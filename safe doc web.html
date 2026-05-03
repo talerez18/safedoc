@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safe Doc – Your Doctor. Anywhere.</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#0891B2;
+  --green2:#06B6D4;
+  --teal:#0EA5E9;
+  --navy:#F0F7FF;
+  --navy2:#E8F4FE;
+  --white:#FFFFFF;
+  --t1:#0F2744;
+  --t2:#3D6A96;
+  --t3:#7AAED6;
+  --border:rgba(14,60,110,.1);
+  --border2:rgba(14,60,110,.18);
+  --card:rgba(255,255,255,.7);
+  --card2:rgba(255,255,255,.85);
+  --accent:#0891B2;
+  --accent2:#06B6D4;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Heebo',sans-serif;background:#F0F7FF;color:#0F2744;overflow-x:hidden;overflow-y:auto;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#E8F4FE}
+::-webkit-scrollbar-thumb{background:#BAD7EF;border-radius:2px}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4vw;
+  background:rgba(240,247,255,0.92);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(8,145,178,0.15);
+}
+.logo{
+  font-size:1.2rem;font-weight:900;color:#08192E;
+  text-decoration:none;display:flex;align-items:center;gap:10px;letter-spacing:-.3px;
+}
+.logo-cross{
+  width:30px;height:30px;border-radius:8px;
+  background:linear-gradient(135deg,#0891B2,#06B6D4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:900;color:#fff;
+}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:.82rem;font-weight:600;color:#08192E;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:#0891B2}
+.nav-cta{
+  background:#0891B2 !important;color:#fff !important;
+  padding:8px 18px;border-radius:6px;font-weight:700 !important;font-size:.8rem !important;
+}
+.nav-cta:hover{background:#06B6D4 !important}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  padding:80px 5vw 60px;
+  overflow:hidden;
+  background:#D6EEFF;
+  width:100%;
+  max-width:100vw;
+  box-sizing:border-box;
+}
+
+
+/* WORLD MAP BACKGROUND */
+.hero-map{
+  position:absolute;inset:0;pointer-events:none;
+}
+.hero-map-svg{
+  position:absolute;inset:0;width:100%;height:100%;
+  opacity:1;
+}
+/* ocean gradient overlay */
+.hero-ocean{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 25% 55%, rgba(6,182,212,.12) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 70% at 75% 35%, rgba(14,165,233,.1) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 35% at 50% 100%, rgba(214,238,255,.95) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 25% at 50% 0%, rgba(214,238,255,.7) 0%, transparent 45%);
+  pointer-events:none;z-index:2;
+}
+/* subtle dot grid on top */
+.hero-dots{
+  position:absolute;inset:0;z-index:3;
+  background-image:radial-gradient(circle, rgba(8,145,178,.3) 1px, transparent 1px);
+  background-size:44px 44px;
+  mask-image:radial-gradient(ellipse 85% 75% at 50% 50%, black 10%, transparent 80%);
+  opacity:.35;pointer-events:none;
+}
+.hero-lines{display:none;}
+
+/* pulsing city dots */
+.city-dot{
+  position:absolute;
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 0 0 rgba(0,201,167,.6);
+  animation:cityPulse 3s infinite;
+}
+.city-dot::before{
+  content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1px solid rgba(0,201,167,.4);
+  animation:ripple 3s infinite;
+}
+.city-dot.d2{animation-delay:.8s}
+.city-dot.d3{animation-delay:1.6s}
+.city-dot.d4{animation-delay:2.2s}
+.city-dot.d5{animation-delay:.4s}
+.city-dot.d6{animation-delay:1.2s}
+@keyframes cityPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(0,201,167,.6)}
+  50%{box-shadow:0 0 0 8px rgba(0,201,167,0)}
+}
+@keyframes ripple{
+  0%{transform:scale(1);opacity:1}
+  100%{transform:scale(3);opacity:0}
+}
+.city-label{
+  position:absolute;
+  font-size:.65rem;font-weight:600;color:var(--green2);
+  white-space:nowrap;pointer-events:none;
+  opacity:.7;
+}
+
+/* flight path animation */
+.path-svg{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;overflow:hidden;
+}
+.flight-path{
+  fill:none;stroke:var(--green);stroke-width:.8;
+  stroke-dasharray:4 6;opacity:.25;
+}
+.flight-dot{
+  fill:var(--green2);r:3;filter:drop-shadow(0 0 4px var(--green2));
+  animation:flyPath 8s linear infinite;
+}
+
+.hero-content{position:relative;z-index:4;max-width:520px;width:100%;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(8,145,178,.12);border:1px solid rgba(8,145,178,.35);
+  border-radius:20px;padding:5px 14px;
+  font-size:.72rem;font-weight:700;letter-spacing:.8px;
+  color:#0369A1;margin-bottom:2rem;text-transform:uppercase;
+}
+.pulse-dot{width:6px;height:6px;border-radius:50%;background:#0891B2;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+h1{
+  font-size:clamp(2rem,3.8vw,3.2rem);
+  font-weight:900;line-height:1.08;
+  letter-spacing:-1.5px;color:#0A1F3C;
+  margin-bottom:1.5rem;
+}
+h1 .g{
+  background:linear-gradient(100deg, #0A6E9F, #0891B2, #06B6D4);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:1.05rem;font-weight:400;color:#1E4A72;
+  line-height:1.9;max-width:440px;margin-bottom:2.5rem;
+}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.btn-main{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#0369A1,#0891B2);
+  color:#fff;padding:13px 26px;border-radius:8px;
+  font-weight:900;font-size:.9rem;text-decoration:none;
+  border:none;cursor:pointer;transition:all .2s;
+  box-shadow:0 8px 30px rgba(8,145,178,.35);
+}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(8,145,178,.45)}
+.btn-sec{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.7);color:#1E4A72;padding:13px 26px;border-radius:8px;
+  font-weight:600;font-size:.9rem;text-decoration:none;
+  border:1px solid rgba(8,145,178,.3);cursor:pointer;transition:all .2s;
+}
+.btn-sec:hover{color:#0891B2;border-color:rgba(8,145,178,.5);background:rgba(255,255,255,.9)}
+
+.hero-stats{
+  display:flex;gap:2.5rem;flex-wrap:wrap;
+  margin-top:3rem;padding-top:2rem;
+  border-top:1px solid rgba(8,145,178,.2);
+  padding-bottom:1rem;
+}
+.hstat .n{font-size:1.9rem;font-weight:900;color:#0A1F3C;line-height:1}
+.hstat .n em{color:#0891B2;font-style:normal}
+.hstat .l{font-size:.72rem;color:#2563A8;margin-top:4px;letter-spacing:.3px;font-weight:500}
+@keyframes flyPath{
+  0%{transform:translateX(0);opacity:0}
+  10%,90%{opacity:1}
+  50%{transform:translateX(220px) translateY(-8px)}
+  100%{transform:translateX(440px);opacity:0}
+}
+
+
+
+
+
+
+/* ── TICKER ── */
+.ticker-bar{overflow:hidden;background:rgba(8,145,178,.07);border-top:1px solid rgba(8,145,178,.15);border-bottom:1px solid rgba(8,145,178,.15);height:38px;display:flex;align-items:center}
+.ticker{display:flex;animation:tick 28s linear infinite;width:max-content}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ti{display:flex;align-items:center;gap:8px;padding:0 24px;border-left:1px solid rgba(8,145,178,.15);white-space:nowrap;font-size:.73rem}
+.ti-dot{width:5px;height:5px;border-radius:50%;background:#0891B2}
+.ti-city{color:#3D6A96;font-weight:500}
+.ti-val{color:#0891B2;font-weight:700}
+
+/* ── SECTIONS ── */
+section{padding:90px 4vw}
+.s-tag{display:block;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0891B2;margin-bottom:.9rem}
+.s-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;letter-spacing:-.8px;color:#08192E;line-height:1.15;margin-bottom:1rem}
+.s-body{font-size:.95rem;color:#1E4A72;line-height:1.9;max-width:520px}
+.sep{height:1px;background:rgba(8,145,178,.12);margin:0 4vw}
+
+/* ── HOW ── */
+#how{background:#E8F4FE}
+.how-wrap{margin-top:4rem}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(8,145,178,.12);border:1px solid rgba(8,145,178,.15);border-radius:12px;overflow:hidden}
+.hstep{background:#FFFFFF;padding:2.5rem 2rem;position:relative;transition:background .2s}
+.hstep:hover{background:#F0FAFF}
+.hstep::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background .2s}
+.hstep:hover::after{background:linear-gradient(90deg,#0891B2,#06B6D4)}
+.hn{font-size:2.2rem;font-weight:900;color:rgba(8,145,178,.12);line-height:1;margin-bottom:1.5rem}
+.hico{width:42px;height:42px;border-radius:10px;background:rgba(8,145,178,.1);border:1px solid rgba(8,145,178,.2);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:1rem}
+.ht{font-size:.9rem;font-weight:700;color:#08192E;margin-bottom:.5rem}
+.hd{font-size:.78rem;color:#1E4A72;line-height:1.75}
+
+/* ── ABOUT ── */
+#about{background:#F0F7FF}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.about-points{margin-top:2.5rem;display:flex;flex-direction:column;gap:1.4rem}
+.ap{display:flex;gap:14px;align-items:flex-start}
+.ap-ico{width:36px;height:36px;min-width:36px;border-radius:8px;background:rgba(8,145,178,.1);border:1px solid rgba(8,145,178,.2);display:flex;align-items:center;justify-content:center;font-size:16px}
+.ap-t h4{font-size:.85rem;font-weight:700;color:#0F2744;margin-bottom:3px}
+.ap-t p{font-size:.78rem;color:#1E4A72;line-height:1.65}
+.about-right{display:flex;flex-direction:column;gap:12px}
+.acard{background:#FFFFFF;border:1px solid rgba(8,145,178,.15);border-radius:10px;padding:1.4rem;box-shadow:0 2px 12px rgba(8,145,178,.08)}
+.acard-n{font-size:2rem;font-weight:900;color:#0891B2}
+.acard-l{font-size:.75rem;color:#5A90B8;margin-top:3px}
+.acard-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.qcard{background:linear-gradient(135deg,rgba(8,145,178,.08),rgba(14,165,233,.06));border:1px solid rgba(8,145,178,.2);border-radius:10px;padding:1.5rem}
+.qcard p{font-size:1rem;color:#0A3057;line-height:1.65;font-style:italic;font-weight:500}
+.qcard .sig{font-size:.7rem;color:#0891B2;margin-top:.75rem;letter-spacing:.5px}
+
+/* ── DOCTORS ── */
+#doctors{background:#E8F4FE}
+.doc-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:4rem}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(8,145,178,.12);border:1px solid rgba(8,145,178,.15);border-radius:12px;overflow:hidden}
+.bc{background:#FFFFFF;padding:2rem;transition:background .2s;position:relative;overflow:hidden}
+.bc:hover{background:#F0FAFF}
+.bc::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 100% 0%, rgba(8,145,178,.06), transparent);opacity:0;transition:opacity .3s}
+.bc:hover::before{opacity:1}
+.bico{width:40px;height:40px;border-radius:9px;background:rgba(8,145,178,.1);border:1px solid rgba(8,145,178,.18);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:1.1rem}
+.bt{font-size:.88rem;font-weight:700;color:#08192E;margin-bottom:.4rem}
+.bd{font-size:.77rem;color:#1E4A72;line-height:1.72}
+.compare{margin-top:4rem}
+.compare-h{font-size:1.3rem;font-weight:900;color:#0F2744;margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse;background:#FFFFFF;border:1px solid rgba(8,145,178,.15);border-radius:10px;overflow:hidden}
+th{padding:.9rem 1.2rem;font-size:.75rem;font-weight:700;letter-spacing:.3px;text-align:right}
+th:first-child{background:#F0F7FF;color:#3D6A96;width:45%}
+th:nth-child(2){background:rgba(8,145,178,.1);color:#0891B2;border-bottom:1px solid rgba(8,145,178,.2)}
+th:last-child{background:#F0F7FF;color:#7AAED6}
+td{padding:.8rem 1.2rem;font-size:.8rem;border-top:1px solid rgba(8,145,178,.1);color:#1E4A72}
+tr:hover td{background:#F8FCFF}
+.ck{color:#0891B2;font-weight:700}
+.cx{color:#BAD7EF}
+
+/* ── JOIN ── */
+#join{background:#F0F7FF}
+.join-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:start}
+.jteaser{background:#FFFFFF;border:1px solid rgba(8,145,178,.15);border-radius:10px;padding:1.5rem;margin-top:2.5rem;box-shadow:0 2px 12px rgba(8,145,178,.07)}
+.jteaser h4{font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#0891B2;margin-bottom:1rem}
+.jteaser ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.jteaser li{font-size:.8rem;color:#0F2744;display:flex;gap:10px;align-items:center}
+.jteaser li::before{content:'→';color:#0891B2;font-size:.7rem;flex-shrink:0}
+.form-box{background:#FFFFFF;border:1.5px solid #C0DAF0;border-radius:14px;padding:2.5rem;box-shadow:0 6px 32px rgba(8,145,178,.12)}
+
+/* stepper */
+.stepper{display:flex;align-items:center;margin-bottom:2rem}
+.sc{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;border:1px solid rgba(8,145,178,.2);background:#EBF5FB;color:#7AAED6;transition:all .3s;flex-shrink:0}
+.sc.active{background:#0891B2;border-color:#0891B2;color:#fff}
+.sc.done{background:#EBF9F9;border-color:#0891B2;color:#0891B2}
+.sl{font-size:.65rem;color:#7AAED6;line-height:1.3;font-weight:500;transition:color .3s}
+.sl.active{color:#0891B2}
+.sl.done{color:#3D6A96}
+.sln{flex:1;height:1px;background:rgba(8,145,178,.15);margin:0 6px;transition:background .3s}
+.sln.done{background:#0891B2}
+.sw{display:flex;align-items:center;gap:7px;flex:1}
+.sw:last-child{flex:none}
+.prog{height:2px;background:rgba(8,145,178,.15);border-radius:1px;margin-bottom:2rem;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,#0891B2,#06B6D4);border-radius:1px;transition:width .4s ease}
+
+/* form */
+.fstep{display:none}.fstep.active{display:block}
+.fstep-h{font-size:.95rem;font-weight:800;color:#08192E;margin-bottom:.25rem}
+.fstep-en{font-size:.78rem;font-weight:400;color:#5A90B8;margin-right:.5rem}
+.fstep-s{font-size:.75rem;color:#1E4A72;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(8,145,178,.15)}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:1rem}
+.fg label{font-size:.72rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#0A2540;margin-bottom:2px}
+.fg label .req{color:#0891B2}
+.fg input,.fg select,.fg textarea{
+  background:#FFFFFF;border:1.5px solid #B0CCE0;border-radius:7px;
+  padding:10px 13px;font-family:'Heebo',sans-serif;font-size:.9rem;
+  color:#08192E;outline:none;transition:border-color .2s,box-shadow .2s;direction:rtl;width:100%;
+}
+.fg input::placeholder,.fg textarea::placeholder{color:#7099B8}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#0891B2;background:#EAF6FD;box-shadow:0 0 0 3px rgba(8,145,178,.1)}
+.fg select option{background:#fff;color:#08192E;font-weight:500}
+.fg textarea{resize:vertical;min-height:80px}
+.fgrow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fgrow3{display:grid;grid-template-columns:1fr 1fr 95px;gap:.75rem}
+.priv{font-size:.7rem;color:#2563A8;margin-top:4px}
+.upload{border:1px dashed rgba(8,145,178,.3);border-radius:8px;padding:1.2rem;text-align:center;background:rgba(8,145,178,.03);cursor:pointer;transition:all .2s;position:relative}
+.upload:hover{border-color:#0891B2;background:rgba(8,145,178,.07)}
+.upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+.uico{font-size:1.3rem;margin-bottom:5px}
+.utxt{font-size:.73rem;color:#2563A8}
+.utxt strong{color:#0891B2}
+.ufn{font-size:.72rem;color:#0369A1;margin-top:5px;display:none;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{padding:6px 14px;border-radius:6px;border:1.5px solid #B0D4E8;background:#EBF5FB;font-size:.78rem;font-weight:600;color:#0F2744;cursor:pointer;transition:all .15s;user-select:none}
+.chip:hover{border-color:#0891B2;color:#0369A1;background:#DCF0FA}
+.chip.sel{background:#DBEFFE;border-color:#0891B2;color:#0369A1;font-weight:700}
+.nav-btns{display:flex;gap:.75rem;margin-top:1.5rem}
+.bbk{flex:1;padding:11px;background:#EBF5FB;border:1.5px solid #B0D4E8;border-radius:7px;font-family:'Heebo',sans-serif;font-size:.88rem;font-weight:700;color:#0F2744;cursor:pointer;transition:all .15s}
+.bbk:hover{border-color:#0891B2;color:#0369A1;background:#DCF0FA}
+.bnxt{flex:2;padding:11px;background:linear-gradient(135deg,#0891B2,#06B6D4);border:none;border-radius:7px;font-family:'Heebo',sans-serif;font-size:.88rem;font-weight:900;color:#fff;cursor:pointer;transition:all .15s;box-shadow:0 4px 20px rgba(8,145,178,.25)}
+.bnxt:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(8,145,178,.38)}
+.terms-row{display:flex;align-items:flex-start;gap:10px;margin-top:1rem}
+.terms-row input[type=checkbox]{width:16px;height:16px;margin-top:3px;flex-shrink:0;accent-color:var(--green)}
+.terms-row label{font-size:.8rem;color:#0F2744;line-height:1.6;cursor:pointer}
+.terms-row a{color:#0891B2}
+.fnote{font-size:.72rem;color:#2563A8;text-align:center;margin-top:.75rem}
+.success-scr{display:none;text-align:center;padding:3rem 1rem}
+.success-scr h3{font-size:1.5rem;font-weight:900;color:#0F2744;margin-bottom:.5rem;margin-top:1rem}
+.success-scr p{font-size:.85rem;color:#1E4A72}
+
+/* ── FOOTER ── */
+footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 4vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.flogo{font-size:1.1rem;font-weight:900;color:#FFFFFF}
+.flogo em{color:#06B6D4;font-style:normal}
+.fcopy{font-size:.73rem;color:rgba(255,255,255,.35)}
+.flinks{display:flex;gap:1.5rem}
+.flinks a{font-size:.73rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s}
+.flinks a:hover{color:#06B6D4}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.reveal.vis{opacity:1;transform:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{padding:0 1.5rem}
+  section{padding:70px 1.5rem}
+  .sep{margin:0 1.5rem}
+  .about-grid,.doc-header,.join-grid{grid-template-columns:1fr;gap:3rem}
+  .how-steps,.benefits-grid{grid-template-columns:1fr 1fr}
+  
+  h1{font-size:2.6rem}
+  .fgrow,.fgrow3{grid-template-columns:1fr}
+  footer{flex-direction:column;text-align:center}
+}
+@media(max-width:620px){
+  .how-steps,.benefits-grid{grid-template-columns:1fr}
+  .nav-links a:not(.nav-cta){display:none}
+  .hero-stats{gap:1.5rem}
+}
+
+/* ── LANGUAGE TOGGLE ── */
+.lang-toggle{
+  display:flex;align-items:center;gap:2px;
+  background:#EBF5FB;border:1.5px solid #B0D4E8;
+  border-radius:20px;padding:3px;
+  margin-left:.5rem;
+}
+.lang-btn{
+  padding:4px 12px;border-radius:16px;
+  font-size:.72rem;font-weight:700;letter-spacing:.3px;
+  cursor:pointer;border:none;background:transparent;
+  color:#5A90B8;transition:all .2s;
+}
+.lang-btn.active{
+  background:#0891B2;color:#fff;
+  box-shadow:0 2px 8px rgba(8,145,178,.3);
+}
+/* hide/show by language */
+body.lang-he [data-en],
+body:not(.lang-he) [data-he]{ display:none !important }
+
+
+
+
+
+
+
+
+
+
+
+/* Language alignment */
+body.lang-he .hero-content{margin-left:auto;margin-right:0;text-align:right;}
+body.lang-en .hero-content,
+body.lang-es .hero-content,
+body.lang-pt .hero-content,
+body.lang-th .hero-content,
+body.lang-vi .hero-content,
+body.lang-km .hero-content,
+body.lang-lo .hero-content,
+body.lang-tl .hero-content,
+body.lang-de .hero-content,
+body.lang-nl .hero-content,
+body.lang-el .hero-content{margin-left:0;margin-right:auto;text-align:left;}
+
+
+/* English uses Inter for better readability */
+body.lang-en, body.lang-en * {
+  font-family: 'Inter', sans-serif;
+}
+body.lang-en h1 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+body.lang-en .hero-sub {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.85;
+  color: #1E4A72;
+}
+body.lang-en .s-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+}
+body.lang-en .nav-links a {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.lm-item{
+  padding:7px 12px;font-size:.82rem;font-weight:500;color:#0F2744;
+  cursor:pointer;border-radius:6px;transition:background .15s;white-space:nowrap;
+}
+.lm-item:hover{background:#EBF5FB;color:#0891B2}
+.lang-btn{
+  display:flex;align-items:center;gap:4px;
+  white-space:nowrap;
+}
+
+
+/* RTL languages */
+body.lang-ar .hero-content,
+body.lang-fa .hero-content,
+body.lang-ur .hero-content {
+  margin-left: auto;
+  margin-right: 0;
+  text-align: right;
+}
+
+</style>
+</head>
+<body class="lang-en">
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo" style="direction:ltr;text-decoration:none;display:flex;align-items:center">
+    <svg width="180" height="48" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1565C0"/>
+          <stop offset="100%" stop-color="#29B6F6"/>
+        </linearGradient>
+        <linearGradient id="hg2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1976D2"/>
+          <stop offset="100%" stop-color="#0D47A1"/>
+        </linearGradient>
+        <clipPath id="heartClip">
+          <path d="M22,8 C22,4 19,2 16,2 C12,2 9,5 9,9 C9,13 12,16 16,19 L22,25 L28,19 C32,16 35,13 35,9 C35,5 32,2 28,2 C25,2 22,4 22,8Z"/>
+        </clipPath>
+      </defs>
+
+      <!-- Heart/stethoscope shape -->
+      <!-- Left arc of heart -->
+      <path d="M22,34 C18,30 10,24 7,18 C4,12 5,5 10,3 C13,2 16,3 18,5 C19,6 20,8 22,10" 
+            fill="none" stroke="url(#hg)" stroke-width="2.8" stroke-linecap="round"/>
+      <!-- Right arc of heart -->
+      <path d="M22,34 C26,30 34,24 37,18 C40,12 39,5 34,3 C31,2 28,3 26,5 C25,6 24,8 22,10" 
+            fill="none" stroke="url(#hg)" stroke-width="2.8" stroke-linecap="round"/>
+
+      <!-- World map inside heart (simplified continents) -->
+      <!-- Americas -->
+      <ellipse cx="16" cy="14" rx="4" ry="5.5" fill="#90CAF9" opacity="0.6" transform="rotate(-10,16,14)"/>
+      <!-- Europe/Africa -->
+      <ellipse cx="22" cy="12" rx="2.5" ry="4" fill="#90CAF9" opacity="0.6" transform="rotate(5,22,12)"/>
+      <!-- Asia -->
+      <ellipse cx="28" cy="13" rx="3.5" ry="4" fill="#90CAF9" opacity="0.6" transform="rotate(-5,28,13)"/>
+
+      <!-- Stethoscope ear tips at bottom -->
+      <circle cx="18" cy="37" r="2.2" fill="none" stroke="url(#hg2)" stroke-width="2"/>
+      <circle cx="26" cy="37" r="2.2" fill="none" stroke="url(#hg2)" stroke-width="2"/>
+      <!-- connecting tube down -->
+      <path d="M22,34 L18,37 M22,34 L26,37" fill="none" stroke="url(#hg)" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- SAFE text -->
+      <text x="46" y="22" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="15" fill="#0D47A1" letter-spacing="1">SAFE</text>
+      <!-- DOC text in light blue -->
+      <text x="100" y="22" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="15" fill="#29B6F6" letter-spacing="1">DOC</text>
+      <!-- Tagline -->
+      <text x="46" y="34" font-family="Arial,Helvetica,sans-serif" font-weight="400" font-size="6.5" fill="#5A90B8" letter-spacing="1.2">YOUR HEALTH.  OUR PRIORITY.</text>
+    </svg>
+  </a>
+  <div class="nav-links">
+    <a href="#how"><span data-he="">איך זה עובד</span><span data-en="">How It Works</span></a>
+    <a href="#about"><span data-he="">אודות</span><span data-en="">About</span></a>
+    <a href="#doctors"><span data-he="">לרופאים</span><span data-en="">For Doctors</span></a>
+    <div class="lang-toggle" style="position:relative">
+      <button class="lang-btn active" id="lang-current" onclick="toggleLangMenu()">🌐 <span id="lang-label">EN</span> ▾</button>
+      <div id="lang-menu" style="display:none;position:absolute;top:38px;left:0;background:white;border:1.5px solid #B0D4E8;border-radius:10px;padding:6px;width:200px;max-height:340px;overflow-y:auto;box-shadow:0 8px 24px rgba(8,145,178,.15);z-index:999">
+        <div class="lm-item" onclick="setLang('en');toggleLangMenu()">🇬🇧 English</div>
+        <div class="lm-item" onclick="setLang('he');toggleLangMenu()">🇮🇱 עברית</div>
+        <div class="lm-item" onclick="setLang('es');toggleLangMenu()">🇪🇸 Español</div>
+        <div class="lm-item" onclick="setLang('pt');toggleLangMenu()">🇧🇷 Português</div>
+        <div class="lm-item" onclick="setLang('th');toggleLangMenu()">🇹🇭 ภาษาไทย</div>
+        <div class="lm-item" onclick="setLang('hi');toggleLangMenu()">🇮🇳 हिन्दी</div>
+        <div class="lm-item" onclick="setLang('vi');toggleLangMenu()">🇻🇳 Tiếng Việt</div>
+        <div class="lm-item" onclick="setLang('km');toggleLangMenu()">🇰🇭 ខ្មែរ</div>
+        <div class="lm-item" onclick="setLang('lo');toggleLangMenu()">🇱🇦 ລາວ</div>
+        <div class="lm-item" onclick="setLang('tl');toggleLangMenu()">🇵🇭 Tagalog</div>
+        <div class="lm-item" onclick="setLang('id');toggleLangMenu()">🇮🇩 Bahasa Indonesia</div>
+        <div class="lm-item" onclick="setLang('zh');toggleLangMenu()">🇨🇳 中文</div>
+        <div class="lm-item" onclick="setLang('ja');toggleLangMenu()">🇯🇵 日本語</div>
+        <div class="lm-item" onclick="setLang('ko');toggleLangMenu()">🇰🇷 한국어</div>
+        <div class="lm-item" onclick="setLang('de');toggleLangMenu()">🇩🇪 Deutsch</div>
+        <div class="lm-item" onclick="setLang('nl');toggleLangMenu()">🇳🇱 Nederlands</div>
+        <div class="lm-item" onclick="setLang('fr');toggleLangMenu()">🇫🇷 Français</div>
+        <div class="lm-item" onclick="setLang('it');toggleLangMenu()">🇮🇹 Italiano</div>
+        <div class="lm-item" onclick="setLang('ru');toggleLangMenu()">🇷🇺 Русский</div>
+        <div class="lm-item" onclick="setLang('el');toggleLangMenu()">🇬🇷 Ελληνικά</div>
+        <div class="lm-item" onclick="setLang('tr');toggleLangMenu()">🇹🇷 Türkçe</div>
+        <div class="lm-item" onclick="setLang('ar');toggleLangMenu()">🇸🇦 العربية</div>
+        <div class="lm-item" onclick="setLang('fa');toggleLangMenu()">🇮🇷 فارسی</div>
+        <div class="lm-item" onclick="setLang('ur');toggleLangMenu()">🇵🇰 اردو</div>
+        <div class="lm-item" onclick="setLang('ne');toggleLangMenu()">🇳🇵 नेपाली</div>
+        <div class="lm-item" onclick="setLang('ta');toggleLangMenu()">🇮🇳 தமிழ்</div>
+        <div class="lm-item" onclick="setLang('pl');toggleLangMenu()">🇵🇱 Polski</div>
+        <div class="lm-item" onclick="setLang('hu');toggleLangMenu()">🇭🇺 Magyar</div>
+        <div class="lm-item" onclick="setLang('si');toggleLangMenu()">🇱🇰 සිංහල</div>
+        <div class="lm-item" onclick="setLang('am');toggleLangMenu()">🇪🇹 አማርኛ</div>
+      </div>
+    </div>
+    </div>
+    <a href="#join" class="nav-cta"><span data-he="">הצטרפות רופאים ←</span><span data-en="">Join as Doctor →</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-map">
+    <!-- WORLD MAP SVG - detailed continents -->
+    <svg class="hero-map-svg" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#A8D8F0"/>
+          <stop offset="50%" stop-color="#7EC8E3"/>
+          <stop offset="100%" stop-color="#5BB8D4"/>
+        </linearGradient>
+        <filter id="landGlow">
+          <feGaussianBlur stdDeviation="1.5" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+        <radialGradient id="atmGrad" cx="50%" cy="45%" r="55%">
+          <stop offset="0%" stop-color="rgba(0,180,150,0.06)"/>
+          <stop offset="100%" stop-color="rgba(0,180,150,0)"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Ocean base -->
+      <rect width="1440" height="800" fill="url(#oceanGrad)"/>
+      <!-- Atmosphere glow -->
+      <ellipse cx="720" cy="400" rx="750" ry="450" fill="url(#atmGrad)" opacity="0.7"/>
+
+      <!-- NORTH AMERICA -->
+      <g filter="url(#landGlow)">
+        <path d="M95,80 L145,72 L195,65 L240,70 L275,82 L295,95 L310,115 L320,140 L315,165 L300,185 L285,210 L270,235 L255,255 L240,270 L228,285 L218,295 L205,302 L195,308 L182,318 L170,325 L158,330 L148,338 L140,348 L130,355 L118,358 L108,352 L98,342 L88,328 L80,312 L75,295 L72,275 L70,255 L68,232 L72,210 L78,188 L85,165 L90,140 L92,115 L93,95 Z" fill="#4AAF82" opacity="0.7"/>
+        <!-- Alaska -->
+        <path d="M50,90 L75,82 L95,80 L93,95 L85,108 L72,115 L58,118 L45,112 L38,100 Z" fill="#4AAF82" opacity="0.65"/>
+        <!-- Mexico/Central -->
+        <path d="M148,338 L158,330 L170,325 L178,335 L182,348 L178,362 L170,372 L160,378 L150,380 L140,376 L132,368 L130,355 Z" fill="#4AAF82" opacity="0.6"/>
+        <!-- Greenland -->
+        <path d="M245,30 L278,25 L305,32 L322,48 L328,65 L318,78 L300,85 L278,82 L258,72 L242,58 L238,42 Z" fill="#52C08A" opacity="0.55"/>
+      </g>
+
+      <!-- SOUTH AMERICA -->
+      <g filter="url(#landGlow)">
+        <path d="M185,400 L200,388 L218,382 L238,380 L255,385 L268,395 L278,410 L282,428 L280,448 L272,468 L260,488 L245,505 L228,518 L210,528 L194,532 L180,530 L168,522 L160,510 L155,495 L153,478 L155,460 L160,442 L168,425 L178,412 Z" fill="#4AAF82" opacity="0.68"/>
+      </g>
+
+      <!-- EUROPE -->
+      <g filter="url(#landGlow)">
+        <path d="M610,80 L635,72 L658,68 L680,72 L698,82 L710,96 L715,112 L708,128 L695,138 L680,142 L665,138 L652,128 L642,115 L630,105 L618,98 Z" fill="#52C08A" opacity="0.72"/>
+        <!-- Scandinavia -->
+        <path d="M658,42 L678,35 L698,32 L715,38 L720,52 L715,68 L698,82 L680,72 L658,68 L648,55 Z" fill="#52C08A" opacity="0.65"/>
+        <!-- UK -->
+        <path d="M598,80 L610,72 L618,78 L615,90 L605,98 L595,92 L592,82 Z" fill="#52C08A" opacity="0.65"/>
+        <!-- Spain/France/Italy -->
+        <path d="M618,98 L630,105 L642,115 L650,128 L648,142 L638,152 L622,158 L605,155 L592,145 L585,132 L588,118 L598,108 Z" fill="#52C08A" opacity="0.68"/>
+        <!-- Eastern Europe -->
+        <path d="M680,142 L710,135 L738,128 L758,135 L768,148 L762,162 L748,172 L728,175 L708,170 L693,158 L685,148 Z" fill="#52C08A" opacity="0.65"/>
+      </g>
+
+      <!-- AFRICA -->
+      <g filter="url(#landGlow)">
+        <path d="M618,200 L640,190 L665,185 L692,188 L718,198 L738,215 L748,238 L752,265 L750,295 L742,325 L728,355 L710,382 L690,405 L668,422 L645,432 L622,435 L600,430 L580,418 L565,400 L555,378 L550,352 L552,325 L558,298 L568,272 L580,248 L592,228 L605,212 Z" fill="#47A87A" opacity="0.72"/>
+        <!-- Madagascar -->
+        <path d="M758,348 L768,340 L776,348 L778,368 L774,385 L762,390 L752,382 L750,365 L753,350 Z" fill="#47A87A" opacity="0.6"/>
+      </g>
+
+      <!-- MIDDLE EAST -->
+      <g filter="url(#landGlow)">
+        <path d="M758,165 L780,158 L805,155 L828,162 L842,175 L848,192 L840,208 L820,218 L798,220 L775,215 L758,202 L750,188 Z" fill="#52C08A" opacity="0.65"/>
+        <!-- Arabian Peninsula -->
+        <path d="M798,220 L820,218 L845,225 L858,242 L860,262 L852,278 L835,285 L815,282 L798,270 L788,252 L788,235 Z" fill="#52C08A" opacity="0.6"/>
+      </g>
+
+      <!-- ASIA -->
+      <g filter="url(#landGlow)">
+        <!-- Russia/Central Asia - large mass -->
+        <path d="M768,48 L820,38 L880,32 L945,28 L1010,30 L1068,38 L1115,52 L1148,68 L1162,88 L1155,108 L1135,122 L1108,130 L1075,132 L1042,128 L1008,120 L975,118 L942,122 L908,128 L875,132 L842,130 L812,122 L788,110 L772,95 L762,78 Z" fill="#4AAF82" opacity="0.68"/>
+        <!-- India -->
+        <path d="M885,200 L912,192 L938,195 L958,208 L968,228 L965,250 L952,268 L935,278 L915,278 L898,265 L888,245 L882,222 Z" fill="#4AAF82" opacity="0.65"/>
+        <!-- Southeast Asia -->
+        <path d="M1008,188 L1035,182 L1060,185 L1080,198 L1088,215 L1082,232 L1062,242 L1038,242 L1018,232 L1005,215 L1002,198 Z" fill="#4AAF82" opacity="0.65"/>
+        <!-- China/East Asia mass -->
+        <path d="M958,118 L1005,112 L1048,115 L1082,125 L1108,140 L1118,158 L1110,175 L1090,185 L1062,188 L1032,185 L1005,175 L980,162 L962,148 L955,132 Z" fill="#4AAF82" opacity="0.68"/>
+        <!-- Japan -->
+        <path d="M1132,118 L1145,112 L1155,118 L1155,130 L1145,138 L1132,135 L1125,125 Z" fill="#4AAF82" opacity="0.6"/>
+      </g>
+
+      <!-- AUSTRALIA -->
+      <g filter="url(#landGlow)">
+        <path d="M1058,462 L1095,450 L1135,448 L1172,455 L1202,470 L1218,492 L1220,518 L1210,542 L1190,558 L1162,565 L1130,562 L1098,550 L1072,530 L1055,505 L1048,480 Z" fill="#4AAF82" opacity="0.65"/>
+        <!-- New Zealand -->
+        <path d="M1235,545 L1245,535 L1255,540 L1258,555 L1250,565 L1238,562 Z" fill="#4AAF82" opacity="0.55"/>
+      </g>
+
+      <!-- FLIGHT PATHS (animated) -->
+      <path id="fp1" d="M720,390 Q900,180 1120,260" fill="none" stroke="rgba(8,145,178,0.45)" stroke-width="1" stroke-dasharray="5 8"/>
+      <path id="fp2" d="M720,390 Q520,180 260,310" fill="none" stroke="rgba(8,145,178,0.4)" stroke-width="1" stroke-dasharray="5 8"/>
+      <path id="fp3" d="M720,390 Q820,480 1030,455" fill="none" stroke="rgba(8,145,178,0.35)" stroke-width="1" stroke-dasharray="5 8"/>
+      <path id="fp4" d="M720,390 Q680,200 750,120" fill="none" stroke="rgba(8,145,178,0.28)" stroke-width="1" stroke-dasharray="5 8"/>
+      <path id="fp5" d="M720,390 Q600,450 340,430" fill="none" stroke="rgba(8,145,178,0.28)" stroke-width="1" stroke-dasharray="5 8"/>
+
+      <!-- Animated travel dots -->
+      <circle r="3.5" fill="rgba(8,145,178,0.9)" filter="url(#landGlow)">
+        <animateMotion dur="9s" repeatCount="indefinite"><mpath href="#fp1"/></animateMotion>
+      </circle>
+      <circle r="3" fill="rgba(8,145,178,0.85)">
+        <animateMotion dur="11s" repeatCount="indefinite" begin="3s"><mpath href="#fp2"/></animateMotion>
+      </circle>
+      <circle r="2.5" fill="rgba(8,145,178,0.75)">
+        <animateMotion dur="8s" repeatCount="indefinite" begin="5s"><mpath href="#fp3"/></animateMotion>
+      </circle>
+      <circle r="2" fill="rgba(8,145,178,0.7)">
+        <animateMotion dur="7s" repeatCount="indefinite" begin="1s"><mpath href="#fp4"/></animateMotion>
+      </circle>
+
+      <!-- CITY GLOW DOTS (major cities) -->
+      <!-- Tel Aviv -->
+      <circle cx="762" cy="198" r="4" fill="#0891B2" opacity="0.9">
+        <animate attributeName="r" values="3;6;3" dur="2.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="762" cy="198" r="12" fill="rgba(0,229,204,0)" stroke="rgba(8,145,178,0.5)" stroke-width="1">
+        <animate attributeName="r" values="6;18;6" dur="2.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.6;0;0.6" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Bangkok -->
+      <circle cx="1032" cy="235" r="3.5" fill="#0891B2" opacity="0.85">
+        <animate attributeName="r" values="2.5;5;2.5" dur="3s" repeatCount="indefinite" begin="0.8s"/>
+        <animate attributeName="opacity" values="0.85;0.3;0.85" dur="3s" repeatCount="indefinite" begin="0.8s"/>
+      </circle>
+      <!-- Barcelona -->
+      <circle cx="622" cy="138" r="3" fill="#0891B2" opacity="0.8">
+        <animate attributeName="r" values="2;4.5;2" dur="3.2s" repeatCount="indefinite" begin="1.5s"/>
+        <animate attributeName="opacity" values="0.8;0.3;0.8" dur="3.2s" repeatCount="indefinite" begin="1.5s"/>
+      </circle>
+      <!-- New York -->
+      <circle cx="178" cy="295" r="3" fill="#0891B2" opacity="0.8">
+        <animate attributeName="r" values="2;4.5;2" dur="2.8s" repeatCount="indefinite" begin="2.2s"/>
+        <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2.8s" repeatCount="indefinite" begin="2.2s"/>
+      </circle>
+      <!-- Tokyo -->
+      <circle cx="1138" cy="155" r="3" fill="#0891B2" opacity="0.75">
+        <animate attributeName="r" values="2;4;2" dur="3.5s" repeatCount="indefinite" begin="1s"/>
+        <animate attributeName="opacity" values="0.75;0.25;0.75" dur="3.5s" repeatCount="indefinite" begin="1s"/>
+      </circle>
+      <!-- London -->
+      <circle cx="600" cy="100" r="3" fill="#0891B2" opacity="0.75">
+        <animate attributeName="r" values="2;4;2" dur="3s" repeatCount="indefinite" begin="0.4s"/>
+      </circle>
+      <!-- Sydney -->
+      <circle cx="1155" cy="512" r="3" fill="#0891B2" opacity="0.75">
+        <animate attributeName="r" values="2;4;2" dur="3.8s" repeatCount="indefinite" begin="2.5s"/>
+      </circle>
+      <!-- Dubai -->
+      <circle cx="832" cy="252" r="3" fill="#0891B2" opacity="0.75">
+        <animate attributeName="r" values="2;4.5;2" dur="2.9s" repeatCount="indefinite" begin="3.2s"/>
+      </circle>
+    </svg>
+  </div>
+  <div class="hero-ocean"></div>
+  <div class="hero-dots"></div>
+        <div>
+          <div class="fcard-name">Dr. Maria Gonzalez</div>
+          <div class="fcard-city"><span data-he="">🇪🇸 ברצלונה, ספרד</span><span data-en="">🇪🇸 Barcelona, Spain</span></div>
+        </div>
+      </div>
+      <div class="fcard-status"><span data-he="">✓ זמין — קליניקה + ביקור בית</span><span data-en="">✓ Available — Clinic &amp; Home</span></div>
+    </div>
+    <div class="fcard">
+      <div class="fcard-top">
+        <div class="fcard-ico">💊</div>
+        <div>
+          <div class="fcard-name">Dr. James Nakamura</div>
+          <div class="fcard-city"><span data-he="">🇯🇵 טוקיו, יפן</span><span data-en="">🇯🇵 Tokyo, Japan</span></div>
+        </div>
+      </div>
+      <div class="fcard-status"><span data-he="">✓ ייעוץ וידאו זמין</span><span data-en="">✓ Video Consult Available</span></div>
+    </div>
+    <div class="fcard">
+      <div class="fcard-top">
+        <div class="fcard-ico">🏥</div>
+        <div>
+          <div class="fcard-name">Dr. Aisha Patel</div>
+          <div class="fcard-city"><span data-he="">🇹🇭 בנגקוק, תאילנד</span><span data-en="">🇹🇭 Bangkok, Thailand</span></div>
+        </div>
+      </div>
+      <div class="fcard-status"><span data-he="">✓ חירום + מרפאה</span><span data-en="">✓ Emergency &amp; Clinic</span></div>
+    </div>
+  </div>
+<div class="hero-content" id="hero-content" style="position:absolute;top:50%;transform:translateY(-50%);max-width:520px;z-index:4;">
+    <div class="hero-badge"><span class="pulse-dot"></span><span data-he="">פלטפורמת רפואה לכל מטייל בעולם</span><span data-en="">Global Medical Platform for Travelers</span></div>
+    <h1>
+      <span data-he="">רפואה מקצועית,<br><span class="g">בכל מקום בעולם.</span></span><span data-en="">Professional care,<br><span class="g">anywhere in the world.</span></span>
+    </h1>
+    <p class="hero-sub"><span data-he="">מערכת Safe Doc מחברת בין מטיילים לרופאים מקצועיים ברחבי הגלובוס. ללא ביורוקרטיה.</span><span data-en="">Safe Doc connects travelers from around the world with professional local doctors. Instant payment, 24/7 availability, zero bureaucracy.</span></p>
+    <div class="hero-btns">
+      <a href="#join" class="btn-main"><span data-he="">הצטרף כרופא שותף ✚</span><span data-en="">Join as Partner Doctor ✚</span></a>
+      <a href="#how" class="btn-sec"><span data-he="">איך זה עובד ←</span><span data-en="">How It Works →</span></a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="n"><em>40</em>+</div><div class="l"><span data-he="">מדינות שותפות</span><span data-en="">Partner Countries</span></div></div>
+      <div class="hstat"><div class="n"><em>24</em>/7</div><div class="l"><span data-he="">זמינות</span><span data-en="">Availability</span></div></div>
+      <div class="hstat"><div class="n"><em>0</em></div><div class="l"><span data-he="">ביורוקרטיה</span><span data-en="">Bureaucracy</span></div></div>
+      <div class="hstat"><div class="n"><span data-he="">מיידי</span><span data-en="">Instant</span></div><div class="l"><span data-he="">תשלום לרופא</span><span data-en="">Doctor Payout</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker">
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Bangkok</span><span class="ti-val"><span data-he="">3 רופאים מחוברים</span><span data-en="">3 doctors online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Barcelona</span><span class="ti-val"><span data-he="">2 רופאים מחוברים</span><span data-en="">2 doctors online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">New York</span><span class="ti-val"><span data-he="">5 רופאים מחוברים</span><span data-en="">5 doctors online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Tokyo</span><span class="ti-val"><span data-he="">1 רופא מחובר</span><span data-en="">1 doctor online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Berlin</span><span class="ti-val"><span data-he="">2 רופאים מחוברים</span><span data-en="">2 doctors online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Dubai</span><span class="ti-val"><span data-he="">4 רופאים מחוברים</span><span data-en="">4 doctors online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">London</span><span class="ti-val"><span data-he="">3 רופאים מחוברים</span><span data-en="">3 doctors online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Sydney</span><span class="ti-val"><span data-he="">2 רופאים מחוברים</span><span data-en="">2 doctors online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Bangkok</span><span class="ti-val"><span data-he="">3 רופאים מחוברים</span><span data-en="">3 doctors online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Barcelona</span><span class="ti-val"><span data-he="">2 רופאים מחוברים</span><span data-en="">2 doctors online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">New York</span><span class="ti-val"><span data-he="">5 רופאים מחוברים</span><span data-en="">5 doctors online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Tokyo</span><span class="ti-val"><span data-he="">1 רופא מחובר</span><span data-en="">1 doctor online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Dubai</span><span class="ti-val"><span data-he="">4 רופאים מחוברים</span><span data-en="">4 doctors online</span></span></div>
+    <div class="ti"><span class="ti-dot"></span><span class="ti-city">London</span><span class="ti-val"><span data-he="">3 רופאים מחוברים</span><span data-en="">3 doctors online</span></span></div>
+  </div>
+</div>
+<!-- LAUNCH BANNER -->
+<div style="background:linear-gradient(135deg,#0891B2,#06B6D4);padding:1.5rem 4vw;text-align:center;position:relative;z-index:1;margin-top:0;clear:both;">
+  <div style="font-size:1.1rem;font-weight:900;color:#fff;letter-spacing:-.3px">
+    <span data-he="">🚀 ההשקה עם חברות הביטוח יוצאת לדרך ב-01 לספטמבר 2026!</span>
+    <span data-en="">🚀 Insurance partnership launch: September 1, 2026!</span>
+  </div>
+  <div style="font-size:.82rem;color:rgba(255,255,255,.8);margin-top:.4rem">
+    <span data-he="">אנחנו מזכירים — המודל שלנו הוא לצרף רופאים ומרפאות איכותיות ולא הכמות.</span>
+    <span data-en="">Our model focuses on quality doctors and clinics — not quantity.</span>
+  </div>
+</div>
+
+<!-- DOCTOR CARDS STRIP -->
+<div style="background:#EAF5FD;padding:2.5rem 4vw;border-bottom:1px solid rgba(8,145,178,.12)">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#0891B2;margin-bottom:1.2rem;text-align:center">
+      <span data-he="">רופאים זמינים עכשיו</span><span data-en="">Doctors Available Now</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
+
+      <div style="background:#fff;border:1px solid rgba(8,145,178,.18);border-radius:12px;padding:1rem 1.1rem;box-shadow:0 3px 14px rgba(8,145,178,.08);display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:10px;direction:ltr">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(8,145,178,.1);border:1px solid rgba(8,145,178,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🩺</div>
+          <div>
+            <div style="font-size:.84rem;font-weight:700;color:#0F2744">Dr. Maria Gonzalez</div>
+            <div style="font-size:.7rem;color:#5A90B8"><span data-he="">🇪🇸 ברצלונה, ספרד</span><span data-en="">🇪🇸 Barcelona, Spain</span></div>
+          </div>
+        </div>
+        <div style="font-size:.7rem;color:#0891B2;background:rgba(8,145,178,.08);padding:4px 10px;border-radius:20px;display:inline-block;border:1px solid rgba(8,145,178,.15);direction:ltr;align-self:flex-start">
+          <span data-he="">✓ זמין — קליניקה + ביקור בית</span><span data-en="">✓ Available — Clinic &amp; Home Visit</span>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid rgba(8,145,178,.18);border-radius:12px;padding:1rem 1.1rem;box-shadow:0 3px 14px rgba(8,145,178,.08);display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:10px;direction:ltr">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(8,145,178,.1);border:1px solid rgba(8,145,178,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">💊</div>
+          <div>
+            <div style="font-size:.84rem;font-weight:700;color:#0F2744">Dr. James Nakamura</div>
+            <div style="font-size:.7rem;color:#5A90B8"><span data-he="">🇯🇵 טוקיו, יפן</span><span data-en="">🇯🇵 Tokyo, Japan</span></div>
+          </div>
+        </div>
+        <div style="font-size:.7rem;color:#0891B2;background:rgba(8,145,178,.08);padding:4px 10px;border-radius:20px;display:inline-block;border:1px solid rgba(8,145,178,.15);direction:ltr;align-self:flex-start">
+          <span data-he="">✓ ייעוץ וידאו זמין</span><span data-en="">✓ Video Consult Available</span>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid rgba(8,145,178,.18);border-radius:12px;padding:1rem 1.1rem;box-shadow:0 3px 14px rgba(8,145,178,.08);display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:10px;direction:ltr">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(8,145,178,.1);border:1px solid rgba(8,145,178,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🏥</div>
+          <div>
+            <div style="font-size:.84rem;font-weight:700;color:#0F2744">Dr. Aisha Patel</div>
+            <div style="font-size:.7rem;color:#5A90B8"><span data-he="">🇹🇭 בנגקוק, תאילנד</span><span data-en="">🇹🇭 Bangkok, Thailand</span></div>
+          </div>
+        </div>
+        <div style="font-size:.7rem;color:#0891B2;background:rgba(8,145,178,.08);padding:4px 10px;border-radius:20px;display:inline-block;border:1px solid rgba(8,145,178,.15);direction:ltr;align-self:flex-start">
+          <span data-he="">✓ חירום + מרפאה</span><span data-en="">✓ Emergency &amp; Clinic</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- HOW -->
+<section id="how">
+  <div class="reveal">
+    <span class="s-tag"><span data-he="">התהליך</span><span data-en="">The Process</span></span>
+    <div class="s-title"><span data-he="">איך Safe Doc עובדת?</span><span data-en="">How Safe Doc Works</span></div>
+    <p class="s-body"><span data-he="">ארבעה שלבים פשוטים — מהרגע שמטייל צריך עזרה ועד שהכסף נוחת אצל הרופא.</span><span data-en="">Four simple steps — from the moment a traveler needs help to the moment payment reaches you.</span></p>
+  </div>
+  <div class="how-steps reveal" style="margin-top:3rem">
+    <div class="hstep">
+      <div class="hn">01</div>
+      <div class="hico">📱</div>
+      <div class="ht"><span data-he="">מציאת שירות רפואי</span><span data-en="">Finding Medical Care</span></div>
+      <div class="hd"><span data-he="">המטייל פותח את האפליקציה ורואה רופאים זמינים בקרבתו — בזמן אמת.</span><span data-en="">The traveler opens the app and sees available doctors nearby — in real time.</span></div>
+    </div>
+    <div class="hstep">
+      <div class="hn">02</div>
+      <div class="hico">🔗</div>
+      <div class="ht"><span data-he="">הפניה לרופא</span><span data-en="">Referred to You</span></div>
+      <div class="hd"><span data-he="">האפליקציה מתאמת את התור וההתקשרות עם רופא זמין.</span><span data-en="">The app coordinates the appointment and connection with an available doctor.</span></div>
+    </div>
+    <div class="hstep">
+      <div class="hn">03</div>
+      <div class="hico">💳</div>
+      <div class="ht"><span data-he="">תשלום מיידי</span><span data-en="">Instant Payment</span></div>
+      <div class="hd"><span data-he="">אנחנו מעבירים לך תשלום מיידי ואוטומטי בדרך שנוחה לך — כרטיס אשראי, העברה לחשבון או מטבע דיגיטלי.</span><span data-en="">We transfer instant, automatic payment in the way most convenient for you — credit card, bank transfer or digital currency.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <span class="s-tag"><span data-he="">אודות Safe Doc</span><span data-en="">About Safe Doc</span></span>
+      <div class="s-title"><span data-he="">נולדנו מתוך צורך אמיתי</span><span data-en="">Born From a Real Need</span></div>
+      <p class="s-body"><span data-he="">כל שנה מאות מיליוני מטיילים ברחבי העולם נפצעים, חולים, זקוקים לייעוץ — ולא יודעים למי לפנות. Safe Doc נוצרה כדי לשנות את זה.</span><span data-en="">Every year, hundreds of millions of travelers get injured, fall ill, or need advice abroad — and don't know who to call. Safe Doc was created to change that.</span></p>
+      <div class="about-points">
+        <div class="ap"><div class="ap-ico">🌍</div><div class="ap-t">
+          <h4><span data-he="">נוכחות גלובלית</span><span data-en="">Global Presence</span></h4>
+          <p><span data-he="">רשת רופאים שותפים ביותר מ-40 מדינות, מאירופה ועד דרום-מזרח אסיה ואמריקה.</span><span data-en="">A network of partner doctors in 40+ countries, from Europe to Southeast Asia and the Americas.</span></p>
+        </div></div>
+        <div class="ap"><div class="ap-ico">🤝</div><div class="ap-t">
+          <h4><span data-he="">שותפות אמיתית</span><span data-en="">Real Partnership</span></h4>
+          <p><span data-he="">מודל תשלום מיידי ומתגמל ביותר — אנחנו משלמים לך ישירות לפי הסיכום עלויות בהסכם שלנו.</span><span data-en="">The most rewarding instant payment model — we pay you directly according to the agreed rates in our contract.</span></p>
+          <p style="margin-top:.75rem;font-size:.82rem;color:#1E4A72;line-height:1.7"><span data-he="">אנחנו בוחרים רופאים איכותיים ומומלצים ולא מחפשים עשרות רופאים בכל יעד. ככה תקבל נפח פעילות גדול מאיתנו.</span><span data-en="">We select quality, recommended doctors — not dozens per destination. That means more volume and referrals for you.</span></p>
+        </div></div>
+        <div class="ap"><div class="ap-ico">🔐</div><div class="ap-t">
+          <h4><span data-he="">אמינות ובטיחות</span><span data-en="">Trust & Safety</span></h4>
+          <p><span data-he="">כל רופא עובר תהליך אימות. המטיילים יודעים שהם בידיים טובות.</span><span data-en="">Every doctor is verified. Travelers know they're in good hands.</span></p>
+        </div></div>
+      </div>
+    </div>
+    <div class="about-right reveal">
+      <div class="qcard">
+        <p><span data-he="">"המטרה שלנו היא פשוטה — שאף מטייל לא יהיה לבד ברגע שהוא זקוק לרופא."</span><span data-en="">"Our goal is simple — no traveler should face a health crisis alone, anywhere in the world."</span></p>
+        <div class="sig"><span data-he="">— צוות Safe Doc</span><span data-en="">— The Safe Doc Team</span></div>
+      </div>
+      <div class="acard-row">
+        <div class="acard"><div class="acard-n">40+</div><div class="acard-l"><span data-he="">מדינות</span><span data-en="">Countries</span></div></div>
+        <div class="acard"><div class="acard-n">24/7</div><div class="acard-l"><span data-he="">זמינות</span><span data-en="">Availability</span></div></div>
+        <div class="acard"><div class="acard-n">0</div><div class="acard-l"><span data-he="">ביורוקרטיה</span><span data-en="">Bureaucracy</span></div></div>
+        <div class="acard"><div class="acard-n"><span data-he="">מיידי</span><span data-en="">Instant</span></div><div class="acard-l"><span data-he="">תשלום לרופא</span><span data-en="">Doctor Payout</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- TRUST / INSURANCE -->
+<section id="trust" style="background:#E8F4FE;padding:80px 4vw">
+  <div class="reveal" style="text-align:center;margin-bottom:1rem">
+    <span class="s-tag"><span data-he="">אמון ושותפויות</span><span data-en="">Trust & Partnerships</span></span>
+    <div class="s-title" style="max-width:600px;margin:0 auto 1rem"><span data-he="">חברות ביטוח ענקיות בוחרות בנו</span><span data-en="">Leading Insurance Giants Back Us</span></div>
+    <p class="s-body" style="margin:0 auto;text-align:center;max-width:560px"><span data-he="">שתי חברות ביטוח גדולות חתמו עמנו על הסכם שותפות. זו הוכחה שהמודל העסקי שלנו מהימן, בטוח ומוכח.</span><span data-en="">Two of the world's largest insurance companies have signed partnership agreements with us — proof that our model is trusted, secure and proven.</span></p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- DOCTORS -->
+<section id="doctors">
+  <div class="doc-header reveal">
+    <div>
+      <span class="s-tag"><span data-he="">לרופאים</span><span data-en="">For Doctors</span></span>
+      <div class="s-title"><span data-he="">למה להצטרף ל-Safe Doc?</span><span data-en="">Why Join Safe Doc?</span></div>
+    </div>
+    <div>
+      <p class="s-body"><span data-he="">הצטרף לרשת הרופאים הגלובלית של Safe Doc. קבל לקוחות מטיילים מכל העולם וקבל תשלום מיידי.</span><span data-en="">Join the Safe Doc global doctor network. Get clients from travelers worldwide, instant payout and terms that simply don't exist anywhere else.</span></p>
+      <br><a href="#join" class="btn-main" style="text-decoration:none;display:inline-flex;margin-top:.5rem"><span data-he="">הצטרף עכשיו ←</span><span data-en="">Join Now →</span></a>
+    </div>
+  </div>
+  <div class="benefits-grid reveal">
+    
+    <div class="bc"><div class="bico">📈</div>
+      <div class="bt"><span data-he="">הכנסה נוספת ללא מאמץ</span><span data-en="">Extra Income, Zero Effort</span></div>
+      <div class="bd"><span data-he="">אנחנו מביאים אליך לקוחות מטיילים שכבר מחפשים רופא. אתה רק מטפל.</span><span data-en="">We bring you traveler clients who are already looking for a doctor. You just treat.</span></div>
+    </div>
+    <div class="bc"><div class="bico">🕐</div>
+      <div class="bt"><span data-he="">שליטה מלאה בזמינות</span><span data-en="">Full Availability Control</span></div>
+      <div class="bd"><span data-he="">פועל רק כשאתה רוצה. הגדר זמינות, סוגי ביקורים ומחירים — הכל דרך הפלטפורמה.</span><span data-en="">Work only when you want. Set your availability, visit types and pricing — all through the platform.</span></div>
+    </div>
+    <div class="bc"><div class="bico">🎁</div>
+      <div class="bt"><span data-he="">אין עלות חודשית</span><span data-en="">No Monthly Fee</span></div>
+      <div class="bd"><span data-he="">הפרסום והחשיפה בחינם! אתה משלם רק עמלה קטנה על מטופלים שהפנינו אליך.</span><span data-en="">Advertising and exposure are free! You only pay a small commission on patients we refer to you.</span></div>
+    </div>
+    <div class="bc"><div class="bico">🌍</div>
+      <div class="bt"><span data-he="">מטיילים מכל העולם</span><span data-en="">Travelers Worldwide</span></div>
+      <div class="bd"><span data-he="">אנחנו בוחרים רופאים ומרפאות מקצועיות ומחפשים איכות ולא כמות. כך נפנה אליך והרבה!</span><span data-en="">We select quality clinics and doctors — not quantity. That means more referrals coming your way!</span></div>
+    </div>
+    <div class="bc"><div class="bico">⚖️</div>
+      <div class="bt"><span data-he="">עמלה הוגנה ושקופה</span><span data-en="">Fair & Transparent Commission</span></div>
+      <div class="bd"><span data-he="">נגבה מהתשלום עמלה קטנה על פי ההסכם שלנו, רק עבור מטופלים שהפנינו אליך.</span><span data-en="">We charge a small commission per patient we refer to you, as agreed in our contract.</span></div>
+    </div>
+    <div class="bc"><div class="bico">🛡️</div>
+      <div class="bt"><span data-he="">גיבוי מקצועי</span><span data-en="">Professional Backing</span></div>
+      <div class="bd"><span data-he="">Safe Doc עומדת מאחוריך — תמיכה ותיאום עם המטייל לפני הביקור.</span><span data-en="">Safe Doc backs you — support and coordination with the traveler before the visit.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- JOIN -->
+<section id="join">
+  <div class="join-grid">
+    <div class="join-left reveal">
+      <span class="s-tag"><span data-he="">הצטרפות</span><span data-en="">Join</span></span>
+      <div class="s-title"><span data-he="">הפוך לרופא שותף</span><span data-en="">Become a Partner Doctor</span></div>
+      <p class="s-body"><span data-he="">תהליך הצטרפות מהיר — 4 חלקים קצרים ואתה על המפה.</span><span data-en="">A quick sign-up — 4 short steps and you're on the map.</span></p>
+      <div class="jteaser">
+        <h4><span data-he="">מה קורה אחרי שמגישים?</span><span data-en="">What Happens After You Apply?</span></h4>
+        <ul>
+          <li><span data-he="">נאמת את הפרטים שלך</span><span data-en="">We verify your details</span></li>
+          <li><span data-he="">נשלח לך את המודל העסקי שלנו</span><span data-en="">We send you our business model</span></li>
+          <li><span data-he="">נקיים הסכם עלויות טיפול</span><span data-en="">We establish a treatment fee agreement</span></li>
+          <li><span data-he="">נעלה את כל הפרטים שלך לאתר</span><span data-en="">We publish your profile on the platform</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-box reveal">
+      <div class="stepper" id="stepper">
+        <div class="sw"><div class="sc active" id="sc1">1</div><div class="sl active" id="sl1"><span data-he="">פרטים<br>אישיים</span><span data-en="">Personal<br>Info</span></div></div>
+        <div class="sln" id="ln1"></div>
+        <div class="sw"><div class="sc" id="sc2">2</div><div class="sl" id="sl2"><span data-he="">מומחיות<br>ואימות</span><span data-en="">Expertise<br>&amp;Verify</span></div></div>
+        <div class="sln" id="ln2"></div>
+        <div class="sw"><div class="sc" id="sc3">3</div><div class="sl" id="sl3"><span data-he="">פרטי<br>מרפאה</span><span data-en="">Clinic<br>Details</span></div></div>
+        <div class="sln" id="ln3"></div>
+        <div class="sw" style="flex:none"><div class="sc" id="sc4">4</div><div class="sl" id="sl4"><span data-he="">משפטי<br>ופיננסי</span><span data-en="">Legal<br>&amp;Final</span></div></div>
+      </div>
+      <div class="prog"><div class="prog-fill" id="prog" style="width:25%"></div></div>
+
+      <!-- STEP 1 -->
+      <div class="fstep active" id="step1">
+        <div class="fstep-h"><span data-he="">חלק 1 — פרטים אישיים</span><span data-en="">Part 1 — Personal Details</span></div>
+        <div class="fstep-s"><span data-he="">הפרטים הבסיסיים שלך</span><span data-en="">Your basic contact information</span></div>
+        <div class="fg">
+          <label><span data-he="">שם מלא</span><span data-en="">Full Name</span> <span class="req">*</span></label>
+          <input type="text" id="fullname" placeholder="Dr. First Last"/>
+        </div>
+        <div class="fg">
+          <label><span data-he="">טלפון / WhatsApp</span><span data-en="">Mobile / WhatsApp</span> <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="+66 81 234 5678"/>
+          <div class="priv"><span data-he="">🔒 לשימוש פנימי בלבד — לא מוצג בפרופיל ציבורי</span><span data-en="">🔒 For internal use only — not shown publicly</span></div>
+        </div>
+        <div class="fg">
+          <label><span data-he="">אימייל מקצועי</span><span data-en="">Professional Email</span> <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="doctor@clinic.com"/>
+        </div>
+        <div class="fg">
+          <label><span data-he="">תמונת פרופיל</span><span data-en="">Profile Photo</span></label>
+          <div class="upload"><input type="file" id="ph-inp" accept="image/*" onchange="showFile(this,'ph-fn')">
+            <div class="uico">📷</div>
+            <div class="utxt"><span data-he="">תמונה מקצועית במדים / קליניקה</span><span data-en="">Professional photo in uniform or clinic</span><br><strong><span data-he="">לחץ להעלאה</span><span data-en="">Click to upload</span></strong></div>
+            <div class="ufn" id="ph-fn"></div>
+          </div>
+        </div>
+        <div class="nav-btns"><button class="bnxt" onclick="goStep(2)"><span data-he="">הבא — מומחיות ואימות ←</span><span data-en="">Next — Expertise &amp; Verify →</span></button></div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="fstep" id="step2">
+        <div class="fstep-h"><span data-he="">חלק 2 — מומחיות ואימות</span><span data-en="">Part 2 — Expertise &amp; Verification</span></div>
+        <div class="fstep-s"><span data-he="">פרטים מקצועיים לאימות זהותך</span><span data-en="">Professional details for doctor verification</span></div>
+        <div class="fg">
+          <label><span data-he="">התמחות ראשית</span><span data-en="">Primary Specialty</span> <span class="req">*</span></label>
+          <select id="specialty">
+            <option value=""><span data-he="">בחר התמחות...</span><span data-en="">Select specialty...</span></option>
+            <option value="internal"><span data-he="">רפואה פנימית</span><span data-en="">Internal Medicine</span></option>
+            <option value="pediatrics"><span data-he="">ילדים</span><span data-en="">Pediatrics</span></option>
+            <option value="family"><span data-he="">רפואת משפחה</span><span data-en="">Family Doctor</span></option>
+            <option value="ortho"><span data-he="">אורתופדיה</span><span data-en="">Orthopedics</span></option>
+            <option value="gastro"><span data-he="">גסטרואנטרולוגיה</span><span data-en="">Gastroenterology</span></option>
+            <option value="derm"><span data-he="">עור</span><span data-en="">Dermatology</span></option>
+            <option value="gynec"><span data-he="">גינקולוגיה</span><span data-en="">Gynecology</span></option>
+            <option value="emergency"><span data-he="">רפואה דחופה</span><span data-en="">Emergency Medicine</span></option>
+          </select>
+        </div>
+        <div class="fgrow">
+          <div class="fg" style="margin:0">
+            <label><span data-he="">מספר רישיון</span><span data-en="">License Number</span> <span class="req">*</span></label>
+            <input type="text" id="license" placeholder="License #"/>
+          </div>
+          <div class="fg" style="margin:0">
+            <label><span data-he="">שנות ניסיון</span><span data-en="">Years of Experience</span> <span class="req">*</span></label>
+            <input type="number" id="experience" placeholder="12" min="0" max="60"/>
+          </div>
+        </div>
+        <div class="fg" style="margin-top:1rem">
+          <label><span data-he="">צילום רישיון רפואי</span><span data-en="">Upload Medical License</span> <span class="req">*</span></label>
+          <div class="upload"><input type="file" id="lic-inp" accept="image/*,.pdf" onchange="showFile(this,'lic-fn')">
+            <div class="uico">📄</div>
+            <div class="utxt"><span data-he="">תמונה או PDF של הרישיון</span><span data-en="">Photo or PDF of your license</span><br><strong><span data-he="">לחץ להעלאה</span><span data-en="">Click to upload</span></strong> — <span data-he="">חובה לאימות</span><span data-en="">required for verification</span></div>
+            <div class="ufn" id="lic-fn"></div>
+          </div>
+        </div>
+        <div class="fg">
+          <label><span data-he="">שפות</span><span data-en="">Languages</span> <span class="req">*</span></label>
+          <div class="chips">
+            <div class="chip" onclick="toggleChip(this)"><span data-he="">אנגלית</span><span data-en="">English</span></div>
+            <div class="chip" onclick="toggleChip(this)"><span data-he="">עברית</span><span data-en="">Hebrew</span></div>
+            <div class="chip" onclick="toggleChip(this)"><span data-he="">תאילנדית</span><span data-en="">Thai</span></div>
+            <div class="chip" onclick="toggleChip(this)"><span data-he="">רוסית</span><span data-en="">Russian</span></div>
+            <div class="chip" onclick="toggleChip(this)"><span data-he="">ספרדית</span><span data-en="">Spanish</span></div>
+            <div class="chip" onclick="toggleChip(this)"><span data-he="">צרפתית</span><span data-en="">French</span></div>
+          </div>
+        </div>
+        <div class="nav-btns">
+          <button class="bbk" onclick="goStep(1)"><span data-he="">← חזור</span><span data-en="">← Back</span></button>
+          <button class="bnxt" onclick="goStep(3)"><span data-he="">הבא — פרטי מרפאה ←</span><span data-en="">Next — Clinic Details →</span></button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="fstep" id="step3">
+        <div class="fstep-h"><span data-he="">חלק 3 — פרטי המרפאה</span><span data-en="">Part 3 — Clinic Details</span></div>
+        <div class="fstep-s"><span data-he="">איפה אתה נמצא ומה אתה מציע</span><span data-en="">Where you are and what you offer</span></div>
+        <div class="fgrow">
+          <div class="fg" style="margin:0">
+            <label><span data-he="">שם המרפאה</span><span data-en="">Clinic Name</span> <span class="req">*</span></label>
+            <input type="text" id="clinic" placeholder="Bangkok Medical Clinic"/>
+          </div>
+          <div class="fg" style="margin:0">
+            <label><span data-he="">כתובת המרפאה</span><span data-en="">Clinic Address</span></label>
+            <input type="text" id="address" placeholder="Full address or Google Maps link"/>
+          </div>
+        </div>
+        <div class="fg" style="margin-top:1rem">
+          <label><span data-he="">סוגי שירות</span><span data-en="">Service Types</span> <span class="req">*</span></label>
+          <div class="chips">
+            <div class="chip" onclick="toggleChip(this)"><span data-he="">🏥 ביקור במרפאה</span><span data-en="">🏥 Clinic Visit</span></div>
+            <div class="chip" onclick="toggleChip(this)"><span data-he="">🏨 ביקור בית / מלון</span><span data-en="">🏨 Home / Hotel Visit</span></div>
+            <div class="chip" onclick="toggleChip(this)"><span data-he="">💻 ייעוץ וידאו</span><span data-en="">💻 Video Consultation</span></div>
+          </div>
+        </div>
+        <div class="fg">
+          <label><span data-he="">עלויות ביקור</span><span data-en="">Consultation Fees</span></label>
+          <div class="fgrow3">
+            <div class="fg" style="margin:0">
+              <label style="font-size:.62rem"><span data-he="">עלות מרפאה</span><span data-en="">Clinic Fee</span></label>
+              <input type="number" id="fee1" placeholder="80" min="0"/>
+            </div>
+            <div class="fg" style="margin:0">
+              <label style="font-size:.62rem"><span data-he="">עלות ביקור בית</span><span data-en="">Home Fee</span></label>
+              <input type="number" id="fee2" placeholder="150" min="0"/>
+            </div>
+            <div class="fg" style="margin:0">
+              <label style="font-size:.62rem"><span data-he="">מטבע</span><span data-en="">Currency</span></label>
+              <select id="currency">
+                <option>USD</option><option>THB</option><option>EUR</option><option>ILS</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="fg">
+          <label><span data-he="">שעות פעילות</span><span data-en="">Operating Hours</span> <span class="req">*</span></label>
+          <textarea id="hours" placeholder="e.g. Mon–Fri 09:00–18:00 | 24/7 WhatsApp for emergencies" style="min-height:65px"></textarea>
+        </div>
+        <div class="nav-btns">
+          <button class="bbk" onclick="goStep(2)"><span data-he="">← חזור</span><span data-en="">← Back</span></button>
+          <button class="bnxt" onclick="goStep(4)"><span data-he="">הבא — אישור ושליחה ←</span><span data-en="">Next — Review &amp; Submit →</span></button>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="fstep" id="step4">
+        <div class="fstep-h"><span data-he="">חלק 4 — משפטי ופיננסי</span><span data-en="">Part 4 — Legal &amp; Financial</span></div>
+        <div class="fstep-s"><span data-he="">צעד אחרון לפני שמגישים</span><span data-en="">Final step before submitting</span></div>
+        <div class="fg">
+          <label><span data-he="">ביטוח אחריות מקצועית</span><span data-en="">Malpractice Insurance</span></label>
+          <div class="upload"><input type="file" id="ins-inp" accept="image/*,.pdf" onchange="showFile(this,'ins-fn')">
+            <div class="uico">🛡️</div>
+            <div class="utxt"><span data-he="">צילום פוליסת ביטוח (רצוי)</span><span data-en="">Photo of insurance policy (recommended)</span><br><strong><span data-he="">לחץ להעלאה</span><span data-en="">Click to upload</span></strong> — <span data-he="">PDF או תמונה</span><span data-en="">PDF or image</span></div>
+            <div class="ufn" id="ins-fn"></div>
+          </div>
+        </div>
+        <div class="fg">
+          <label><span data-he="">Bio / הערות נוספות</span><span data-en="">Bio / Additional Notes</span></label>
+          <textarea id="bio" placeholder="..." style="min-height:95px" data-he-placeholder="ספר לנו על עצמך — ניסיון, גישה לחולה, מה מייחד אותך." data-en-placeholder="Tell us about yourself — experience, approach, what makes you stand out."></textarea>
+        </div>
+        <div class="terms-row">
+          <input type="checkbox" id="terms"/>
+          <label for="terms"><span data-he="">אני מאשר/ת שהפרטים שמסרתי נכונים ושאני רופא/ה מוסמך/ת בעל/ת רישיון תקף. קראתי והסכמתי ל<a href='#'>תנאי השימוש</a> של Safe Doc.</span><span data-en="">I confirm all details are accurate and that I am a licensed medical professional. I agree to Safe Doc's <a href='#'>Terms of Service</a>.</span></label>
+        </div>
+        <div class="nav-btns">
+          <button class="bbk" onclick="goStep(3)"><span data-he="">← חזור</span><span data-en="">← Back</span></button>
+          <button class="bnxt" onclick="submitForm()"><span data-he="">שלח בקשת הצטרפות ✚</span><span data-en="">Submit Application ✚</span></button>
+        </div>
+        <div class="fnote"><span data-he="">נחזור אליך תוך 48 שעות עם פרטים לשיחת היכרות</span><span data-en="">We'll get back to you within 48 hours</span></div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-scr" id="success-scr">
+        <div style="font-size:2.5rem">✦</div>
+        <h3><span data-he="">הבקשה התקבלה!</span><span data-en="">Application Received!</span></h3>
+        <p><span data-he="">ברוך הבא למשפחת Safe Doc.<br>נחזור אליך תוך 48 שעות לשיחת היכרות קצרה.</span><span data-en="">Welcome to the Safe Doc family.<br>We'll be in touch within 48 hours for a short intro call.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">Safe<em> Doc</em></div>
+  <div class="fcopy"><span data-he="">© 2025 Safe Doc. כל הזכויות שמורות.</span><span data-en="">© 2025 Safe Doc. All rights reserved.</span></div>
+  <div class="flinks">
+    <a href="#"><span data-he="">פרטיות</span><span data-en="">Privacy</span></a>
+    <a href="#"><span data-he="">תנאי שימוש</span><span data-en="">Terms</span></a>
+    <a href="#join"><span data-he="">הצטרפות</span><span data-en="">Join</span></a>
+  </div>
+</footer>
+
+<script>
+
+const translations = {
+  he: {
+    badge: "פלטפורמת רפואה לכל מטייל בעולם",
+    h1a: "רפואה מקצועית,",
+    h1b: "בכל מקום בעולם.",
+    sub: "מערכת Safe Doc מחברת בין מטיילים לרופאים מקצועיים ברחבי הגלובוס. ללא ביורוקרטיה.",
+    btn1: "הצטרף כרופא שותף ✚", btn2: "איך זה עובד ←",
+    nav1:"איך זה עובד", nav2:"אודות", nav3:"לרופאים", nav4:"הצטרפות רופאים ←",
+    label:"עב", dir:"rtl"
+  },
+  en: {
+    badge: "Global Medical Platform for Travelers",
+    h1a: "Professional care,",
+    h1b: "anywhere in the world.",
+    sub: "Safe Doc connects travelers from around the world with professional local doctors. Instant payment, 24/7 availability, zero bureaucracy.",
+    btn1: "Join as Partner Doctor ✚", btn2: "How It Works →",
+    nav1:"How It Works", nav2:"About", nav3:"For Doctors", nav4:"Join as Doctor →",
+    label:"EN", dir:"ltr"
+  },
+  es: {
+    badge: "Plataforma Médica Global para Viajeros",
+    h1a: "Atención profesional,",
+    h1b: "en cualquier lugar del mundo.",
+    sub: "Safe Doc conecta viajeros de todo el mundo con médicos locales profesionales. Pago inmediato, disponibilidad 24/7, cero burocracia.",
+    btn1: "Únete como Médico Asociado ✚", btn2: "Cómo funciona →",
+    nav1:"Cómo funciona", nav2:"Acerca de", nav3:"Para Médicos", nav4:"Únete →",
+    label:"ES", dir:"ltr"
+  },
+  pt: {
+    badge: "Plataforma Médica Global para Viajantes",
+    h1a: "Cuidado profissional,",
+    h1b: "em qualquer lugar do mundo.",
+    sub: "Safe Doc conecta viajantes de todo o mundo com médicos locais profissionais. Pagamento imediato, disponibilidade 24/7, zero burocracia.",
+    btn1: "Junte-se como Médico Parceiro ✚", btn2: "Como funciona →",
+    nav1:"Como funciona", nav2:"Sobre nós", nav3:"Para Médicos", nav4:"Junte-se →",
+    label:"PT", dir:"ltr"
+  },
+  th: {
+    badge: "แพลตฟอร์มการแพทย์ทั่วโลกสำหรับนักเดินทาง",
+    h1a: "การดูแลแบบมืออาชีพ",
+    h1b: "ทุกที่ในโลก",
+    sub: "Safe Doc เชื่อมต่อนักเดินทางทั่วโลกกับแพทย์ท้องถิ่นมืออาชีพ ชำระเงินทันที พร้อมให้บริการ 24/7 ไม่มีระบบราชการ",
+    btn1: "เข้าร่วมเป็นแพทย์พาร์ทเนอร์ ✚", btn2: "วิธีการทำงาน →",
+    nav1:"วิธีการทำงาน", nav2:"เกี่ยวกับ", nav3:"สำหรับแพทย์", nav4:"เข้าร่วม →",
+    label:"TH", dir:"ltr"
+  },
+  vi: {
+    badge: "Nền tảng Y tế Toàn cầu cho Du khách",
+    h1a: "Chăm sóc chuyên nghiệp,",
+    h1b: "ở bất cứ đâu trên thế giới.",
+    sub: "Safe Doc kết nối du khách khắp thế giới với các bác sĩ địa phương chuyên nghiệp. Thanh toán ngay lập tức, sẵn sàng 24/7, không quan liêu.",
+    btn1: "Tham gia làm Bác sĩ Đối tác ✚", btn2: "Cách hoạt động →",
+    nav1:"Cách hoạt động", nav2:"Giới thiệu", nav3:"Cho Bác sĩ", nav4:"Tham gia →",
+    label:"VI", dir:"ltr"
+  },
+  km: {
+    badge: "វេទិកាវេជ្ជសាស្ត្រពិភពលោកសម្រាប់អ្នកដំណើរ",
+    h1a: "ការថែទាំដោយជំនាញ",
+    h1b: "គ្រប់ទីកន្លែងក្នុងពិភពលោក",
+    sub: "Safe Doc ភ្ជាប់អ្នកដំណើរពីទូទាំងពិភពលោកជាមួយវេជ្ជបណ្ឌិតក្នុងស្រុកជំនាញ។ ការបង់ប្រាក់ភ្លាមៗ ពេលវេលា 24/7 គ្មានផ្នែកណា។",
+    btn1: "ចូលរួមជាវេជ្ជបណ្ឌិតដៃគូ ✚", btn2: "របៀបដំណើរការ →",
+    nav1:"របៀបដំណើរការ", nav2:"អំពីយើង", nav3:"សម្រាប់វេជ្ជបណ្ឌិត", nav4:"ចូលរួម →",
+    label:"KM", dir:"ltr"
+  },
+  lo: {
+    badge: "ເວທີທາງການແພດທົ່ວໂລກສຳລັບນັກທ່ອງທ່ຽວ",
+    h1a: "ການດູແລທາງວິຊາຊີບ,",
+    h1b: "ທຸກບ່ອນໃນໂລກ.",
+    sub: "Safe Doc ເຊື່ອມຕໍ່ນັກທ່ອງທ່ຽວທົ່ວໂລກກັບທ່ານໝໍທ້ອງຖິ່ນທີ່ເປັນມືອາຊີບ. ການຊຳລະເງິນທັນທີ, ພ້ອມ 24/7, ບໍ່ມີລະບຽບການ.",
+    btn1: "ເຂົ້າຮ່ວມເປັນທ່ານໝໍຮ່ວມງານ ✚", btn2: "ວິທີການເຮັດວຽກ →",
+    nav1:"ວິທີການ", nav2:"ກ່ຽວກັບ", nav3:"ສຳລັບທ່ານໝໍ", nav4:"ເຂົ້າຮ່ວມ →",
+    label:"LO", dir:"ltr"
+  },
+  tl: {
+    badge: "Global Medical Platform para sa mga Manlalakbay",
+    h1a: "Propesyonal na pangangalaga,",
+    h1b: "kahit saan sa mundo.",
+    sub: "Ikinokonekta ng Safe Doc ang mga manlalakbay mula sa buong mundo sa mga propesyonal na lokal na doktor. Agarang bayad, available 24/7, walang burukrasya.",
+    btn1: "Sumali bilang Partner Doctor ✚", btn2: "Paano ito gumagana →",
+    nav1:"Paano gumagana", nav2:"Tungkol sa amin", nav3:"Para sa mga Doktor", nav4:"Sumali →",
+    label:"TL", dir:"ltr"
+  },
+  de: {
+    badge: "Globale Medizinische Plattform für Reisende",
+    h1a: "Professionelle Versorgung,",
+    h1b: "überall auf der Welt.",
+    sub: "Safe Doc verbindet Reisende aus aller Welt mit professionellen lokalen Ärzten. Sofortige Bezahlung, 24/7 Verfügbarkeit, null Bürokratie.",
+    btn1: "Als Partnerarzt beitreten ✚", btn2: "So funktioniert es →",
+    nav1:"So funktioniert es", nav2:"Über uns", nav3:"Für Ärzte", nav4:"Beitreten →",
+    label:"DE", dir:"ltr"
+  },
+  nl: {
+    badge: "Wereldwijd Medisch Platform voor Reizigers",
+    h1a: "Professionele zorg,",
+    h1b: "overal ter wereld.",
+    sub: "Safe Doc verbindt reizigers van over de hele wereld met professionele lokale artsen. Directe betaling, 24/7 beschikbaarheid, nul bureaucratie.",
+    btn1: "Word partnerarts ✚", btn2: "Hoe het werkt →",
+    nav1:"Hoe het werkt", nav2:"Over ons", nav3:"Voor artsen", nav4:"Word lid →",
+    label:"NL", dir:"ltr"
+  },
+  el: {
+    badge: "Παγκόσμια Ιατρική Πλατφόρμα για Ταξιδιώτες",
+    h1a: "Επαγγελματική φροντίδα,",
+    h1b: "οπουδήποτε στον κόσμο.",
+    sub: "Το Safe Doc συνδέει ταξιδιώτες από όλο τον κόσμο με επαγγελματίες τοπικούς γιατρούς. Άμεση πληρωμή, διαθεσιμότητα 24/7, μηδέν γραφειοκρατία.",
+    btn1: "Γίνε συνεργάτης γιατρός ✚", btn2: "Πώς λειτουργεί →",
+    nav1:"Πώς λειτουργεί", nav2:"Σχετικά", nav3:"Για γιατρούς", nav4:"Εγγραφή →",
+    label:"EL", dir:"ltr"
+  },
+
+  ar: {
+    badge: "منصة طبية عالمية للمسافرين",
+    h1a: "رعاية احترافية،", h1b: "في كل مكان في العالم.",
+    sub: "Safe Doc تربط المسافرين من جميع أنحاء العالم بأطباء محليين محترفين. دفع فوري، متاح 24/7، بدون بيروقراطية.",
+    btn1: "انضم كطبيب شريك ✚", btn2: "كيف يعمل ←",
+    nav1:"كيف يعمل", nav2:"من نحن", nav3:"للأطباء", nav4:"انضم →",
+    label:"AR", dir:"rtl"
+  },
+  fr: {
+    badge: "Plateforme Médicale Mondiale pour les Voyageurs",
+    h1a: "Des soins professionnels,", h1b: "partout dans le monde.",
+    sub: "Safe Doc connecte les voyageurs du monde entier avec des médecins locaux professionnels. Paiement immédiat, disponible 24/7, zéro bureaucratie.",
+    btn1: "Rejoindre comme Médecin Partenaire ✚", btn2: "Comment ça marche →",
+    nav1:"Comment ça marche", nav2:"À propos", nav3:"Pour les Médecins", nav4:"Rejoindre →",
+    label:"FR", dir:"ltr"
+  },
+  it: {
+    badge: "Piattaforma Medica Globale per Viaggiatori",
+    h1a: "Assistenza professionale,", h1b: "ovunque nel mondo.",
+    sub: "Safe Doc collega viaggiatori di tutto il mondo con medici locali professionisti. Pagamento immediato, disponibile 24/7, zero burocrazia.",
+    btn1: "Unisciti come Medico Partner ✚", btn2: "Come funziona →",
+    nav1:"Come funziona", nav2:"Chi siamo", nav3:"Per i Medici", nav4:"Unisciti →",
+    label:"IT", dir:"ltr"
+  },
+  ru: {
+    badge: "Глобальная медицинская платформа для путешественников",
+    h1a: "Профессиональная помощь,", h1b: "в любой точке мира.",
+    sub: "Safe Doc соединяет путешественников со всего мира с местными профессиональными врачами. Мгновенная оплата, доступно 24/7, ноль бюрократии.",
+    btn1: "Присоединиться как врач-партнёр ✚", btn2: "Как это работает →",
+    nav1:"Как это работает", nav2:"О нас", nav3:"Для врачей", nav4:"Присоединиться →",
+    label:"RU", dir:"ltr"
+  },
+  pl: {
+    badge: "Globalna Platforma Medyczna dla Podróżnych",
+    h1a: "Profesjonalna opieka,", h1b: "wszędzie na świecie.",
+    sub: "Safe Doc łączy podróżnych z całego świata z profesjonalnymi lokalnymi lekarzami. Natychmiastowa płatność, dostępne 24/7, zero biurokracji.",
+    btn1: "Dołącz jako lekarz partner ✚", btn2: "Jak to działa →",
+    nav1:"Jak to działa", nav2:"O nas", nav3:"Dla lekarzy", nav4:"Dołącz →",
+    label:"PL", dir:"ltr"
+  },
+  hu: {
+    badge: "Globális Orvosi Platform Utazóknak",
+    h1a: "Professzionális ellátás,", h1b: "bárhol a világon.",
+    sub: "A Safe Doc összeköti az utazókat a világ minden tájáról helyi szakorvosokkal. Azonnali fizetés, 24/7 elérhetőség, nulla bürokrácia.",
+    btn1: "Csatlakozz partnerként ✚", btn2: "Hogyan működik →",
+    nav1:"Hogyan működik", nav2:"Rólunk", nav3:"Orvosoknak", nav4:"Csatlakozz →",
+    label:"HU", dir:"ltr"
+  },
+  hr: {
+    badge: "Globalna Medicinska Platforma za Putnike",
+    h1a: "Profesionalna skrb,", h1b: "bilo gdje na svijetu.",
+    sub: "Safe Doc povezuje putnike iz cijelog svijeta s profesionalnim lokalnim liječnicima. Trenutno plaćanje, dostupno 24/7, nula birokracije.",
+    btn1: "Pridruži se kao liječnik partner ✚", btn2: "Kako funkcionira →",
+    nav1:"Kako funkcionira", nav2:"O nama", nav3:"Za liječnike", nav4:"Pridruži se →",
+    label:"HR", dir:"ltr"
+  },
+  lt: {
+    badge: "Pasaulinė medicinos platforma keliautojams",
+    h1a: "Profesionali priežiūra,", h1b: "bet kur pasaulyje.",
+    sub: "Safe Doc jungia keliautojus iš viso pasaulio su profesionaliais vietiniais gydytojais. Momentinis mokėjimas, prieinama 24/7, jokios biurokratijos.",
+    btn1: "Prisijunk kaip partneris gydytojas ✚", btn2: "Kaip tai veikia →",
+    nav1:"Kaip tai veikia", nav2:"Apie mus", nav3:"Gydytojams", nav4:"Prisijunk →",
+    label:"LT", dir:"ltr"
+  },
+  tr: {
+    badge: "Gezginler için Küresel Tıp Platformu",
+    h1a: "Profesyonel bakım,", h1b: "dünyanın her yerinde.",
+    sub: "Safe Doc, dünyanın dört bir yanındaki gezginleri profesyonel yerel doktorlarla buluşturur. Anında ödeme, 7/24 müsaitlik, sıfır bürokrasi.",
+    btn1: "Ortak Doktor olarak katıl ✚", btn2: "Nasıl çalışır →",
+    nav1:"Nasıl çalışır", nav2:"Hakkımızda", nav3:"Doktorlar için", nav4:"Katıl →",
+    label:"TR", dir:"ltr"
+  },
+  fa: {
+    badge: "پلتفرم پزشکی جهانی برای مسافران",
+    h1a: "مراقبت حرفه‌ای،", h1b: "در هر کجای جهان.",
+    sub: "Safe Doc مسافران را از سراسر جهان به پزشکان محلی حرفه‌ای متصل می‌کند. پرداخت فوری، در دسترس ۲۴/۷، بدون بروکراسی.",
+    btn1: "به عنوان پزشک شریک بپیوندید ✚", btn2: "چگونه کار می‌کند ←",
+    nav1:"چگونه کار می‌کند", nav2:"درباره ما", nav3:"برای پزشکان", nav4:"بپیوندید ←",
+    label:"FA", dir:"rtl"
+  },
+  ur: {
+    badge: "مسافروں کے لیے عالمی طبی پلیٹ فارم",
+    h1a: "پیشہ ورانہ دیکھ بھال،", h1b: "دنیا میں کہیں بھی۔",
+    sub: "Safe Doc دنیا بھر کے مسافروں کو مقامی پیشہ ور ڈاکٹروں سے جوڑتا ہے۔ فوری ادائیگی، 24/7 دستیاب، صفر بیوروکریسی۔",
+    btn1: "پارٹنر ڈاکٹر کے طور پر شامل ہوں ✚", btn2: "یہ کیسے کام کرتا ہے ←",
+    nav1:"یہ کیسے کام کرتا ہے", nav2:"ہمارے بارے میں", nav3:"ڈاکٹروں کے لیے", nav4:"شامل ہوں ←",
+    label:"UR", dir:"rtl"
+  },
+  hi: {
+    badge: "यात्रियों के लिए वैश्विक चिकित्सा मंच",
+    h1a: "पेशेवर देखभाल,", h1b: "दुनिया में कहीं भी।",
+    sub: "Safe Doc दुनिया भर के यात्रियों को स्थानीय पेशेवर डॉक्टरों से जोड़ता है। तत्काल भुगतान, 24/7 उपलब्ध, शून्य नौकरशाही।",
+    btn1: "पार्टनर डॉक्टर के रूप में जुड़ें ✚", btn2: "यह कैसे काम करता है →",
+    nav1:"यह कैसे काम करता है", nav2:"हमारे बारे में", nav3:"डॉक्टरों के लिए", nav4:"जुड़ें →",
+    label:"HI", dir:"ltr"
+  },
+  ne: {
+    badge: "यात्रुहरूका लागि विश्वव्यापी चिकित्सा प्लेटफर्म",
+    h1a: "व्यावसायिक हेरचाह,", h1b: "विश्वमा जहाँ पनि।",
+    sub: "Safe Doc विश्वभरका यात्रुहरूलाई स्थानीय पेशेवर डाक्टरहरूसँग जोड्छ। तत्काल भुक्तानी, 24/7 उपलब्ध, शून्य नोकरशाही।",
+    btn1: "पार्टनर डाक्टरको रूपमा सामेल हुनुहोस् ✚", btn2: "यो कसरी काम गर्छ →",
+    nav1:"कसरी काम गर्छ", nav2:"हाम्रो बारेमा", nav3:"डाक्टरहरूका लागि", nav4:"सामेल हुनुहोस् →",
+    label:"NE", dir:"ltr"
+  },
+  si: {
+    badge: "සංචාරකයන් සඳහා ගෝලීය වෛද්‍ය වේදිකාව",
+    h1a: "වෘත්තීය සේවාව,", h1b: "ලොව ඕනෑම තැනක.",
+    sub: "Safe Doc ලොව පුරා සංචාරකයන් ප්‍රාදේශීය වෘත්තීය වෛද්‍යවරුන් සමඟ සම්බන්ධ කරයි. ක්ෂණික ගෙවීම, 24/7 ලබාගත හැකි, නිලමල ශූන්‍ය.",
+    btn1: "හවුල් වෛද්‍යවරයෙකු ලෙස සම්බන්ධ වන්න ✚", btn2: "ක්‍රියාකාරිත්වය →",
+    nav1:"ක්‍රියාකාරිත්වය", nav2:"අප ගැන", nav3:"වෛද්‍යවරුන් සඳහා", nav4:"සම්බන්ධ වන්න →",
+    label:"SI", dir:"ltr"
+  },
+  ta: {
+    badge: "பயணிகளுக்கான உலகளாவிய மருத்துவ தளம்",
+    h1a: "தொழில்முறை சேவை,", h1b: "உலகில் எங்கும்.",
+    sub: "Safe Doc உலகெங்கிலும் உள்ள பயணிகளை உள்ளூர் தொழில்முறை மருத்துவர்களுடன் இணைக்கிறது. உடனடி கட்டணம், 24/7 கிடைக்கும், பூஜ்ஜிய தாரீகு.",
+    btn1: "பங்கு மருத்துவராக சேரவும் ✚", btn2: "எப்படி செயல்படுகிறது →",
+    nav1:"எப்படி செயல்படுகிறது", nav2:"எங்களை பற்றி", nav3:"மருத்துவர்களுக்கு", nav4:"சேரவும் →",
+    label:"TA", dir:"ltr"
+  },
+  zh: {
+    badge: "面向旅行者的全球医疗平台",
+    h1a: "专业医疗服务，", h1b: "遍布世界各地。",
+    sub: "Safe Doc将世界各地的旅行者与当地专业医生连接起来。即时付款，全天候24/7，零官僚主义。",
+    btn1: "加入成为合作医生 ✚", btn2: "了解运作方式 →",
+    nav1:"运作方式", nav2:"关于我们", nav3:"医生专区", nav4:"加入 →",
+    label:"中文", dir:"ltr"
+  },
+  ja: {
+    badge: "旅行者のためのグローバル医療プラットフォーム",
+    h1a: "プロフェッショナルケア、", h1b: "世界中どこでも。",
+    sub: "Safe Docは世界中の旅行者と地元のプロの医師をつなぎます。即時支払い、24時間365日対応、ゼロ官僚主義。",
+    btn1: "パートナードクターとして参加 ✚", btn2: "仕組みを見る →",
+    nav1:"仕組み", nav2:"私たちについて", nav3:"医師の方へ", nav4:"参加する →",
+    label:"日本語", dir:"ltr"
+  },
+  ko: {
+    badge: "여행자를 위한 글로벌 의료 플랫폼",
+    h1a: "전문적인 의료 서비스,", h1b: "세계 어디서나.",
+    sub: "Safe Doc은 전 세계 여행자를 전문 현지 의사와 연결합니다. 즉시 결제, 24/7 이용 가능, 관료주의 제로.",
+    btn1: "파트너 의사로 참여하기 ✚", btn2: "작동 방식 보기 →",
+    nav1:"작동 방식", nav2:"소개", nav3:"의사 전용", nav4:"참여하기 →",
+    label:"한국어", dir:"ltr"
+  },
+  id: {
+    badge: "Platform Medis Global untuk Wisatawan",
+    h1a: "Perawatan profesional,", h1b: "di mana saja di dunia.",
+    sub: "Safe Doc menghubungkan wisatawan dari seluruh dunia dengan dokter lokal profesional. Pembayaran instan, tersedia 24/7, nol birokrasi.",
+    btn1: "Bergabung sebagai Dokter Mitra ✚", btn2: "Cara kerjanya →",
+    nav1:"Cara kerjanya", nav2:"Tentang kami", nav3:"Untuk Dokter", nav4:"Bergabung →",
+    label:"ID", dir:"ltr"
+  },
+  am: {
+    badge: "ለተጓዦች የዓለም ሕክምና መድረክ",
+    h1a: "ሙያዊ እንክብካቤ,", h1b: "በዓለም ውስጥ በማንኛውም ቦታ።",
+    sub: "Safe Doc ከዓለም ዙሪያ ያሉ ተጓዦችን ከአካባቢ ሙያዊ ሐኪሞች ጋር ያገናኛል። ፈጣን ክፍያ፣ 24/7 ይገኛል፣ ዜሮ ቢሮክራሲ።",
+    btn1: "እንደ አጋር ሐኪም ይቀላቀሉ ✚", btn2: "እንዴት እንደሚሰራ →",
+    nav1:"እንዴት እንደሚሰራ", nav2:"ስለ እኛ", nav3:"ለሐኪሞች", nav4:"ይቀላቀሉ →",
+    label:"AM", dir:"ltr"
+  },
+  ay: {
+    badge: "Puriyirinaka Aruskipawi Aymara Pachpan",
+    h1a: "Yatxatawi kamachi,", h1b: "kawkiri markan.",
+    sub: "Safe Doc puriyirinaka jach'a markan ukhamarak kamachinaka juyphiyanipxtanwa. Jisk'a payana, 24/7 utjanipxiwa, jan burocracia.",
+    btn1: "Kamachi Doktor arunaka ✚", btn2: "Kunas luraski →",
+    nav1:"Kunas luraski", nav2:"Jiwasanakana", nav3:"Kamachinakana", nav4:"Mantaña →",
+    label:"AY", dir:"ltr"
+  },
+  qu: {
+    badge: "Puriq runakuna qillqasqa hampiy",
+    h1a: "Allin hampiyniyuq,", h1b: "maypipis kay pachapi.",
+    sub: "Safe Doc puriq runakunata yachaqñiqa hampiqkunawan tinkichin. Pay tukukuq, 24/7 rikch'aq, mana burocracia.",
+    btn1: "Yaykuy hampiq kaspa ✚", btn2: "Imayna ruwakun →",
+    nav1:"Imayna ruwakun", nav2:"Ñuqanchikpim", nav3:"Hampiqkunapaq", nav4:"Yaykuy →",
+    label:"QU", dir:"ltr"
+  },
+  gn: {
+    badge: "Ñande rape ryepy ikatu porã ikuaave",
+    h1a: "Porandu ñangareko,", h1b: "ko yvy ári oimeraẽva.",
+    sub: "Safe Doc ojuhu mba'asy rehe umi puruhára ko yvy rupive tembikuaa porã kuéra ndive. Mbohepy pyahurõ, 24/7 ikatu, mboriahu'ỹ.",
+    btn1: "Eike médico socio ✚", btn2: "Mba'éicha oiko →",
+    nav1:"Mba'éicha oiko", nav2:"Ore rehegua", nav3:"Médico kuérapegua", nav4:"Eike →",
+    label:"GN", dir:"ltr"
+  },
+  bs: {
+    badge: "Plataforma Médica Global para Viajeros de Bolivia",
+    h1a: "Atención profesional,", h1b: "en cualquier lugar del mundo.",
+    sub: "Safe Doc conecta viajeros de todo el mundo con médicos locales profesionales. Pago inmediato, disponible 24/7, cero burocracia.",
+    btn1: "Únete como Médico Asociado ✚", btn2: "Cómo funciona →",
+    nav1:"Cómo funciona", nav2:"Acerca de", nav3:"Para Médicos", nav4:"Únete →",
+    label:"BO", dir:"ltr"
+  },
+
+};
+
+function applyTranslation(lang) {
+  const t = translations[lang];
+  if (!t) return;
+  // Update label
+  const lbl = document.getElementById('lang-label');
+  if (lbl) lbl.textContent = t.label;
+  // Hero badge
+  const badge = document.querySelector('.hero-badge');
+  if (badge) {
+    const dot = badge.querySelector('.pulse-dot');
+    badge.innerHTML = '';
+    if (dot) badge.appendChild(dot);
+    badge.appendChild(document.createTextNode(' ' + t.badge));
+  }
+  // H1
+  const h1 = document.querySelector('h1');
+  if (h1) h1.innerHTML = t.h1a + '<br><span class="g">' + t.h1b + '</span>';
+  // Sub
+  const sub = document.querySelector('.hero-sub');
+  if (sub) sub.textContent = t.sub;
+  // Buttons
+  const btns = document.querySelectorAll('.hero-btns a');
+  if (btns[0]) btns[0].textContent = t.btn1;
+  if (btns[1]) btns[1].textContent = t.btn2;
+  // Nav links
+  const navLinks = document.querySelectorAll('.nav-links > a:not(.nav-cta)');
+  if (navLinks[0]) navLinks[0].textContent = t.nav1;
+  if (navLinks[1]) navLinks[1].textContent = t.nav2;
+  if (navLinks[2]) navLinks[2].textContent = t.nav3;
+  const cta = document.querySelector('.nav-cta');
+  if (cta) cta.textContent = t.nav4;
+  // Direction
+  document.documentElement.dir = t.dir;
+  document.documentElement.lang = lang;
+  // Font
+  document.body.style.fontFamily = lang === 'he' ? "'Heebo', sans-serif" : "'Inter', sans-serif";
+  // Hero position handled by setLang
+}
+
+function toggleLangMenu() {
+  const m = document.getElementById('lang-menu');
+  m.style.display = m.style.display === 'none' ? 'block' : 'none';
+}
+// Close menu on outside click
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.lang-toggle')) {
+    const m = document.getElementById('lang-menu');
+    if (m) m.style.display = 'none';
+  }
+});
+
+function setLang(lang){
+  document.body.className='lang-'+lang;
+  applyTranslation(lang);
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    if(b.getAttribute('onclick').includes("'"+lang+"'"))b.classList.add('active');
+  });
+  document.documentElement.dir=lang==='he'?'rtl':'ltr';
+  document.documentElement.lang=lang;
+  document.querySelectorAll('.fg input,.fg select,.fg textarea').forEach(el=>{
+    el.style.direction=lang==='he'?'rtl':'ltr';
+  });
+  // bio placeholder
+  const bio=document.getElementById('bio');
+  if(bio)bio.placeholder=bio.getAttribute('data-'+lang+'-placeholder')||'...';
+}
+let cur=1;
+const reqs={1:[{id:'fullname'},{id:'phone'},{id:'email'}],2:[{id:'specialty'},{id:'license'},{id:'experience'}],3:[{id:'clinic'},{id:'hours'}]};
+function goStep(n){
+  if(n>cur&&reqs[cur]){
+    let ok=true;
+    reqs[cur].forEach(r=>{
+      const el=document.getElementById(r.id);
+      if(!el||!el.value.trim()){if(el){el.style.borderColor='#f87171';el.style.boxShadow='0 0 0 2px rgba(248,113,113,.15)'}ok=false}
+      else{el.style.borderColor='';el.style.boxShadow=''}
+    });
+    if(!ok){
+      const lang=document.body.className.replace('lang-','');
+      alert(lang==='he'?'אנא מלא את כל שדות החובה':'Please fill in all required fields');
+      return;
+    }
+  }
+  document.getElementById('step'+cur).classList.remove('active');
+  cur=n;
+  document.getElementById('step'+n).classList.add('active');
+  updateStepper();
+  document.getElementById('join').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function updateStepper(){
+  for(let i=1;i<=4;i++){
+    const c=document.getElementById('sc'+i),l=document.getElementById('sl'+i);
+    c.className='sc'+(i<cur?' done':i===cur?' active':'');
+    c.innerHTML=i<cur?'✓':i;
+    l.className='sl'+(i<cur?' done':i===cur?' active':'');
+  }
+  for(let i=1;i<=3;i++) document.getElementById('ln'+i).className='sln'+(i<cur?' done':'');
+  document.getElementById('prog').style.width=[25,50,75,100][cur-1]+'%';
+}
+function toggleChip(el){el.classList.toggle('sel')}
+function showFile(inp,fnId){
+  const el=document.getElementById(fnId);
+  if(inp.files&&inp.files[0]){el.textContent='✓ '+inp.files[0].name;el.style.display='block'}
+}
+function submitForm(){
+  if(!document.getElementById('terms').checked){
+    const lang=document.body.className.replace('lang-','');
+    alert(lang==='he'?'יש לאשר את תנאי השימוש':'Please accept the Terms of Service');
+    return;
+  }
+  document.getElementById('step4').style.display='none';
+  document.getElementById('stepper').style.display='none';
+  document.querySelector('.prog').style.display='none';
+  document.getElementById('success-scr').style.display='block';
+}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+  });
+});
+// Set initial bio placeholder
+window.addEventListener('load',()=>{
+  const bio=document.getElementById('bio');
+  if(bio)bio.placeholder=bio.getAttribute('data-he-placeholder')||'';
+});
+</script>
+</body>
+</html>
