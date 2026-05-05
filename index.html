@@ -365,23 +365,28 @@ footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 
 .reveal.vis{opacity:1;transform:none}
 
 /* ── RESPONSIVE ── */
+/* —— RESPONSIVE —— */
 @media(max-width:960px){
   nav{padding:0 1.5rem}
-  section{padding:70px 1.5rem}
+  section{padding:50px 1.5rem} /* הקטנת מרווחים */
   .sep{margin:0 1.5rem}
-  .about-grid,.doc-header,.join-grid{grid-template-columns:1fr;gap:3rem}
+  .about-grid,.doc-header,.join-grid{grid-template-columns:1fr;gap:2rem}
   .how-steps,.benefits-grid{grid-template-columns:1fr 1fr}
   
-  h1{font-size:2.6rem}
+  h1{font-size:2.1rem; line-height: 1.2;} /* כותרת קטנה יותר שלא תיחתך */
+  .hero-content{max-width: 100%; text-align: center;}
+  .hero{padding-top: 100px; min-height: auto;}
+  
   .fgrow,.fgrow3{grid-template-columns:1fr}
   footer{flex-direction:column;text-align:center}
 }
+
 @media(max-width:620px){
   .how-steps,.benefits-grid{grid-template-columns:1fr}
-  .nav-links a:not(.nav-cta){display:none}
-  .hero-stats{gap:1.5rem}
+  .nav-links{display:none} 
+  .hero-stats{gap:1rem; flex-direction: column; align-items: center;}
+  .btn-main, .btn-sec { width: 100%; justify-content: center; margin-bottom: 10px;} /* כפתורים נוחים ללחיצה ברוחב מלא */
 }
-
 /* ── LANGUAGE TOGGLE ── */
 .lang-toggle{
   display:flex;align-items:center;gap:2px;
