@@ -2086,6 +2086,12 @@ async function submitForm() {
 
     var res = await fetch('https://safedoc-form.tal-997.workers.dev', {method:'POST', body:fd});
     var data = await res.json();
+    if (res.status === 409) {
+      var dupMsg = lang==='he'
+        ? 'נראה שהמייל הזה כבר רשום אצלנו. לבירורים: info@safe-dr.com'
+        : 'This email is already registered. Contact us at info@safe-dr.com';
+      throw new Error(dupMsg);
+    }
     if (!res.ok || data.error) throw new Error(data.error || 'Server error');
 
     localStorage.removeItem('safedoc_draft');
@@ -2110,11 +2116,32 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
   });
 });
+// ── Live validation (D): green border on valid fields, no red while typing ────
+function setupLiveValidation() {
+  var ids = ['country','city','clinic_name','medical_type','hours','phone','email','currency','about'];
+  ids.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    function check() {
+      if (el.value && el.value.trim()) {
+        el.style.borderColor = '#22c55e';
+        el.style.boxShadow = '0 0 0 2px rgba(34,197,94,.1)';
+      } else {
+        el.style.borderColor = '';
+        el.style.boxShadow = '';
+      }
+    }
+    el.addEventListener('input', check);
+    el.addEventListener('change', check);
+  });
+}
+
 window.addEventListener('load', function() {
   populateCountries();
   detectLocation();
   detectBrowserLanguage();
   restoreFormState();
+  setupLiveValidation();
   var bio = document.getElementById('bio');
   if (bio) bio.placeholder = bio.getAttribute('data-he-placeholder') || '';
 });
