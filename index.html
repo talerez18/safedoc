@@ -363,36 +363,39 @@ footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
 .reveal.vis{opacity:1;transform:none}
-/* —— RESPONSIVE FIX V2 —— */
+/* —— FINAL RESPONSIVE FIX —— */
 @media(max-width:960px){
-  html, body { overflow-x: hidden; position: relative; width: 100%; }
+  html, body { overflow-x: hidden; width: 100%; position: relative; margin: 0; padding: 0; }
   
   /* סידור הראש: לוגו, שפה וכפתור */
-  nav { padding: 0.5rem 1rem; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
+  nav { padding: 10px 15px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 5px; }
   .nav-links { display: none; } 
-  .lang-toggle { display: flex !important; order: 2; transform: scale(0.85); margin: 0; } 
-  .flogo { order: 1; margin-right: auto; }
-  nav > .btn-main { order: 3; padding: 6px 12px; font-size: 0.75rem; white-space: nowrap; } 
+  .lang-toggle { display: flex !important; order: 2; transform: scale(0.8); margin: 0; } 
+  .flogo { order: 1; flex: 1; }
+  nav > .btn-main { order: 3; padding: 5px 10px; font-size: 0.7rem; white-space: nowrap; min-width: auto; } 
 
-  section { padding: 30px 1rem; }
+  /* סידור ה-Hero והטופס */
+  section { padding: 40px 15px; width: 100%; box-sizing: border-box; }
+  .hero { padding: 120px 15px 40px; text-align: center; }
+  .hero-content { width: 100%; padding: 0; }
+  h1 { font-size: 1.6rem !important; line-height: 1.2; width: 100%; }
   
-  /* תיקון ה-Hero - המרווח מלמעלה */
-  .hero { padding: 130px 1rem 40px; min-height: auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .hero-content { width: 100%; max-width: 100%; padding: 0; }
-  h1 { font-size: 1.7rem !important; line-height: 1.2; margin-bottom: 1.5rem; }
+  .hero-btns { flex-direction: column; gap: 10px; width: 100%; max-width: 280px; margin: 0 auto; }
+  .btn-main, .btn-sec { width: 100% !important; margin: 0; justify-content: center; }
   
-  .hero-btns { flex-direction: column; gap: 12px; width: 100%; max-width: 280px; margin: 0 auto; }
-  .btn-main, .btn-sec { width: 100% !important; margin: 0; justify-content: center; height: 48px; }
-  
-  .hero-stats { gap: 1rem; justify-content: center; margin-top: 2rem; }
+  /* תיקון הטופס שלא ייחתך בצדדים */
+  .form-box { margin: 0 auto; width: 100% !important; max-width: 100%; padding: 15px; box-sizing: border-box; }
+  .fgrow, .fgrow3 { grid-template-columns: 1fr; gap: 15px; }
+  .step-content { padding: 10px; }
   
   .about-grid, .doc-header, .join-grid { grid-template-columns: 1fr; gap: 2rem; }
   .how-steps, .benefits-grid { grid-template-columns: 1fr; }
 }
 
 @media(max-width:480px) {
-  h1 { font-size: 1.5rem !important; }
-  .hero-stats { flex-direction: column; align-items: center; }
+  h1 { font-size: 1.4rem !important; }
+  .hero-stats { flex-direction: column; gap: 15px; }
+  .form-box { padding: 10px; }
 }
 /* ── LANGUAGE TOGGLE ── */
 .lang-toggle{
