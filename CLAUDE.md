@@ -16,15 +16,18 @@ A 4-step registration form was added in May 2026 to replace a non-functional pla
 Browser (index.html)
   → POST multipart/form-data
   → Cloudflare Worker (safedoc-form.tal-997.workers.dev)
-    → Airtable REST API (record creation)
-    → Airtable Upload API (file attachments)
+    → Airtable REST API (record creation + duplicate check)
+    → Cloudflare R2 (file storage)
+    → Airtable REST API PATCH (attach R2 URLs to record)
 ```
 
 - **Worker URL:** `https://safedoc-form.tal-997.workers.dev`
 - **Airtable base:** `appRhlu9LqRwjI5To`
 - **Airtable table:** `tblbGe6gl8xD9Pmvo`
-- **Attachment field ID:** `fldxNMOEXwKHniARG` (מסמכים שצורפו)
-- **Worker secret:** `AIRTABLE_TOKEN` (stored in Cloudflare, never in code)
+- **Attachment field:** `מסמכים שצורפו` (PATCH via REST API with R2 public URLs)
+- **R2 bucket:** `safedoc-temp-files` (public URL: `https://pub-ad6f0437d11748eaa90f7a639f2df155.r2.dev`)
+- **R2 lifecycle:** objects auto-deleted after 30 days
+- **Worker secrets:** `AIRTABLE_TOKEN` | **Worker binding:** `bucket` (R2)
 
 ---
 
@@ -145,8 +148,11 @@ Workers → safedoc-form → Edit code → paste → Deploy.
 
 The worker performs:
 1. Email duplicate check against Airtable (returns 409 if duplicate — fail-open on API error)
-2. Creates Airtable record from all text/select fields
-3. Uploads files to Airtable attachment field
+2. Creates Airtable record from all text/select fields (status defaulted to "שלח לנו פרטים")
+3. Uploads files to Cloudflare R2 bucket (`safedoc-temp-files`, binding name: `bucket`)
+4. PATCHes the Airtable record with the R2 public URLs as attachments
+
+Note: Airtable's `content.airtable.com` upload API does not work with PAT tokens — hence the R2 approach.
 
 ---
 
