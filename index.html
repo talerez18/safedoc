@@ -473,6 +473,12 @@ body.lang-ur .hero-content {
   text-align: right;
 }
 
+/* ── YES/NO SERVICE ROWS ── */
+.yn-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.3rem 0;border-bottom:1px solid rgba(8,145,178,.07)}
+.yn-row:last-child{border-bottom:none}
+.yn-label{font-size:.78rem;font-weight:600;color:#0A2540;flex:1}
+.yn-chips{flex:0 0 auto;display:flex;gap:.35rem}
+.yn-chips .chip{padding:.22rem .65rem;font-size:.72rem;margin:0}
 </style>
 </head>
 <body class="lang-en">
@@ -986,8 +992,8 @@ body.lang-ur .hero-content {
   <div class="join-grid">
     <div class="join-left reveal">
       <span class="s-tag"><span data-he="">הצטרפות</span><span data-en="">Join</span></span>
-      <div class="s-title"><span data-he="">הפוך לרופא שותף</span><span data-en="">Become a Partner Doctor</span></div>
-      <p class="s-body"><span data-he="">תהליך הצטרפות מהיר — 4 חלקים קצרים ואתה על המפה.</span><span data-en="">A quick sign-up — 4 short steps and you're on the map.</span></p>
+      <div class="s-title"><span data-he="">הפוך לרופא שותף</span><span data-en="">Become a Partner</span></div>
+      <p class="s-body"><span data-he="">תהליך הצטרפות מהיר — 4 שלבים קצרים ואתה על המפה.</span><span data-en="">A quick onboarding — 4 short steps and you're on the map.</span></p>
       <div class="jteaser">
         <h4><span data-he="">מה קורה אחרי שמגישים?</span><span data-en="">What Happens After You Apply?</span></h4>
         <ul>
@@ -1001,163 +1007,258 @@ body.lang-ur .hero-content {
 
     <div class="form-box reveal">
       <div class="stepper" id="stepper">
-        <div class="sw"><div class="sc active" id="sc1">1</div><div class="sl active" id="sl1"><span data-he="">פרטים<br>אישיים</span><span data-en="">Personal<br>Info</span></div></div>
+        <div class="sw"><div class="sc active" id="sc1">1</div><div class="sl active" id="sl1"><span data-he="">מיקום</span><span data-en="">Location</span></div></div>
         <div class="sln" id="ln1"></div>
-        <div class="sw"><div class="sc" id="sc2">2</div><div class="sl" id="sl2"><span data-he="">מומחיות<br>ואימות</span><span data-en="">Expertise<br>&amp;Verify</span></div></div>
+        <div class="sw"><div class="sc" id="sc2">2</div><div class="sl" id="sl2"><span data-he="">מרפאה</span><span data-en="">Clinic</span></div></div>
         <div class="sln" id="ln2"></div>
-        <div class="sw"><div class="sc" id="sc3">3</div><div class="sl" id="sl3"><span data-he="">פרטי<br>מרפאה</span><span data-en="">Clinic<br>Details</span></div></div>
+        <div class="sw"><div class="sc" id="sc3">3</div><div class="sl" id="sl3"><span data-he="">קשר</span><span data-en="">Contact</span></div></div>
         <div class="sln" id="ln3"></div>
-        <div class="sw" style="flex:none"><div class="sc" id="sc4">4</div><div class="sl" id="sl4"><span data-he="">משפטי<br>ופיננסי</span><span data-en="">Legal<br>&amp;Final</span></div></div>
+        <div class="sw" style="flex:none"><div class="sc" id="sc4">4</div><div class="sl" id="sl4"><span data-he="">אודות</span><span data-en="">About</span></div></div>
       </div>
       <div class="prog"><div class="prog-fill" id="prog" style="width:25%"></div></div>
 
-      <!-- STEP 1 -->
+      <!-- STEP 1: Location -->
       <div class="fstep active" id="step1">
-        <div class="fstep-h"><span data-he="">חלק 1 — פרטים אישיים</span><span data-en="">Part 1 — Personal Details</span></div>
-        <div class="fstep-s"><span data-he="">הפרטים הבסיסיים שלך</span><span data-en="">Your basic contact information</span></div>
-        <div class="fg">
-          <label><span data-he="">שם מלא</span><span data-en="">Full Name</span> <span class="req">*</span></label>
-          <input type="text" id="fullname" placeholder="Dr. First Last"/>
-        </div>
-        <div class="fg">
-          <label><span data-he="">טלפון / WhatsApp</span><span data-en="">Mobile / WhatsApp</span> <span class="req">*</span></label>
-          <input type="tel" id="phone" placeholder="+66 81 234 5678"/>
-          <div class="priv"><span data-he="">🔒 לשימוש פנימי בלבד — לא מוצג בפרופיל ציבורי</span><span data-en="">🔒 For internal use only — not shown publicly</span></div>
-        </div>
-        <div class="fg">
-          <label><span data-he="">אימייל מקצועי</span><span data-en="">Professional Email</span> <span class="req">*</span></label>
-          <input type="email" id="email" placeholder="doctor@clinic.com"/>
-        </div>
-        <div class="fg">
-          <label><span data-he="">תמונת פרופיל</span><span data-en="">Profile Photo</span></label>
-          <div class="upload"><input type="file" id="ph-inp" accept="image/*" onchange="showFile(this,'ph-fn')">
-            <div class="uico">📷</div>
-            <div class="utxt"><span data-he="">תמונה מקצועית במדים / קליניקה</span><span data-en="">Professional photo in uniform or clinic</span><br><strong><span data-he="">לחץ להעלאה</span><span data-en="">Click to upload</span></strong></div>
-            <div class="ufn" id="ph-fn"></div>
+        <div class="fstep-h"><span data-he="">שלב 1 — מיקום</span><span data-en="">Step 1 — Location</span></div>
+        <div class="fstep-s"><span data-he="">איפה נמצאת המרפאה?</span><span data-en="">Where is your clinic located?</span></div>
+        <div class="fgrow">
+          <div class="fg" style="margin:0">
+            <label><span data-he="">מדינה</span><span data-en="">Country</span> <span class="req">*</span></label>
+            <select id="country" onchange="filterCities()">
+              <option value=""><span data-he="">בחר מדינה...</span><span data-en="">Select country...</span></option>
+            </select>
+          </div>
+          <div class="fg" style="margin:0">
+            <label><span data-he="">עיר</span><span data-en="">City</span> <span class="req">*</span></label>
+            <select id="city">
+              <option value=""><span data-he="">בחר עיר...</span><span data-en="">Select city...</span></option>
+            </select>
           </div>
         </div>
-        <div class="nav-btns"><button class="bnxt" onclick="goStep(2)"><span data-he="">הבא — מומחיות ואימות ←</span><span data-en="">Next — Expertise &amp; Verify →</span></button></div>
+        <div class="fg">
+          <label><span data-he="">כתובת מלאה</span><span data-en="">Full Address</span></label>
+          <input type="text" id="address" placeholder="123 Main St, Building A"/>
+        </div>
+        <div class="fg">
+          <label><span data-he="">לינק גוגל מפס</span><span data-en="">Google Maps Link</span></label>
+          <input type="url" id="maps_link" placeholder="https://maps.google.com/..."/>
+        </div>
+        <div class="nav-btns"><button class="bnxt" onclick="goStep(2)"><span data-he="">הבא — מרפאה ומומחיות ←</span><span data-en="">Next — Clinic &amp; Specialty →</span></button></div>
       </div>
 
-      <!-- STEP 2 -->
+      <!-- STEP 2: Clinic & Specialty -->
       <div class="fstep" id="step2">
-        <div class="fstep-h"><span data-he="">חלק 2 — מומחיות ואימות</span><span data-en="">Part 2 — Expertise &amp; Verification</span></div>
-        <div class="fstep-s"><span data-he="">פרטים מקצועיים לאימות זהותך</span><span data-en="">Professional details for doctor verification</span></div>
+        <div class="fstep-h"><span data-he="">שלב 2 — מרפאה ומומחיות</span><span data-en="">Step 2 — Clinic &amp; Specialty</span></div>
+        <div class="fstep-s"><span data-he="">פרטי המרפאה והמומחיות הרפואית</span><span data-en="">Clinic details and medical expertise</span></div>
+        <div class="fgrow">
+          <div class="fg" style="margin:0">
+            <label><span data-he="">שם המרפאה</span><span data-en="">Clinic Name</span> <span class="req">*</span></label>
+            <input type="text" id="clinic_name" placeholder="Bangkok Medical Clinic"/>
+          </div>
+          <div class="fg" style="margin:0">
+            <label><span data-he="">שם נוסף</span><span data-en="">Secondary Name</span></label>
+            <input type="text" id="clinic_name2" placeholder="Optional"/>
+          </div>
+        </div>
         <div class="fg">
-          <label><span data-he="">התמחות ראשית</span><span data-en="">Primary Specialty</span> <span class="req">*</span></label>
-          <select id="specialty">
-            <option value=""><span data-he="">בחר התמחות...</span><span data-en="">Select specialty...</span></option>
-            <option value="internal"><span data-he="">רפואה פנימית</span><span data-en="">Internal Medicine</span></option>
-            <option value="pediatrics"><span data-he="">ילדים</span><span data-en="">Pediatrics</span></option>
-            <option value="family"><span data-he="">רפואת משפחה</span><span data-en="">Family Doctor</span></option>
-            <option value="ortho"><span data-he="">אורתופדיה</span><span data-en="">Orthopedics</span></option>
-            <option value="gastro"><span data-he="">גסטרואנטרולוגיה</span><span data-en="">Gastroenterology</span></option>
-            <option value="derm"><span data-he="">עור</span><span data-en="">Dermatology</span></option>
-            <option value="gynec"><span data-he="">גינקולוגיה</span><span data-en="">Gynecology</span></option>
-            <option value="emergency"><span data-he="">רפואה דחופה</span><span data-en="">Emergency Medicine</span></option>
+          <label><span data-he="">סוג רפואי</span><span data-en="">Medical Type</span> <span class="req">*</span></label>
+          <select id="medical_type">
+            <option value=""><span data-he="">בחר סוג...</span><span data-en="">Select type...</span></option>
+            <option>Hospital</option><option>Small Hospital</option><option>Clinic</option>
+            <option>Private Doctor</option><option>Dentistry</option><option>Evacuations</option>
+            <option>Laboratory</option><option>Diagnostic Tests [MRI, CT]</option>
+            <option>Pharmacy</option><option>Online Consultation</option>
           </select>
+        </div>
+        <div class="fg">
+          <label><span data-he="">התמחות</span><span data-en="">Specialization</span></label>
+          <div class="chips" id="chips-spec">
+            <div class="chip" onclick="toggleChip(this)" data-val="General Clinic">General Clinic</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Family Doctor">Family Doctor</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="רפואת ילדים">Pediatrics</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="ENT">ENT</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Dentistry">Dentistry</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Ophthalmology">Ophthalmology</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Gynecology">Gynecology</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Obstetrics and Gynecology">OB/GYN</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Gastroscopy">Gastroscopy</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Orthopedics">Orthopedics</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Skin &amp; Venereal diseases">Dermatology</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Cardiology">Cardiology</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Urology">Urology</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Hematology">Hematology</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="General Surgery">General Surgery</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Neurology">Neurology</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Laboratory Tests">Lab Tests</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Diagnostic Tests">Diagnostic Tests</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Online Consultation / Telehealth">Telehealth</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Other">Other</div>
+          </div>
         </div>
         <div class="fgrow">
           <div class="fg" style="margin:0">
-            <label><span data-he="">מספר רישיון</span><span data-en="">License Number</span> <span class="req">*</span></label>
-            <input type="text" id="license" placeholder="License #"/>
+            <label><span data-he="">שעות פעילות</span><span data-en="">Operating Hours</span></label>
+            <textarea id="hours" style="min-height:62px" placeholder="e.g. Mon-Fri 09:00-18:00"></textarea>
           </div>
           <div class="fg" style="margin:0">
-            <label><span data-he="">שנות ניסיון</span><span data-en="">Years of Experience</span> <span class="req">*</span></label>
-            <input type="number" id="experience" placeholder="12" min="0" max="60"/>
-          </div>
-        </div>
-        <div class="fg" style="margin-top:1rem">
-          <label><span data-he="">צילום רישיון רפואי</span><span data-en="">Upload Medical License</span> <span class="req">*</span></label>
-          <div class="upload"><input type="file" id="lic-inp" accept="image/*,.pdf" onchange="showFile(this,'lic-fn')">
-            <div class="uico">📄</div>
-            <div class="utxt"><span data-he="">תמונה או PDF של הרישיון</span><span data-en="">Photo or PDF of your license</span><br><strong><span data-he="">לחץ להעלאה</span><span data-en="">Click to upload</span></strong> — <span data-he="">חובה לאימות</span><span data-en="">required for verification</span></div>
-            <div class="ufn" id="lic-fn"></div>
+            <label><span data-he="">ימי פעילות</span><span data-en="">Active Days</span></label>
+            <div class="chips" id="chips-days" style="flex-wrap:wrap;gap:.35rem">
+              <div class="chip" onclick="toggleChip(this)" data-val="א">Sun</div>
+              <div class="chip" onclick="toggleChip(this)" data-val="ב">Mon</div>
+              <div class="chip" onclick="toggleChip(this)" data-val="ג">Tue</div>
+              <div class="chip" onclick="toggleChip(this)" data-val="ד">Wed</div>
+              <div class="chip" onclick="toggleChip(this)" data-val="ה">Thu</div>
+              <div class="chip" onclick="toggleChip(this)" data-val="ו">Fri</div>
+              <div class="chip" onclick="toggleChip(this)" data-val="ש">Sat</div>
+            </div>
           </div>
         </div>
         <div class="fg">
-          <label><span data-he="">שפות</span><span data-en="">Languages</span> <span class="req">*</span></label>
-          <div class="chips">
-            <div class="chip" onclick="toggleChip(this)"><span data-he="">אנגלית</span><span data-en="">English</span></div>
-            <div class="chip" onclick="toggleChip(this)"><span data-he="">עברית</span><span data-en="">Hebrew</span></div>
-            <div class="chip" onclick="toggleChip(this)"><span data-he="">תאילנדית</span><span data-en="">Thai</span></div>
-            <div class="chip" onclick="toggleChip(this)"><span data-he="">רוסית</span><span data-en="">Russian</span></div>
-            <div class="chip" onclick="toggleChip(this)"><span data-he="">ספרדית</span><span data-en="">Spanish</span></div>
-            <div class="chip" onclick="toggleChip(this)"><span data-he="">צרפתית</span><span data-en="">French</span></div>
+          <label><span data-he="">שירותים</span><span data-en="">Services</span></label>
+          <div style="margin-top:.5rem">
+            <div class="yn-row"><span class="yn-label"><span data-he="">ביקורי בית / מלון</span><span data-en="">Home / Hotel Visits</span></span><div class="chips yn-chips" data-field="hotel_visits"><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">חירום 24/7</span><span data-en="">24/7 Emergency</span></span><div class="chips yn-chips" data-field="emergency"><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">בדיקות אבחנתיות</span><span data-en="">Diagnostic Tests</span></span><div class="chips yn-chips" data-field="diagnostic"><div class="chip yn" onclick="toggleYN(this,'diagnostic')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'diagnostic')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">בדיקות מעבדה</span><span data-en="">Lab Tests</span></span><div class="chips yn-chips" data-field="lab"><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">פינויים</span><span data-en="">Evacuations</span></span><div class="chips yn-chips" data-field="evacuations"><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">ייעוץ אונליין</span><span data-en="">Online Consult</span></span><div class="chips yn-chips" data-field="online_consult"><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes + Digital Prescriptions">Yes + Rx</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="No">No</div></div></div>
           </div>
         </div>
         <div class="nav-btns">
           <button class="bbk" onclick="goStep(1)"><span data-he="">← חזור</span><span data-en="">← Back</span></button>
-          <button class="bnxt" onclick="goStep(3)"><span data-he="">הבא — פרטי מרפאה ←</span><span data-en="">Next — Clinic Details →</span></button>
+          <button class="bnxt" onclick="goStep(3)"><span data-he="">הבא — קשר ועלויות ←</span><span data-en="">Next — Contact &amp; Pricing →</span></button>
         </div>
       </div>
 
-      <!-- STEP 3 -->
+      <!-- STEP 3: Contact & Pricing -->
       <div class="fstep" id="step3">
-        <div class="fstep-h"><span data-he="">חלק 3 — פרטי המרפאה</span><span data-en="">Part 3 — Clinic Details</span></div>
-        <div class="fstep-s"><span data-he="">איפה אתה נמצא ומה אתה מציע</span><span data-en="">Where you are and what you offer</span></div>
+        <div class="fstep-h"><span data-he="">שלב 3 — קשר ועלויות</span><span data-en="">Step 3 — Contact &amp; Pricing</span></div>
+        <div class="fstep-s"><span data-he="">פרטי יצירת קשר ועלויות</span><span data-en="">Contact details and consultation fees</span></div>
         <div class="fgrow">
           <div class="fg" style="margin:0">
-            <label><span data-he="">שם המרפאה</span><span data-en="">Clinic Name</span> <span class="req">*</span></label>
-            <input type="text" id="clinic" placeholder="Bangkok Medical Clinic"/>
+            <label><span data-he="">נייד / WhatsApp</span><span data-en="">Mobile / WhatsApp</span> <span class="req">*</span></label>
+            <input type="tel" id="phone" placeholder="+66 81 234 5678"/>
           </div>
           <div class="fg" style="margin:0">
-            <label><span data-he="">כתובת המרפאה</span><span data-en="">Clinic Address</span></label>
-            <input type="text" id="address" placeholder="Full address or Google Maps link"/>
+            <label><span data-he="">טלפון משרד</span><span data-en="">Office Phone</span></label>
+            <input type="tel" id="office_phone" placeholder="+66 2 123 4567"/>
           </div>
         </div>
-        <div class="fg" style="margin-top:1rem">
-          <label><span data-he="">סוגי שירות</span><span data-en="">Service Types</span> <span class="req">*</span></label>
-          <div class="chips">
-            <div class="chip" onclick="toggleChip(this)"><span data-he="">🏥 ביקור במרפאה</span><span data-en="">🏥 Clinic Visit</span></div>
-            <div class="chip" onclick="toggleChip(this)"><span data-he="">🏨 ביקור בית / מלון</span><span data-en="">🏨 Home / Hotel Visit</span></div>
-            <div class="chip" onclick="toggleChip(this)"><span data-he="">💻 ייעוץ וידאו</span><span data-en="">💻 Video Consultation</span></div>
+        <div class="fgrow">
+          <div class="fg" style="margin:0">
+            <label><span data-he="">אימייל</span><span data-en="">Email</span> <span class="req">*</span></label>
+            <input type="email" id="email" placeholder="doctor@clinic.com"/>
+            <div class="priv"><span data-he="">🔒 לשימוש פנימי בלבד</span><span data-en="">🔒 Internal use only</span></div>
+          </div>
+          <div class="fg" style="margin:0">
+            <label><span data-he="">אתר</span><span data-en="">Website</span></label>
+            <input type="url" id="website" placeholder="https://yourclinic.com"/>
           </div>
         </div>
         <div class="fg">
-          <label><span data-he="">עלויות ביקור</span><span data-en="">Consultation Fees</span></label>
+          <label><span data-he="">עלויות</span><span data-en="">Fees</span></label>
           <div class="fgrow3">
             <div class="fg" style="margin:0">
-              <label style="font-size:.62rem"><span data-he="">עלות מרפאה</span><span data-en="">Clinic Fee</span></label>
-              <input type="number" id="fee1" placeholder="80" min="0"/>
+              <label style="font-size:.62rem"><span data-he="">מרפאה</span><span data-en="">Clinic</span></label>
+              <input type="number" id="fee_clinic" placeholder="80" min="0"/>
             </div>
             <div class="fg" style="margin:0">
-              <label style="font-size:.62rem"><span data-he="">עלות ביקור בית</span><span data-en="">Home Fee</span></label>
-              <input type="number" id="fee2" placeholder="150" min="0"/>
+              <label style="font-size:.62rem"><span data-he="">ביקור בית/מלון</span><span data-en="">Home/Hotel</span></label>
+              <input type="number" id="fee_hotel" placeholder="150" min="0"/>
             </div>
             <div class="fg" style="margin:0">
-              <label style="font-size:.62rem"><span data-he="">מטבע</span><span data-en="">Currency</span></label>
-              <select id="currency">
-                <option>USD</option><option>THB</option><option>EUR</option><option>ILS</option>
-              </select>
+              <label style="font-size:.62rem"><span data-he="">אונליין</span><span data-en="">Online</span></label>
+              <input type="number" id="fee_online" placeholder="50" min="0"/>
             </div>
           </div>
         </div>
-        <div class="fg">
-          <label><span data-he="">שעות פעילות</span><span data-en="">Operating Hours</span> <span class="req">*</span></label>
-          <textarea id="hours" placeholder="e.g. Mon–Fri 09:00–18:00 | 24/7 WhatsApp for emergencies" style="min-height:65px"></textarea>
+        <div class="fgrow">
+          <div class="fg" style="margin:0">
+            <label><span data-he="">מטבע</span><span data-en="">Currency</span></label>
+            <select id="currency">
+              <option value="">Select...</option>
+              <option>US Dollar (USD)</option><option>Euro (EUR)</option><option>British Pound (GBP)</option>
+              <option>Australian Dollar (AUD)</option><option>Canadian Dollar (CAD)</option>
+              <option>Thai Baht (THB)</option><option>Indian Rupee (INR)</option>
+              <option>Indonesian Rupiah (IDR)</option><option>Vietnamese Dong (VND)</option>
+              <option>Philippine Peso (PHP)</option><option>South Korean Won (KRW)</option>
+              <option>Brazilian Real (BRL)</option><option>Argentine Peso (ARS)</option>
+              <option>Colombian Peso (COP)</option><option>Chilean Peso (CLP)</option>
+              <option>Peruvian Sol (PEN)</option><option>Bolivian Boliviano (BOB)</option>
+              <option>Uruguayan Peso (UYU)</option><option>Mexican Peso (MXN)</option>
+              <option>Costa Rican Colon (CRC)</option><option>Guatemalan Quetzal (GTQ)</option>
+              <option>Dominican Peso (DOP)</option><option>Cuban Peso (CUP)</option>
+              <option>Cambodian Riel (KHR)</option><option>Lao Kip (LAK)</option>
+              <option>Nepalese Rupee (NPR)</option><option>Sri Lankan Rupee (LKR)</option>
+              <option>New Zealand Dollar (NZD)</option><option>Polish Zloty (PLN)</option>
+              <option>Hungarian Forint (HUF)</option><option>Moroccan Dirham (MAD)</option>
+              <option>Paraguayan Guarani (PYG)</option><option>Other</option>
+            </select>
+          </div>
+          <div class="fg" style="margin:0">
+            <label><span data-he="">תיאור עלויות</span><span data-en="">Fee Description</span></label>
+            <textarea id="fee_description" style="min-height:62px" placeholder="e.g. Prices vary by visit type..."></textarea>
+          </div>
         </div>
         <div class="nav-btns">
           <button class="bbk" onclick="goStep(2)"><span data-he="">← חזור</span><span data-en="">← Back</span></button>
-          <button class="bnxt" onclick="goStep(4)"><span data-he="">הבא — אישור ושליחה ←</span><span data-en="">Next — Review &amp; Submit →</span></button>
+          <button class="bnxt" onclick="goStep(4)"><span data-he="">הבא — אודות ומסמכים ←</span><span data-en="">Next — About &amp; Docs →</span></button>
         </div>
       </div>
 
-      <!-- STEP 4 -->
+      <!-- STEP 4: About & Documents -->
       <div class="fstep" id="step4">
-        <div class="fstep-h"><span data-he="">חלק 4 — משפטי ופיננסי</span><span data-en="">Part 4 — Legal &amp; Financial</span></div>
-        <div class="fstep-s"><span data-he="">צעד אחרון לפני שמגישים</span><span data-en="">Final step before submitting</span></div>
+        <div class="fstep-h"><span data-he="">שלב 4 — אודות ומסמכים</span><span data-en="">Step 4 — About &amp; Documents</span></div>
+        <div class="fstep-s"><span data-he="">קצת עליך ומסמכים רלוונטיים</span><span data-en="">Tell us about yourself and upload documents</span></div>
         <div class="fg">
-          <label><span data-he="">ביטוח אחריות מקצועית</span><span data-en="">Malpractice Insurance</span></label>
-          <div class="upload"><input type="file" id="ins-inp" accept="image/*,.pdf" onchange="showFile(this,'ins-fn')">
-            <div class="uico">🛡️</div>
-            <div class="utxt"><span data-he="">צילום פוליסת ביטוח (רצוי)</span><span data-en="">Photo of insurance policy (recommended)</span><br><strong><span data-he="">לחץ להעלאה</span><span data-en="">Click to upload</span></strong> — <span data-he="">PDF או תמונה</span><span data-en="">PDF or image</span></div>
-            <div class="ufn" id="ins-fn"></div>
+          <label><span data-he="">אודות המרפאה</span><span data-en="">About the Clinic</span></label>
+          <textarea id="about" style="min-height:90px" placeholder="Tell us about your clinic, experience, approach..."></textarea>
+        </div>
+        <div class="fg">
+          <label><span data-he="">שפות</span><span data-en="">Languages Spoken</span></label>
+          <div class="chips" id="chips-lang">
+            <div class="chip" onclick="toggleChip(this)" data-val="English">English</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Hebrew">Hebrew</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Spanish">Spanish</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="French">French</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="German">German</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Russian">Russian</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Arabic">Arabic</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Hindi">Hindi</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Thai">Thai</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Portuguese">Portuguese</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Italian">Italian</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Dutch">Dutch</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Turkish">Turkish</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Greek">Greek</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Japanese">Japanese</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Chinese (Mandarin)">Mandarin</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Korean">Korean</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Vietnamese">Vietnamese</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Indonesian">Indonesian</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Polish">Polish</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Croatian">Croatian</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Hungarian">Hungarian</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Persian (Farsi)">Farsi</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Khmer">Khmer</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Lao">Lao</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Filipino (Tagalog)">Tagalog</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Lithuanian">Lithuanian</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Other">Other</div>
           </div>
         </div>
         <div class="fg">
-          <label><span data-he="">Bio / הערות נוספות</span><span data-en="">Bio / Additional Notes</span></label>
-          <textarea id="bio" placeholder="..." style="min-height:95px" data-he-placeholder="ספר לנו על עצמך — ניסיון, גישה לחולה, מה מייחד אותך." data-en-placeholder="Tell us about yourself — experience, approach, what makes you stand out."></textarea>
+          <label><span data-he="">מסמכים (עד 3 קבצים)</span><span data-en="">Documents (up to 3 files)</span></label>
+          <div class="upload" onclick="document.getElementById('files-inp').click()" style="cursor:pointer">
+            <input type="file" id="files-inp" accept="image/*,.pdf" multiple style="display:none" onchange="showFiles(this)">
+            <div class="uico">📎</div>
+            <div class="utxt"><span data-he="">רישיון רפואי, תמונת פרופיל, ביטוח מקצועי</span><span data-en="">Medical license, profile photo, insurance policy</span><br><strong><span data-he="">לחץ להעלאה</span><span data-en="">Click to upload</span></strong> — <span data-he="">עד 3 קבצים, PDF או תמונה</span><span data-en="">up to 3 files, PDF or image</span></div>
+            <div class="ufn" id="files-fn"></div>
+          </div>
+        </div>
+        <div class="fg">
+          <label><span data-he="">הערות ושאלות</span><span data-en="">Notes &amp; Questions</span></label>
+          <textarea id="notes" style="min-height:65px" placeholder="Any questions or additional information..."></textarea>
         </div>
         <div class="terms-row">
           <input type="checkbox" id="terms"/>
@@ -1165,9 +1266,10 @@ body.lang-ur .hero-content {
         </div>
         <div class="nav-btns">
           <button class="bbk" onclick="goStep(3)"><span data-he="">← חזור</span><span data-en="">← Back</span></button>
-          <button class="bnxt" onclick="submitForm()"><span data-he="">שלח בקשת הצטרפות ✚</span><span data-en="">Submit Application ✚</span></button>
+          <button class="bnxt" id="submit-btn" onclick="submitForm()"><span data-he="">שלח בקשת הצטרפות ✚</span><span data-en="">Submit Application ✚</span></button>
         </div>
-        <div class="fnote"><span data-he="">נחזור אליך תוך 48 שעות עם פרטים לשיחת היכרות</span><span data-en="">We'll get back to you within 48 hours</span></div>
+        <div class="fnote"><span data-he="">נחזור אליך תוך 48 שעות</span><span data-en="">We'll get back to you within 48 hours</span></div>
+        <div id="submit-error" style="display:none;color:#ef4444;font-size:.8rem;margin-top:.5rem;text-align:center"></div>
       </div>
 
       <!-- SUCCESS -->
@@ -1565,18 +1667,107 @@ function setLang(lang){
   const bio=document.getElementById('bio');
   if(bio)bio.placeholder=bio.getAttribute('data-'+lang+'-placeholder')||'...';
 }
+// ── Country → Cities mapping ────────────────────────────────────────────────
+const COUNTRY_CITIES = {
+  'Thailand':       ['Bangkok','Chiang Mai','Phuket','Koh Samui','Pattaya','Krabi','Hua Hin','Chiang Rai','Koh Phangan','Koh Tao'],
+  'Spain':          ['Barcelona','Madrid','Valencia','Seville','Malaga','Ibiza','Majorca','Tenerife','Gran Canaria','Lanzarote'],
+  'Greece':         ['Athens','Thessaloniki','Santorini','Mykonos','Rhodes','Crete','Corfu','Zakynthos','Kefalonia','Paros'],
+  'Italy':          ['Rome','Milan','Florence','Venice','Naples','Amalfi','Positano','Sardinia','Sicily','Turin'],
+  'Portugal':       ['Lisbon','Porto','Faro','Algarve','Madeira','Azores','Cascais','Sintra','Braga','Setubal'],
+  'France':         ['Paris','Nice','Marseille','Lyon','Cannes','Monaco','Bordeaux','Strasbourg','Toulouse','Biarritz'],
+  'Germany':        ['Berlin','Munich','Hamburg','Frankfurt','Cologne','Stuttgart','Dusseldorf','Dresden','Leipzig','Nuremberg'],
+  'Austria':        ['Vienna','Salzburg','Innsbruck','Graz','Linz','Klagenfurt'],
+  'Switzerland':    ['Zurich','Geneva','Basel','Bern','Lucerne','Interlaken','Zermatt','Lausanne'],
+  'Netherlands':    ['Amsterdam','Rotterdam','The Hague','Utrecht','Eindhoven','Maastricht'],
+  'Belgium':        ['Brussels','Bruges','Antwerp','Ghent','Liege'],
+  'Czech Republic': ['Prague','Brno','Ostrava','Plzen','Karlovy Vary'],
+  'Hungary':        ['Budapest','Debrecen','Miskolc','Pecs'],
+  'Poland':         ['Warsaw','Krakow','Gdansk','Wroclaw','Poznan'],
+  'Romania':        ['Bucharest','Cluj-Napoca','Timisoara','Iasi','Constanta'],
+  'Bulgaria':       ['Sofia','Plovdiv','Varna','Burgas','Sozopol'],
+  'Croatia':        ['Zagreb','Split','Dubrovnik','Zadar','Hvar','Korcula'],
+  'Turkey':         ['Istanbul','Antalya','Bodrum','Izmir','Cappadocia','Ankara','Alanya','Fethiye','Marmaris'],
+  'Egypt':          ['Cairo','Sharm El Sheikh','Hurghada','Luxor','Alexandria','Dahab'],
+  'Morocco':        ['Marrakesh','Casablanca','Fes','Agadir','Tangier','Rabat','Essaouira'],
+  'Jordan':         ['Amman','Petra','Aqaba','Dead Sea','Wadi Rum'],
+  'Israel':         ['Tel Aviv','Jerusalem','Eilat','Haifa','Netanya','Herzliya','Tiberias','Dead Sea'],
+  'UAE':            ['Dubai','Abu Dhabi','Sharjah','Ajman','Ras Al Khaimah'],
+  'India':          ['Mumbai','Delhi','Goa','Jaipur','Bangalore','Kolkata','Chennai','Agra','Kerala','Rishikesh'],
+  'Nepal':          ['Kathmandu','Pokhara','Chitwan','Lumbini'],
+  'Sri Lanka':      ['Colombo','Kandy','Galle','Sigiriya','Ella','Mirissa'],
+  'Vietnam':        ['Hanoi','Ho Chi Minh City','Hoi An','Da Nang','Nha Trang','Phu Quoc','Hue','Sa Pa'],
+  'Cambodia':       ['Phnom Penh','Siem Reap','Sihanoukville','Battambang'],
+  'Indonesia':      ['Bali','Jakarta','Lombok','Yogyakarta','Komodo','Flores','Gili Islands'],
+  'Philippines':    ['Manila','Cebu','Palawan','Boracay','Siargao','Davao'],
+  'Japan':          ['Tokyo','Osaka','Kyoto','Hiroshima','Sapporo','Nara','Fukuoka','Okinawa'],
+  'South Korea':    ['Seoul','Busan','Jeju Island','Gyeongju','Incheon'],
+  'China':          ['Beijing','Shanghai','Chengdu','Guilin','Xian','Shenzhen','Hong Kong','Macau'],
+  'Australia':      ['Sydney','Melbourne','Brisbane','Perth','Cairns','Adelaide','Gold Coast','Byron Bay'],
+  'New Zealand':    ['Auckland','Wellington','Queenstown','Christchurch','Rotorua'],
+  'USA':            ['New York','Los Angeles','Miami','Las Vegas','San Francisco','Chicago','New Orleans','Orlando','Hawaii','Seattle'],
+  'Canada':         ['Toronto','Vancouver','Montreal','Calgary','Quebec City','Banff','Whistler'],
+  'Mexico':         ['Cancun','Mexico City','Los Cabos','Playa del Carmen','Puerto Vallarta','Tulum','Oaxaca'],
+  'Costa Rica':     ['San Jose','Manuel Antonio','Monteverde','Arenal','Tamarindo','Puerto Viejo'],
+  'Peru':           ['Lima','Cusco','Machu Picchu','Arequipa','Lake Titicaca'],
+  'Colombia':       ['Bogota','Medellin','Cartagena','Cali','Santa Marta'],
+  'Brazil':         ['Rio de Janeiro','Sao Paulo','Salvador','Florianopolis','Foz do Iguacu','Fortaleza'],
+  'Argentina':      ['Buenos Aires','Bariloche','Mendoza','Salta','El Calafate'],
+  'South Africa':   ['Cape Town','Johannesburg','Durban','Kruger','Stellenbosch','Garden Route'],
+  'Kenya':          ['Nairobi','Mombasa','Maasai Mara','Zanzibar','Kilimanjaro'],
+  'Other':          ['Other'],
+};
+
+function populateCountries() {
+  var sel = document.getElementById('country');
+  if (!sel) return;
+  Object.keys(COUNTRY_CITIES).forEach(function(c) {
+    var o = document.createElement('option');
+    o.value = c;
+    o.textContent = c;
+    sel.appendChild(o);
+  });
+}
+
+function filterCities() {
+  var country = document.getElementById('country').value;
+  var cityEl = document.getElementById('city');
+  cityEl.innerHTML = '';
+  var placeholder = document.createElement('option');
+  placeholder.value = '';
+  placeholder.textContent = '- City -';
+  cityEl.appendChild(placeholder);
+  var cities = COUNTRY_CITIES[country] || [];
+  cities.forEach(function(c) {
+    var o = document.createElement('option');
+    o.value = c;
+    o.textContent = c;
+    cityEl.appendChild(o);
+  });
+}
+
+// ── Form steps ───────────────────────────────────────────────────────────────
 let cur=1;
-const reqs={1:[{id:'fullname'},{id:'phone'},{id:'email'}],2:[{id:'specialty'},{id:'license'},{id:'experience'}],3:[{id:'clinic'},{id:'hours'}]};
+const reqs={
+  1:[{id:'country'},{id:'city'}],
+  2:[{id:'clinic_name'},{id:'medical_type'}],
+  3:[{id:'phone'},{id:'email'}]
+};
+
 function goStep(n){
   if(n>cur&&reqs[cur]){
-    let ok=true;
-    reqs[cur].forEach(r=>{
-      const el=document.getElementById(r.id);
-      if(!el||!el.value.trim()){if(el){el.style.borderColor='#f87171';el.style.boxShadow='0 0 0 2px rgba(248,113,113,.15)'}ok=false}
-      else{el.style.borderColor='';el.style.boxShadow=''}
+    var ok=true;
+    reqs[cur].forEach(function(r){
+      var el=document.getElementById(r.id);
+      if(!el||!el.value.trim()){
+        if(el){el.style.borderColor='#f87171';el.style.boxShadow='0 0 0 2px rgba(248,113,113,.15)';}
+        ok=false;
+      } else {
+        el.style.borderColor='';
+        el.style.boxShadow='';
+      }
     });
     if(!ok){
-      const lang=document.body.className.replace('lang-','');
+      var lang=document.body.className.replace('lang-','');
       alert(lang==='he'?'אנא מלא את כל שדות החובה':'Please fill in all required fields');
       return;
     }
@@ -1587,44 +1778,136 @@ function goStep(n){
   updateStepper();
   document.getElementById('join').scrollIntoView({behavior:'smooth',block:'start'});
 }
+
 function updateStepper(){
-  for(let i=1;i<=4;i++){
-    const c=document.getElementById('sc'+i),l=document.getElementById('sl'+i);
+  for(var i=1;i<=4;i++){
+    var c=document.getElementById('sc'+i),l=document.getElementById('sl'+i);
     c.className='sc'+(i<cur?' done':i===cur?' active':'');
-    c.innerHTML=i<cur?'✓':i;
+    c.textContent=i<cur?'✓':i;
     l.className='sl'+(i<cur?' done':i===cur?' active':'');
   }
-  for(let i=1;i<=3;i++) document.getElementById('ln'+i).className='sln'+(i<cur?' done':'');
+  for(var i=1;i<=3;i++) document.getElementById('ln'+i).className='sln'+(i<cur?' done':'');
   document.getElementById('prog').style.width=[25,50,75,100][cur-1]+'%';
 }
-function toggleChip(el){el.classList.toggle('sel')}
-function showFile(inp,fnId){
-  const el=document.getElementById(fnId);
-  if(inp.files&&inp.files[0]){el.textContent='✓ '+inp.files[0].name;el.style.display='block'}
+
+function toggleChip(el){ el.classList.toggle('sel'); }
+
+function toggleYN(el, field) {
+  var row = el.closest('.yn-chips');
+  row.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('sel'); });
+  el.classList.add('sel');
 }
-function submitForm(){
-  if(!document.getElementById('terms').checked){
-    const lang=document.body.className.replace('lang-','');
-    alert(lang==='he'?'יש לאשר את תנאי השימוש':'Please accept the Terms of Service');
+
+function showFiles(inp) {
+  var el = document.getElementById('files-fn');
+  if (!el) return;
+  if (inp.files && inp.files.length > 0) {
+    var names = Array.from(inp.files).map(function(f){ return f.name; }).join(', ');
+    el.textContent = '✓ ' + names;
+    el.style.display = 'block';
+  } else {
+    el.style.display = 'none';
+  }
+}
+
+async function submitForm() {
+  var lang = document.body.className.replace('lang-','');
+
+  if (!document.getElementById('terms').checked) {
+    alert(lang==='he' ? 'יש לאשר את תנאי השימוש' : 'Please accept the Terms of Service');
     return;
   }
-  document.getElementById('step4').style.display='none';
-  document.getElementById('stepper').style.display='none';
-  document.querySelector('.prog').style.display='none';
-  document.getElementById('success-scr').style.display='block';
+
+  var btn = document.getElementById('submit-btn');
+  var errEl = document.getElementById('submit-error');
+  btn.disabled = true;
+  btn.textContent = lang==='he' ? 'שולח...' : 'Sending...';
+  errEl.style.display = 'none';
+
+  try {
+    var fd = new FormData();
+
+    // Text fields
+    var textIds = ['clinic_name','clinic_name2','address','maps_link','phone','office_phone',
+                   'email','website','hours','about','fee_clinic','fee_hotel','fee_online',
+                   'fee_description','notes'];
+    textIds.forEach(function(k) {
+      var el = document.getElementById(k);
+      if (el && el.value.trim()) fd.append(k, el.value.trim());
+    });
+
+    // Single selects
+    ['medical_type','currency'].forEach(function(k) {
+      var el = document.getElementById(k);
+      if (el && el.value) fd.append(k, el.value);
+    });
+
+    // Country / city
+    var country = document.getElementById('country').value;
+    var city = document.getElementById('city').value;
+    if (country) fd.append('country_en', country);
+    if (city) fd.append('city_en', city);
+
+    // Yes/No chips
+    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult'].forEach(function(field) {
+      var sel = document.querySelector('.yn-chips[data-field="'+field+'"] .chip.sel');
+      if (sel) fd.append(field, sel.getAttribute('data-val'));
+    });
+
+    // Multi-select chips
+    document.querySelectorAll('#chips-spec .chip.sel').forEach(function(c) {
+      fd.append('specialization', c.getAttribute('data-val'));
+    });
+    document.querySelectorAll('#chips-days .chip.sel').forEach(function(c) {
+      fd.append('days', c.getAttribute('data-val'));
+    });
+    document.querySelectorAll('#chips-lang .chip.sel').forEach(function(c) {
+      fd.append('languages', c.getAttribute('data-val'));
+    });
+
+    // Files (max 3)
+    var filesInp = document.getElementById('files-inp');
+    if (filesInp && filesInp.files) {
+      var maxFiles = Math.min(filesInp.files.length, 3);
+      for (var i = 0; i < maxFiles; i++) {
+        fd.append('files', filesInp.files[i]);
+      }
+    }
+
+    var res = await fetch('https://safedoc-form.tal-997.workers.dev', {
+      method: 'POST',
+      body: fd,
+    });
+
+    var data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error || 'Server error');
+
+    // Success
+    document.getElementById('step4').classList.remove('active');
+    document.getElementById('stepper').style.display = 'none';
+    document.querySelector('.prog').style.display = 'none';
+    document.getElementById('success-scr').style.display = 'block';
+
+  } catch (err) {
+    errEl.textContent = (lang==='he' ? 'שגיאה בשליחה: ' : 'Submission error: ') + err.message;
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = lang==='he' ? 'שלח' : 'Submit';
+  }
 }
+
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')});},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const t=document.querySelector(a.getAttribute('href'));
-    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
   });
 });
-// Set initial bio placeholder
-window.addEventListener('load',()=>{
-  const bio=document.getElementById('bio');
-  if(bio)bio.placeholder=bio.getAttribute('data-he-placeholder')||'';
+window.addEventListener('load', function() {
+  populateCountries();
+  var bio = document.getElementById('bio');
+  if (bio) bio.placeholder = bio.getAttribute('data-he-placeholder') || '';
 });
 </script>
 </body>
