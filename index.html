@@ -363,29 +363,33 @@ footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
 .reveal.vis{opacity:1;transform:none}
-
-/* ── RESPONSIVE ── */
-/* —— RESPONSIVE —— */
+/* —— RESPONSIVE FIX —— */
 @media(max-width:960px){
-  nav{padding:0 1.5rem}
-  section{padding:50px 1.5rem} /* הקטנת מרווחים */
-  .sep{margin:0 1.5rem}
-  .about-grid,.doc-header,.join-grid{grid-template-columns:1fr;gap:2rem}
-  .how-steps,.benefits-grid{grid-template-columns:1fr 1fr}
+  html, body { overflow-x: hidden; position: relative; width: 100%; }
+  nav{padding:0 1rem; justify-content: space-between;}
+  .nav-links{display:none} 
+  section{padding:40px 1rem}
   
-  h1{font-size:2.1rem; line-height: 1.2;} /* כותרת קטנה יותר שלא תיחתך */
-  .hero-content{max-width: 100%; text-align: center;}
-  .hero{padding-top: 100px; min-height: auto;}
+  h1{font-size:1.8rem !important; line-height: 1.1; margin-bottom: 1rem;}
+  .hero-content{max-width: 100%; text-align: center; padding: 0;}
+  .hero{padding: 100px 1rem 40px; min-height: auto; display: block;}
   
-  .fgrow,.fgrow3{grid-template-columns:1fr}
-  footer{flex-direction:column;text-align:center}
+  .hero-btns{flex-direction: column; gap: 10px; width: 100%;}
+  .btn-main, .btn-sec { width: 100% !important; margin: 0; justify-content: center; box-sizing: border-box; }
+  
+  .hero-stats{gap: 1rem; justify-content: center;}
+  .hstat .n { font-size: 1.5rem; }
+  
+  .about-grid, .doc-header, .join-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .how-steps, .benefits-grid { grid-template-columns: 1fr; }
+  
+  .form-box { padding: 1rem; width: 100%; box-sizing: border-box; }
+  .fgrow, .fgrow3 { grid-template-columns: 1fr; }
 }
 
-@media(max-width:620px){
-  .how-steps,.benefits-grid{grid-template-columns:1fr}
-  .nav-links{display:none} 
-  .hero-stats{gap:1rem; flex-direction: column; align-items: center;}
-  .btn-main, .btn-sec { width: 100%; justify-content: center; margin-bottom: 10px;} /* כפתורים נוחים ללחיצה ברוחב מלא */
+@media(max-width:480px) {
+  .hero-badge { font-size: 0.6rem; padding: 4px 8px; }
+  .ticker-bar { display: none; } /* מוריד את הטיקר שעלול להרחיב את המסך */
 }
 /* ── LANGUAGE TOGGLE ── */
 .lang-toggle{
