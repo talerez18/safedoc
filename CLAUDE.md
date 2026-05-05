@@ -42,7 +42,7 @@ Browser (index.html)
 | `email` | אימייל |
 | `website` | אתר |
 | `hours` | שעות פעילות |
-| `about` | אודות המרפאה |
+| `about_clinic` | אודות המרפאה |
 | `fee_clinic` | עלות טיפול |
 | `fee_hotel` | עלות הגעה למלון |
 | `fee_online` | עלות ייעוץ אונליין |
@@ -83,7 +83,7 @@ Browser (index.html)
 - Step 1: country, city
 - Step 2: clinic_name, medical_type, specialization chips (≥1), hours, days chips (≥1), all 6 Y/N service rows
 - Step 3: phone, email, currency
-- Step 4: about, languages chips (≥1)
+- Step 4: about_clinic, languages chips (≥1)
 
 **Optional** (no validation):
 - address, maps_link, office_phone, website, clinic_name2, fee_clinic, fee_hotel, fee_online, fee_description, notes, files
