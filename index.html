@@ -357,77 +357,60 @@ footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 
 .flogo em{color:#06B6D4;font-style:normal}
 .fcopy{font-size:.73rem;color:rgba(255,255,255,.35)}
 .flinks{display:flex;gap:1.5rem}
-.flinks a{font-size:.73rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s}
+..flinks a{font-size:.73rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s}
 .flinks a:hover{color:#06B6D4}
 
-/* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
-.reveal.vis{opacity:1;transform:none}
-/* —— FINAL CLEAN RESPONSIVE —— */
+/* —— FINAL RESPONSIVE FIX —— */
 @media(max-width:960px){
-  /* מניעת בריחה של האתר לצדדים */
-  html, body { 
-    overflow-x: hidden !important; 
-    width: 100% !important; 
-    position: relative; 
-    margin: 0 !important; 
-    padding: 0 !important; 
-  }
-
-  /* סידור ה-Header: לוגו משמאל, שפה וכפתור מימין */
-  nav { 
-    padding: 10px 15px !important; 
-    display: flex !important; 
-    flex-wrap: nowrap !important; 
-    justify-content: space-between !important; 
-    align-items: center !important;
-  }
+  html, body { overflow-x: hidden !important; width: 100% !important; position: relative; margin: 0 !important; padding: 0 !important; }
+  
+  /* סידור ה-Header */
+  nav { padding: 10px 15px !important; display: flex !important; flex-wrap: nowrap !important; justify-content: space-between !important; align-items: center !important; }
   .nav-links { display: none !important; } 
   .lang-toggle { display: flex !important; order: 2; transform: scale(0.8); margin: 0 5px !important; } 
-  .flogo { order: 1; flex-shrink: 1; }
-  nav > .btn-main { order: 3; padding: 6px 10px !important; font-size: 0.75rem !important; white-space: nowrap !important; }
+  .flogo { order: 1; flex: 1; }
+  nav > .btn-main { order: 3; padding: 6px 10px !important; font-size: 0.75rem !important; white-space: nowrap !important; } 
 
-  /* תיקון ה-Hero והטופס שנדבק לימין */
-  section { 
-    padding: 40px 20px !important; 
-    width: 100% !important; 
-    box-sizing: border-box !important; 
-  }
-  .hero { padding-top: 110px !important; text-align: center !important; }
-  h1 { font-size: 1.6rem !important; width: 100% !important; margin: 0 auto 1.5rem !important; }
+  /* סידור ה-Hero והטופס שלא ייחתך */
+  section { padding: 40px 20px !important; width: 100% !important; box-sizing: border-box !important; }
+  .hero { padding: 120px 20px 40px !important; text-align: center !important; }
+  h1 { font-size: 1.6rem !important; line-height: 1.2; width: 100% !important; margin: 0 auto 1.5rem !important; }
   
-  .hero-btns { 
-    display: flex !important;
-    flex-direction: column !important; 
-    gap: 12px !important; 
-    width: 100% !important; 
-    max-width: 300px !important; 
-    margin: 0 auto !important; 
-  }
-  .btn-main, .btn-sec { width: 100% !important; display: flex !important; justify-content: center !important; }
-
-  /* תיקון הטופס - זה ימרכז אותו וימנע חיתוך */
-  .form-box { 
-    margin: 0 auto !important; 
-    width: 100% !important; 
-    max-width: 100% !important; 
-    padding: 20px !important; 
-    box-sizing: border-box !important;
-    float: none !important; /* מבטל הצמדה לימין */
-  }
+  .hero-btns { display: flex !important; flex-direction: column !important; gap: 12px !important; width: 100% !important; max-width: 280px !important; margin: 0 auto !important; }
+  .btn-main, .btn-sec { width: 100% !important; margin: 0 !important; justify-content: center !important; }
+  
+  .form-box { margin: 0 auto !important; width: 100% !important; max-width: 100% !important; padding: 15px !important; box-sizing: border-box !important; float: none !important; }
   .fgrow, .fgrow3 { display: grid !important; grid-template-columns: 1fr !important; gap: 15px !important; }
 }
-/* ── LANGUAGE TOGGLE ── */
-.lang-toggle{
-  display:flex;align-items:center;gap:2px;
-  background:#EBF5FB;border:1.5px solid #B0D4E8;
-  border-radius:20px;padding:3px;
-  margin-left:.5rem;
+
+/* —— LANGUAGE TOGGLE —— */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: #EBF5FB;
+  border: 1.5px solid #B0D4E8;
+  border-radius: 20px;
+  padding: 3px;
+  margin-left: .5rem;
+  z-index: 1001;
 }
-.lang-btn{
-  padding:4px 12px;border-radius:16px;
-  font-size:.72rem;font-weight:700;letter-spacing:.3px;
-  cursor:pointer;border:none;background:transparent;
+
+.lang-btn {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: .72rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #5A90B8;
+}
+
+.lang-btn.active {
+  background: #0891B2;
+  color: #fff;
+}
   color:#5A90B8;transition:all .2s;
 }
 .lang-btn.active{
