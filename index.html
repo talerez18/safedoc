@@ -1024,7 +1024,7 @@ body.lang-ur .hero-content {
         <div class="fgrow">
           <div class="fg" style="margin:0">
             <label><span data-he="">מדינה</span><span data-en="">Country</span> <span class="req">*</span></label>
-            <select id="country" onchange="filterCities()">
+            <select id="country" onchange="filterCities(); applyCountryMeta(this.value)">
               <option value=""><span data-he="">בחר מדינה...</span><span data-en="">Select country...</span></option>
             </select>
           </div>
@@ -1071,7 +1071,7 @@ body.lang-ur .hero-content {
           </select>
         </div>
         <div class="fg">
-          <label><span data-he="">התמחות</span><span data-en="">Specialization</span></label>
+          <label><span data-he="">התמחות</span><span data-en="">Specialization</span> <span class="req">*</span></label>
           <div class="chips" id="chips-spec">
             <div class="chip" onclick="toggleChip(this)" data-val="General Clinic">General Clinic</div>
             <div class="chip" onclick="toggleChip(this)" data-val="Family Doctor">Family Doctor</div>
@@ -1097,11 +1097,11 @@ body.lang-ur .hero-content {
         </div>
         <div class="fgrow">
           <div class="fg" style="margin:0">
-            <label><span data-he="">שעות פעילות</span><span data-en="">Operating Hours</span></label>
+            <label><span data-he="">שעות פעילות</span><span data-en="">Operating Hours</span> <span class="req">*</span></label>
             <textarea id="hours" style="min-height:62px" placeholder="e.g. Mon-Fri 09:00-18:00"></textarea>
           </div>
           <div class="fg" style="margin:0">
-            <label><span data-he="">ימי פעילות</span><span data-en="">Active Days</span></label>
+            <label><span data-he="">ימי פעילות</span><span data-en="">Active Days</span> <span class="req">*</span></label>
             <div class="chips" id="chips-days" style="flex-wrap:wrap;gap:.35rem">
               <div class="chip" onclick="toggleChip(this)" data-val="א">Sun</div>
               <div class="chip" onclick="toggleChip(this)" data-val="ב">Mon</div>
@@ -1114,7 +1114,7 @@ body.lang-ur .hero-content {
           </div>
         </div>
         <div class="fg">
-          <label><span data-he="">שירותים</span><span data-en="">Services</span></label>
+          <label><span data-he="">שירותים</span><span data-en="">Services</span> <span class="req">*</span></label>
           <div style="margin-top:.5rem">
             <div class="yn-row"><span class="yn-label"><span data-he="">ביקורי בית / מלון</span><span data-en="">Home / Hotel Visits</span></span><div class="chips yn-chips" data-field="hotel_visits"><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">חירום 24/7</span><span data-en="">24/7 Emergency</span></span><div class="chips yn-chips" data-field="emergency"><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="No">No</div></div></div>
@@ -1156,7 +1156,7 @@ body.lang-ur .hero-content {
           </div>
         </div>
         <div class="fg">
-          <label><span data-he="">עלויות</span><span data-en="">Fees</span></label>
+          <label><span data-he="">עלויות</span><span data-en="">Fees</span> <span class="req">*</span></label>
           <div class="fgrow3">
             <div class="fg" style="margin:0">
               <label style="font-size:.62rem"><span data-he="">מרפאה</span><span data-en="">Clinic</span></label>
@@ -1174,7 +1174,7 @@ body.lang-ur .hero-content {
         </div>
         <div class="fgrow">
           <div class="fg" style="margin:0">
-            <label><span data-he="">מטבע</span><span data-en="">Currency</span></label>
+            <label><span data-he="">מטבע</span><span data-en="">Currency</span> <span class="req">*</span></label>
             <select id="currency">
               <option value="">Select...</option>
               <option>US Dollar (USD)</option><option>Euro (EUR)</option><option>British Pound (GBP)</option>
@@ -1211,11 +1211,11 @@ body.lang-ur .hero-content {
         <div class="fstep-h"><span data-he="">שלב 4 — אודות ומסמכים</span><span data-en="">Step 4 — About &amp; Documents</span></div>
         <div class="fstep-s"><span data-he="">קצת עליך ומסמכים רלוונטיים</span><span data-en="">Tell us about yourself and upload documents</span></div>
         <div class="fg">
-          <label><span data-he="">אודות המרפאה</span><span data-en="">About the Clinic</span></label>
+          <label><span data-he="">אודות המרפאה</span><span data-en="">About the Clinic</span> <span class="req">*</span></label>
           <textarea id="about" style="min-height:90px" placeholder="Tell us about your clinic, experience, approach..."></textarea>
         </div>
         <div class="fg">
-          <label><span data-he="">שפות</span><span data-en="">Languages Spoken</span></label>
+          <label><span data-he="">שפות</span><span data-en="">Languages Spoken</span> <span class="req">*</span></label>
           <div class="chips" id="chips-lang">
             <div class="chip" onclick="toggleChip(this)" data-val="English">English</div>
             <div class="chip" onclick="toggleChip(this)" data-val="Hebrew">Hebrew</div>
@@ -1717,6 +1717,55 @@ const COUNTRY_CITIES = {
   'Other':          ['Other'],
 };
 
+// ── Country meta: phone code + currency ──────────────────────────────────────
+const COUNTRY_META = {
+  'Thailand':{'dial':'+66','cur':'Thai Baht (THB)'},
+  'Spain':{'dial':'+34','cur':'Euro (EUR)'},
+  'Greece':{'dial':'+30','cur':'Euro (EUR)'},
+  'Italy':{'dial':'+39','cur':'Euro (EUR)'},
+  'Portugal':{'dial':'+351','cur':'Euro (EUR)'},
+  'France':{'dial':'+33','cur':'Euro (EUR)'},
+  'Germany':{'dial':'+49','cur':'Euro (EUR)'},
+  'Austria':{'dial':'+43','cur':'Euro (EUR)'},
+  'Switzerland':{'dial':'+41','cur':'Euro (EUR)'},
+  'Netherlands':{'dial':'+31','cur':'Euro (EUR)'},
+  'Belgium':{'dial':'+32','cur':'Euro (EUR)'},
+  'Czech Republic':{'dial':'+420','cur':'Euro (EUR)'},
+  'Hungary':{'dial':'+36','cur':'Hungarian Forint (HUF)'},
+  'Poland':{'dial':'+48','cur':'Polish Zloty (PLN)'},
+  'Romania':{'dial':'+40','cur':'Euro (EUR)'},
+  'Bulgaria':{'dial':'+359','cur':'Euro (EUR)'},
+  'Croatia':{'dial':'+385','cur':'Euro (EUR)'},
+  'Turkey':{'dial':'+90','cur':'Other'},
+  'Egypt':{'dial':'+20','cur':'Other'},
+  'Morocco':{'dial':'+212','cur':'Moroccan Dirham (MAD)'},
+  'Jordan':{'dial':'+962','cur':'Other'},
+  'Israel':{'dial':'+972','cur':'Other'},
+  'UAE':{'dial':'+971','cur':'Other'},
+  'India':{'dial':'+91','cur':'Indian Rupee (INR)'},
+  'Nepal':{'dial':'+977','cur':'Nepalese Rupee (NPR)'},
+  'Sri Lanka':{'dial':'+94','cur':'Sri Lankan Rupee (LKR)'},
+  'Vietnam':{'dial':'+84','cur':'Vietnamese Dong (VND)'},
+  'Cambodia':{'dial':'+855','cur':'Cambodian Riel (KHR)'},
+  'Indonesia':{'dial':'+62','cur':'Indonesian Rupiah (IDR)'},
+  'Philippines':{'dial':'+63','cur':'Philippine Peso (PHP)'},
+  'Japan':{'dial':'+81','cur':'Other'},
+  'South Korea':{'dial':'+82','cur':'South Korean Won (KRW)'},
+  'China':{'dial':'+86','cur':'Other'},
+  'Australia':{'dial':'+61','cur':'Australian Dollar (AUD)'},
+  'New Zealand':{'dial':'+64','cur':'New Zealand Dollar (NZD)'},
+  'USA':{'dial':'+1','cur':'US Dollar (USD)'},
+  'Canada':{'dial':'+1','cur':'Canadian Dollar (CAD)'},
+  'Mexico':{'dial':'+52','cur':'Mexican Peso (MXN)'},
+  'Costa Rica':{'dial':'+506','cur':'Costa Rican Colon (CRC)'},
+  'Peru':{'dial':'+51','cur':'Peruvian Sol (PEN)'},
+  'Colombia':{'dial':'+57','cur':'Colombian Peso (COP)'},
+  'Brazil':{'dial':'+55','cur':'Brazilian Real (BRL)'},
+  'Argentina':{'dial':'+54','cur':'Argentine Peso (ARS)'},
+  'South Africa':{'dial':'+27','cur':'Other'},
+  'Kenya':{'dial':'+254','cur':'Other'},
+};
+
 function populateCountries() {
   var sel = document.getElementById('country');
   if (!sel) return;
@@ -1731,7 +1780,7 @@ function populateCountries() {
 function filterCities() {
   var country = document.getElementById('country').value;
   var cityEl = document.getElementById('city');
-  cityEl.innerHTML = '';
+  while (cityEl.firstChild) cityEl.removeChild(cityEl.firstChild);
   var placeholder = document.createElement('option');
   placeholder.value = '';
   placeholder.textContent = '- City -';
@@ -1745,33 +1794,68 @@ function filterCities() {
   });
 }
 
-// ── Form steps ───────────────────────────────────────────────────────────────
-let cur=1;
-const reqs={
+function applyCountryMeta(country) {
+  var meta = COUNTRY_META[country];
+  if (!meta) return;
+  var phoneEl = document.getElementById('phone');
+  if (phoneEl && !phoneEl.value.trim()) {
+    phoneEl.value = meta.dial + ' ';
+  }
+  var curEl = document.getElementById('currency');
+  if (curEl && !curEl.value) {
+    Array.from(curEl.options).forEach(function(opt) {
+      if (opt.text === meta.cur) curEl.value = opt.value;
+    });
+  }
+}
+
+// ── Form validation ───────────────────────────────────────────────────────────
+var cur=1;
+var reqs={
   1:[{id:'country'},{id:'city'}],
-  2:[{id:'clinic_name'},{id:'medical_type'}],
-  3:[{id:'phone'},{id:'email'}]
+  2:[
+    {id:'clinic_name'},{id:'medical_type'},
+    {chips:'chips-spec'},{id:'hours'},{chips:'chips-days'},
+    {yn:'hotel_visits'},{yn:'emergency'},{yn:'diagnostic'},
+    {yn:'lab'},{yn:'evacuations'},{yn:'online_consult'},
+  ],
+  3:[{id:'phone'},{id:'email'},{id:'currency'}],
 };
 
-function goStep(n){
-  if(n>cur&&reqs[cur]){
-    var ok=true;
-    reqs[cur].forEach(function(r){
-      var el=document.getElementById(r.id);
-      if(!el||!el.value.trim()){
-        if(el){el.style.borderColor='#f87171';el.style.boxShadow='0 0 0 2px rgba(248,113,113,.15)';}
-        ok=false;
-      } else {
-        el.style.borderColor='';
-        el.style.boxShadow='';
-      }
-    });
-    if(!ok){
-      var lang=document.body.className.replace('lang-','');
-      alert(lang==='he'?'אנא מלא את כל שדות החובה':'Please fill in all required fields');
-      return;
+function markError(el) { el.style.outline='2px solid #f87171'; }
+function clearError(el) { el.style.outline=''; }
+
+function validateStep(stepNum) {
+  var list = reqs[stepNum];
+  if (!list) return true;
+  var ok = true;
+  list.forEach(function(r) {
+    if (r.id) {
+      var el = document.getElementById(r.id);
+      if (!el || !el.value.trim()) { if(el) markError(el); ok=false; }
+      else clearError(el);
+    } else if (r.chips) {
+      var box = document.getElementById(r.chips);
+      if (box && !box.querySelector('.chip.sel')) {
+        box.style.outline='2px solid #f87171'; ok=false;
+      } else if (box) { box.style.outline=''; }
+    } else if (r.yn) {
+      var ynBox = document.querySelector('.yn-chips[data-field="'+r.yn+'"]');
+      if (ynBox && !ynBox.querySelector('.chip.sel')) {
+        ynBox.closest('.yn-row').style.background='rgba(248,113,113,.08)'; ok=false;
+      } else if (ynBox) { ynBox.closest('.yn-row').style.background=''; }
     }
+  });
+  return ok;
+}
+
+function goStep(n){
+  if(n>cur && !validateStep(cur)){
+    var lang=document.body.className.replace('lang-','');
+    alert(lang==='he'?'אנא מלא את כל שדות החובה':'Please fill in all required fields');
+    return;
   }
+  saveFormState();
   document.getElementById('step'+cur).classList.remove('active');
   cur=n;
   document.getElementById('step'+n).classList.add('active');
@@ -1790,28 +1874,173 @@ function updateStepper(){
   document.getElementById('prog').style.width=[25,50,75,100][cur-1]+'%';
 }
 
-function toggleChip(el){ el.classList.toggle('sel'); }
+function toggleChip(el){
+  el.classList.toggle('sel');
+  var box = el.closest('.chips');
+  if (box && box.querySelector('.chip.sel')) box.style.outline='';
+}
 
 function toggleYN(el, field) {
   var row = el.closest('.yn-chips');
   row.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('sel'); });
   el.classList.add('sel');
+  row.closest('.yn-row').style.background='';
 }
 
 function showFiles(inp) {
   var el = document.getElementById('files-fn');
   if (!el) return;
-  if (inp.files && inp.files.length > 0) {
-    var names = Array.from(inp.files).map(function(f){ return f.name; }).join(', ');
-    el.textContent = '✓ ' + names;
-    el.style.display = 'block';
-  } else {
-    el.style.display = 'none';
+  while (el.firstChild) el.removeChild(el.firstChild);
+  if (!inp.files || !inp.files.length) { el.style.display='none'; return; }
+  el.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;';
+  Array.from(inp.files).slice(0,3).forEach(function(file) {
+    var item = document.createElement('div');
+    item.style.cssText = 'display:inline-flex;align-items:center;gap:5px;background:rgba(8,145,178,.1);padding:4px 8px;font-size:.72rem;color:#0A2540;border:1px solid rgba(8,145,178,.2);';
+    if (file.type.startsWith('image/')) {
+      var img = document.createElement('img');
+      img.style.cssText = 'width:26px;height:26px;object-fit:cover;display:block;';
+      var reader = new FileReader();
+      reader.onload = function(e) { img.src = e.target.result; };
+      reader.readAsDataURL(file);
+      item.appendChild(img);
+    } else {
+      var ico = document.createElement('span');
+      ico.textContent = '📄';
+      item.appendChild(ico);
+    }
+    var name = document.createElement('span');
+    name.textContent = file.name.length > 22 ? file.name.substring(0,20)+'…' : file.name;
+    item.appendChild(name);
+    el.appendChild(item);
+  });
+}
+
+// ── localStorage persistence ──────────────────────────────────────────────────
+function saveFormState() {
+  try {
+    var state = { step: cur };
+    ['clinic_name','clinic_name2','address','maps_link','phone','office_phone',
+     'email','website','hours','about','fee_clinic','fee_hotel','fee_online',
+     'fee_description','notes','country','city','medical_type','currency'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) state[id] = el.value;
+    });
+    state.spec = Array.from(document.querySelectorAll('#chips-spec .chip.sel')).map(function(c){return c.getAttribute('data-val');});
+    state.days = Array.from(document.querySelectorAll('#chips-days .chip.sel')).map(function(c){return c.getAttribute('data-val');});
+    state.lang = Array.from(document.querySelectorAll('#chips-lang .chip.sel')).map(function(c){return c.getAttribute('data-val');});
+    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult'].forEach(function(f) {
+      var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
+      if (s) state['yn_'+f] = s.getAttribute('data-val');
+    });
+    localStorage.setItem('safedoc_draft', JSON.stringify(state));
+  } catch(e){}
+}
+
+function applyDraft(state) {
+  ['clinic_name','clinic_name2','address','maps_link','phone','office_phone',
+   'email','website','hours','about','fee_clinic','fee_hotel','fee_online',
+   'fee_description','notes','medical_type','currency'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && state[id]) el.value = state[id];
+  });
+  if (state.country) {
+    document.getElementById('country').value = state.country;
+    filterCities();
+    if (state.city) document.getElementById('city').value = state.city;
+  }
+  if (state.spec) state.spec.forEach(function(v){ var c=document.querySelector('#chips-spec .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
+  if (state.days) state.days.forEach(function(v){ var c=document.querySelector('#chips-days .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
+  if (state.lang) state.lang.forEach(function(v){ var c=document.querySelector('#chips-lang .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
+  ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult'].forEach(function(f) {
+    var v = state['yn_'+f];
+    if (v) { var c=document.querySelector('.yn-chips[data-field="'+f+'"] .chip[data-val="'+v+'"]'); if(c) toggleYN(c,f); }
+  });
+  if (state.step && state.step > 1) goStep(state.step);
+}
+
+function restoreFormState() {
+  try {
+    var saved = localStorage.getItem('safedoc_draft');
+    if (!saved) return;
+    var state = JSON.parse(saved);
+    var lang = document.body.className.replace('lang-','') || 'he';
+    var banner = document.createElement('div');
+    banner.style.cssText = 'background:#f0f9ff;border:1px solid #0891B2;border-left:4px solid #0891B2;padding:10px 14px;margin-bottom:12px;font-size:.8rem;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;';
+    var msg = document.createElement('span');
+    msg.style.color = '#0A2540';
+    msg.textContent = lang==='he' ? 'יש לנו טיוטה שמורה. להמשיך ממנה?' : 'You have a saved draft. Continue from where you left off?';
+    var btns = document.createElement('div');
+    btns.style.cssText = 'display:flex;gap:6px;flex-shrink:0;';
+    var btnY = document.createElement('button');
+    btnY.textContent = lang==='he' ? 'כן, המשך' : 'Yes, continue';
+    btnY.style.cssText = 'padding:4px 12px;background:#0891B2;color:#fff;border:none;cursor:pointer;font-size:.75rem;font-weight:600;';
+    var btnN = document.createElement('button');
+    btnN.textContent = lang==='he' ? 'התחל מחדש' : 'Start over';
+    btnN.style.cssText = 'padding:4px 12px;background:#fff;border:1px solid #cbd5e1;cursor:pointer;font-size:.75rem;color:#475569;';
+    btnY.onclick = function() { applyDraft(state); banner.remove(); };
+    btnN.onclick = function() { localStorage.removeItem('safedoc_draft'); banner.remove(); };
+    btns.appendChild(btnY);
+    btns.appendChild(btnN);
+    banner.appendChild(msg);
+    banner.appendChild(btns);
+    var wrap = document.getElementById('step1').parentNode;
+    wrap.insertBefore(banner, wrap.firstChild);
+  } catch(e){}
+}
+
+// ── Browser language → pre-select language chip ───────────────────────────────
+function detectBrowserLanguage() {
+  var code = (navigator.language || navigator.userLanguage || '').split('-')[0].toLowerCase();
+  var map = {
+    'he':'Hebrew','iw':'Hebrew','en':'English','th':'Thai','fr':'French',
+    'de':'German','es':'Spanish','it':'Italian','pt':'Portuguese','ru':'Russian',
+    'ar':'Arabic','hi':'Hindi','zh':'Chinese (Mandarin)','ja':'Japanese',
+    'ko':'Korean','vi':'Vietnamese','id':'Indonesian','pl':'Polish',
+    'tr':'Turkish','el':'Greek','nl':'Dutch','hr':'Croatian','hu':'Hungarian',
+    'fa':'Persian (Farsi)','km':'Khmer','lo':'Lao','tl':'Filipino (Tagalog)','lt':'Lithuanian',
+  };
+  var lang = map[code];
+  if (lang) {
+    var chip = document.querySelector('#chips-lang .chip[data-val="'+lang+'"]');
+    if (chip && !chip.classList.contains('sel')) chip.classList.add('sel');
   }
 }
 
+// ── IP geolocation ────────────────────────────────────────────────────────────
+async function detectLocation() {
+  try {
+    var res = await fetch('https://ipapi.co/json/');
+    if (!res.ok) return;
+    var data = await res.json();
+    var nameMap = {'United States':'USA','United States of America':'USA','United Arab Emirates':'UAE'};
+    var country = nameMap[data.country_name] || data.country_name;
+    if (!COUNTRY_CITIES[country]) return;
+    document.getElementById('country').value = country;
+    filterCities();
+    applyCountryMeta(country);
+    if (data.city) {
+      var match = COUNTRY_CITIES[country].find(function(c){ return c.toLowerCase()===data.city.toLowerCase(); });
+      if (match) document.getElementById('city').value = match;
+    }
+  } catch(e){}
+}
+
+// ── Submit ────────────────────────────────────────────────────────────────────
 async function submitForm() {
   var lang = document.body.className.replace('lang-','');
+
+  // Validate step 4
+  var aboutEl = document.getElementById('about');
+  var langBox = document.getElementById('chips-lang');
+  var s4ok = true;
+  if (!aboutEl || !aboutEl.value.trim()) { if(aboutEl) markError(aboutEl); s4ok=false; }
+  else clearError(aboutEl);
+  if (langBox && !langBox.querySelector('.chip.sel')) { langBox.style.outline='2px solid #f87171'; s4ok=false; }
+  else if (langBox) langBox.style.outline='';
+  if (!s4ok) {
+    alert(lang==='he'?'אנא מלא את כל שדות החובה':'Please fill in all required fields');
+    return;
+  }
 
   if (!document.getElementById('terms').checked) {
     alert(lang==='he' ? 'יש לאשר את תנאי השימוש' : 'Please accept the Terms of Service');
@@ -1827,62 +2056,39 @@ async function submitForm() {
   try {
     var fd = new FormData();
 
-    // Text fields
-    var textIds = ['clinic_name','clinic_name2','address','maps_link','phone','office_phone',
-                   'email','website','hours','about','fee_clinic','fee_hotel','fee_online',
-                   'fee_description','notes'];
-    textIds.forEach(function(k) {
+    ['clinic_name','clinic_name2','address','maps_link','phone','office_phone',
+     'email','website','hours','about','fee_clinic','fee_hotel','fee_online',
+     'fee_description','notes'].forEach(function(k) {
       var el = document.getElementById(k);
       if (el && el.value.trim()) fd.append(k, el.value.trim());
     });
-
-    // Single selects
     ['medical_type','currency'].forEach(function(k) {
       var el = document.getElementById(k);
       if (el && el.value) fd.append(k, el.value);
     });
-
-    // Country / city
     var country = document.getElementById('country').value;
     var city = document.getElementById('city').value;
     if (country) fd.append('country_en', country);
     if (city) fd.append('city_en', city);
+    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult'].forEach(function(f) {
+      var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
+      if (s) fd.append(f, s.getAttribute('data-val'));
+    });
+    document.querySelectorAll('#chips-spec .chip.sel').forEach(function(c){ fd.append('specialization', c.getAttribute('data-val')); });
+    document.querySelectorAll('#chips-days .chip.sel').forEach(function(c){ fd.append('days', c.getAttribute('data-val')); });
+    document.querySelectorAll('#chips-lang .chip.sel').forEach(function(c){ fd.append('languages', c.getAttribute('data-val')); });
 
-    // Yes/No chips
-    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult'].forEach(function(field) {
-      var sel = document.querySelector('.yn-chips[data-field="'+field+'"] .chip.sel');
-      if (sel) fd.append(field, sel.getAttribute('data-val'));
-    });
-
-    // Multi-select chips
-    document.querySelectorAll('#chips-spec .chip.sel').forEach(function(c) {
-      fd.append('specialization', c.getAttribute('data-val'));
-    });
-    document.querySelectorAll('#chips-days .chip.sel').forEach(function(c) {
-      fd.append('days', c.getAttribute('data-val'));
-    });
-    document.querySelectorAll('#chips-lang .chip.sel').forEach(function(c) {
-      fd.append('languages', c.getAttribute('data-val'));
-    });
-
-    // Files (max 3)
     var filesInp = document.getElementById('files-inp');
     if (filesInp && filesInp.files) {
-      var maxFiles = Math.min(filesInp.files.length, 3);
-      for (var i = 0; i < maxFiles; i++) {
-        fd.append('files', filesInp.files[i]);
-      }
+      var maxF = Math.min(filesInp.files.length, 3);
+      for (var i=0; i<maxF; i++) fd.append('files', filesInp.files[i]);
     }
 
-    var res = await fetch('https://safedoc-form.tal-997.workers.dev', {
-      method: 'POST',
-      body: fd,
-    });
-
+    var res = await fetch('https://safedoc-form.tal-997.workers.dev', {method:'POST', body:fd});
     var data = await res.json();
     if (!res.ok || data.error) throw new Error(data.error || 'Server error');
 
-    // Success
+    localStorage.removeItem('safedoc_draft');
     document.getElementById('step4').classList.remove('active');
     document.getElementById('stepper').style.display = 'none';
     document.querySelector('.prog').style.display = 'none';
@@ -1906,6 +2112,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 });
 window.addEventListener('load', function() {
   populateCountries();
+  detectLocation();
+  detectBrowserLanguage();
+  restoreFormState();
   var bio = document.getElementById('bio');
   if (bio) bio.placeholder = bio.getAttribute('data-he-placeholder') || '';
 });
