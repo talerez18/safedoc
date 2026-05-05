@@ -1212,7 +1212,7 @@ body.lang-ur .hero-content {
         <div class="fstep-s"><span data-he="">קצת עליך ומסמכים רלוונטיים</span><span data-en="">Tell us about yourself and upload documents</span></div>
         <div class="fg">
           <label><span data-he="">אודות המרפאה</span><span data-en="">About the Clinic</span> <span class="req">*</span></label>
-          <textarea id="about" style="min-height:90px" placeholder="Tell us about your clinic, experience, approach..."></textarea>
+          <textarea id="about_clinic" style="min-height:90px" placeholder="Tell us about your clinic, experience, approach..."></textarea>
         </div>
         <div class="fg">
           <label><span data-he="">שפות</span><span data-en="">Languages Spoken</span> <span class="req">*</span></label>
@@ -1920,7 +1920,7 @@ function saveFormState() {
   try {
     var state = { step: cur };
     ['clinic_name','clinic_name2','address','maps_link','phone','office_phone',
-     'email','website','hours','about','fee_clinic','fee_hotel','fee_online',
+     'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online',
      'fee_description','notes','country','city','medical_type','currency'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) state[id] = el.value;
@@ -1938,7 +1938,7 @@ function saveFormState() {
 
 function applyDraft(state) {
   ['clinic_name','clinic_name2','address','maps_link','phone','office_phone',
-   'email','website','hours','about','fee_clinic','fee_hotel','fee_online',
+   'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online',
    'fee_description','notes','medical_type','currency'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el && state[id]) el.value = state[id];
@@ -2030,7 +2030,7 @@ async function submitForm() {
   var lang = document.body.className.replace('lang-','');
 
   // Validate step 4
-  var aboutEl = document.getElementById('about');
+  var aboutEl = document.getElementById('about_clinic');
   var langBox = document.getElementById('chips-lang');
   var s4ok = true;
   if (!aboutEl || !aboutEl.value.trim()) { if(aboutEl) markError(aboutEl); s4ok=false; }
@@ -2057,7 +2057,7 @@ async function submitForm() {
     var fd = new FormData();
 
     ['clinic_name','clinic_name2','address','maps_link','phone','office_phone',
-     'email','website','hours','about','fee_clinic','fee_hotel','fee_online',
+     'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online',
      'fee_description','notes'].forEach(function(k) {
       var el = document.getElementById(k);
       if (el && el.value.trim()) fd.append(k, el.value.trim());
@@ -2118,7 +2118,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 });
 // ── Live validation (D): green border on valid fields, no red while typing ────
 function setupLiveValidation() {
-  var ids = ['country','city','clinic_name','medical_type','hours','phone','email','currency','about'];
+  var ids = ['country','city','clinic_name','medical_type','hours','phone','email','currency','about_clinic'];
   ids.forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
