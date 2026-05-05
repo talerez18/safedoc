@@ -363,33 +363,36 @@ footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
 .reveal.vis{opacity:1;transform:none}
-/* —— RESPONSIVE FIX —— */
+/* —— RESPONSIVE FIX V2 —— */
 @media(max-width:960px){
   html, body { overflow-x: hidden; position: relative; width: 100%; }
-  nav{padding:0 1rem; justify-content: space-between;}
-  .nav-links{display:none} 
-  section{padding:40px 1rem}
   
-  h1{font-size:1.8rem !important; line-height: 1.1; margin-bottom: 1rem;}
-  .hero-content{max-width: 100%; text-align: center; padding: 0;}
-  .hero{padding: 100px 1rem 40px; min-height: auto; display: block;}
+  /* סידור הראש: לוגו, שפה וכפתור */
+  nav { padding: 0.5rem 1rem; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
+  .nav-links { display: none; } 
+  .lang-toggle { display: flex !important; order: 2; transform: scale(0.85); margin: 0; } 
+  .flogo { order: 1; margin-right: auto; }
+  nav > .btn-main { order: 3; padding: 6px 12px; font-size: 0.75rem; white-space: nowrap; } 
+
+  section { padding: 30px 1rem; }
   
-  .hero-btns{flex-direction: column; gap: 10px; width: 100%;}
-  .btn-main, .btn-sec { width: 100% !important; margin: 0; justify-content: center; box-sizing: border-box; }
+  /* תיקון ה-Hero - המרווח מלמעלה */
+  .hero { padding: 130px 1rem 40px; min-height: auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .hero-content { width: 100%; max-width: 100%; padding: 0; }
+  h1 { font-size: 1.7rem !important; line-height: 1.2; margin-bottom: 1.5rem; }
   
-  .hero-stats{gap: 1rem; justify-content: center;}
-  .hstat .n { font-size: 1.5rem; }
+  .hero-btns { flex-direction: column; gap: 12px; width: 100%; max-width: 280px; margin: 0 auto; }
+  .btn-main, .btn-sec { width: 100% !important; margin: 0; justify-content: center; height: 48px; }
+  
+  .hero-stats { gap: 1rem; justify-content: center; margin-top: 2rem; }
   
   .about-grid, .doc-header, .join-grid { grid-template-columns: 1fr; gap: 2rem; }
   .how-steps, .benefits-grid { grid-template-columns: 1fr; }
-  
-  .form-box { padding: 1rem; width: 100%; box-sizing: border-box; }
-  .fgrow, .fgrow3 { grid-template-columns: 1fr; }
 }
 
 @media(max-width:480px) {
-  .hero-badge { font-size: 0.6rem; padding: 4px 8px; }
-  .ticker-bar { display: none; } /* מוריד את הטיקר שעלול להרחיב את המסך */
+  h1 { font-size: 1.5rem !important; }
+  .hero-stats { flex-direction: column; align-items: center; }
 }
 /* ── LANGUAGE TOGGLE ── */
 .lang-toggle{
@@ -876,8 +879,7 @@ body.lang-ur .hero-content {
   <div class="reveal">
     <span class="s-tag"><span data-he="">התהליך</span><span data-en="">The Process</span></span>
     <div class="s-title"><span data-he="">איך Safe Doc עובדת?</span><span data-en="">How Safe Doc Works</span></div>
-    <p class="s-body"><span data-he="">ארבעה שלבים פשוטים — מהרגע שמטייל צריך עזרה ועד שהכסף נוחת אצל הרופא.</span><span data-en="">Four simple steps — from the moment a traveler needs help to the moment payment reaches you.</span></p>
-  </div>
+<span data-he="שלושה שלבים פשוטים – מהרגע שמטייל צריך עזרה ועד שהכל מוסדר."></span><span data-en="">3 simple steps – from the moment a traveler needs help to the moment payment is secured.</span>  </div>
   <div class="how-steps reveal" style="margin-top:3rem">
     <div class="hstep">
       <div class="hn">01</div>
