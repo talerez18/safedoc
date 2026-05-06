@@ -357,60 +357,60 @@ footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 
 .flogo em{color:#06B6D4;font-style:normal}
 .fcopy{font-size:.73rem;color:rgba(255,255,255,.35)}
 .flinks{display:flex;gap:1.5rem}
-.flinks a{font-size:.73rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s}
+..flinks a{font-size:.73rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s}
 .flinks a:hover{color:#06B6D4}
 
-/* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
-.reveal.vis{opacity:1;transform:none}
-/* —— FINAL RESPONSIVE FIX —— */
 /* —— FINAL RESPONSIVE FIX —— */
 @media(max-width:960px){
-  html, body { overflow-x: hidden; width: 100%; position: relative; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden !important; width: 100% !important; position: relative; margin: 0 !important; padding: 0 !important; }
   
-  /* Header layout */
-  nav { padding: 10px 15px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 5px; }
+  /* סידור ה-Header */
+  nav { padding: 10px 15px !important; display: flex !important; flex-wrap: nowrap !important; justify-content: space-between !important; align-items: center !important; }
+  .nav-links { display: none !important; } 
+  .lang-toggle { display: flex !important; order: 2; transform: scale(0.8); margin: 0 5px !important; } 
+  .flogo { order: 1; flex: 1; }
+  nav > .btn-main { order: 3; padding: 6px 10px !important; font-size: 0.75rem !important; white-space: nowrap !important; } 
 
-  /* Keep language dropdown visible on mobile.
-     Your `.lang-toggle` is inside `.nav-links`, so you must NOT hide `.nav-links`. */
-  .nav-links { display:flex !important; align-items:center; }
-  .nav-links > a { display:none !important; } /* hide only the section links */
-  .lang-toggle { display:flex !important; transform: scale(0.85); margin: 0; }
-
-  /* Hero + layout */
-  section { padding: 40px 15px; width: 100%; box-sizing: border-box; }
-  .hero { padding: 120px 15px 40px; text-align: center; }
-  .hero-content { width: 100%; padding: 0; }
-
-  h1 { font-size: 1.6rem !important; line-height: 1.2; width: 100%; }
-
-  .hero-btns { flex-direction: column; gap: 10px; width: 100%; max-width: 280px; margin: 0 auto; }
-  .btn-main, .btn-sec { width: 100% !important; margin: 0; justify-content: center; }
-
-  /* Form + grids */
-  .form-box { margin: 0 auto; width: 100% !important; max-width: 100%; padding: 15px; box-sizing: border-box; }
-  .fgrow, .fgrow3 { grid-template-columns: 1fr; gap: 15px; }
-  .step-content { padding: 10px; }
-
-  .about-grid, .doc-header, .join-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .how-steps, .benefits-grid { grid-template-columns: 1fr; }
+  /* סידור ה-Hero והטופס שלא ייחתך */
+  section { padding: 40px 20px !important; width: 100% !important; box-sizing: border-box !important; }
+  .hero { padding: 120px 20px 40px !important; text-align: center !important; }
+  h1 { font-size: 1.6rem !important; line-height: 1.2; width: 100% !important; margin: 0 auto 1.5rem !important; }
+  
+  .hero-btns { display: flex !important; flex-direction: column !important; gap: 12px !important; width: 100% !important; max-width: 280px !important; margin: 0 auto !important; }
+  .btn-main, .btn-sec { width: 100% !important; margin: 0 !important; justify-content: center !important; }
+  
+  .form-box { margin: 0 auto !important; width: 100% !important; max-width: 100% !important; padding: 15px !important; box-sizing: border-box !important; float: none !important; }
+  .fgrow, .fgrow3 { display: grid !important; grid-template-columns: 1fr !important; gap: 15px !important; }
 }
-@media(max-width:480px) {
-  h1 { font-size: 1.4rem !important; }
-  .hero-stats { flex-direction: column; gap: 15px; }
-  .form-box { padding: 10px; }
+
+/* —— LANGUAGE TOGGLE —— */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: #EBF5FB;
+  border: 1.5px solid #B0D4E8;
+  border-radius: 20px;
+  padding: 3px;
+  margin-left: .5rem;
+  z-index: 1001;
 }
-/* ── LANGUAGE TOGGLE ── */
-.lang-toggle{
-  display:flex;align-items:center;gap:2px;
-  background:#EBF5FB;border:1.5px solid #B0D4E8;
-  border-radius:20px;padding:3px;
-  margin-left:.5rem;
+
+.lang-btn {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: .72rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #5A90B8;
 }
-.lang-btn{
-  padding:4px 12px;border-radius:16px;
-  font-size:.72rem;font-weight:700;letter-spacing:.3px;
-  cursor:pointer;border:none;background:transparent;
+
+.lang-btn.active {
+  background: #0891B2;
+  color: #fff;
+}
   color:#5A90B8;transition:all .2s;
 }
 .lang-btn.active{
@@ -1665,31 +1665,22 @@ document.addEventListener('click', function(e) {
   if (!e.target.closest('.lang-toggle')) {
     const m = document.getElementById('lang-menu');
     if (m) m.style.display = 'none';
- function setLang(lang){
-  const t = translations[lang] || {};
-  const dir = t.dir || (lang === 'he' ? 'rtl' : 'ltr');
+  }
+});
 
-  document.body.className = 'lang-' + lang;
+function setLang(lang){
+  document.body.className='lang-'+lang;
   applyTranslation(lang);
-
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.lang-btn').forEach(b=>{
     if(b.getAttribute('onclick').includes("'"+lang+"'"))b.classList.add('active');
   });
-
-  // Important: do NOT force RTL only for `he` (your translations already define t.dir)
-  document.documentElement.dir = dir;
-  document.documentElement.lang = lang;
-
-  // Ensure form controls follow selected language direction.
+  document.documentElement.dir=lang==='he'?'rtl':'ltr';
+  document.documentElement.lang=lang;
   document.querySelectorAll('.fg input,.fg select,.fg textarea').forEach(el=>{
-    el.style.direction = dir;
+    el.style.direction=lang==='he'?'rtl':'ltr';
   });
-
   // bio placeholder
-  const bio = document.getElementById('bio');
-  if(bio)bio.placeholder = bio.getAttribute('data-'+lang+'-placeholder') || '...';
-}
   const bio=document.getElementById('bio');
   if(bio)bio.placeholder=bio.getAttribute('data-'+lang+'-placeholder')||'...';
 }
