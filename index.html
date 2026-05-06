@@ -364,34 +364,37 @@ footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
 .reveal.vis{opacity:1;transform:none}
 /* —— FINAL RESPONSIVE FIX —— */
+/* —— FINAL RESPONSIVE FIX —— */
 @media(max-width:960px){
   html, body { overflow-x: hidden; width: 100%; position: relative; margin: 0; padding: 0; }
   
-  /* סידור הראש: לוגו, שפה וכפתור */
+  /* Header layout */
   nav { padding: 10px 15px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 5px; }
-  .nav-links { display: none; } 
-  .lang-toggle { display: flex !important; order: 2; transform: scale(0.8); margin: 0; } 
-  .flogo { order: 1; flex: 1; }
-  nav > .btn-main { order: 3; padding: 5px 10px; font-size: 0.7rem; white-space: nowrap; min-width: auto; } 
 
-  /* סידור ה-Hero והטופס */
+  /* Keep language dropdown visible on mobile.
+     Your `.lang-toggle` is inside `.nav-links`, so you must NOT hide `.nav-links`. */
+  .nav-links { display:flex !important; align-items:center; }
+  .nav-links > a { display:none !important; } /* hide only the section links */
+  .lang-toggle { display:flex !important; transform: scale(0.85); margin: 0; }
+
+  /* Hero + layout */
   section { padding: 40px 15px; width: 100%; box-sizing: border-box; }
   .hero { padding: 120px 15px 40px; text-align: center; }
   .hero-content { width: 100%; padding: 0; }
+
   h1 { font-size: 1.6rem !important; line-height: 1.2; width: 100%; }
-  
+
   .hero-btns { flex-direction: column; gap: 10px; width: 100%; max-width: 280px; margin: 0 auto; }
   .btn-main, .btn-sec { width: 100% !important; margin: 0; justify-content: center; }
-  
-  /* תיקון הטופס שלא ייחתך בצדדים */
+
+  /* Form + grids */
   .form-box { margin: 0 auto; width: 100% !important; max-width: 100%; padding: 15px; box-sizing: border-box; }
   .fgrow, .fgrow3 { grid-template-columns: 1fr; gap: 15px; }
   .step-content { padding: 10px; }
-  
+
   .about-grid, .doc-header, .join-grid { grid-template-columns: 1fr; gap: 2rem; }
   .how-steps, .benefits-grid { grid-template-columns: 1fr; }
 }
-
 @media(max-width:480px) {
   h1 { font-size: 1.4rem !important; }
   .hero-stats { flex-direction: column; gap: 15px; }
@@ -1662,22 +1665,31 @@ document.addEventListener('click', function(e) {
   if (!e.target.closest('.lang-toggle')) {
     const m = document.getElementById('lang-menu');
     if (m) m.style.display = 'none';
-  }
-});
+ function setLang(lang){
+  const t = translations[lang] || {};
+  const dir = t.dir || (lang === 'he' ? 'rtl' : 'ltr');
 
-function setLang(lang){
-  document.body.className='lang-'+lang;
+  document.body.className = 'lang-' + lang;
   applyTranslation(lang);
+
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.lang-btn').forEach(b=>{
     if(b.getAttribute('onclick').includes("'"+lang+"'"))b.classList.add('active');
   });
-  document.documentElement.dir=lang==='he'?'rtl':'ltr';
-  document.documentElement.lang=lang;
+
+  // Important: do NOT force RTL only for `he` (your translations already define t.dir)
+  document.documentElement.dir = dir;
+  document.documentElement.lang = lang;
+
+  // Ensure form controls follow selected language direction.
   document.querySelectorAll('.fg input,.fg select,.fg textarea').forEach(el=>{
-    el.style.direction=lang==='he'?'rtl':'ltr';
+    el.style.direction = dir;
   });
+
   // bio placeholder
+  const bio = document.getElementById('bio');
+  if(bio)bio.placeholder = bio.getAttribute('data-'+lang+'-placeholder') || '...';
+}
   const bio=document.getElementById('bio');
   if(bio)bio.placeholder=bio.getAttribute('data-'+lang+'-placeholder')||'...';
 }
