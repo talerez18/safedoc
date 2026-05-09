@@ -1061,11 +1061,11 @@ body.lang-ur .hero-content {
         </div>
         <div class="fg">
           <label><span data-he="">כתובת מלאה</span><span data-en="">Full Address</span></label>
-          <input type="text" id="address" placeholder="Street, building, floor"/>
+          <input type="text" id="address"/>
         </div>
         <div class="fg">
           <label><span data-he="">לינק גוגל מפס</span><span data-en="">Google Maps Link</span></label>
-          <input type="url" id="maps_link" placeholder="https://maps.google.com/..."/>
+          <input type="url" id="maps_link"/>
         </div>
         <div class="nav-btns"><button class="bnxt" onclick="goStep(2)"><span data-he="">הבא — מרפאה ומומחיות ←</span><span data-en="">Next — Clinic &amp; Specialty →</span></button></div>
       </div>
@@ -1077,11 +1077,11 @@ body.lang-ur .hero-content {
         <div class="fgrow">
           <div class="fg" style="margin:0">
             <label><span data-he="">שם המרפאה</span><span data-en="">Clinic Name</span> <span class="req">*</span></label>
-            <input type="text" id="clinic_name" placeholder="e.g. Downtown Medical Clinic"/>
+            <input type="text" id="clinic_name"/>
           </div>
           <div class="fg" style="margin:0">
             <label><span data-he="">שם נוסף</span><span data-en="">Secondary Name</span></label>
-            <input type="text" id="clinic_name2" placeholder="Secondary or English name (optional)"/>
+            <input type="text" id="clinic_name2"/>
           </div>
         </div>
         <div class="fg">
@@ -1124,7 +1124,7 @@ body.lang-ur .hero-content {
         <div class="fgrow">
           <div class="fg" style="margin:0">
             <label><span data-he="">שעות פעילות</span><span data-en="">Operating Hours</span> <span class="req">*</span></label>
-            <textarea id="hours" style="min-height:62px" placeholder="e.g. Mon-Fri 09:00-18:00"></textarea>
+            <textarea id="hours" style="min-height:62px"></textarea>
           </div>
           <div class="fg" style="margin:0">
             <label><span data-he="">ימי פעילות</span><span data-en="">Active Days</span> <span class="req">*</span></label>
@@ -1167,22 +1167,22 @@ body.lang-ur .hero-content {
         <div class="fgrow">
           <div class="fg" style="margin:0">
             <label><span data-he="">נייד / WhatsApp</span><span data-en="">Mobile / WhatsApp</span> <span class="req">*</span></label>
-            <input type="tel" id="phone" placeholder="+1 555 000 0000"/>
+            <input type="tel" id="phone"/>
           </div>
           <div class="fg" style="margin:0">
             <label><span data-he="">טלפון משרד</span><span data-en="">Office Phone</span></label>
-            <input type="tel" id="office_phone" placeholder="+1 555 000 0001"/>
+            <input type="tel" id="office_phone"/>
           </div>
         </div>
         <div class="fgrow">
           <div class="fg" style="margin:0">
             <label><span data-he="">אימייל</span><span data-en="">Email</span> <span class="req">*</span></label>
-            <input type="email" id="email" placeholder="doctor@clinic.com"/>
+            <input type="email" id="email"/>
             <div class="priv"><span data-he="">🔒 לשימוש פנימי בלבד</span><span data-en="">🔒 Internal use only</span></div>
           </div>
           <div class="fg" style="margin:0">
             <label><span data-he="">אתר</span><span data-en="">Website</span></label>
-            <input type="url" id="website" placeholder="https://yourclinic.com"/>
+            <input type="url" id="website"/>
           </div>
         </div>
         <div class="fg">
@@ -1191,15 +1191,15 @@ body.lang-ur .hero-content {
           <div class="fgrow3">
             <div class="fg" style="margin:0">
               <label style="font-size:.62rem"><span data-he="">מרפאה</span><span data-en="">Clinic</span></label>
-              <input type="number" id="fee_clinic" placeholder="80" min="0"/>
+              <input type="number" id="fee_clinic" min="0"/>
             </div>
             <div class="fg" style="margin:0">
               <label style="font-size:.62rem"><span data-he="">ביקור בית/מלון</span><span data-en="">Home/Hotel</span></label>
-              <input type="number" id="fee_hotel" placeholder="150" min="0"/>
+              <input type="number" id="fee_hotel" min="0"/>
             </div>
             <div class="fg" style="margin:0">
               <label style="font-size:.62rem"><span data-he="">אונליין</span><span data-en="">Online</span></label>
-              <input type="number" id="fee_online" placeholder="50" min="0"/>
+              <input type="number" id="fee_online" min="0"/>
             </div>
           </div>
         </div>
@@ -1228,7 +1228,7 @@ body.lang-ur .hero-content {
           </div>
           <div class="fg" style="margin:0">
             <label><span data-he="">תיאור עלויות</span><span data-en="">Fee Description</span></label>
-            <textarea id="fee_description" style="min-height:62px" placeholder="e.g. Prices vary by visit type..."></textarea>
+            <textarea id="fee_description" style="min-height:62px"></textarea>
           </div>
         </div>
         <div class="nav-btns">
@@ -1243,7 +1243,7 @@ body.lang-ur .hero-content {
         <div class="fstep-s"><span data-he="">קצת עליך ומסמכים רלוונטיים</span><span data-en="">Tell us about yourself and upload documents</span></div>
         <div class="fg">
           <label><span data-he="">אודות המרפאה</span><span data-en="">About the Clinic</span> <span class="req">*</span></label>
-          <textarea id="about_clinic" style="min-height:90px" placeholder="Tell us about your clinic, experience, approach..."></textarea>
+          <textarea id="about_clinic" style="min-height:90px"></textarea>
         </div>
         <div class="fg">
           <label><span data-he="">שפות</span><span data-en="">Languages Spoken</span> <span class="req">*</span></label>
@@ -1289,7 +1289,7 @@ body.lang-ur .hero-content {
         </div>
         <div class="fg">
           <label><span data-he="">הערות ושאלות</span><span data-en="">Notes &amp; Questions</span></label>
-          <textarea id="notes" style="min-height:65px" placeholder="Any questions or additional information..."></textarea>
+          <textarea id="notes" style="min-height:65px"></textarea>
         </div>
         <div class="terms-row">
           <input type="checkbox" id="terms"/>
