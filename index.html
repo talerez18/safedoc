@@ -318,13 +318,13 @@ tr:hover td{background:#F8FCFF}
 .fg input,.fg select,.fg textarea{
   background:#FFFFFF;border:1.5px solid #B0CCE0;border-radius:7px;
   padding:10px 13px;font-family:'Heebo',sans-serif;font-size:.9rem;
-  color:#08192E;outline:none;transition:border-color .2s,box-shadow .2s;direction:rtl;width:100%;
+  color:#08192E;outline:none;transition:border-color .2s,box-shadow .2s;direction:ltr;width:100%;
 }
 .fg input::placeholder,.fg textarea::placeholder{color:#7099B8}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#0891B2;background:#EAF6FD;box-shadow:0 0 0 3px rgba(8,145,178,.1)}
 .fg select option{background:#fff;color:#08192E;font-weight:500}
 .fg textarea{resize:vertical;min-height:80px}
-.fgrow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fgrow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
 .fgrow3{display:grid;grid-template-columns:1fr 1fr 95px;gap:.75rem}
 .priv{font-size:.7rem;color:#2563A8;margin-top:4px}
 .upload{border:1px dashed rgba(8,145,178,.3);border-radius:8px;padding:1.2rem;text-align:center;background:rgba(8,145,178,.03);cursor:pointer;transition:all .2s;position:relative}
@@ -418,6 +418,9 @@ footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 
 /* hide/show by language */
 body.lang-he [data-en],
 body:not(.lang-he) [data-he]{ display:none !important }
+/* Form always in English regardless of language toggle */
+#join [data-he]{display:none!important}
+#join [data-en]{display:inline!important}
 
 
 
@@ -1051,6 +1054,20 @@ body.lang-ur .hero-content {
           </div>
         </div>
         <div class="fg">
+          <label>Main Area in City</label>
+          <div class="chips" id="chips-area">
+            <div class="chip" onclick="toggleChip(this)" data-val="City Center">City Center</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="North">North</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="South">South</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="East">East</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="West">West</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Airport Area">Airport Area</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Beach Area">Beach Area</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Old City">Old City</div>
+            <div class="chip" onclick="toggleChip(this)" data-val="Other">Other</div>
+          </div>
+        </div>
+        <div class="fg">
           <label><span data-he="">כתובת מלאה</span><span data-en="">Full Address</span></label>
           <input type="text" id="address" placeholder="Street, building, floor"/>
         </div>
@@ -1137,6 +1154,7 @@ body.lang-ur .hero-content {
             <div class="yn-row"><span class="yn-label"><span data-he="">בדיקות מעבדה</span><span data-en="">Lab Tests</span></span><div class="chips yn-chips" data-field="lab"><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">פינויים</span><span data-en="">Evacuations</span></span><div class="chips yn-chips" data-field="evacuations"><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">ייעוץ אונליין</span><span data-en="">Online Consult</span></span><div class="chips yn-chips" data-field="online_consult"><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes + Digital Prescriptions">Yes + Rx</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label">Appointment Required</span><div class="chips yn-chips" data-field="appointment_required"><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="No">No</div></div></div>
           </div>
         </div>
         <div class="nav-btns">
@@ -1832,7 +1850,7 @@ var reqs={
     {id:'clinic_name'},{id:'medical_type'},
     {chips:'chips-spec'},{id:'hours'},{chips:'chips-days'},
     {yn:'hotel_visits'},{yn:'emergency'},{yn:'diagnostic'},
-    {yn:'lab'},{yn:'evacuations'},{yn:'online_consult'},
+    {yn:'lab'},{yn:'evacuations'},{yn:'online_consult'},{yn:'appointment_required'},
   ],
   3:[{id:'phone'},{id:'email'},{id:'currency'}],
 };
@@ -2085,13 +2103,14 @@ async function submitForm() {
     var city = document.getElementById('city').value;
     if (country) fd.append('country_en', country);
     if (city) fd.append('city_en', city);
-    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult'].forEach(function(f) {
+    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult','appointment_required'].forEach(function(f) {
       var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
       if (s) fd.append(f, s.getAttribute('data-val'));
     });
     document.querySelectorAll('#chips-spec .chip.sel').forEach(function(c){ fd.append('specialization', c.getAttribute('data-val')); });
     document.querySelectorAll('#chips-days .chip.sel').forEach(function(c){ fd.append('days', c.getAttribute('data-val')); });
     document.querySelectorAll('#chips-lang .chip.sel').forEach(function(c){ fd.append('languages', c.getAttribute('data-val')); });
+    document.querySelectorAll('#chips-area .chip.sel').forEach(function(c){ fd.append('area', c.getAttribute('data-val')); });
 
     var filesInp = document.getElementById('files-inp');
     if (filesInp && filesInp.files) {
@@ -2102,10 +2121,7 @@ async function submitForm() {
     var res = await fetch('https://safedoc-form.tal-997.workers.dev', {method:'POST', body:fd});
     var data = await res.json();
     if (res.status === 409) {
-      var dupMsg = lang==='he'
-        ? 'נראה שהמייל הזה כבר רשום אצלנו. לבירורים: info@safe-dr.com'
-        : 'This email is already registered. Contact us at info@safe-dr.com';
-      throw new Error(dupMsg);
+      throw new Error('This email has reached the maximum of 5 registrations. Contact us at info@safe-dr.com');
     }
     if (!res.ok || data.error) throw new Error(data.error || 'Server error');
 
