@@ -2118,7 +2118,7 @@ async function submitForm() {
       for (var i=0; i<maxF; i++) fd.append('files', filesInp.files[i]);
     }
 
-    var res = await fetch('https://safedoc-form.tal-997.workers.dev', {method:'POST', body:fd});
+    var res = await fetch(WORKER_URL, {method:'POST', body:fd});
     var data = await res.json();
     if (res.status === 409) {
       throw new Error('This email has reached the maximum of 5 registrations. Contact us at info@safe-dr.com');
@@ -2167,10 +2167,63 @@ function setupLiveValidation() {
   });
 }
 
+const WORKER_URL = 'https://safedoc-form.tal-997.workers.dev';
+
+async function loadDynamicOptions() {
+  try {
+    var cached = sessionStorage.getItem('safedoc_opts');
+    var data;
+    if (cached) {
+      var parsed = JSON.parse(cached);
+      if (Date.now() - parsed.ts < 3600000) { data = parsed.data; }
+    }
+    if (!data) {
+      var res = await fetch(WORKER_URL + '/options');
+      if (!res.ok) return;
+      data = await res.json();
+      sessionStorage.setItem('safedoc_opts', JSON.stringify({ data: data, ts: Date.now() }));
+    }
+    applyDynamicOptions(data);
+  } catch(e) { /* fail silently — static fallback remains */ }
+}
+
+function applyDynamicOptions(data) {
+  if (data.specialization && data.specialization.length) {
+    var specBox = document.getElementById('chips-spec');
+    if (specBox) {
+      specBox.innerHTML = data.specialization.map(function(v) {
+        return '<div class="chip" onclick="toggleChip(this)" data-val="' + v + '">' + v + '</div>';
+      }).join('');
+    }
+  }
+  if (data.medical_type && data.medical_type.length) {
+    var sel = document.getElementById('medical_type');
+    if (sel) {
+      var placeholder = sel.options[0];
+      sel.innerHTML = '';
+      sel.appendChild(placeholder);
+      data.medical_type.forEach(function(v) {
+        var o = document.createElement('option');
+        o.value = v; o.textContent = v;
+        sel.appendChild(o);
+      });
+    }
+  }
+  if (data.languages && data.languages.length) {
+    var langBox = document.getElementById('chips-lang');
+    if (langBox) {
+      langBox.innerHTML = data.languages.map(function(v) {
+        return '<div class="chip" onclick="toggleChip(this)" data-val="' + v + '">' + v + '</div>';
+      }).join('');
+    }
+  }
+}
+
 window.addEventListener('load', function() {
   populateCountries();
   detectLocation();
   detectBrowserLanguage();
+  loadDynamicOptions();
   restoreFormState();
   setupLiveValidation();
   var bio = document.getElementById('bio');
