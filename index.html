@@ -327,6 +327,10 @@ tr:hover td{background:#F8FCFF}
 .fgrow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
 .fgrow3{display:grid;grid-template-columns:1fr 1fr 95px;gap:.75rem}
 .priv{font-size:.7rem;color:#2563A8;margin-top:4px}
+.fdesc{font-size:.72rem;color:#3D6A96;margin-top:3px;line-height:1.5}
+.appt-row{display:flex;align-items:center;gap:8px;padding:.5rem 0;border-top:1px solid rgba(8,145,178,.1);margin-top:.25rem}
+.appt-row input[type=checkbox]{width:16px;height:16px;flex-shrink:0;accent-color:var(--green);cursor:pointer}
+.appt-row label{font-size:.78rem;font-weight:600;color:#0A2540;cursor:pointer}
 .upload{border:1px dashed rgba(8,145,178,.3);border-radius:8px;padding:1.2rem;text-align:center;background:rgba(8,145,178,.03);cursor:pointer;transition:all .2s;position:relative}
 .upload:hover{border-color:#0891B2;background:rgba(8,145,178,.07)}
 .upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
@@ -418,9 +422,6 @@ footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 
 /* hide/show by language */
 body.lang-he [data-en],
 body:not(.lang-he) [data-he]{ display:none !important }
-/* Form always in English regardless of language toggle */
-#join [data-he]{display:none!important}
-#join [data-en]{display:inline!important}
 
 
 
@@ -1055,17 +1056,8 @@ body.lang-ur .hero-content {
         </div>
         <div class="fg">
           <label>Main Area in City</label>
-          <div class="chips" id="chips-area">
-            <div class="chip" onclick="toggleChip(this)" data-val="City Center">City Center</div>
-            <div class="chip" onclick="toggleChip(this)" data-val="North">North</div>
-            <div class="chip" onclick="toggleChip(this)" data-val="South">South</div>
-            <div class="chip" onclick="toggleChip(this)" data-val="East">East</div>
-            <div class="chip" onclick="toggleChip(this)" data-val="West">West</div>
-            <div class="chip" onclick="toggleChip(this)" data-val="Airport Area">Airport Area</div>
-            <div class="chip" onclick="toggleChip(this)" data-val="Beach Area">Beach Area</div>
-            <div class="chip" onclick="toggleChip(this)" data-val="Old City">Old City</div>
-            <div class="chip" onclick="toggleChip(this)" data-val="Other">Other</div>
-          </div>
+          <div class="fdesc">Enter [if applicable] the area of your clinic or service. For example: City Center</div>
+          <input type="text" id="area"/>
         </div>
         <div class="fg">
           <label><span data-he="">כתובת מלאה</span><span data-en="">Full Address</span></label>
@@ -1094,6 +1086,7 @@ body.lang-ur .hero-content {
         </div>
         <div class="fg">
           <label><span data-he="">סוג רפואי</span><span data-en="">Medical Type</span> <span class="req">*</span></label>
+          <div class="fdesc">Select the primary type of your medical facility</div>
           <select id="medical_type">
             <option value=""><span data-he="">בחר סוג...</span><span data-en="">Select type...</span></option>
             <option>Hospital</option><option>Small Hospital</option><option>Clinic</option>
@@ -1104,6 +1097,7 @@ body.lang-ur .hero-content {
         </div>
         <div class="fg">
           <label><span data-he="">התמחות</span><span data-en="">Specialization</span> <span class="req">*</span></label>
+          <div class="fdesc">Select all medical services you provide</div>
           <div class="chips" id="chips-spec">
             <div class="chip" onclick="toggleChip(this)" data-val="General Clinic">General Clinic</div>
             <div class="chip" onclick="toggleChip(this)" data-val="Family Doctor">Family Doctor</div>
@@ -1154,7 +1148,10 @@ body.lang-ur .hero-content {
             <div class="yn-row"><span class="yn-label"><span data-he="">בדיקות מעבדה</span><span data-en="">Lab Tests</span></span><div class="chips yn-chips" data-field="lab"><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">פינויים</span><span data-en="">Evacuations</span></span><div class="chips yn-chips" data-field="evacuations"><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">ייעוץ אונליין</span><span data-en="">Online Consult</span></span><div class="chips yn-chips" data-field="online_consult"><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes + Digital Prescriptions">Yes + Rx</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="No">No</div></div></div>
-            <div class="yn-row"><span class="yn-label">Appointment Required</span><div class="chips yn-chips" data-field="appointment_required"><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="No">No</div></div></div>
+            <div class="appt-row">
+              <input type="checkbox" id="appointment_required">
+              <label for="appointment_required">Appointment Required</label>
+            </div>
           </div>
         </div>
         <div class="nav-btns">
@@ -1189,7 +1186,8 @@ body.lang-ur .hero-content {
           </div>
         </div>
         <div class="fg">
-          <label><span data-he="">עלויות</span><span data-en="">Fees</span> <span class="req">*</span></label>
+          <label><span data-he="">עלויות</span><span data-en="">Fees &amp; Pricing</span> <span class="req">*</span></label>
+          <div class="fdesc">Please describe in detail the fees you charge travelers referred to you — clinic visit, home/hotel visit, medications, tests, online consultation, and more. This helps us understand your fair pricing.</div>
           <div class="fgrow3">
             <div class="fg" style="margin:0">
               <label style="font-size:.62rem"><span data-he="">מרפאה</span><span data-en="">Clinic</span></label>
@@ -1850,7 +1848,7 @@ var reqs={
     {id:'clinic_name'},{id:'medical_type'},
     {chips:'chips-spec'},{id:'hours'},{chips:'chips-days'},
     {yn:'hotel_visits'},{yn:'emergency'},{yn:'diagnostic'},
-    {yn:'lab'},{yn:'evacuations'},{yn:'online_consult'},{yn:'appointment_required'},
+    {yn:'lab'},{yn:'evacuations'},{yn:'online_consult'},
   ],
   3:[{id:'phone'},{id:'email'},{id:'currency'}],
 };
@@ -2103,14 +2101,16 @@ async function submitForm() {
     var city = document.getElementById('city').value;
     if (country) fd.append('country_en', country);
     if (city) fd.append('city_en', city);
-    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult','appointment_required'].forEach(function(f) {
+    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult'].forEach(function(f) {
       var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
       if (s) fd.append(f, s.getAttribute('data-val'));
     });
+    fd.append('appointment_required', document.getElementById('appointment_required').checked ? 'true' : 'false');
     document.querySelectorAll('#chips-spec .chip.sel').forEach(function(c){ fd.append('specialization', c.getAttribute('data-val')); });
     document.querySelectorAll('#chips-days .chip.sel').forEach(function(c){ fd.append('days', c.getAttribute('data-val')); });
     document.querySelectorAll('#chips-lang .chip.sel').forEach(function(c){ fd.append('languages', c.getAttribute('data-val')); });
-    document.querySelectorAll('#chips-area .chip.sel').forEach(function(c){ fd.append('area', c.getAttribute('data-val')); });
+    var areaEl = document.getElementById('area');
+    if (areaEl && areaEl.value.trim()) fd.append('area', areaEl.value.trim());
 
     var filesInp = document.getElementById('files-inp');
     if (filesInp && filesInp.files) {
