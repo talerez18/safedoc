@@ -313,7 +313,7 @@ tr:hover td{background:#F8FCFF}
 .fstep-en{font-size:.78rem;font-weight:400;color:#5A90B8;margin-right:.5rem}
 .fstep-s{font-size:.75rem;color:#1E4A72;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(8,145,178,.15)}
 .fg{display:flex;flex-direction:column;gap:5px;margin-bottom:1rem}
-.fg label{font-size:.72rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#0A2540;margin-bottom:2px}
+.fg label{font-size:.78rem;font-weight:700;letter-spacing:.2px;color:#0A2540;margin-bottom:2px}
 .fg label .req{color:#0891B2}
 .fg input,.fg select,.fg textarea{
   background:#FFFFFF;border:1.5px solid #B0CCE0;border-radius:7px;
@@ -342,6 +342,23 @@ tr:hover td{background:#F8FCFF}
 .chip{padding:6px 14px;border-radius:6px;border:1.5px solid #B0D4E8;background:#EBF5FB;font-size:.78rem;font-weight:600;color:#0F2744;cursor:pointer;transition:all .15s;user-select:none}
 .chip:hover{border-color:#0891B2;color:#0369A1;background:#DCF0FA}
 .chip.sel{background:#DBEFFE;border-color:#0891B2;color:#0369A1;font-weight:700}
+.combo{position:relative;background:#F0F8FF;border:1.5px solid #B0D4E8;border-radius:8px;padding:.55rem .8rem;transition:all .15s}
+.combo:focus-within{border-color:#0891B2;background:#EAF6FD;box-shadow:0 0 0 3px rgba(8,145,178,.1)}
+.combo input{background:transparent;border:none;outline:none;width:100%;font-size:.86rem;color:#0A2540;padding:0;font-family:inherit}
+.combo input::placeholder{color:#7099B8}
+.combo.multi{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.combo.multi input{flex:1;min-width:120px}
+.combo-tags{display:flex;flex-wrap:wrap;gap:5px}
+.combo-tag{display:inline-flex;align-items:center;gap:6px;background:#DBEFFE;border:1px solid #0891B2;color:#0369A1;font-size:.74rem;font-weight:600;padding:3px 4px 3px 10px;border-radius:5px;line-height:1}
+.combo-tag.free{background:#FDF2E1;border-color:#D97706;color:#92400E}
+.combo-tag .x{cursor:pointer;font-weight:700;padding:0 6px;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;height:18px;width:18px;font-size:.78rem}
+.combo-tag .x:hover{background:rgba(0,0,0,.08)}
+.combo-list{position:absolute;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid #B0D4E8;border-radius:8px;max-height:220px;overflow-y:auto;z-index:10;box-shadow:0 8px 24px rgba(8,25,46,.12)}
+.combo-list[hidden]{display:none}
+.combo-item{padding:8px 12px;font-size:.82rem;color:#0A2540;cursor:pointer;border-bottom:1px solid #F0F8FF}
+.combo-item:last-child{border-bottom:none}
+.combo-item:hover,.combo-item.active{background:#EAF6FD;color:#0369A1}
+.combo-item .add-hint{font-size:.7rem;color:#92400E;float:right;font-weight:600}
 .nav-btns{display:flex;gap:.75rem;margin-top:1.5rem}
 .bbk{flex:1;padding:11px;background:#EBF5FB;border:1.5px solid #B0D4E8;border-radius:7px;font-family:'Heebo',sans-serif;font-size:.88rem;font-weight:700;color:#0F2744;cursor:pointer;transition:all .15s}
 .bbk:hover{border-color:#0891B2;color:#0369A1;background:#DCF0FA}
@@ -1040,52 +1057,40 @@ body.lang-ur .hero-content {
       <div class="fstep active" id="step1">
         <div class="fstep-h"><span data-he="">שלב 1 — מיקום</span><span data-en="">Step 1 — Location</span></div>
         <div class="fstep-s"><span data-he="">איפה נמצאת המרפאה?</span><span data-en="">Where is your clinic located?</span></div>
-        <div class="fgrow">
-          <div class="fg" style="margin:0">
-            <label><span data-he="">מדינה</span><span data-en="">Country</span> <span class="req">*</span></label>
-            <select id="country" onchange="filterCities(); applyCountryMeta(this.value)">
-              <option value="">Select country...</option>
-            </select>
-          </div>
-          <div class="fg" style="margin:0">
-            <label><span data-he="">עיר</span><span data-en="">City</span> <span class="req">*</span></label>
-            <select id="city">
-              <option value="">Select city...</option>
-            </select>
+        <div class="fg">
+          <label><span data-he="">מדינה</span><span data-en="">Country</span></label>
+          <div class="combo" id="country-combo">
+            <input type="text" id="country-input" autocomplete="off" placeholder="Type to search..."/>
+            <input type="hidden" id="country"/>
+            <div class="combo-list" id="country-list" hidden></div>
           </div>
         </div>
         <div class="fg">
-          <label>Main Area in City</label>
-          <div class="fdesc">Enter [if applicable] the area of your clinic or service. For example: City Center</div>
-          <input type="text" id="area"/>
+          <label><span data-he="">ערים</span><span data-en="">Cities</span></label>
+          <div class="combo multi" id="city-combo">
+            <div class="combo-tags" id="city-tags"></div>
+            <input type="text" id="city-input" autocomplete="off" placeholder="Type city name, press Enter to add..."/>
+            <div class="combo-list" id="city-list" hidden></div>
+          </div>
+          <div class="fdesc"><span data-he="">אפשר לבחור כמה ערים. אם העיר לא ברשימה — להקליד ולהקיש Enter.</span><span data-en="">You can pick multiple cities. If a city is not in the list, type it and press Enter.</span></div>
         </div>
         <div class="fg">
-          <label><span data-he="">כתובת מלאה</span><span data-en="">Full Address</span></label>
+          <label><span data-he="">כתובת מלאה</span><span data-en="">Full address</span></label>
           <input type="text" id="address"/>
         </div>
-        <div class="fg">
-          <label><span data-he="">לינק גוגל מפס</span><span data-en="">Google Maps Link</span></label>
-          <input type="url" id="maps_link"/>
-        </div>
-        <div class="nav-btns"><button class="bnxt" onclick="goStep(2)"><span data-he="">הבא — מרפאה ומומחיות ←</span><span data-en="">Next — Clinic &amp; Specialty →</span></button></div>
+        <div class="nav-btns"><button class="bnxt" onclick="goStep(2)"><span data-he="">הבא — מרפאה ומומחיות ←</span><span data-en="">Next — clinic &amp; specialty →</span></button></div>
       </div>
 
       <!-- STEP 2: Clinic & Specialty -->
       <div class="fstep" id="step2">
-        <div class="fstep-h"><span data-he="">שלב 2 — מרפאה ומומחיות</span><span data-en="">Step 2 — Clinic &amp; Specialty</span></div>
+        <div class="fstep-h"><span data-he="">שלב 2 — מרפאה ומומחיות</span><span data-en="">Step 2 — clinic &amp; specialty</span></div>
         <div class="fstep-s"><span data-he="">פרטי המרפאה והמומחיות הרפואית</span><span data-en="">Clinic details and medical expertise</span></div>
-        <div class="fgrow">
-          <div class="fg" style="margin:0">
-            <label><span data-he="">שם המרפאה</span><span data-en="">Clinic Name</span> <span class="req">*</span></label>
-            <input type="text" id="clinic_name"/>
-          </div>
-          <div class="fg" style="margin:0">
-            <label><span data-he="">שם נוסף</span><span data-en="">Secondary Name</span></label>
-            <input type="text" id="clinic_name2"/>
-          </div>
+        <div class="fg">
+          <label><span data-he="">שם המרפאה</span><span data-en="">Clinic name</span> <span class="req">*</span></label>
+          <input type="text" id="clinic_name"/>
         </div>
         <div class="fg">
-          <label><span data-he="">סוג רפואי</span><span data-en="">Medical Type</span> <span class="req">*</span></label>
+          <label><span data-he="">סוג רפואי</span><span data-en="">Medical type</span></label>
           <div class="fdesc">Select the primary type of your medical facility</div>
           <select id="medical_type">
             <option value="">Select type...</option>
@@ -1096,7 +1101,7 @@ body.lang-ur .hero-content {
           </select>
         </div>
         <div class="fg">
-          <label><span data-he="">התמחות</span><span data-en="">Specialization</span> <span class="req">*</span></label>
+          <label><span data-he="">התמחות</span><span data-en="">Specialization</span></label>
           <div class="fdesc">Select all medical services you provide</div>
           <div class="chips" id="chips-spec">
             <div class="chip" onclick="toggleChip(this)" data-val="General Clinic">General Clinic</div>
@@ -1123,11 +1128,11 @@ body.lang-ur .hero-content {
         </div>
         <div class="fgrow">
           <div class="fg" style="margin:0">
-            <label><span data-he="">שעות פעילות</span><span data-en="">Operating Hours</span> <span class="req">*</span></label>
+            <label><span data-he="">שעות פעילות</span><span data-en="">Operating hours</span></label>
             <textarea id="hours" style="min-height:62px"></textarea>
           </div>
           <div class="fg" style="margin:0">
-            <label><span data-he="">ימי פעילות</span><span data-en="">Active Days</span> <span class="req">*</span></label>
+            <label><span data-he="">ימי פעילות</span><span data-en="">Active days</span></label>
             <div class="chips" id="chips-days" style="flex-wrap:wrap;gap:.35rem">
               <div class="chip" onclick="toggleChip(this)" data-val="א">Sun</div>
               <div class="chip" onclick="toggleChip(this)" data-val="ב">Mon</div>
@@ -1140,29 +1145,26 @@ body.lang-ur .hero-content {
           </div>
         </div>
         <div class="fg">
-          <label><span data-he="">שירותים</span><span data-en="">Services</span> <span class="req">*</span></label>
+          <label><span data-he="">שירותים</span><span data-en="">Services</span></label>
           <div style="margin-top:.5rem">
-            <div class="yn-row"><span class="yn-label"><span data-he="">ביקורי בית / מלון</span><span data-en="">Home / Hotel Visits</span></span><div class="chips yn-chips" data-field="hotel_visits"><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="No">No</div></div></div>
-            <div class="yn-row"><span class="yn-label"><span data-he="">חירום 24/7</span><span data-en="">24/7 Emergency</span></span><div class="chips yn-chips" data-field="emergency"><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="No">No</div></div></div>
-            <div class="yn-row"><span class="yn-label"><span data-he="">בדיקות אבחנתיות</span><span data-en="">Diagnostic Tests</span></span><div class="chips yn-chips" data-field="diagnostic"><div class="chip yn" onclick="toggleYN(this,'diagnostic')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'diagnostic')" data-val="No">No</div></div></div>
-            <div class="yn-row"><span class="yn-label"><span data-he="">בדיקות מעבדה</span><span data-en="">Lab Tests</span></span><div class="chips yn-chips" data-field="lab"><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">ביקורי בית / מלון</span><span data-en="">Home / hotel visits</span></span><div class="chips yn-chips" data-field="hotel_visits"><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">חירום 24/7</span><span data-en="">24/7 emergency</span></span><div class="chips yn-chips" data-field="emergency"><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">בדיקות אבחנתיות</span><span data-en="">Diagnostic tests</span></span><div class="chips yn-chips" data-field="diagnostic"><div class="chip yn" onclick="toggleYN(this,'diagnostic')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'diagnostic')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">בדיקות מעבדה</span><span data-en="">Lab tests</span></span><div class="chips yn-chips" data-field="lab"><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">פינויים</span><span data-en="">Evacuations</span></span><div class="chips yn-chips" data-field="evacuations"><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="No">No</div></div></div>
-            <div class="yn-row"><span class="yn-label"><span data-he="">ייעוץ אונליין</span><span data-en="">Online Consult</span></span><div class="chips yn-chips" data-field="online_consult"><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes + Digital Prescriptions">Yes + Rx</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="No">No</div></div></div>
-            <div class="appt-row">
-              <input type="checkbox" id="appointment_required">
-              <label for="appointment_required">Appointment Required</label>
-            </div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">ייעוץ אונליין</span><span data-en="">Online consult</span></span><div class="chips yn-chips" data-field="online_consult"><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes + Digital Prescriptions">Yes + Rx</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">תיאום תור מראש?</span><span data-en="">Appointment required?</span></span><div class="chips yn-chips" data-field="appointment_required"><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="No">No</div></div></div>
           </div>
         </div>
         <div class="nav-btns">
           <button class="bbk" onclick="goStep(1)"><span data-he="">← חזור</span><span data-en="">← Back</span></button>
-          <button class="bnxt" onclick="goStep(3)"><span data-he="">הבא — קשר ועלויות ←</span><span data-en="">Next — Contact &amp; Pricing →</span></button>
+          <button class="bnxt" onclick="goStep(3)"><span data-he="">הבא — קשר ועלויות ←</span><span data-en="">Next — contact &amp; pricing →</span></button>
         </div>
       </div>
 
       <!-- STEP 3: Contact & Pricing -->
       <div class="fstep" id="step3">
-        <div class="fstep-h"><span data-he="">שלב 3 — קשר ועלויות</span><span data-en="">Step 3 — Contact &amp; Pricing</span></div>
+        <div class="fstep-h"><span data-he="">שלב 3 — קשר ועלויות</span><span data-en="">Step 3 — contact &amp; pricing</span></div>
         <div class="fstep-s"><span data-he="">פרטי יצירת קשר ועלויות</span><span data-en="">Contact details and consultation fees</span></div>
         <div class="fgrow">
           <div class="fg" style="margin:0">
@@ -1170,13 +1172,13 @@ body.lang-ur .hero-content {
             <input type="tel" id="phone"/>
           </div>
           <div class="fg" style="margin:0">
-            <label><span data-he="">טלפון משרד</span><span data-en="">Office Phone</span></label>
+            <label><span data-he="">טלפון משרד</span><span data-en="">Office phone</span></label>
             <input type="tel" id="office_phone"/>
           </div>
         </div>
         <div class="fgrow">
           <div class="fg" style="margin:0">
-            <label><span data-he="">אימייל</span><span data-en="">Email</span> <span class="req">*</span></label>
+            <label><span data-he="">אימייל</span><span data-en="">Email</span></label>
             <input type="email" id="email"/>
             <div class="priv"><span data-he="">🔒 לשימוש פנימי בלבד</span><span data-en="">🔒 Internal use only</span></div>
           </div>
@@ -1186,7 +1188,7 @@ body.lang-ur .hero-content {
           </div>
         </div>
         <div class="fg">
-          <label><span data-he="">עלויות</span><span data-en="">Fees &amp; Pricing</span> <span class="req">*</span></label>
+          <label><span data-he="">עלויות</span><span data-en="">Fees &amp; pricing</span></label>
           <div class="fdesc">Please describe in detail the fees you charge travelers referred to you — clinic visit, home/hotel visit, medications, tests, online consultation, and more. This helps us understand your fair pricing.</div>
           <div class="fgrow3">
             <div class="fg" style="margin:0">
@@ -1194,7 +1196,7 @@ body.lang-ur .hero-content {
               <input type="number" id="fee_clinic" min="0"/>
             </div>
             <div class="fg" style="margin:0">
-              <label style="font-size:.62rem"><span data-he="">ביקור בית/מלון</span><span data-en="">Home/Hotel</span></label>
+              <label style="font-size:.62rem"><span data-he="">ביקור בית/מלון</span><span data-en="">Home/hotel</span></label>
               <input type="number" id="fee_hotel" min="0"/>
             </div>
             <div class="fg" style="margin:0">
@@ -1205,7 +1207,7 @@ body.lang-ur .hero-content {
         </div>
         <div class="fgrow">
           <div class="fg" style="margin:0">
-            <label><span data-he="">מטבע</span><span data-en="">Currency</span> <span class="req">*</span></label>
+            <label><span data-he="">מטבע</span><span data-en="">Currency</span></label>
             <select id="currency">
               <option value="">Select...</option>
               <option>US Dollar (USD)</option><option>Euro (EUR)</option><option>British Pound (GBP)</option>
@@ -1227,26 +1229,30 @@ body.lang-ur .hero-content {
             </select>
           </div>
           <div class="fg" style="margin:0">
-            <label><span data-he="">תיאור עלויות</span><span data-en="">Fee Description</span></label>
+            <label><span data-he="">תיאור עלויות</span><span data-en="">Fee description</span></label>
             <textarea id="fee_description" style="min-height:62px"></textarea>
           </div>
         </div>
         <div class="nav-btns">
           <button class="bbk" onclick="goStep(2)"><span data-he="">← חזור</span><span data-en="">← Back</span></button>
-          <button class="bnxt" onclick="goStep(4)"><span data-he="">הבא — אודות ומסמכים ←</span><span data-en="">Next — About &amp; Docs →</span></button>
+          <button class="bnxt" onclick="goStep(4)"><span data-he="">הבא — אודות ומסמכים ←</span><span data-en="">Next — about &amp; docs →</span></button>
         </div>
       </div>
 
       <!-- STEP 4: About & Documents -->
       <div class="fstep" id="step4">
-        <div class="fstep-h"><span data-he="">שלב 4 — אודות ומסמכים</span><span data-en="">Step 4 — About &amp; Documents</span></div>
+        <div class="fstep-h"><span data-he="">שלב 4 — אודות ומסמכים</span><span data-en="">Step 4 — about &amp; documents</span></div>
         <div class="fstep-s"><span data-he="">קצת עליך ומסמכים רלוונטיים</span><span data-en="">Tell us about yourself and upload documents</span></div>
         <div class="fg">
-          <label><span data-he="">אודות המרפאה</span><span data-en="">About the Clinic</span> <span class="req">*</span></label>
+          <label><span data-he="">אודות המרפאה</span><span data-en="">About the clinic</span></label>
           <textarea id="about_clinic" style="min-height:90px"></textarea>
         </div>
         <div class="fg">
-          <label><span data-he="">שפות</span><span data-en="">Languages Spoken</span> <span class="req">*</span></label>
+          <label><span data-he="">לינק גוגל מפס [אופציונלי]</span><span data-en="">Google Maps Link [OPTION]</span></label>
+          <input type="url" id="maps_link"/>
+        </div>
+        <div class="fg">
+          <label><span data-he="">שפות</span><span data-en="">Languages spoken</span></label>
           <div class="chips" id="chips-lang">
             <div class="chip" onclick="toggleChip(this)" data-val="English">English</div>
             <div class="chip" onclick="toggleChip(this)" data-val="Hebrew">Hebrew</div>
@@ -1279,16 +1285,16 @@ body.lang-ur .hero-content {
           </div>
         </div>
         <div class="fg">
-          <label><span data-he="">מסמכים (עד 3 קבצים)</span><span data-en="">Documents (up to 3 files)</span></label>
+          <label><span data-he="">מסמכים</span><span data-en="">Documents</span></label>
           <div class="upload" onclick="document.getElementById('files-inp').click()" style="cursor:pointer">
             <input type="file" id="files-inp" accept="image/*,.pdf" multiple style="display:none" onchange="showFiles(this)">
             <div class="uico">📎</div>
-            <div class="utxt"><span data-he="">רישיון רפואי, תמונת פרופיל, ביטוח מקצועי</span><span data-en="">Medical license, profile photo, insurance policy</span><br><strong><span data-he="">לחץ להעלאה</span><span data-en="">Click to upload</span></strong> — <span data-he="">עד 3 קבצים, PDF או תמונה</span><span data-en="">up to 3 files, PDF or image</span></div>
+            <div class="utxt"><span data-he="">אנא צרף תעודת רישיון רפואי</span><span data-en="">Please attach Medical License Certificate</span><br><strong><span data-he="">לחץ להעלאה</span><span data-en="">Click to upload</span></strong></div>
             <div class="ufn" id="files-fn"></div>
           </div>
         </div>
         <div class="fg">
-          <label><span data-he="">הערות ושאלות</span><span data-en="">Notes &amp; Questions</span></label>
+          <label><span data-he="">הערות ושאלות</span><span data-en="">Notes &amp; questions</span></label>
           <textarea id="notes" style="min-height:65px"></textarea>
         </div>
         <div class="terms-row">
@@ -1297,7 +1303,7 @@ body.lang-ur .hero-content {
         </div>
         <div class="nav-btns">
           <button class="bbk" onclick="goStep(3)"><span data-he="">← חזור</span><span data-en="">← Back</span></button>
-          <button class="bnxt" id="submit-btn" onclick="submitForm()"><span data-he="">שלח בקשת הצטרפות ✚</span><span data-en="">Submit Application ✚</span></button>
+          <button class="bnxt" id="submit-btn" onclick="submitForm()"><span data-he="">שלח בקשת הצטרפות ✚</span><span data-en="">Submit application ✚</span></button>
         </div>
         <div class="fnote"><span data-he="">נחזור אליך תוך 48 שעות</span><span data-en="">We'll get back to you within 48 hours</span></div>
         <div id="submit-error" style="display:none;color:#ef4444;font-size:.8rem;margin-top:.5rem;text-align:center"></div>
@@ -1306,7 +1312,7 @@ body.lang-ur .hero-content {
       <!-- SUCCESS -->
       <div class="success-scr" id="success-scr">
         <div style="font-size:2.5rem">✦</div>
-        <h3><span data-he="">הבקשה התקבלה!</span><span data-en="">Application Received!</span></h3>
+        <h3><span data-he="">הבקשה התקבלה!</span><span data-en="">Application received!</span></h3>
         <p><span data-he="">ברוך הבא למשפחת Safe Doc.<br>נחזור אליך תוך 48 שעות לשיחת היכרות קצרה.</span><span data-en="">Welcome to the Safe Doc family.<br>We'll be in touch within 48 hours for a short intro call.</span></p>
       </div>
     </div>
@@ -1698,57 +1704,12 @@ function setLang(lang){
   const bio=document.getElementById('bio');
   if(bio)bio.placeholder=bio.getAttribute('data-'+lang+'-placeholder')||'...';
 }
-// ── Country → Cities mapping ────────────────────────────────────────────────
-const COUNTRY_CITIES = {
-  'Thailand':       ['Bangkok','Chiang Mai','Phuket','Koh Samui','Pattaya','Krabi','Hua Hin','Chiang Rai','Koh Phangan','Koh Tao'],
-  'Spain':          ['Barcelona','Madrid','Valencia','Seville','Malaga','Ibiza','Majorca','Tenerife','Gran Canaria','Lanzarote'],
-  'Greece':         ['Athens','Thessaloniki','Santorini','Mykonos','Rhodes','Crete','Corfu','Zakynthos','Kefalonia','Paros'],
-  'Italy':          ['Rome','Milan','Florence','Venice','Naples','Amalfi','Positano','Sardinia','Sicily','Turin'],
-  'Portugal':       ['Lisbon','Porto','Faro','Algarve','Madeira','Azores','Cascais','Sintra','Braga','Setubal'],
-  'France':         ['Paris','Nice','Marseille','Lyon','Cannes','Monaco','Bordeaux','Strasbourg','Toulouse','Biarritz'],
-  'Germany':        ['Berlin','Munich','Hamburg','Frankfurt','Cologne','Stuttgart','Dusseldorf','Dresden','Leipzig','Nuremberg'],
-  'Austria':        ['Vienna','Salzburg','Innsbruck','Graz','Linz','Klagenfurt'],
-  'Switzerland':    ['Zurich','Geneva','Basel','Bern','Lucerne','Interlaken','Zermatt','Lausanne'],
-  'Netherlands':    ['Amsterdam','Rotterdam','The Hague','Utrecht','Eindhoven','Maastricht'],
-  'Belgium':        ['Brussels','Bruges','Antwerp','Ghent','Liege'],
-  'Czech Republic': ['Prague','Brno','Ostrava','Plzen','Karlovy Vary'],
-  'Hungary':        ['Budapest','Debrecen','Miskolc','Pecs'],
-  'Poland':         ['Warsaw','Krakow','Gdansk','Wroclaw','Poznan'],
-  'Romania':        ['Bucharest','Cluj-Napoca','Timisoara','Iasi','Constanta'],
-  'Bulgaria':       ['Sofia','Plovdiv','Varna','Burgas','Sozopol'],
-  'Croatia':        ['Zagreb','Split','Dubrovnik','Zadar','Hvar','Korcula'],
-  'Turkey':         ['Istanbul','Antalya','Bodrum','Izmir','Cappadocia','Ankara','Alanya','Fethiye','Marmaris'],
-  'Egypt':          ['Cairo','Sharm El Sheikh','Hurghada','Luxor','Alexandria','Dahab'],
-  'Morocco':        ['Marrakesh','Casablanca','Fes','Agadir','Tangier','Rabat','Essaouira'],
-  'Jordan':         ['Amman','Petra','Aqaba','Dead Sea','Wadi Rum'],
-  'Israel':         ['Tel Aviv','Jerusalem','Eilat','Haifa','Netanya','Herzliya','Tiberias','Dead Sea'],
-  'UAE':            ['Dubai','Abu Dhabi','Sharjah','Ajman','Ras Al Khaimah'],
-  'India':          ['Mumbai','Delhi','Goa','Jaipur','Bangalore','Kolkata','Chennai','Agra','Kerala','Rishikesh'],
-  'Nepal':          ['Kathmandu','Pokhara','Chitwan','Lumbini'],
-  'Sri Lanka':      ['Colombo','Kandy','Galle','Sigiriya','Ella','Mirissa'],
-  'Vietnam':        ['Hanoi','Ho Chi Minh City','Hoi An','Da Nang','Nha Trang','Phu Quoc','Hue','Sa Pa'],
-  'Cambodia':       ['Phnom Penh','Siem Reap','Sihanoukville','Battambang'],
-  'Indonesia':      ['Bali','Jakarta','Lombok','Yogyakarta','Komodo','Flores','Gili Islands'],
-  'Philippines':    ['Manila','Cebu','Palawan','Boracay','Siargao','Davao'],
-  'Japan':          ['Tokyo','Osaka','Kyoto','Hiroshima','Sapporo','Nara','Fukuoka','Okinawa'],
-  'South Korea':    ['Seoul','Busan','Jeju Island','Gyeongju','Incheon'],
-  'China':          ['Beijing','Shanghai','Chengdu','Guilin','Xian','Shenzhen','Hong Kong','Macau'],
-  'Australia':      ['Sydney','Melbourne','Brisbane','Perth','Cairns','Adelaide','Gold Coast','Byron Bay'],
-  'New Zealand':    ['Auckland','Wellington','Queenstown','Christchurch','Rotorua'],
-  'USA':            ['New York','Los Angeles','Miami','Las Vegas','San Francisco','Chicago','New Orleans','Orlando','Hawaii','Seattle'],
-  'Canada':         ['Toronto','Vancouver','Montreal','Calgary','Quebec City','Banff','Whistler'],
-  'Mexico':         ['Cancun','Mexico City','Los Cabos','Playa del Carmen','Puerto Vallarta','Tulum','Oaxaca'],
-  'Costa Rica':     ['San Jose','Manuel Antonio','Monteverde','Arenal','Tamarindo','Puerto Viejo'],
-  'Peru':           ['Lima','Cusco','Machu Picchu','Arequipa','Lake Titicaca'],
-  'Colombia':       ['Bogota','Medellin','Cartagena','Cali','Santa Marta'],
-  'Brazil':         ['Rio de Janeiro','Sao Paulo','Salvador','Florianopolis','Foz do Iguacu','Fortaleza'],
-  'Argentina':      ['Buenos Aires','Bariloche','Mendoza','Salta','El Calafate'],
-  'South Africa':   ['Cape Town','Johannesburg','Durban','Kruger','Stellenbosch','Garden Route'],
-  'Kenya':          ['Nairobi','Mombasa','Maasai Mara','Zanzibar','Kilimanjaro'],
-  'Other':          ['Other'],
-};
+// ── Dynamic country/city lists (populated from /options) ─────────────────────
+var COUNTRY_LIST = [];
+var CITY_LIST = [];
+var CITY_STATE = { list: [], free: [] };
 
-// ── Country meta: phone code + currency ──────────────────────────────────────
+// ── Country meta: phone code + currency (static fallback) ────────────────────
 const COUNTRY_META = {
   'Thailand':{'dial':'+66','cur':'Thai Baht (THB)'},
   'Spain':{'dial':'+34','cur':'Euro (EUR)'},
@@ -1797,31 +1758,164 @@ const COUNTRY_META = {
   'Kenya':{'dial':'+254','cur':'Other'},
 };
 
-function populateCountries() {
-  var sel = document.getElementById('country');
-  if (!sel) return;
-  Object.keys(COUNTRY_CITIES).forEach(function(c) {
-    var o = document.createElement('option');
-    o.value = c;
-    o.textContent = c;
-    sel.appendChild(o);
+// ── Combobox helpers (DOM-only, no innerHTML with user content) ──────────────
+function makeItem(text, onClick, hint) {
+  var d = document.createElement('div');
+  d.className = 'combo-item';
+  d.textContent = text;
+  if (hint) {
+    var h = document.createElement('span');
+    h.className = 'add-hint';
+    h.textContent = hint;
+    d.appendChild(h);
+  }
+  d.addEventListener('click', onClick);
+  return d;
+}
+function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
+
+// ── Country combobox (single-select with autocomplete) ───────────────────────
+function setupCountryCombo() {
+  var input = document.getElementById('country-input');
+  var hidden = document.getElementById('country');
+  var list = document.getElementById('country-list');
+  if (!input || !hidden || !list) return;
+
+  function renderList(filter) {
+    var q = (filter || '').trim().toLowerCase();
+    var items = COUNTRY_LIST;
+    if (q) {
+      var starts = items.filter(function(c){ return c.toLowerCase().indexOf(q) === 0; });
+      var includes = items.filter(function(c){ return c.toLowerCase().indexOf(q) > 0; });
+      items = starts.concat(includes);
+    }
+    clear(list);
+    if (!items.length) { list.hidden = true; return; }
+    items.slice(0, 50).forEach(function(c) {
+      list.appendChild(makeItem(c, function(){ selectCountry(c); }));
+    });
+    list.hidden = false;
+  }
+
+  function selectCountry(val) {
+    input.value = val;
+    hidden.value = val;
+    list.hidden = true;
+    applyCountryMeta(val);
+  }
+
+  input.addEventListener('focus', function(){ renderList(input.value); });
+  input.addEventListener('input', function() {
+    hidden.value = '';
+    renderList(input.value);
+  });
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { list.hidden = true; }
+    else if (e.key === 'Enter') {
+      e.preventDefault();
+      var first = list.querySelector('.combo-item');
+      if (first) first.click();
+    }
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#country-combo')) list.hidden = true;
   });
 }
 
-function filterCities() {
-  var country = document.getElementById('country').value;
-  var cityEl = document.getElementById('city');
-  while (cityEl.firstChild) cityEl.removeChild(cityEl.firstChild);
-  var placeholder = document.createElement('option');
-  placeholder.value = '';
-  placeholder.textContent = '- City -';
-  cityEl.appendChild(placeholder);
-  var cities = COUNTRY_CITIES[country] || [];
-  cities.forEach(function(c) {
-    var o = document.createElement('option');
-    o.value = c;
-    o.textContent = c;
-    cityEl.appendChild(o);
+// ── City combobox (multi-select with autocomplete + free text) ───────────────
+function setupCityCombo() {
+  var input = document.getElementById('city-input');
+  var list = document.getElementById('city-list');
+  var tags = document.getElementById('city-tags');
+  if (!input || !list || !tags) return;
+
+  function makeTag(text, source, idx) {
+    var span = document.createElement('span');
+    span.className = 'combo-tag' + (source === 'free' ? ' free' : '');
+    span.textContent = text;
+    var x = document.createElement('span');
+    x.className = 'x';
+    x.textContent = '×';
+    x.addEventListener('click', function(){ removeCityTag(source, idx); });
+    span.appendChild(x);
+    return span;
+  }
+
+  function renderTags() {
+    clear(tags);
+    CITY_STATE.list.forEach(function(c, i){ tags.appendChild(makeTag(c, 'list', i)); });
+    CITY_STATE.free.forEach(function(c, i){ tags.appendChild(makeTag(c, 'free', i)); });
+  }
+  window.refreshCityTags = renderTags;
+
+  function renderList(filter) {
+    var q = (filter || '').trim().toLowerCase();
+    var taken = CITY_STATE.list.concat(CITY_STATE.free).map(function(s){ return s.toLowerCase(); });
+    var available = CITY_LIST.filter(function(c){ return taken.indexOf(c.toLowerCase()) === -1; });
+    var items = available;
+    if (q) {
+      var starts = items.filter(function(c){ return c.toLowerCase().indexOf(q) === 0; });
+      var includes = items.filter(function(c){ return c.toLowerCase().indexOf(q) > 0; });
+      items = starts.concat(includes);
+    }
+    clear(list);
+    items.slice(0, 50).forEach(function(c) {
+      list.appendChild(makeItem(c, function(){ addListCity(c); }));
+    });
+    if (q && items.length === 0 && taken.indexOf(q) === -1) {
+      var lang = document.body.className.replace('lang-','');
+      var hint = '+ ' + (lang === 'he' ? 'הוסף עיר חופשית' : 'Add as custom city');
+      list.appendChild(makeItem('"' + filter.trim() + '"', function(){ addFreeCity(filter.trim()); }, hint));
+    }
+    list.hidden = list.childNodes.length === 0;
+  }
+
+  function addListCity(val) {
+    if (!val) return;
+    var taken = CITY_STATE.list.concat(CITY_STATE.free).map(function(s){ return s.toLowerCase(); });
+    if (taken.indexOf(val.toLowerCase()) !== -1) return;
+    CITY_STATE.list.push(val);
+    input.value = '';
+    renderTags();
+    renderList('');
+    input.focus();
+  }
+  function addFreeCity(val) {
+    if (!val) return;
+    var taken = CITY_STATE.list.concat(CITY_STATE.free).map(function(s){ return s.toLowerCase(); });
+    if (taken.indexOf(val.toLowerCase()) !== -1) return;
+    var match = CITY_LIST.find(function(c){ return c.toLowerCase() === val.toLowerCase(); });
+    if (match) CITY_STATE.list.push(match);
+    else CITY_STATE.free.push(val);
+    input.value = '';
+    renderTags();
+    renderList('');
+    input.focus();
+  }
+  function removeCityTag(source, idx) {
+    if (source === 'list') CITY_STATE.list.splice(idx, 1);
+    else CITY_STATE.free.splice(idx, 1);
+    renderTags();
+  }
+
+  input.addEventListener('focus', function(){ renderList(input.value); });
+  input.addEventListener('input', function(){ renderList(input.value); });
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { list.hidden = true; }
+    else if (e.key === 'Enter') {
+      e.preventDefault();
+      var v = input.value.trim();
+      if (!v) return;
+      var match = CITY_LIST.find(function(c){ return c.toLowerCase() === v.toLowerCase(); });
+      if (match) addListCity(match);
+      else addFreeCity(v);
+    } else if (e.key === 'Backspace' && !input.value) {
+      if (CITY_STATE.free.length) { CITY_STATE.free.pop(); renderTags(); }
+      else if (CITY_STATE.list.length) { CITY_STATE.list.pop(); renderTags(); }
+    }
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#city-combo')) list.hidden = true;
   });
 }
 
@@ -1843,14 +1937,9 @@ function applyCountryMeta(country) {
 // ── Form validation ───────────────────────────────────────────────────────────
 var cur=1;
 var reqs={
-  1:[{id:'country'},{id:'city'}],
-  2:[
-    {id:'clinic_name'},{id:'medical_type'},
-    {chips:'chips-spec'},{id:'hours'},{chips:'chips-days'},
-    {yn:'hotel_visits'},{yn:'emergency'},{yn:'diagnostic'},
-    {yn:'lab'},{yn:'evacuations'},{yn:'online_consult'},
-  ],
-  3:[{id:'phone'},{id:'email'},{id:'currency'}],
+  1:[],
+  2:[{id:'clinic_name'}],
+  3:[{id:'phone'}],
 };
 
 function markError(el) { el.style.outline='2px solid #f87171'; }
@@ -1950,16 +2039,18 @@ function showFiles(inp) {
 function saveFormState() {
   try {
     var state = { step: cur };
-    ['clinic_name','clinic_name2','address','maps_link','phone','office_phone',
+    ['clinic_name','address','maps_link','phone','office_phone',
      'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online',
-     'fee_description','notes','country','city','medical_type','currency'].forEach(function(id) {
+     'fee_description','notes','country','medical_type','currency'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) state[id] = el.value;
     });
+    state.cities_list = CITY_STATE.list.slice();
+    state.cities_free = CITY_STATE.free.slice();
     state.spec = Array.from(document.querySelectorAll('#chips-spec .chip.sel')).map(function(c){return c.getAttribute('data-val');});
     state.days = Array.from(document.querySelectorAll('#chips-days .chip.sel')).map(function(c){return c.getAttribute('data-val');});
     state.lang = Array.from(document.querySelectorAll('#chips-lang .chip.sel')).map(function(c){return c.getAttribute('data-val');});
-    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult'].forEach(function(f) {
+    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult','appointment_required'].forEach(function(f) {
       var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
       if (s) state['yn_'+f] = s.getAttribute('data-val');
     });
@@ -1968,21 +2059,26 @@ function saveFormState() {
 }
 
 function applyDraft(state) {
-  ['clinic_name','clinic_name2','address','maps_link','phone','office_phone',
+  ['clinic_name','address','maps_link','phone','office_phone',
    'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online',
    'fee_description','notes','medical_type','currency'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el && state[id]) el.value = state[id];
   });
   if (state.country) {
-    document.getElementById('country').value = state.country;
-    filterCities();
-    if (state.city) document.getElementById('city').value = state.city;
+    var hidden = document.getElementById('country');
+    var inp = document.getElementById('country-input');
+    if (hidden) hidden.value = state.country;
+    if (inp) inp.value = state.country;
+    applyCountryMeta(state.country);
   }
+  if (state.cities_list) CITY_STATE.list = state.cities_list.slice();
+  if (state.cities_free) CITY_STATE.free = state.cities_free.slice();
+  if (typeof window.refreshCityTags === 'function') window.refreshCityTags();
   if (state.spec) state.spec.forEach(function(v){ var c=document.querySelector('#chips-spec .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
   if (state.days) state.days.forEach(function(v){ var c=document.querySelector('#chips-days .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
   if (state.lang) state.lang.forEach(function(v){ var c=document.querySelector('#chips-lang .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
-  ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult'].forEach(function(f) {
+  ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult','appointment_required'].forEach(function(f) {
     var v = state['yn_'+f];
     if (v) { var c=document.querySelector('.yn-chips[data-field="'+f+'"] .chip[data-val="'+v+'"]'); if(c) toggleYN(c,f); }
   });
@@ -2045,13 +2141,18 @@ async function detectLocation() {
     var data = await res.json();
     var nameMap = {'United States':'USA','United States of America':'USA','United Arab Emirates':'UAE'};
     var country = nameMap[data.country_name] || data.country_name;
-    if (!COUNTRY_CITIES[country]) return;
-    document.getElementById('country').value = country;
-    filterCities();
+    if (!COUNTRY_LIST.length || COUNTRY_LIST.indexOf(country) === -1) return;
+    var hidden = document.getElementById('country');
+    var inp = document.getElementById('country-input');
+    if (hidden) hidden.value = country;
+    if (inp && !inp.value) inp.value = country;
     applyCountryMeta(country);
-    if (data.city) {
-      var match = COUNTRY_CITIES[country].find(function(c){ return c.toLowerCase()===data.city.toLowerCase(); });
-      if (match) document.getElementById('city').value = match;
+    if (data.city && CITY_LIST.length) {
+      var match = CITY_LIST.find(function(c){ return c.toLowerCase()===data.city.toLowerCase(); });
+      if (match && CITY_STATE.list.indexOf(match) === -1) {
+        CITY_STATE.list.push(match);
+        if (typeof window.refreshCityTags === 'function') window.refreshCityTags();
+      }
     }
   } catch(e){}
 }
@@ -2059,19 +2160,6 @@ async function detectLocation() {
 // ── Submit ────────────────────────────────────────────────────────────────────
 async function submitForm() {
   var lang = document.body.className.replace('lang-','');
-
-  // Validate step 4
-  var aboutEl = document.getElementById('about_clinic');
-  var langBox = document.getElementById('chips-lang');
-  var s4ok = true;
-  if (!aboutEl || !aboutEl.value.trim()) { if(aboutEl) markError(aboutEl); s4ok=false; }
-  else clearError(aboutEl);
-  if (langBox && !langBox.querySelector('.chip.sel')) { langBox.style.outline='2px solid #f87171'; s4ok=false; }
-  else if (langBox) langBox.style.outline='';
-  if (!s4ok) {
-    alert(lang==='he'?'אנא מלא את כל שדות החובה':'Please fill in all required fields');
-    return;
-  }
 
   if (!document.getElementById('terms').checked) {
     alert(lang==='he' ? 'יש לאשר את תנאי השימוש' : 'Please accept the Terms of Service');
@@ -2087,7 +2175,7 @@ async function submitForm() {
   try {
     var fd = new FormData();
 
-    ['clinic_name','clinic_name2','address','maps_link','phone','office_phone',
+    ['clinic_name','address','maps_link','phone','office_phone',
      'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online',
      'fee_description','notes'].forEach(function(k) {
       var el = document.getElementById(k);
@@ -2098,19 +2186,16 @@ async function submitForm() {
       if (el && el.value) fd.append(k, el.value);
     });
     var country = document.getElementById('country').value;
-    var city = document.getElementById('city').value;
     if (country) fd.append('country_en', country);
-    if (city) fd.append('city_en', city);
-    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult'].forEach(function(f) {
+    CITY_STATE.list.forEach(function(c){ fd.append('city_en', c); });
+    if (CITY_STATE.free.length) fd.append('city_freetext', CITY_STATE.free.join(', '));
+    ['hotel_visits','emergency','diagnostic','lab','evacuations','online_consult','appointment_required'].forEach(function(f) {
       var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
       if (s) fd.append(f, s.getAttribute('data-val'));
     });
-    fd.append('appointment_required', document.getElementById('appointment_required').checked ? 'true' : 'false');
     document.querySelectorAll('#chips-spec .chip.sel').forEach(function(c){ fd.append('specialization', c.getAttribute('data-val')); });
     document.querySelectorAll('#chips-days .chip.sel').forEach(function(c){ fd.append('days', c.getAttribute('data-val')); });
     document.querySelectorAll('#chips-lang .chip.sel').forEach(function(c){ fd.append('languages', c.getAttribute('data-val')); });
-    var areaEl = document.getElementById('area');
-    if (areaEl && areaEl.value.trim()) fd.append('area', areaEl.value.trim());
 
     var filesInp = document.getElementById('files-inp');
     if (filesInp && filesInp.files) {
@@ -2149,7 +2234,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 });
 // ── Live validation (D): green border on valid fields, no red while typing ────
 function setupLiveValidation() {
-  var ids = ['country','city','clinic_name','medical_type','hours','phone','email','currency','about_clinic'];
+  var ids = ['clinic_name','phone'];
   ids.forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
@@ -2187,20 +2272,28 @@ async function loadDynamicOptions() {
   } catch(e) { /* fail silently — static fallback remains */ }
 }
 
+function makeChip(val, onclickAttr) {
+  var c = document.createElement('div');
+  c.className = 'chip';
+  c.setAttribute('data-val', val);
+  c.textContent = val;
+  c.setAttribute('onclick', onclickAttr);
+  return c;
+}
+
 function applyDynamicOptions(data) {
   if (data.specialization && data.specialization.length) {
     var specBox = document.getElementById('chips-spec');
     if (specBox) {
-      specBox.innerHTML = data.specialization.map(function(v) {
-        return '<div class="chip" onclick="toggleChip(this)" data-val="' + v + '">' + v + '</div>';
-      }).join('');
+      clear(specBox);
+      data.specialization.forEach(function(v){ specBox.appendChild(makeChip(v, 'toggleChip(this)')); });
     }
   }
   if (data.medical_type && data.medical_type.length) {
     var sel = document.getElementById('medical_type');
     if (sel) {
       var placeholder = sel.options[0];
-      sel.innerHTML = '';
+      clear(sel);
       sel.appendChild(placeholder);
       data.medical_type.forEach(function(v) {
         var o = document.createElement('option');
@@ -2212,18 +2305,24 @@ function applyDynamicOptions(data) {
   if (data.languages && data.languages.length) {
     var langBox = document.getElementById('chips-lang');
     if (langBox) {
-      langBox.innerHTML = data.languages.map(function(v) {
-        return '<div class="chip" onclick="toggleChip(this)" data-val="' + v + '">' + v + '</div>';
-      }).join('');
+      clear(langBox);
+      data.languages.forEach(function(v){ langBox.appendChild(makeChip(v, 'toggleChip(this)')); });
     }
+  }
+  if (data.countries && data.countries.length) {
+    COUNTRY_LIST = data.countries.slice();
+  }
+  if (data.cities && data.cities.length) {
+    CITY_LIST = data.cities.slice();
   }
 }
 
-window.addEventListener('load', function() {
-  populateCountries();
-  detectLocation();
+window.addEventListener('load', async function() {
+  setupCountryCombo();
+  setupCityCombo();
   detectBrowserLanguage();
-  loadDynamicOptions();
+  await loadDynamicOptions();
+  detectLocation();
   restoreFormState();
   setupLiveValidation();
   var bio = document.getElementById('bio');
