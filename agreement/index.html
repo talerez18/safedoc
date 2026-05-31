@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Safe Doc – Collaboration Agreement</title>
 <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Poppins:wght@400;500;600;700;800;900&family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
   --teal:#0891B2; --cyan:#06B6D4; --sky:#22D3EE;
@@ -495,32 +496,135 @@ function onFilePicked(){
   document.getElementById('f-file-name').textContent = name;
 }
 
-var WORKER_URL = 'https://safedoc-form.tal-997.workers.dev';
-async function submitAgreement(){
-  if (!confirmed) return;
-  var btn = document.getElementById('submit-btn');
-  btn.disabled = true;
+// ── Paste your Google Apps Script Web App URL here (ends with /exec) ──
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwyHPmq3egTLxnXEkoMYdykNoiLUeXPkseIJfAsyiQEg7JE-yfBVCURIWDKZ3z0XkoR/exec';
+// (Optional) keep sending to the old Cloudflare worker too — leave '' to skip
+var WORKER_URL = '';
+
+function collectData(){
   var prices = {};
   var labels = ['Clinic','Home/Hotel','Online','Lab','Diagnostic','Injections','IV','Medicines'];
   document.querySelectorAll('[data-price]').forEach(function(inp,i){ prices[labels[i]] = inp.value || ''; });
-  var fd = new FormData();
   var fileInput = document.getElementById('f-file');
-  if (fileInput && fileInput.files && fileInput.files[0]) { fd.append('price_file', fileInput.files[0]); }
-  fd.append('form_type', 'collaboration_agreement');
-  fd.append('date', document.getElementById('f-date').value || '');
-  fd.append('full_name', document.getElementById('f-name').value || '');
-  fd.append('license', document.getElementById('f-license').value || '');
-  fd.append('clinic_name', document.getElementById('f-clinic').value || '');
-  fd.append('phone', document.getElementById('f-phone').value || '');
-  fd.append('address', document.getElementById('f-address').value || '');
-  fd.append('prices', JSON.stringify(prices));
-  fd.append('other_terms', document.getElementById('f-other').value || '');
-  fd.append('confirmed', 'yes');
-  fd.append('language', document.documentElement.lang);
-  fd.append('confirmed_at', new Date().toISOString());
+  return {
+    form_type: 'collaboration_agreement',
+    date: document.getElementById('f-date').value || '',
+    clinic_name: document.getElementById('f-clinic').value || '',
+    phone: document.getElementById('f-phone').value || '',
+    address: document.getElementById('f-address').value || '',
+    prices: JSON.stringify(prices),
+    pricesObj: prices,
+    other_terms: document.getElementById('f-other').value || '',
+    file_name: (fileInput && fileInput.files && fileInput.files[0]) ? fileInput.files[0].name : '',
+    confirmed: 'yes',
+    language: document.documentElement.lang,
+    confirmed_at: new Date().toISOString()
+  };
+}
+
+// Build a clean PDF of the agreement for the doctor
+function generatePDF(d){
   try{
-    await fetch(WORKER_URL, { method:'POST', body:fd });
-  }catch(e){ /* show success anyway so the doctor isn't blocked */ }
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({unit:'pt', format:'a4'});
+    var W = doc.internal.pageSize.getWidth();
+    var y = 56;
+
+    // Header band
+    doc.setFillColor(8,145,178);
+    doc.rect(0,0,W,90,'F');
+    doc.setTextColor(255,255,255);
+    doc.setFont('helvetica','bold'); doc.setFontSize(22);
+    doc.text('SAFE DOC', 40, 46);
+    doc.setFont('helvetica','normal'); doc.setFontSize(12);
+    doc.text('Collaboration Agreement', 40, 68);
+
+    y = 130;
+    doc.setTextColor(20,40,68);
+    doc.setFont('helvetica','bold'); doc.setFontSize(14);
+    doc.text('Provider Details', 40, y); y += 8;
+    doc.setDrawColor(8,145,178); doc.setLineWidth(1); doc.line(40,y,W-40,y); y += 22;
+
+    doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.setTextColor(40,60,90);
+    function line(label, val){
+      doc.setFont('helvetica','bold'); doc.text(label+':', 40, y);
+      doc.setFont('helvetica','normal'); doc.text(String(val||'-'), 200, y);
+      y += 22;
+    }
+    line('Date', d.date);
+    line('Clinic / Practice', d.clinic_name);
+    line('Phone / WhatsApp', d.phone);
+    line('Country', d.address);
+
+    y += 12;
+    doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.setTextColor(20,40,68);
+    doc.text('Agreed Price List', 40, y); y += 8;
+    doc.line(40,y,W-40,y); y += 22;
+
+    var pnames = {Clinic:'Clinic Consultation','Home/Hotel':'Home / Hotel Visit',Online:'Online Consultation',Lab:'Lab Tests',Diagnostic:'Diagnostic Tests',Injections:'Injections / Vaccinations',IV:'IV / Infusion',Medicines:'Medicines'};
+    doc.setFontSize(11);
+    Object.keys(pnames).forEach(function(k){
+      var v = d.pricesObj[k] || '-';
+      doc.setFont('helvetica','normal'); doc.setTextColor(40,60,90);
+      doc.text(pnames[k], 40, y);
+      doc.setFont('helvetica','bold'); doc.text(String(v), 360, y);
+      y += 20;
+    });
+
+    if (d.other_terms){
+      y += 8;
+      doc.setFont('helvetica','bold'); doc.text('Other terms:', 40, y); y += 18;
+      doc.setFont('helvetica','normal');
+      var split = doc.splitTextToSize(d.other_terms, W-80);
+      doc.text(split, 40, y); y += split.length*15;
+    }
+    if (d.file_name){
+      y += 6;
+      doc.setFont('helvetica','italic'); doc.setTextColor(100,120,140);
+      doc.text('Attached price file: ' + d.file_name, 40, y); y += 20;
+    }
+
+    y += 16;
+    doc.setDrawColor(220,230,238); doc.line(40,y,W-40,y); y += 24;
+    doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(8,145,178);
+    doc.text('\u2713 Confirmed & agreed by the provider', 40, y); y += 18;
+    doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(120,130,145);
+    doc.text('Confirmed at: ' + d.confirmed_at, 40, y); y += 13;
+    doc.text('No costs, no monthly fees, no commission. Full terms apply as presented online.', 40, y);
+
+    var fname = 'SafeDoc-Agreement-' + (d.clinic_name||'clinic').replace(/[^a-z0-9]/gi,'_') + '.pdf';
+    doc.save(fname);
+  }catch(err){ /* if PDF fails, don't block submission */ }
+}
+
+async function submitAgreement(){
+  if (!confirmed) return;
+  document.getElementById('submit-btn').disabled = true;
+  var d = collectData();
+
+  // 1) Generate the PDF for the doctor
+  generatePDF(d);
+
+  // 2) Send the data to your Google Sheet (no-cors so it always goes through)
+  if (SHEET_URL && SHEET_URL.indexOf('http') === 0){
+    try{
+      var params = new URLSearchParams();
+      Object.keys(d).forEach(function(k){ if(k!=='pricesObj') params.append(k, d[k]); });
+      await fetch(SHEET_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: params.toString() });
+    }catch(e){ /* show success anyway */ }
+  }
+
+  // 3) Optionally also send the file + data to the old worker
+  if (WORKER_URL && WORKER_URL.indexOf('http') === 0){
+    try{
+      var fd = new FormData();
+      Object.keys(d).forEach(function(k){ if(k!=='pricesObj') fd.append(k, d[k]); });
+      var fi = document.getElementById('f-file');
+      if (fi && fi.files && fi.files[0]) fd.append('price_file', fi.files[0]);
+      await fetch(WORKER_URL, { method:'POST', body:fd });
+    }catch(e){}
+  }
+
   document.getElementById('doc-card').style.display = 'none';
   var s = document.getElementById('success');
   s.style.display = 'block';
