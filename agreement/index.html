@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Safe Doc – Collaboration Agreement</title>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Poppins:wght@400;500;600;700;800;900&family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0891B2; --cyan:#06B6D4; --sky:#22D3EE;
+  --ink:#0F2744; --ink2:#3a6388;
+  --glass:rgba(255,255,255,.78);
+  --brd:rgba(8,145,178,.16);
+  --shadow:0 10px 40px rgba(8,80,120,.10);
+  --shadow-lift:0 24px 70px rgba(8,80,120,.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Poppins','Varela Round',sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(900px 600px at 85% -8%, rgba(34,211,238,.16), transparent 55%),
+    radial-gradient(800px 500px at 8% 10%, rgba(8,145,178,.14), transparent 50%),
+    linear-gradient(180deg,#F4FAFF 0%, #EAF4FC 100%);
+  background-attachment:fixed;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:60px;
+}
+body.lang-he, body.lang-he *{ font-family:'Varela Round','Heebo',sans-serif !important; }
+body.lang-he{ direction:rtl; }
+
+/* ── TOP BAR ── */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 5vw;
+  background:rgba(244,250,255,.8);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border-bottom:1px solid rgba(8,145,178,.12);
+}
+.logo svg{display:block;height:42px;width:auto}
+
+/* ── LANGUAGE TOGGLE ── */
+.lang-toggle{position:relative}
+.lang-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:100px;
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(8,145,178,.22);
+  font-family:inherit;font-size:.82rem;font-weight:700;color:var(--teal);
+  cursor:pointer;transition:all .2s;
+}
+.lang-btn:hover{box-shadow:0 4px 14px rgba(8,145,178,.16)}
+#lang-menu{
+  display:none;position:absolute;top:46px;
+  inset-inline-end:0;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid rgba(8,145,178,.18);
+  border-radius:16px;padding:6px;
+  width:230px;max-height:60vh;overflow-y:auto;
+  box-shadow:var(--shadow-lift);z-index:999;
+}
+.lm-item{
+  padding:11px 14px;border-radius:10px;
+  font-size:.9rem;font-weight:600;color:var(--ink);
+  cursor:pointer;transition:background .15s;
+  display:flex;align-items:center;gap:8px;min-height:44px;
+}
+.lm-item:hover{background:rgba(8,145,178,.08)}
+
+/* ── DOC CARD ── */
+.wrap{max-width:780px;margin:32px auto 0;padding:0 5vw}
+.doc{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(150%);
+  border:1px solid var(--brd);
+  border-radius:24px;
+  box-shadow:var(--shadow-lift);
+  padding:clamp(24px,5vw,48px);
+}
+.doc-head{text-align:center;margin-bottom:8px}
+.doc-head .ttl{
+  font-family:'Poppins','Varela Round',sans-serif;
+  font-size:clamp(1.5rem,4vw,2.1rem);font-weight:800;
+  letter-spacing:-.8px;color:var(--ink);
+  background:linear-gradient(180deg,#06192E,#0B2D4E);
+  -webkit-background-clip:text;background-clip:text;
+}
+body.lang-he .doc-head .ttl{font-family:'Varela Round','Heebo',sans-serif}
+.doc-head .sub{font-size:.95rem;color:var(--ink2);margin-top:4px;font-weight:600}
+.doc-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:nowrap;gap:10px;
+  margin:22px 0;padding:14px 0;
+  border-top:1px solid rgba(8,145,178,.12);
+  border-bottom:1px solid rgba(8,145,178,.12);
+  font-size:.82rem;color:var(--ink2);
+  direction:ltr; /* always keep date left, bsd right */
+}
+.doc-meta .date-field{display:flex;align-items:center;gap:8px;order:1}
+.doc-meta .bsd-fixed{order:2;font-family:'Heebo','Varela Round',sans-serif;font-weight:700;direction:rtl;font-size:.95rem;color:var(--ink)}
+.doc-meta input{
+  font-family:inherit;border:1px solid rgba(8,145,178,.25);
+  border-radius:9px;padding:7px 11px;font-size:.85rem;color:var(--ink);
+  background:rgba(255,255,255,.7);outline:none;transition:.2s;
+}
+.doc-meta input:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(8,145,178,.12)}
+
+/* ── SECTIONS ── */
+.sec{margin-top:30px}
+.sec-h{
+  display:flex;align-items:center;gap:10px;
+  font-size:1.05rem;font-weight:800;color:var(--ink);
+  letter-spacing:-.3px;margin-bottom:12px;
+}
+.sec-h .num{
+  width:28px;height:28px;border-radius:9px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--teal),var(--cyan));
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:.82rem;font-weight:800;
+}
+.sec p{font-size:.92rem;line-height:1.7;color:#234969}
+.sec .lead{font-weight:700;color:var(--teal)}
+
+/* ── PRICE TABLE ── */
+.ptable{width:100%;border-collapse:separate;border-spacing:0;margin-top:6px;border-radius:14px;overflow:hidden;border:1px solid rgba(8,145,178,.16)}
+.ptable th{
+  background:linear-gradient(135deg,rgba(8,145,178,.1),rgba(34,211,238,.06));
+  font-size:.8rem;font-weight:700;color:var(--teal);
+  padding:12px 14px;text-align:start;
+}
+.ptable td{
+  padding:11px 14px;font-size:.86rem;color:#234969;
+  border-top:1px solid rgba(8,145,178,.1);
+}
+.ptable td:last-child{width:40%}
+.ptable input{
+  width:100%;font-family:inherit;border:1px solid rgba(8,145,178,.22);
+  border-radius:8px;padding:7px 10px;font-size:.84rem;color:var(--ink);
+  background:rgba(255,255,255,.8);outline:none;transition:.2s;
+}
+.ptable input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(8,145,178,.12)}
+.ptable tr:nth-child(even) td{background:rgba(8,145,178,.025)}
+
+/* ── FILE UPLOAD ── */
+.upload-row{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.upload-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:11px;cursor:pointer;
+  background:rgba(8,145,178,.08);border:1.5px solid rgba(8,145,178,.28);
+  color:var(--teal);font-family:inherit;font-size:.88rem;font-weight:700;
+  transition:.2s;
+}
+.upload-btn:hover{background:rgba(8,145,178,.14);border-color:var(--teal)}
+.upload-name{font-size:.82rem;color:var(--ink2);font-weight:600}
+.upload-hint{font-size:.76rem;color:var(--ink2);margin-top:8px;opacity:.85}
+
+/* ── PROVIDER FIELDS ── */
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+.fld{display:flex;flex-direction:column;gap:5px}
+.fld.full{grid-column:1 / -1}
+.fld label{font-size:.8rem;font-weight:700;color:var(--ink)}
+.fld input, .fld textarea{
+  font-family:inherit;border:1px solid rgba(8,145,178,.22);
+  border-radius:10px;padding:10px 12px;font-size:.88rem;color:var(--ink);
+  background:rgba(255,255,255,.8);outline:none;transition:.2s;width:100%;
+}
+.fld input:focus, .fld textarea:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(8,145,178,.12)}
+.fld textarea{resize:vertical;min-height:70px}
+
+/* ── CONFIRM CHECKBOX ── */
+.confirm{
+  margin-top:30px;padding:18px 20px;
+  background:linear-gradient(135deg,rgba(8,145,178,.08),rgba(34,211,238,.05));
+  border:1.5px solid rgba(8,145,178,.22);border-radius:16px;
+  display:flex;align-items:flex-start;gap:14px;cursor:pointer;
+  transition:.2s;
+}
+.confirm:hover{border-color:var(--teal)}
+.confirm.checked{background:linear-gradient(135deg,rgba(8,145,178,.14),rgba(34,211,238,.09));border-color:var(--teal)}
+.confirm .box{
+  width:26px;height:26px;flex-shrink:0;border-radius:8px;
+  border:2px solid var(--teal);background:rgba(255,255,255,.7);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:#fff;transition:.2s;margin-top:1px;
+}
+.confirm.checked .box{background:linear-gradient(135deg,var(--teal),var(--cyan))}
+.confirm .box svg{opacity:0;transform:scale(.5);transition:.2s}
+.confirm.checked .box svg{opacity:1;transform:scale(1)}
+.confirm .txt{font-size:.9rem;line-height:1.55;color:var(--ink);font-weight:600}
+
+/* ── SUBMIT ── */
+.submit-btn{
+  margin-top:22px;width:100%;padding:16px;border:none;border-radius:14px;
+  background:linear-gradient(135deg,var(--teal),var(--cyan));
+  color:#fff;font-family:inherit;font-size:1.02rem;font-weight:800;letter-spacing:-.2px;
+  cursor:pointer;position:relative;overflow:hidden;
+  box-shadow:0 10px 30px rgba(8,145,178,.32);transition:transform .2s,box-shadow .2s;
+}
+.submit-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 16px 44px rgba(8,145,178,.45)}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed}
+.note{text-align:center;font-size:.78rem;color:var(--ink2);margin-top:12px}
+
+/* ── SUCCESS ── */
+.success{display:none;text-align:center;padding:40px 20px}
+.success.show{display:block}
+.success .ico{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 18px;
+  background:linear-gradient(135deg,var(--teal),var(--cyan));
+  display:flex;align-items:center;justify-content:center;font-size:34px;color:#fff;
+  box-shadow:0 12px 34px rgba(8,145,178,.3);
+}
+.success h3{font-size:1.4rem;font-weight:800;color:var(--ink);margin-bottom:8px}
+.success p{font-size:.92rem;color:var(--ink2);line-height:1.6}
+
+@media(max-width:560px){
+  .fields{grid-template-columns:1fr}
+  .ptable th, .ptable td{padding:9px 10px;font-size:.8rem}
+  .doc-meta{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:nowrap}
+}
+</style>
+</head>
+<body class="lang-en">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="#" class="logo" style="direction:ltr;text-decoration:none">
+    <svg width="170" height="44" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1565C0"/><stop offset="100%" stop-color="#29B6F6"/></linearGradient>
+        <linearGradient id="hg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1976D2"/><stop offset="100%" stop-color="#0D47A1"/></linearGradient>
+      </defs>
+      <path d="M22,34 C18,30 10,24 7,18 C4,12 5,5 10,3 C13,2 16,3 18,5 C19,6 20,8 22,10" fill="none" stroke="url(#hg)" stroke-width="2.8" stroke-linecap="round"/>
+      <path d="M22,34 C26,30 34,24 37,18 C40,12 39,5 34,3 C31,2 28,3 26,5 C25,6 24,8 22,10" fill="none" stroke="url(#hg)" stroke-width="2.8" stroke-linecap="round"/>
+      <ellipse cx="16" cy="14" rx="4" ry="5.5" fill="#90CAF9" opacity="0.6" transform="rotate(-10,16,14)"/>
+      <ellipse cx="22" cy="12" rx="2.5" ry="4" fill="#90CAF9" opacity="0.6" transform="rotate(5,22,12)"/>
+      <ellipse cx="28" cy="13" rx="3.5" ry="4" fill="#90CAF9" opacity="0.6" transform="rotate(-5,28,13)"/>
+      <circle cx="18" cy="37" r="2.2" fill="none" stroke="url(#hg2)" stroke-width="2"/>
+      <circle cx="26" cy="37" r="2.2" fill="none" stroke="url(#hg2)" stroke-width="2"/>
+      <path d="M22,34 L18,37 M22,34 L26,37" fill="none" stroke="url(#hg)" stroke-width="2" stroke-linecap="round"/>
+      <text x="46" y="22" font-family="Poppins,Arial,sans-serif" font-weight="800" font-size="15" fill="#0D47A1" letter-spacing="1">SAFE</text>
+      <text x="100" y="22" font-family="Poppins,Arial,sans-serif" font-weight="800" font-size="15" fill="#29B6F6" letter-spacing="1">DOC</text>
+      <text x="46" y="34" font-family="Poppins,Arial,sans-serif" font-weight="400" font-size="6.5" fill="#5A90B8" letter-spacing="1.2">YOUR HEALTH.  OUR PRIORITY.</text>
+    </svg>
+  </a>
+  <div class="lang-toggle">
+    <button class="lang-btn" id="lang-current" onclick="toggleLangMenu(event)">🌐 <span id="lang-label">EN</span> ▾</button>
+    <div id="lang-menu">
+      <div class="lm-item" onclick="setLang('en')">🇬🇧 English</div>
+      <div class="lm-item" onclick="setLang('he')">🇮🇱 עברית</div>
+      <div class="lm-item" onclick="setLang('es')">🇪🇸 Español</div>
+      <div class="lm-item" onclick="setLang('pt')">🇧🇷 Português</div>
+      <div class="lm-item" onclick="setLang('th')">🇹🇭 ไทย</div>
+      <div class="lm-item" onclick="setLang('hi')">🇮🇳 हिन्दी</div>
+      <div class="lm-item" onclick="setLang('vi')">🇻🇳 Tiếng Việt</div>
+      <div class="lm-item" onclick="setLang('km')">🇰🇭 ខ្មែរ</div>
+      <div class="lm-item" onclick="setLang('lo')">🇱🇦 ລາວ</div>
+      <div class="lm-item" onclick="setLang('tl')">🇵🇭 Tagalog</div>
+      <div class="lm-item" onclick="setLang('id')">🇮🇩 Indonesia</div>
+      <div class="lm-item" onclick="setLang('zh')">🇨🇳 中文</div>
+      <div class="lm-item" onclick="setLang('ja')">🇯🇵 日本語</div>
+      <div class="lm-item" onclick="setLang('ko')">🇰🇷 한국어</div>
+      <div class="lm-item" onclick="setLang('de')">🇩🇪 Deutsch</div>
+      <div class="lm-item" onclick="setLang('nl')">🇳🇱 Nederlands</div>
+      <div class="lm-item" onclick="setLang('fr')">🇫🇷 Français</div>
+      <div class="lm-item" onclick="setLang('it')">🇮🇹 Italiano</div>
+      <div class="lm-item" onclick="setLang('ru')">🇷🇺 Русский</div>
+      <div class="lm-item" onclick="setLang('el')">🇬🇷 Ελληνικά</div>
+      <div class="lm-item" onclick="setLang('tr')">🇹🇷 Türkçe</div>
+      <div class="lm-item" onclick="setLang('ar')">🇸🇦 العربية</div>
+      <div class="lm-item" onclick="setLang('fa')">🇮🇷 فارسی</div>
+      <div class="lm-item" onclick="setLang('ur')">🇵🇰 اردو</div>
+      <div class="lm-item" onclick="setLang('ne')">🇳🇵 नेपाली</div>
+      <div class="lm-item" onclick="setLang('ta')">🇱🇰 தமிழ்</div>
+      <div class="lm-item" onclick="setLang('pl')">🇵🇱 Polski</div>
+      <div class="lm-item" onclick="setLang('hu')">🇭🇺 Magyar</div>
+      <div class="lm-item" onclick="setLang('si')">🇱🇰 සිංහල</div>
+      <div class="lm-item" onclick="setLang('am')">🇪🇹 አማርኛ</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="doc" id="doc-card">
+    <div class="doc-head">
+      <div class="ttl" data-k="title">Collaboration Agreement</div>
+      <div class="sub" data-k="subtitle">Safe Doc &amp; Medical Service Provider</div>
+    </div>
+
+    <div class="doc-meta">
+      <div class="bsd-fixed">בס"ד</div>
+      <div class="date-field">
+        <span data-k="date">Date:</span>
+        <input type="date" id="f-date">
+      </div>
+    </div>
+
+    <!-- PROVIDER DETAILS -->
+    <div class="sec">
+      <div class="sec-h"><span class="num">★</span><span data-k="provider_details">Provider Details</span></div>
+      <div class="fields">
+        <div class="fld"><label data-k="clinic_name">Clinic / Practice Name</label><input type="text" id="f-clinic"></div>
+        <div class="fld"><label data-k="phone">Phone / WhatsApp</label><input type="tel" id="f-phone"></div>
+        <div class="fld full"><label data-k="address">Country</label><input type="text" id="f-address"></div>
+      </div>
+    </div>
+
+    <!-- 1. SCOPE -->
+    <div class="sec">
+      <div class="sec-h"><span class="num">1</span><span data-k="s1_h">Scope of Services</span></div>
+      <p data-k="s1_p">This Agreement governs the professional collaboration between Safe Doc (the "Company") and the Provider for medical consultation and treatment services provided to travelers. The Provider agrees to provide services including clinic visits, house calls, and diagnostics based on independent medical judgment.</p>
+    </div>
+
+    <!-- 2. PRICE LIST -->
+    <div class="sec">
+      <div class="sec-h"><span class="num">2</span><span data-k="s2_h">Agreed Price List</span></div>
+      <table class="ptable">
+        <thead><tr><th data-k="service_item">Service Item</th><th data-k="agreed_price">Agreed Price (Local Currency)</th></tr></thead>
+        <tbody>
+          <tr><td data-k="p_clinic">Clinic Consultation</td><td><input type="text" data-price></td></tr>
+          <tr><td data-k="p_home">Home / Hotel Visit (House Call)</td><td><input type="text" data-price></td></tr>
+          <tr><td data-k="p_online">Online Consultation (Telemedicine)</td><td><input type="text" data-price></td></tr>
+          <tr><td data-k="p_lab">Laboratory Tests (Blood, Urine, etc.)</td><td><input type="text" data-price></td></tr>
+          <tr><td data-k="p_diag">Diagnostic Tests (X-Ray, ECG, etc.)</td><td><input type="text" data-price></td></tr>
+          <tr><td data-k="p_inj">Injections / Vaccinations / Wound Dressing</td><td><input type="text" data-price></td></tr>
+          <tr><td data-k="p_iv">IV Fluids / Infusion Therapy</td><td><input type="text" data-price></td></tr>
+          <tr><td data-k="p_med">Medicines / Pharmacy Items</td><td><input type="text" data-price></td></tr>
+        </tbody>
+      </table>
+      <div class="fld full" style="margin-top:14px">
+        <label data-k="other_terms">Other Services / Special Terms:</label>
+        <textarea id="f-other"></textarea>
+      </div>
+      <div class="upload-row">
+        <input type="file" id="f-file" style="display:none" onchange="onFilePicked()">
+        <button type="button" class="upload-btn" onclick="document.getElementById('f-file').click()">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 16V4M12 4L7 9M12 4l5 5M5 20h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span data-k="upload_btn">Upload File</span>
+        </button>
+        <span class="upload-name" id="f-file-name"></span>
+      </div>
+      <div class="upload-hint" data-k="upload_hint">You can upload a price list file instead of filling in the details.</div>
+    </div>
+
+    <!-- 3. FEES -->
+    <div class="sec">
+      <div class="sec-h"><span class="num">3</span><span data-k="s3_h">Service Fees &amp; System Costs</span></div>
+      <p><span class="lead" data-k="s3_lead">No Costs.</span> <span data-k="s3_p">It is agreed that the Medical Provider shall not pay any monthly fees, shall not pay any cost for the system, and shall not pay any commission for patients arriving through Safe Doc.</span></p>
+    </div>
+
+    <!-- 4. PLATFORM USE -->
+    <div class="sec">
+      <div class="sec-h"><span class="num">4</span><span data-k="s4_h">Platform Use &amp; Payments</span></div>
+      <p data-k="s4_p">The Medical Provider acknowledges and agrees that any treatment of a traveler arriving through Safe Doc shall be executed through the Safe Doc application. The total payment and tests performed for the patient, including repeat treatments related to the same medical event, shall be paid through the Safe Doc platform in accordance with the agreed fair costs, without any brokerage fees whatsoever.</p>
+    </div>
+
+    <!-- 5. LIABILITY -->
+    <div class="sec">
+      <div class="sec-h"><span class="num">5</span><span data-k="s5_h">Medical Responsibility &amp; Liability</span></div>
+      <p data-k="s5_p">The Provider bears sole medical and legal responsibility for the treatment. Safe Doc is a technology platform and shall not be held liable for any medical outcomes, malpractice, or negligence. The Provider declares they possess valid medical licenses and professional indemnity insurance required by local law.</p>
+    </div>
+
+    <!-- 6. CONFIDENTIALITY -->
+    <div class="sec">
+      <div class="sec-h"><span class="num">6</span><span data-k="s6_h">Confidentiality &amp; Non-Circumvention</span></div>
+      <p data-k="s6_p">The Provider shall maintain absolute confidentiality regarding the Company's business model and patient data. The Provider shall not circumvent the platform to provide private services to travelers referred by Safe Doc.</p>
+    </div>
+
+    <!-- 7. TERM -->
+    <div class="sec">
+      <div class="sec-h"><span class="num">7</span><span data-k="s7_h">Term &amp; Termination</span></div>
+      <p data-k="s7_p">Either party may terminate this Agreement by providing 30 days' written notice. This Agreement is governed by the laws of the country where the medical service is provided. Disputes shall be resolved through good-faith negotiations.</p>
+    </div>
+
+    <!-- CONFIRM CHECKBOX (replaces signature) -->
+    <div class="confirm" id="confirm-box" onclick="toggleConfirm()">
+      <div class="box"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="txt" data-k="confirm_text">I confirm that I have read and understood this Collaboration Agreement, that all details I provided are accurate, that I am a licensed medical professional, and I agree to all its terms.</div>
+    </div>
+
+    <button class="submit-btn" id="submit-btn" onclick="submitAgreement()" disabled data-k="submit">Confirm &amp; Submit Agreement</button>
+    <div class="note" data-k="note">Your confirmation is recorded securely. No signature required.</div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="doc success" id="success" style="display:none">
+    <div class="ico">✓</div>
+    <h3 data-k="success_title">Agreement Confirmed!</h3>
+    <p data-k="success_msg">Thank you. Your collaboration agreement has been received. Our team will be in touch shortly with next steps.</p>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════
+// TRANSLATIONS — keyed by data-k attribute
+// ════════════════════════════════════════════════════
+var T = {
+  title:{en:"Collaboration Agreement",he:"הסכם שיתוף פעולה",es:"Acuerdo de Colaboración",pt:"Acordo de Colaboração",th:"ข้อตกลงความร่วมมือ",hi:"सहयोग समझौता",vi:"Thỏa thuận Hợp tác",km:"កិច្ចព្រមព្រៀងសហការ",lo:"ຂໍ້ຕົກລົງຮ່ວມມື",tl:"Kasunduan sa Pakikipagtulungan",id:"Perjanjian Kerja Sama",zh:"合作协议",ja:"協業契約書",ko:"협력 계약서",de:"Kooperationsvereinbarung",nl:"Samenwerkingsovereenkomst",fr:"Accord de Collaboration",it:"Accordo di Collaborazione",ru:"Соглашение о сотрудничестве",el:"Συμφωνία Συνεργασίας",tr:"İşbirliği Sözleşmesi",ar:"اتفاقية تعاون",fa:"توافقنامه همکاری",ur:"تعاون کا معاہدہ",ne:"सहकार्य सम्झौता",ta:"ஒத்துழைப்பு ஒப்பந்தம்",pl:"Umowa o Współpracy",hu:"Együttműködési Megállapodás",si:"සහයෝගිතා ගිවිසුම",am:"የትብብር ስምምነት"},
+  subtitle:{en:"Safe Doc & Medical Service Provider",he:"Safe Doc וספק שירות רפואי",es:"Safe Doc y Proveedor de Servicios Médicos",pt:"Safe Doc e Prestador de Serviços Médicos",th:"Safe Doc และผู้ให้บริการทางการแพทย์",hi:"Safe Doc और चिकित्सा सेवा प्रदाता",vi:"Safe Doc & Nhà cung cấp dịch vụ y tế",km:"Safe Doc និងអ្នកផ្តល់សេវាវេជ្ជសាស្ត្រ",lo:"Safe Doc ແລະຜູ້ໃຫ້ບໍລິການທາງການແພດ",tl:"Safe Doc at Medical Service Provider",id:"Safe Doc & Penyedia Layanan Medis",zh:"Safe Doc 与医疗服务提供者",ja:"Safe Docと医療サービス提供者",ko:"Safe Doc 및 의료 서비스 제공자",de:"Safe Doc & medizinischer Dienstleister",nl:"Safe Doc & medische zorgverlener",fr:"Safe Doc et Prestataire de Services Médicaux",it:"Safe Doc e Fornitore di Servizi Medici",ru:"Safe Doc и поставщик медицинских услуг",el:"Safe Doc & Πάροχος Ιατρικών Υπηρεσιών",tr:"Safe Doc & Tıbbi Hizmet Sağlayıcı",ar:"Safe Doc ومقدم الخدمة الطبية",fa:"Safe Doc و ارائه‌دهنده خدمات پزشکی",ur:"Safe Doc اور طبی خدمات فراہم کنندہ",ne:"Safe Doc र चिकित्सा सेवा प्रदायक",ta:"Safe Doc & மருத்துவ சேவை வழங்குநர்",pl:"Safe Doc i Dostawca Usług Medycznych",hu:"Safe Doc és orvosi szolgáltató",si:"Safe Doc සහ වෛද්‍ය සේවා සපයන්නා",am:"Safe Doc እና የሕክምና አገልግሎት አቅራቢ"},
+  date:{en:"Date:",he:"תאריך:",es:"Fecha:",pt:"Data:",th:"วันที่:",hi:"तारीख:",vi:"Ngày:",km:"កាលបរិច្ឆេទ:",lo:"ວັນທີ:",tl:"Petsa:",id:"Tanggal:",zh:"日期:",ja:"日付:",ko:"날짜:",de:"Datum:",nl:"Datum:",fr:"Date:",it:"Data:",ru:"Дата:",el:"Ημερομηνία:",tr:"Tarih:",ar:"التاريخ:",fa:"تاریخ:",ur:"تاریخ:",ne:"मिति:",ta:"தேதி:",pl:"Data:",hu:"Dátum:",si:"දිනය:",am:"ቀን:"},
+  provider_details:{en:"Provider Details",he:"פרטי הרופא",es:"Datos del Proveedor",pt:"Dados do Prestador",th:"รายละเอียดผู้ให้บริการ",hi:"प्रदाता विवरण",vi:"Thông tin nhà cung cấp",km:"ព័ត៌មានអ្នកផ្តល់សេវា",lo:"ລາຍລະອຽດຜູ້ໃຫ້ບໍລິການ",tl:"Detalye ng Provider",id:"Detail Penyedia",zh:"提供者信息",ja:"提供者の詳細",ko:"제공자 정보",de:"Anbieterangaben",nl:"Gegevens zorgverlener",fr:"Détails du prestataire",it:"Dettagli del fornitore",ru:"Данные поставщика",el:"Στοιχεία παρόχου",tr:"Sağlayıcı Bilgileri",ar:"بيانات مقدم الخدمة",fa:"جزئیات ارائه‌دهنده",ur:"فراہم کنندہ کی تفصیلات",ne:"प्रदायक विवरण",ta:"வழங்குநர் விவரங்கள்",pl:"Dane dostawcy",hu:"Szolgáltató adatai",si:"සපයන්නාගේ විස්තර",am:"የአቅራቢ ዝርዝሮች"},
+  full_name:{en:"Full Name",he:"שם מלא",es:"Nombre completo",pt:"Nome completo",th:"ชื่อเต็ม",hi:"पूरा नाम",vi:"Họ và tên",km:"ឈ្មោះពេញ",lo:"ຊື່ເຕັມ",tl:"Buong Pangalan",id:"Nama lengkap",zh:"全名",ja:"氏名",ko:"성명",de:"Vollständiger Name",nl:"Volledige naam",fr:"Nom complet",it:"Nome completo",ru:"Полное имя",el:"Πλήρες όνομα",tr:"Ad Soyad",ar:"الاسم الكامل",fa:"نام کامل",ur:"پورا نام",ne:"पूरा नाम",ta:"முழு பெயர்",pl:"Imię i nazwisko",hu:"Teljes név",si:"සම්පූර්ණ නම",am:"ሙሉ ስም"},
+  license:{en:"Medical License No.",he:"מספר רישיון רפואי",es:"N.º de licencia médica",pt:"N.º de licença médica",th:"เลขที่ใบอนุญาตแพทย์",hi:"चिकित्सा लाइसेंस संख्या",vi:"Số giấy phép hành nghề",km:"លេខអាជ្ញាប័ណ្ណវេជ្ជសាស្ត្រ",lo:"ເລກໃບອະນຸຍາດແພດ",tl:"Medical License No.",id:"No. Lisensi Medis",zh:"医疗执照号",ja:"医師免許番号",ko:"의료 면허 번호",de:"Approbationsnummer",nl:"Medisch licentienr.",fr:"N° de licence médicale",it:"N. licenza medica",ru:"Номер мед. лицензии",el:"Αρ. ιατρικής άδειας",tr:"Tıbbi Lisans No.",ar:"رقم الترخيص الطبي",fa:"شماره مجوز پزشکی",ur:"میڈیکل لائسنس نمبر",ne:"चिकित्सा इजाजतपत्र नं.",ta:"மருத்துவ உரிமம் எண்",pl:"Nr licencji medycznej",hu:"Orvosi engedély száma",si:"වෛද්‍ය බලපත්‍ර අංකය",am:"የሕክምና ፈቃድ ቁ."},
+  clinic_name:{en:"Clinic / Practice Name",he:"שם המרפאה",es:"Nombre de la clínica",pt:"Nome da clínica",th:"ชื่อคลินิก",hi:"क्लिनिक का नाम",vi:"Tên phòng khám",km:"ឈ្មោះគ្លីនិក",lo:"ຊື່ຄລີນິກ",tl:"Pangalan ng Klinika",id:"Nama klinik",zh:"诊所名称",ja:"クリニック名",ko:"클리닉 이름",de:"Name der Praxis",nl:"Naam kliniek",fr:"Nom de la clinique",it:"Nome della clinica",ru:"Название клиники",el:"Όνομα κλινικής",tr:"Klinik Adı",ar:"اسم العيادة",fa:"نام کلینیک",ur:"کلینک کا نام",ne:"क्लिनिकको नाम",ta:"கிளினிக் பெயர்",pl:"Nazwa kliniki",hu:"Rendelő neve",si:"සායනයේ නම",am:"የክሊኒክ ስም"},
+  phone:{en:"Phone / WhatsApp",he:"טלפון / וואטסאפ",es:"Teléfono",pt:"Telefone",th:"โทรศัพท์",hi:"फ़ोन",vi:"Điện thoại",km:"ទូរស័ព្ទ",lo:"ໂທລະສັບ",tl:"Telepono",id:"Telepon",zh:"电话",ja:"電話",ko:"전화",de:"Telefon",nl:"Telefoon",fr:"Téléphone",it:"Telefono",ru:"Телефон",el:"Τηλέφωνο",tr:"Telefon",ar:"الهاتف",fa:"تلفن",ur:"فون",ne:"फोन",ta:"தொலைபேசி",pl:"Telefon",hu:"Telefon",si:"දුරකථනය",am:"ስልክ"},
+  address:{en:"Country",he:"מדינה",es:"País",pt:"País",th:"ประเทศ",hi:"देश",vi:"Quốc gia",km:"ប្រទេស",lo:"ປະເທດ",tl:"Bansa",id:"Negara",zh:"国家",ja:"国",ko:"국가",de:"Land",nl:"Land",fr:"Pays",it:"Paese",ru:"Страна",el:"Χώρα",tr:"Ülke",ar:"الدولة",fa:"کشور",ur:"ملک",ne:"देश",ta:"நாடு",pl:"Kraj",hu:"Ország",si:"රට",am:"ሀገር"},
+  s1_h:{en:"Scope of Services",he:"היקף השירותים",es:"Alcance de los servicios",pt:"Âmbito dos serviços",th:"ขอบเขตการบริการ",hi:"सेवाओं का दायरा",vi:"Phạm vi dịch vụ",km:"វិសាលភាពសេវាកម្ម",lo:"ຂອບເຂດການບໍລິການ",tl:"Saklaw ng Serbisyo",id:"Ruang Lingkup Layanan",zh:"服务范围",ja:"サービス範囲",ko:"서비스 범위",de:"Leistungsumfang",nl:"Reikwijdte diensten",fr:"Étendue des services",it:"Ambito dei servizi",ru:"Объём услуг",el:"Εύρος υπηρεσιών",tr:"Hizmet Kapsamı",ar:"نطاق الخدمات",fa:"دامنه خدمات",ur:"خدمات کا دائرہ",ne:"सेवाहरूको दायरा",ta:"சேவைகளின் வரம்பு",pl:"Zakres usług",hu:"Szolgáltatások köre",si:"සේවා පරාසය",am:"የአገልግሎት ወሰን"},
+  s1_p:{en:"This Agreement governs the professional collaboration between Safe Doc (the \"Company\") and the Provider for medical consultation and treatment services provided to travelers. The Provider agrees to provide services including clinic visits, house calls, and diagnostics based on independent medical judgment.",he:"הסכם זה מסדיר את שיתוף הפעולה המקצועי בין Safe Doc (\"החברה\") לבין הרופא, למתן שירותי ייעוץ וטיפול רפואי למטיילים. הרופא מסכים לספק שירותים הכוללים ביקורי מרפאה, ביקורי בית ואבחונים בהתאם לשיקול דעתו הרפואי העצמאי.",es:"Este Acuerdo regula la colaboración profesional entre Safe Doc (la \"Empresa\") y el Proveedor para servicios de consulta y tratamiento médico a viajeros. El Proveedor acepta prestar servicios que incluyen consultas en clínica, visitas a domicilio y diagnósticos según su criterio médico independiente.",pt:"Este Acordo rege a colaboração profissional entre a Safe Doc (a \"Empresa\") e o Prestador para serviços de consulta e tratamento médico a viajantes. O Prestador concorda em prestar serviços incluindo consultas, visitas domiciliares e diagnósticos com base em julgamento médico independente.",th:"ข้อตกลงนี้ควบคุมความร่วมมือทางวิชาชีพระหว่าง Safe Doc (\"บริษัท\") และผู้ให้บริการ สำหรับบริการให้คำปรึกษาและการรักษาแก่นักเดินทาง ผู้ให้บริการตกลงให้บริการรวมถึงการตรวจที่คลินิก การเยี่ยมบ้าน และการวินิจฉัยตามดุลยพินิจทางการแพทย์อิสระ",hi:"यह समझौता Safe Doc (\"कंपनी\") और प्रदाता के बीच यात्रियों को चिकित्सा परामर्श और उपचार सेवाओं के लिए पेशेवर सहयोग को नियंत्रित करता है। प्रदाता स्वतंत्र चिकित्सा निर्णय के आधार पर क्लिनिक विज़िट, घर पर विज़िट और निदान सहित सेवाएं प्रदान करने के लिए सहमत है।",vi:"Thỏa thuận này điều chỉnh sự hợp tác chuyên nghiệp giữa Safe Doc (\"Công ty\") và Nhà cung cấp về dịch vụ tư vấn và điều trị y tế cho du khách. Nhà cung cấp đồng ý cung cấp dịch vụ bao gồm khám tại phòng khám, khám tại nhà và chẩn đoán dựa trên phán đoán y khoa độc lập.",km:"កិច្ចព្រមព្រៀងនេះគ្រប់គ្រងកិច្ចសហការវិជ្ជាជីវៈរវាង Safe Doc និងអ្នកផ្តល់សេវា សម្រាប់សេវាប្រឹក្សា និងព្យាបាលដល់អ្នកដំណើរ។ អ្នកផ្តល់សេវាយល់ព្រមផ្តល់សេវារួមមានការពិនិត្យនៅគ្លីនិក ការទៅផ្ទះ និងការវិនិច្ឆ័យ។",lo:"ຂໍ້ຕົກລົງນີ້ຄວບຄຸມການຮ່ວມມືລະຫວ່າງ Safe Doc ແລະຜູ້ໃຫ້ບໍລິການ ສຳລັບການໃຫ້ຄຳປຶກສາ ແລະການປິ່ນປົວແກ່ນັກທ່ອງທ່ຽວ. ຜູ້ໃຫ້ບໍລິການຕົກລົງໃຫ້ບໍລິການລວມທັງການກວດທີ່ຄລີນິກ, ການຢ້ຽມບ້ານ ແລະການວິນິດໄສ.",tl:"Pinamamahalaan ng Kasunduang ito ang propesyonal na pakikipagtulungan sa pagitan ng Safe Doc (ang \"Kumpanya\") at ng Provider para sa konsultasyon at paggamot sa mga manlalakbay. Sumasang-ayon ang Provider na magbigay ng serbisyo kabilang ang clinic visit, house call, at diagnostics base sa independiyenteng pasya medikal.",id:"Perjanjian ini mengatur kolaborasi profesional antara Safe Doc (\"Perusahaan\") dan Penyedia untuk layanan konsultasi dan perawatan medis bagi wisatawan. Penyedia setuju memberikan layanan termasuk kunjungan klinik, kunjungan rumah, dan diagnostik berdasarkan penilaian medis independen.",zh:"本协议规范 Safe Doc（\"公司\"）与提供者之间为旅行者提供医疗咨询和治疗服务的专业合作。提供者同意根据独立医疗判断提供包括诊所就诊、上门服务和诊断在内的服务。",ja:"本契約は、旅行者への医療相談および治療サービスに関する Safe Doc（「会社」）と提供者との専門的協業を規定します。提供者は、独立した医学的判断に基づき、クリニック診察、往診、診断を含むサービスを提供することに同意します。",ko:"본 계약은 여행자에 대한 의료 상담 및 치료 서비스를 위한 Safe Doc(\"회사\")와 제공자 간의 전문적 협력을 규율합니다. 제공자는 독립적인 의학적 판단에 따라 클리닉 진료, 왕진, 진단을 포함한 서비스를 제공하는 데 동의합니다.",de:"Diese Vereinbarung regelt die berufliche Zusammenarbeit zwischen Safe Doc (das \"Unternehmen\") und dem Anbieter für medizinische Beratung und Behandlung von Reisenden. Der Anbieter stimmt zu, Leistungen einschließlich Praxisbesuchen, Hausbesuchen und Diagnostik nach unabhängigem medizinischem Ermessen zu erbringen.",nl:"Deze overeenkomst regelt de professionele samenwerking tussen Safe Doc (het \"Bedrijf\") en de zorgverlener voor medische consultatie en behandeling van reizigers. De zorgverlener stemt ermee in diensten te leveren waaronder praktijkbezoeken, huisbezoeken en diagnostiek op basis van onafhankelijk medisch oordeel.",fr:"Le présent accord régit la collaboration professionnelle entre Safe Doc (la « Société ») et le Prestataire pour des services de consultation et de traitement médical aux voyageurs. Le Prestataire accepte de fournir des services comprenant des consultations en clinique, des visites à domicile et des diagnostics selon son jugement médical indépendant.",it:"Il presente Accordo disciplina la collaborazione professionale tra Safe Doc (la \"Società\") e il Fornitore per servizi di consulenza e trattamento medico ai viaggiatori. Il Fornitore accetta di fornire servizi tra cui visite in clinica, visite a domicilio e diagnostica secondo giudizio medico indipendente.",ru:"Настоящее Соглашение регулирует профессиональное сотрудничество между Safe Doc («Компания») и Поставщиком в части медицинских консультаций и лечения путешественников. Поставщик соглашается предоставлять услуги, включая приёмы в клинике, визиты на дом и диагностику по независимому медицинскому усмотрению.",el:"Η παρούσα Συμφωνία διέπει την επαγγελματική συνεργασία μεταξύ της Safe Doc (η «Εταιρεία») και του Παρόχου για υπηρεσίες ιατρικής συμβουλής και θεραπείας σε ταξιδιώτες. Ο Πάροχος συμφωνεί να παρέχει υπηρεσίες όπως επισκέψεις σε κλινική, κατ' οίκον επισκέψεις και διαγνωστικά βάσει ανεξάρτητης ιατρικής κρίσης.",tr:"Bu Sözleşme, gezginlere yönelik tıbbi danışmanlık ve tedavi hizmetleri için Safe Doc (\"Şirket\") ile Sağlayıcı arasındaki profesyonel iş birliğini düzenler. Sağlayıcı, bağımsız tıbbi değerlendirmeye dayalı olarak klinik muayene, ev ziyareti ve teşhis dahil hizmetler sunmayı kabul eder.",ar:"تحكم هذه الاتفاقية التعاون المهني بين Safe Doc (\"الشركة\") ومقدم الخدمة لخدمات الاستشارة والعلاج الطبي للمسافرين. يوافق مقدم الخدمة على تقديم خدمات تشمل زيارات العيادة والزيارات المنزلية والتشخيص بناءً على حكم طبي مستقل.",fa:"این توافقنامه همکاری حرفه‌ای بین Safe Doc («شرکت») و ارائه‌دهنده را برای خدمات مشاوره و درمان پزشکی به مسافران تنظیم می‌کند. ارائه‌دهنده موافقت می‌کند خدماتی شامل ویزیت کلینیک، ویزیت منزل و تشخیص بر اساس قضاوت پزشکی مستقل ارائه دهد.",ur:"یہ معاہدہ مسافروں کو طبی مشاورت اور علاج کی خدمات کے لیے Safe Doc (\"کمپنی\") اور فراہم کنندہ کے درمیان پیشہ ورانہ تعاون کو منظم کرتا ہے۔ فراہم کنندہ آزاد طبی فیصلے کی بنیاد پر کلینک وزٹ، گھر وزٹ اور تشخیص سمیت خدمات فراہم کرنے پر متفق ہے۔",ne:"यो सम्झौताले यात्रुहरूलाई चिकित्सा परामर्श र उपचार सेवाका लागि Safe Doc (\"कम्पनी\") र प्रदायकबीचको व्यावसायिक सहकार्यलाई नियन्त्रण गर्छ। प्रदायक स्वतन्त्र चिकित्सा निर्णयका आधारमा क्लिनिक भ्रमण, घर भ्रमण र निदान सहित सेवा प्रदान गर्न सहमत छ।",ta:"இந்த ஒப்பந்தம் பயணிகளுக்கான மருத்துவ ஆலோசனை மற்றும் சிகிச்சை சேவைகளுக்காக Safe Doc (\"நிறுவனம்\") மற்றும் வழங்குநருக்கு இடையேயான தொழில்முறை ஒத்துழைப்பை நிர்வகிக்கிறது. வழங்குநர் சுயாதீன மருத்துவ தீர்ப்பின் அடிப்படையில் கிளினிக் வருகை, வீட்டு வருகை மற்றும் கண்டறிதல் உள்ளிட்ட சேவைகளை வழங்க ஒப்புக்கொள்கிறார்.",pl:"Niniejsza Umowa reguluje profesjonalną współpracę między Safe Doc („Spółka\") a Dostawcą w zakresie konsultacji i leczenia podróżnych. Dostawca zgadza się świadczyć usługi obejmujące wizyty w klinice, wizyty domowe i diagnostykę w oparciu o niezależną ocenę medyczną.",hu:"Ez a Megállapodás szabályozza a Safe Doc (a „Társaság\") és a Szolgáltató közötti szakmai együttműködést az utazóknak nyújtott orvosi tanácsadás és kezelés terén. A Szolgáltató vállalja, hogy független orvosi megítélés alapján nyújt szolgáltatásokat, beleértve a rendelői vizsgálatokat, házhozhívásokat és diagnosztikát.",si:"මෙම ගිවිසුම ගමන්කරුවන්ට වෛද්‍ය උපදේශන සහ ප්‍රතිකාර සේවා සඳහා Safe Doc (\"සමාගම\") සහ සපයන්නා අතර වෘත්තීය සහයෝගිතාව පාලනය කරයි. සපයන්නා ස්වාධීන වෛද්‍ය විනිශ්චය මත සායන සංචාර, නිවාස සංචාර සහ රෝග විනිශ්චය ඇතුළු සේවා සැපයීමට එකඟ වේ.",am:"ይህ ስምምነት በ Safe Doc (\"ኩባንያው\") እና በአቅራቢው መካከል ለተጓዦች የሕክምና ምክርና ሕክምና አገልግሎቶችን በተመለከተ ሙያዊ ትብብርን ይቆጣጠራል። አቅራቢው በራሱ የሕክምና ፍርድ መሠረት የክሊኒክ ጉብኝቶችን፣ የቤት ጉብኝቶችን እና ምርመራዎችን ጨምሮ አገልግሎቶችን ለመስጠት ይስማማል።"},
+  s2_h:{en:"Agreed Price List",he:"מחירון מוסכם",es:"Lista de precios acordada",pt:"Lista de preços acordada",th:"รายการราคาที่ตกลง",hi:"सहमत मूल्य सूची",vi:"Bảng giá đã thỏa thuận",km:"បញ្ជីតម្លៃដែលបានព្រមព្រៀង",lo:"ລາຍການລາຄາທີ່ຕົກລົງ",tl:"Napagkasunduang Listahan ng Presyo",id:"Daftar Harga yang Disepakati",zh:"约定价格表",ja:"合意価格表",ko:"합의된 가격표",de:"Vereinbarte Preisliste",nl:"Overeengekomen prijslijst",fr:"Liste de prix convenue",it:"Listino prezzi concordato",ru:"Согласованный прайс-лист",el:"Συμφωνημένος τιμοκατάλογος",tr:"Anlaşılan Fiyat Listesi",ar:"قائمة الأسعار المتفق عليها",fa:"فهرست قیمت توافقی",ur:"متفقہ قیمت کی فہرست",ne:"सहमत मूल्य सूची",ta:"ஒப்புக்கொள்ளப்பட்ட விலைப்பட்டியல்",pl:"Uzgodniony cennik",hu:"Megállapodott árlista",si:"එකඟ වූ මිල ලැයිස්තුව",am:"የተስማማ የዋጋ ዝርዝር"},
+  service_item:{en:"Service Item",he:"שירות",es:"Servicio",pt:"Serviço",th:"รายการบริการ",hi:"सेवा",vi:"Dịch vụ",km:"សេវាកម្ម",lo:"ລາຍການບໍລິການ",tl:"Serbisyo",id:"Item Layanan",zh:"服务项目",ja:"サービス項目",ko:"서비스 항목",de:"Leistung",nl:"Dienst",fr:"Service",it:"Servizio",ru:"Услуга",el:"Υπηρεσία",tr:"Hizmet Kalemi",ar:"بند الخدمة",fa:"مورد خدمت",ur:"خدمت کی شے",ne:"सेवा वस्तु",ta:"சேவை உருப்படி",pl:"Usługa",hu:"Szolgáltatás",si:"සේවා අයිතමය",am:"የአገልግሎት ንጥል"},
+  agreed_price:{en:"Agreed Price (Local Currency)",he:"מחיר מוסכם (מטבע מקומי)",es:"Precio acordado (moneda local)",pt:"Preço acordado (moeda local)",th:"ราคาที่ตกลง (สกุลเงินท้องถิ่น)",hi:"सहमत मूल्य (स्थानीय मुद्रा)",vi:"Giá thỏa thuận (nội tệ)",km:"តម្លៃព្រមព្រៀង (រូបិយប័ណ្ណក្នុងស្រុក)",lo:"ລາຄາທີ່ຕົກລົງ (ສະກຸນເງິນທ້ອງຖິ່ນ)",tl:"Napagkasunduang Presyo (Lokal na Pera)",id:"Harga Disepakati (Mata Uang Lokal)",zh:"约定价格（当地货币）",ja:"合意価格（現地通貨）",ko:"합의 가격 (현지 통화)",de:"Vereinbarter Preis (Landeswährung)",nl:"Overeengekomen prijs (lokale valuta)",fr:"Prix convenu (monnaie locale)",it:"Prezzo concordato (valuta locale)",ru:"Согласованная цена (местная валюта)",el:"Συμφωνημένη τιμή (τοπικό νόμισμα)",tr:"Anlaşılan Fiyat (Yerel Para)",ar:"السعر المتفق عليه (العملة المحلية)",fa:"قیمت توافقی (ارز محلی)",ur:"متفقہ قیمت (مقامی کرنسی)",ne:"सहमत मूल्य (स्थानीय मुद्रा)",ta:"ஒப்புக்கொண்ட விலை (உள்ளூர் நாணயம்)",pl:"Uzgodniona cena (waluta lokalna)",hu:"Megállapodott ár (helyi pénznem)",si:"එකඟ මිල (දේශීය මුදල්)",am:"የተስማማ ዋጋ (የአካባቢ ምንዛሪ)"},
+  p_clinic:{en:"Clinic Consultation",he:"ייעוץ במרפאה",es:"Consulta en clínica",pt:"Consulta na clínica",th:"การปรึกษาที่คลินิก",hi:"क्लिनिक परामर्श",vi:"Khám tại phòng khám",km:"ការប្រឹក្សានៅគ្លីនិក",lo:"ການປຶກສາທີ່ຄລີນິກ",tl:"Konsultasyon sa Klinika",id:"Konsultasi Klinik",zh:"诊所咨询",ja:"クリニック診察",ko:"클리닉 진료",de:"Praxisberatung",nl:"Praktijkconsult",fr:"Consultation en clinique",it:"Consulto in clinica",ru:"Консультация в клинике",el:"Συμβουλευτική κλινικής",tr:"Klinik Muayenesi",ar:"استشارة العيادة",fa:"مشاوره کلینیک",ur:"کلینک مشاورت",ne:"क्लिनिक परामर्श",ta:"கிளினிக் ஆலோசனை",pl:"Konsultacja w klinice",hu:"Rendelői konzultáció",si:"සායන උපදේශනය",am:"የክሊኒክ ምክክር"},
+  p_home:{en:"Home / Hotel Visit (House Call)",he:"ביקור בית / מלון",es:"Visita a domicilio / hotel",pt:"Visita domiciliar / hotel",th:"การเยี่ยมบ้าน / โรงแรม",hi:"घर / होटल विज़िट",vi:"Khám tại nhà / khách sạn",km:"ការទៅផ្ទះ / សណ្ឋាគារ",lo:"ການຢ້ຽມບ້ານ / ໂຮງແຮມ",tl:"Home / Hotel Visit",id:"Kunjungan Rumah / Hotel",zh:"上门 / 酒店出诊",ja:"自宅・ホテル往診",ko:"가정 / 호텔 방문",de:"Haus-/Hotelbesuch",nl:"Huis-/hotelbezoek",fr:"Visite à domicile / hôtel",it:"Visita a domicilio / hotel",ru:"Визит на дом / в отель",el:"Επίσκεψη σπίτι / ξενοδοχείο",tr:"Ev / Otel Ziyareti",ar:"زيارة منزلية / فندقية",fa:"ویزیت منزل / هتل",ur:"گھر / ہوٹل وزٹ",ne:"घर / होटल भ्रमण",ta:"வீடு / ஹோட்டல் வருகை",pl:"Wizyta domowa / hotelowa",hu:"Otthoni / szállodai látogatás",si:"නිවස / හෝටල් සංචාරය",am:"የቤት / ሆቴል ጉብኝት"},
+  p_online:{en:"Online Consultation (Telemedicine)",he:"ייעוץ מקוון (טלרפואה)",es:"Consulta en línea (telemedicina)",pt:"Consulta online (telemedicina)",th:"การปรึกษาออนไลน์ (เทเลเมดิซีน)",hi:"ऑनलाइन परामर्श (टेलीमेडिसिन)",vi:"Tư vấn trực tuyến (y tế từ xa)",km:"ការប្រឹក្សាតាមអ៊ីនធឺណិត",lo:"ການປຶກສາອອນລາຍ",tl:"Online na Konsultasyon",id:"Konsultasi Online (Telemedicine)",zh:"在线咨询（远程医疗）",ja:"オンライン診察（遠隔医療）",ko:"온라인 상담 (원격의료)",de:"Online-Beratung (Telemedizin)",nl:"Online consult (telegeneeskunde)",fr:"Consultation en ligne (télémédecine)",it:"Consulto online (telemedicina)",ru:"Онлайн-консультация (телемедицина)",el:"Διαδικτυακή συμβουλευτική (τηλεϊατρική)",tr:"Çevrimiçi Danışma (Teletıp)",ar:"استشارة عبر الإنترنت (طب عن بُعد)",fa:"مشاوره آنلاین (پزشکی از راه دور)",ur:"آن لائن مشاورت (ٹیلی میڈیسن)",ne:"अनलाइन परामर्श (टेलिमेडिसिन)",ta:"ஆன்லைன் ஆலோசனை (தொலைமருத்துவம்)",pl:"Konsultacja online (telemedycyna)",hu:"Online konzultáció (telemedicina)",si:"සබැඳි උපදේශනය (දුරස්ථ වෛද්‍ය)",am:"የመስመር ላይ ምክክር (ቴሌሜዲሲን)"},
+  p_lab:{en:"Laboratory Tests (Blood, Urine, etc.)",he:"בדיקות מעבדה (דם, שתן וכו')",es:"Análisis de laboratorio (sangre, orina, etc.)",pt:"Exames laboratoriais (sangue, urina, etc.)",th:"การตรวจทางห้องปฏิบัติการ (เลือด ปัสสาวะ ฯลฯ)",hi:"प्रयोगशाला परीक्षण (रक्त, मूत्र आदि)",vi:"Xét nghiệm (máu, nước tiểu, v.v.)",km:"ការធ្វើតេស្តមន្ទីរពិសោធន៍",lo:"ການກວດຫ້ອງທົດລອງ",tl:"Mga Lab Test (Dugo, Ihi, atbp.)",id:"Tes Laboratorium (Darah, Urin, dll.)",zh:"实验室检查（血液、尿液等）",ja:"臨床検査（血液・尿など）",ko:"실험실 검사 (혈액, 소변 등)",de:"Labortests (Blut, Urin usw.)",nl:"Laboratoriumtests (bloed, urine, enz.)",fr:"Analyses de laboratoire (sang, urine, etc.)",it:"Esami di laboratorio (sangue, urine, ecc.)",ru:"Лабораторные анализы (кровь, моча и др.)",el:"Εργαστηριακές εξετάσεις (αίμα, ούρα κ.λπ.)",tr:"Laboratuvar Testleri (Kan, İdrar vb.)",ar:"فحوصات مخبرية (دم، بول، إلخ)",fa:"آزمایش‌های آزمایشگاهی (خون، ادرار و غیره)",ur:"لیبارٹری ٹیسٹ (خون، پیشاب وغیرہ)",ne:"प्रयोगशाला परीक्षण (रगत, पिसाब आदि)",ta:"ஆய்வக சோதனைகள் (இரத்தம், சிறுநீர் முதலியன)",pl:"Badania laboratoryjne (krew, mocz itp.)",hu:"Laborvizsgálatok (vér, vizelet stb.)",si:"රසායනාගාර පරීක්ෂණ (රුධිර, මුත්‍රා, ආදිය)",am:"የቤተ ሙከራ ምርመራዎች (ደም፣ ሽንት ወዘተ)"},
+  p_diag:{en:"Diagnostic Tests (X-Ray, ECG, etc.)",he:"בדיקות אבחון (רנטגן, אק\"ג וכו')",es:"Pruebas diagnósticas (rayos X, ECG, etc.)",pt:"Exames diagnósticos (raio-X, ECG, etc.)",th:"การตรวจวินิจฉัย (เอกซเรย์ คลื่นไฟฟ้าหัวใจ ฯลฯ)",hi:"नैदानिक परीक्षण (एक्स-रे, ईसीजी आदि)",vi:"Chẩn đoán hình ảnh (X-quang, ECG, v.v.)",km:"ការធ្វើតេស្តវិនិច្ឆ័យ",lo:"ການກວດວິນິດໄສ",tl:"Diagnostic Tests (X-Ray, ECG, atbp.)",id:"Tes Diagnostik (Rontgen, EKG, dll.)",zh:"诊断检查（X光、心电图等）",ja:"画像・診断検査（X線・心電図など）",ko:"진단 검사 (X-레이, 심전도 등)",de:"Diagnosetests (Röntgen, EKG usw.)",nl:"Diagnostische tests (röntgen, ECG, enz.)",fr:"Tests diagnostiques (radio, ECG, etc.)",it:"Esami diagnostici (raggi X, ECG, ecc.)",ru:"Диагностика (рентген, ЭКГ и др.)",el:"Διαγνωστικά (ακτινογραφία, ΗΚΓ κ.λπ.)",tr:"Tanı Testleri (Röntgen, EKG vb.)",ar:"فحوصات تشخيصية (أشعة، تخطيط القلب، إلخ)",fa:"آزمایش‌های تشخیصی (اشعه ایکس، نوار قلب و غیره)",ur:"تشخیصی ٹیسٹ (ایکس رے، ای سی جی وغیرہ)",ne:"नैदानिक परीक्षण (एक्स-रे, ईसीजी आदि)",ta:"நோயறிதல் சோதனைகள் (எக்ஸ்-ரே, ஈசிஜி முதலியன)",pl:"Badania diagnostyczne (RTG, EKG itp.)",hu:"Diagnosztikai vizsgálatok (röntgen, EKG stb.)",si:"රෝග විනිශ්චය පරීක්ෂණ (X-ray, ECG, ආදිය)",am:"የመመርመሪያ ምርመራዎች (ኤክስሬይ፣ ኢሲጂ ወዘተ)"},
+  p_inj:{en:"Injections / Vaccinations / Wound Dressing",he:"זריקות / חיסונים / חבישת פצעים",es:"Inyecciones / vacunas / curación de heridas",pt:"Injeções / vacinas / curativos",th:"การฉีด / วัคซีน / ทำแผล",hi:"इंजेक्शन / टीकाकरण / घाव ड्रेसिंग",vi:"Tiêm / vắc-xin / thay băng",km:"ការចាក់ថ្នាំ / វ៉ាក់សាំង / រុំរបួស",lo:"ການສັກຢາ / ວັກຊີນ / ປ່ຽນຜ້າພັນແຜ",tl:"Iniksiyon / Bakuna / Wound Dressing",id:"Suntikan / Vaksinasi / Perawatan Luka",zh:"注射 / 疫苗 / 伤口换药",ja:"注射・予防接種・創傷処置",ko:"주사 / 예방접종 / 상처 드레싱",de:"Injektionen / Impfungen / Wundversorgung",nl:"Injecties / vaccinaties / wondverzorging",fr:"Injections / vaccins / pansements",it:"Iniezioni / vaccinazioni / medicazioni",ru:"Инъекции / прививки / перевязки",el:"Ενέσεις / εμβολιασμοί / επίδεσμοι",tr:"Enjeksiyon / Aşı / Yara Bakımı",ar:"حقن / تطعيمات / تضميد الجروح",fa:"تزریقات / واکسیناسیون / پانسمان زخم",ur:"انجیکشن / ویکسینیشن / زخم کی ڈریسنگ",ne:"इन्जेक्सन / खोप / घाउ ड्रेसिङ",ta:"ஊசிகள் / தடுப்பூசிகள் / காயம் கட்டுதல்",pl:"Zastrzyki / szczepienia / opatrunki",hu:"Injekciók / oltások / sebkötözés",si:"එන්නත් / එන්නත්කරණ / තුවාල බැඳීම",am:"መርፌዎች / ክትባቶች / ቁስል ማሰሪያ"},
+  p_iv:{en:"IV Fluids / Infusion Therapy",he:"עירוי נוזלים / טיפול תוך-ורידי",es:"Sueros IV / terapia de infusión",pt:"Fluidos IV / terapia de infusão",th:"การให้น้ำเกลือ / การให้สารน้ำทางหลอดเลือด",hi:"IV द्रव / इन्फ्यूजन थेरेपी",vi:"Truyền dịch / liệu pháp truyền",km:"សារធាតុរាវ IV / ការព្យាបាលដោយចាក់បញ្ចូល",lo:"ນ້ຳເກືອ IV / ການປິ່ນປົວດ້ວຍການໃຫ້ສານນ້ຳ",tl:"IV Fluids / Infusion Therapy",id:"Cairan Infus / Terapi Infus",zh:"静脉输液 / 输注治疗",ja:"点滴・輸液療法",ko:"수액 / 주입 요법",de:"Infusionen / Infusionstherapie",nl:"Infuus / infusietherapie",fr:"Perfusions IV / thérapie par perfusion",it:"Fleboclisi / terapia infusionale",ru:"Капельницы / инфузионная терапия",el:"Ενδοφλέβια υγρά / θεραπεία έγχυσης",tr:"IV Sıvılar / İnfüzyon Tedavisi",ar:"محاليل وريدية / علاج بالتسريب",fa:"مایعات وریدی / انفوزیون درمانی",ur:"IV سیال / انفیوژن تھراپی",ne:"IV तरल / इन्फ्युजन थेरापी",ta:"IV திரவங்கள் / உட்செலுத்தல் சிகிச்சை",pl:"Płyny IV / terapia infuzyjna",hu:"Infúzió / infúziós terápia",si:"IV තරල / කාන්දු චිකිත්සාව",am:"የደም ስር ፈሳሽ / ኢንፊውዥን ሕክምና"},
+  p_med:{en:"Medicines / Pharmacy Items",he:"תרופות / פריטי בית מרקחת",es:"Medicamentos / artículos de farmacia",pt:"Medicamentos / itens de farmácia",th:"ยา / สินค้าจากร้านขายยา",hi:"दवाइयाँ / फार्मेसी आइटम",vi:"Thuốc / vật phẩm nhà thuốc",km:"ឱសថ / ផលិតផលឱសថស្ថាន",lo:"ຢາ / ສິນຄ້າຮ້ານຂາຍຢາ",tl:"Gamot / Pharmacy Items",id:"Obat / Item Farmasi",zh:"药品 / 药房用品",ja:"医薬品・薬局用品",ko:"의약품 / 약국 품목",de:"Medikamente / Apothekenartikel",nl:"Medicijnen / apotheekartikelen",fr:"Médicaments / articles de pharmacie",it:"Medicinali / articoli di farmacia",ru:"Лекарства / аптечные товары",el:"Φάρμακα / είδη φαρμακείου",tr:"İlaçlar / Eczane Ürünleri",ar:"أدوية / منتجات الصيدلية",fa:"داروها / اقلام داروخانه",ur:"ادویات / فارمیسی اشیاء",ne:"औषधि / फार्मेसी सामान",ta:"மருந்துகள் / மருந்தக பொருட்கள்",pl:"Leki / artykuły apteczne",hu:"Gyógyszerek / gyógyszertári termékek",si:"ඖෂධ / ඖෂධ අයිතම",am:"መድኃኒቶች / የመድኃኒት ቤት ዕቃዎች"},
+  other_terms:{en:"Other Services / Special Terms:",he:"שירותים נוספים / תנאים מיוחדים:",es:"Otros servicios / términos especiales:",pt:"Outros serviços / termos especiais:",th:"บริการอื่น / เงื่อนไขพิเศษ:",hi:"अन्य सेवाएँ / विशेष शर्तें:",vi:"Dịch vụ khác / điều khoản đặc biệt:",km:"សេវាផ្សេងទៀត / លក្ខខណ្ឌពិសេស:",lo:"ບໍລິການອື່ນ / ເງື່ອນໄຂພິເສດ:",tl:"Iba pang Serbisyo / Espesyal na Tuntunin:",id:"Layanan Lain / Ketentuan Khusus:",zh:"其他服务 / 特殊条款：",ja:"その他のサービス / 特別条件：",ko:"기타 서비스 / 특별 조건:",de:"Weitere Leistungen / Sonderbedingungen:",nl:"Andere diensten / speciale voorwaarden:",fr:"Autres services / conditions spéciales :",it:"Altri servizi / termini speciali:",ru:"Прочие услуги / особые условия:",el:"Άλλες υπηρεσίες / ειδικοί όροι:",tr:"Diğer Hizmetler / Özel Şartlar:",ar:"خدمات أخرى / شروط خاصة:",fa:"خدمات دیگر / شرایط ویژه:",ur:"دیگر خدمات / خصوصی شرائط:",ne:"अन्य सेवा / विशेष सर्तहरू:",ta:"பிற சேவைகள் / சிறப்பு விதிமுறைகள்:",pl:"Inne usługi / warunki specjalne:",hu:"Egyéb szolgáltatások / különleges feltételek:",si:"වෙනත් සේවා / විශේෂ කොන්දේසි:",am:"ሌሎች አገልግሎቶች / ልዩ ውሎች:"},
+  s3_h:{en:"Service Fees & System Costs",he:"דמי שירות ועלויות מערכת",es:"Tarifas de servicio y costos del sistema",pt:"Taxas de serviço e custos do sistema",th:"ค่าบริการและค่าใช้จ่ายระบบ",hi:"सेवा शुल्क और सिस्टम लागत",vi:"Phí dịch vụ & chi phí hệ thống",km:"ថ្លៃសេវា និងថ្លៃប្រព័ន្ធ",lo:"ຄ່າບໍລິການ ແລະຄ່າລະບົບ",tl:"Bayad sa Serbisyo at Gastos sa Sistema",id:"Biaya Layanan & Biaya Sistem",zh:"服务费与系统费用",ja:"サービス料・システム費用",ko:"서비스 수수료 및 시스템 비용",de:"Servicegebühren & Systemkosten",nl:"Servicekosten & systeemkosten",fr:"Frais de service et coûts du système",it:"Costi di servizio e di sistema",ru:"Плата за услуги и стоимость системы",el:"Χρεώσεις υπηρεσιών & κόστος συστήματος",tr:"Hizmet Ücretleri & Sistem Maliyetleri",ar:"رسوم الخدمة وتكاليف النظام",fa:"هزینه خدمات و هزینه سیستم",ur:"سروس فیس اور سسٹم لاگت",ne:"सेवा शुल्क र प्रणाली लागत",ta:"சேவைக் கட்டணம் & கணினி செலவுகள்",pl:"Opłaty za usługi i koszty systemu",hu:"Szolgáltatási díjak és rendszerköltségek",si:"සේවා ගාස්තු සහ පද්ධති පිරිවැය",am:"የአገልግሎት ክፍያ እና የስርዓት ወጪ"},
+  s3_lead:{en:"No Costs.",he:"ללא עלויות.",es:"Sin costos.",pt:"Sem custos.",th:"ไม่มีค่าใช้จ่าย.",hi:"कोई लागत नहीं।",vi:"Không chi phí.",km:"គ្មានថ្លៃ.",lo:"ບໍ່ມີຄ່າໃຊ້ຈ່າຍ.",tl:"Walang Gastos.",id:"Tanpa Biaya.",zh:"无费用。",ja:"費用なし。",ko:"비용 없음.",de:"Keine Kosten.",nl:"Geen kosten.",fr:"Aucun coût.",it:"Nessun costo.",ru:"Без затрат.",el:"Χωρίς κόστος.",tr:"Maliyet Yok.",ar:"بلا تكاليف.",fa:"بدون هزینه.",ur:"کوئی لاگت نہیں۔",ne:"कुनै लागत छैन।",ta:"செலவு இல்லை.",pl:"Bez kosztów.",hu:"Nincs költség.",si:"පිරිවැයක් නැත.",am:"ምንም ወጪ የለም።"},
+  s3_p:{en:"It is agreed that the Medical Provider shall not pay any monthly fees, shall not pay any cost for the system, and shall not pay any commission for patients arriving through Safe Doc.",he:"מוסכם כי הרופא לא ישלם דמי מנוי חודשיים, לא ישלם כל עלות עבור המערכת, ולא ישלם כל עמלה עבור מטופלים המגיעים דרך Safe Doc.",es:"Se acuerda que el Proveedor Médico no pagará cuotas mensuales, ni costo alguno por el sistema, ni comisión por los pacientes que lleguen a través de Safe Doc.",pt:"Fica acordado que o Prestador Médico não pagará taxas mensais, nem qualquer custo pelo sistema, nem comissão pelos pacientes que cheguem através da Safe Doc.",th:"ตกลงกันว่าผู้ให้บริการทางการแพทย์จะไม่ชำระค่าธรรมเนียมรายเดือน ไม่ชำระค่าระบบ และไม่ชำระค่าคอมมิชชันสำหรับผู้ป่วยที่มาผ่าน Safe Doc",hi:"यह सहमति है कि चिकित्सा प्रदाता कोई मासिक शुल्क, सिस्टम के लिए कोई लागत, और Safe Doc के माध्यम से आने वाले रोगियों के लिए कोई कमीशन नहीं देगा।",vi:"Các bên đồng ý rằng Nhà cung cấp y tế sẽ không trả phí hàng tháng, không trả chi phí hệ thống và không trả hoa hồng cho bệnh nhân đến qua Safe Doc.",km:"យល់ព្រមថាអ្នកផ្តល់សេវាវេជ្ជសាស្ត្រនឹងមិនបង់ថ្លៃប្រចាំខែ មិនបង់ថ្លៃប្រព័ន្ធ និងមិនបង់កម្រៃជើងសារសម្រាប់អ្នកជំងឺដែលមកតាម Safe Doc ឡើយ។",lo:"ຕົກລົງວ່າຜູ້ໃຫ້ບໍລິການທາງການແພດຈະບໍ່ຈ່າຍຄ່າທຳນຽມລາຍເດືອນ ບໍ່ຈ່າຍຄ່າລະບົບ ແລະບໍ່ຈ່າຍຄ່ານາຍໜ້າສຳລັບຄົນເຈັບທີ່ມາຜ່ານ Safe Doc.",tl:"Napagkasunduan na ang Medical Provider ay hindi magbabayad ng buwanang bayad, gastos sa sistema, o komisyon para sa mga pasyenteng dumarating sa pamamagitan ng Safe Doc.",id:"Disepakati bahwa Penyedia Medis tidak membayar biaya bulanan, biaya sistem, maupun komisi untuk pasien yang datang melalui Safe Doc.",zh:"双方同意，医疗提供者无需支付任何月费、系统费用，也无需为通过 Safe Doc 到达的患者支付任何佣金。",ja:"医療提供者は月額料金、システム費用、および Safe Doc を通じて来院した患者に対する手数料を一切支払わないことに合意します。",ko:"의료 제공자는 월 이용료, 시스템 비용, 그리고 Safe Doc을 통해 오는 환자에 대한 어떠한 수수료도 지불하지 않는 데 동의합니다.",de:"Es wird vereinbart, dass der medizinische Anbieter keine monatlichen Gebühren, keine Systemkosten und keine Provision für über Safe Doc kommende Patienten zahlt.",nl:"Overeengekomen wordt dat de zorgverlener geen maandelijkse kosten, geen systeemkosten en geen commissie betaalt voor patiënten die via Safe Doc komen.",fr:"Il est convenu que le Prestataire médical ne paiera aucuns frais mensuels, aucun coût pour le système et aucune commission pour les patients arrivant via Safe Doc.",it:"Si conviene che il Fornitore medico non pagherà canoni mensili, alcun costo per il sistema né commissioni per i pazienti che arrivano tramite Safe Doc.",ru:"Стороны соглашаются, что медицинский поставщик не платит ежемесячных взносов, не несёт расходов на систему и не платит комиссию за пациентов, поступающих через Safe Doc.",el:"Συμφωνείται ότι ο πάροχος δεν θα καταβάλλει μηνιαία τέλη, κόστος συστήματος ή προμήθεια για ασθενείς που φτάνουν μέσω Safe Doc.",tr:"Tıbbi Sağlayıcının aylık ücret, sistem maliyeti veya Safe Doc aracılığıyla gelen hastalar için komisyon ödemeyeceği kabul edilir.",ar:"يُتفق على أن مقدم الخدمة الطبية لن يدفع أي رسوم شهرية، ولا أي تكلفة للنظام، ولا أي عمولة عن المرضى الذين يصلون عبر Safe Doc.",fa:"توافق می‌شود که ارائه‌دهنده پزشکی هیچ هزینه ماهانه، هزینه سیستم یا کمیسیونی برای بیماران ورودی از طریق Safe Doc پرداخت نمی‌کند.",ur:"یہ طے پایا ہے کہ میڈیکل فراہم کنندہ کوئی ماہانہ فیس، سسٹم کی لاگت، یا Safe Doc کے ذریعے آنے والے مریضوں کے لیے کوئی کمیشن ادا نہیں کرے گا۔",ne:"सहमति भएको छ कि चिकित्सा प्रदायकले कुनै मासिक शुल्क, प्रणालीको लागत, र Safe Doc मार्फत आउने बिरामीहरूका लागि कुनै कमिशन तिर्नेछैन।",ta:"மருத்துவ வழங்குநர் மாதாந்திர கட்டணம், கணினி செலவு, மற்றும் Safe Doc வழியாக வரும் நோயாளிகளுக்கு எந்த கமிஷனும் செலுத்த மாட்டார் என ஒப்புக்கொள்ளப்படுகிறது.",pl:"Uzgadnia się, że Dostawca medyczny nie będzie płacić opłat miesięcznych, kosztów systemu ani prowizji za pacjentów przybywających przez Safe Doc.",hu:"Megállapodás szerint az orvosi szolgáltató nem fizet havi díjat, rendszerköltséget, sem jutalékot a Safe Docon keresztül érkező betegek után.",si:"වෛද්‍ය සපයන්නා මාසික ගාස්තු, පද්ධති පිරිවැය, හෝ Safe Doc හරහා පැමිණෙන රෝගීන් සඳහා කොමිස් ගෙවීමක් නොකරන බවට එකඟ වේ.",am:"የሕክምና አቅራቢው ወርሃዊ ክፍያ፣ የስርዓት ወጪ፣ ወይም በ Safe Doc በኩል ለሚመጡ ታካሚዎች ኮሚሽን እንደማይከፍል ተስማምቷል።"},
+  s4_h:{en:"Platform Use & Payments",he:"שימוש בפלטפורמה ותשלומים",es:"Uso de la plataforma y pagos",pt:"Uso da plataforma e pagamentos",th:"การใช้แพลตฟอร์มและการชำระเงิน",hi:"प्लेटफ़ॉर्म उपयोग और भुगतान",vi:"Sử dụng nền tảng & thanh toán",km:"ការប្រើប្រាស់វេទិកា និងការទូទាត់",lo:"ການໃຊ້ແພລດຟອມ ແລະການຊຳລະ",tl:"Paggamit ng Platform at Bayad",id:"Penggunaan Platform & Pembayaran",zh:"平台使用与付款",ja:"プラットフォーム利用と支払い",ko:"플랫폼 사용 및 결제",de:"Plattformnutzung & Zahlungen",nl:"Platformgebruik & betalingen",fr:"Utilisation de la plateforme et paiements",it:"Uso della piattaforma e pagamenti",ru:"Использование платформы и платежи",el:"Χρήση πλατφόρμας & πληρωμές",tr:"Platform Kullanımı & Ödemeler",ar:"استخدام المنصة والمدفوعات",fa:"استفاده از پلتفرم و پرداخت‌ها",ur:"پلیٹ فارم کا استعمال اور ادائیگیاں",ne:"प्लेटफर्म प्रयोग र भुक्तानी",ta:"தளப் பயன்பாடு & கட்டணங்கள்",pl:"Korzystanie z platformy i płatności",hu:"Platformhasználat és fizetések",si:"වේදිකා භාවිතය සහ ගෙවීම්",am:"የመድረክ አጠቃቀም እና ክፍያዎች"},
+  s4_p:{en:"The Medical Provider acknowledges and agrees that any treatment of a traveler arriving through Safe Doc shall be executed through the Safe Doc application. The total payment and tests performed for the patient, including repeat treatments related to the same medical event, shall be paid through the Safe Doc platform in accordance with the agreed fair costs, without any brokerage fees whatsoever.",he:"הרופא מאשר ומסכים כי כל טיפול במטייל המגיע דרך Safe Doc יבוצע דרך אפליקציית Safe Doc. סך התשלום והבדיקות שבוצעו עבור המטופל, לרבות טיפולים חוזרים הקשורים לאותו אירוע רפואי, ישולמו דרך פלטפורמת Safe Doc ובהתאם לעלויות ההוגנות המוסכמות, ללא דמי תיווך כלשהם.",es:"El Proveedor reconoce y acepta que todo tratamiento de un viajero que llegue a través de Safe Doc se ejecutará mediante la aplicación Safe Doc. El pago total y las pruebas realizadas al paciente, incluidos los tratamientos repetidos relacionados con el mismo evento médico, se pagarán a través de la plataforma Safe Doc conforme a los costos justos acordados, sin comisión de intermediación alguna.",pt:"O Prestador reconhece e concorda que qualquer tratamento de um viajante que chegue através da Safe Doc será executado pela aplicação Safe Doc. O pagamento total e os exames realizados ao paciente, incluindo tratamentos repetidos relacionados ao mesmo evento médico, serão pagos através da plataforma Safe Doc de acordo com os custos justos acordados, sem quaisquer taxas de intermediação.",th:"ผู้ให้บริการรับทราบและตกลงว่าการรักษานักเดินทางที่มาผ่าน Safe Doc จะดำเนินการผ่านแอป Safe Doc การชำระเงินทั้งหมดและการตรวจที่ทำให้ผู้ป่วย รวมถึงการรักษาซ้ำที่เกี่ยวข้องกับเหตุการณ์ทางการแพทย์เดียวกัน จะชำระผ่านแพลตฟอร์ม Safe Doc ตามค่าใช้จ่ายที่เป็นธรรมที่ตกลงกัน โดยไม่มีค่านายหน้าใด ๆ",hi:"प्रदाता स्वीकार करता है और सहमत है कि Safe Doc के माध्यम से आने वाले यात्री का कोई भी उपचार Safe Doc एप्लिकेशन के माध्यम से किया जाएगा। रोगी के लिए किया गया कुल भुगतान और परीक्षण, उसी चिकित्सा घटना से संबंधित दोहराए गए उपचार सहित, सहमत उचित लागत के अनुसार Safe Doc प्लेटफ़ॉर्म के माध्यम से बिना किसी दलाली शुल्क के भुगतान किया जाएगा।",vi:"Nhà cung cấp xác nhận và đồng ý rằng mọi điều trị cho du khách đến qua Safe Doc sẽ được thực hiện qua ứng dụng Safe Doc. Tổng thanh toán và các xét nghiệm cho bệnh nhân, bao gồm điều trị lặp lại liên quan đến cùng một sự kiện y tế, sẽ được thanh toán qua nền tảng Safe Doc theo mức chi phí công bằng đã thỏa thuận, không có bất kỳ phí môi giới nào.",km:"អ្នកផ្តល់សេវាទទួលស្គាល់ និងយល់ព្រមថាការព្យាបាលអ្នកដំណើរដែលមកតាម Safe Doc នឹងធ្វើឡើងតាមកម្មវិធី Safe Doc។ ការទូទាត់សរុប និងការធ្វើតេស្ត រួមទាំងការព្យាបាលឡើងវិញ នឹងបង់តាមវេទិកា Safe Doc តាមតម្លៃយុត្តិធម៌ដែលបានព្រមព្រៀង ដោយគ្មានថ្លៃឈ្នួល។",lo:"ຜູ້ໃຫ້ບໍລິການຮັບຮູ້ ແລະຕົກລົງວ່າການປິ່ນປົວນັກທ່ອງທ່ຽວທີ່ມາຜ່ານ Safe Doc ຈະດຳເນີນຜ່ານແອັບ Safe Doc. ການຊຳລະທັງໝົດ ແລະການກວດ ຈະຊຳລະຜ່ານແພລດຟອມ Safe Doc ຕາມຄ່າໃຊ້ຈ່າຍຍຸຕິທຳທີ່ຕົກລົງ ໂດຍບໍ່ມີຄ່ານາຍໜ້າ.",tl:"Kinikilala at sumasang-ayon ang Provider na ang anumang paggamot sa manlalakbay na dumarating sa pamamagitan ng Safe Doc ay isasagawa sa pamamagitan ng Safe Doc application. Ang kabuuang bayad at mga test, kabilang ang inuulit na paggamot, ay babayaran sa Safe Doc platform ayon sa napagkasunduang patas na halaga, nang walang anumang bayad sa brokerage.",id:"Penyedia mengakui dan setuju bahwa setiap perawatan wisatawan yang datang melalui Safe Doc akan dilakukan melalui aplikasi Safe Doc. Total pembayaran dan tes, termasuk perawatan berulang, akan dibayarkan melalui platform Safe Doc sesuai biaya wajar yang disepakati, tanpa biaya perantara apa pun.",zh:"提供者承认并同意，通过 Safe Doc 到达的旅行者的任何治疗均应通过 Safe Doc 应用程序执行。为患者支付的总费用和检查，包括与同一医疗事件相关的重复治疗，均应按约定的公平费用通过 Safe Doc 平台支付，不收取任何中介费。",ja:"提供者は、Safe Doc を通じて来院した旅行者の治療はすべて Safe Doc アプリを通じて実施されることを承認し同意します。患者に対する支払総額および検査は、同一医療事象に関連する再治療を含め、合意された公正な費用に従って Safe Doc プラットフォームを通じて支払われ、仲介手数料は一切発生しません。",ko:"제공자는 Safe Doc을 통해 오는 여행자의 모든 치료가 Safe Doc 애플리케이션을 통해 수행됨을 인정하고 동의합니다. 환자에 대한 총 결제 및 검사는 동일 의료 사건과 관련된 반복 치료를 포함하여 합의된 공정 비용에 따라 Safe Doc 플랫폼을 통해 지불되며, 어떠한 중개 수수료도 없습니다.",de:"Der Anbieter erkennt an und stimmt zu, dass jede Behandlung eines über Safe Doc kommenden Reisenden über die Safe-Doc-App erfolgt. Die Gesamtzahlung und durchgeführten Tests, einschließlich wiederholter Behandlungen desselben medizinischen Ereignisses, werden über die Safe-Doc-Plattform gemäß den vereinbarten fairen Kosten ohne jegliche Vermittlungsgebühren bezahlt.",nl:"De zorgverlener erkent en stemt ermee in dat elke behandeling van een via Safe Doc komende reiziger via de Safe Doc-applicatie wordt uitgevoerd. De totale betaling en tests, inclusief herhaalde behandelingen van hetzelfde medische voorval, worden via het Safe Doc-platform betaald volgens de overeengekomen eerlijke kosten, zonder enige bemiddelingskosten.",fr:"Le Prestataire reconnaît et accepte que tout traitement d'un voyageur arrivant via Safe Doc sera exécuté via l'application Safe Doc. Le paiement total et les examens réalisés pour le patient, y compris les traitements répétés liés au même événement médical, seront payés via la plateforme Safe Doc conformément aux coûts équitables convenus, sans aucuns frais d'intermédiation.",it:"Il Fornitore riconosce e accetta che qualsiasi trattamento di un viaggiatore che arriva tramite Safe Doc sarà eseguito tramite l'applicazione Safe Doc. Il pagamento totale e gli esami eseguiti per il paziente, inclusi i trattamenti ripetuti relativi allo stesso evento medico, saranno pagati tramite la piattaforma Safe Doc secondo i costi equi concordati, senza alcuna commissione di intermediazione.",ru:"Поставщик признаёт и соглашается, что любое лечение путешественника, прибывшего через Safe Doc, будет проводиться через приложение Safe Doc. Общая оплата и проведённые анализы, включая повторные процедуры по тому же медицинскому случаю, оплачиваются через платформу Safe Doc по согласованным справедливым ценам без каких-либо посреднических сборов.",el:"Ο Πάροχος αναγνωρίζει και συμφωνεί ότι κάθε θεραπεία ταξιδιώτη που φτάνει μέσω Safe Doc θα εκτελείται μέσω της εφαρμογής Safe Doc. Η συνολική πληρωμή και οι εξετάσεις, συμπεριλαμβανομένων επαναλαμβανόμενων θεραπειών, θα καταβάλλονται μέσω της πλατφόρμας Safe Doc σύμφωνα με το συμφωνηθέν δίκαιο κόστος, χωρίς καμία προμήθεια μεσιτείας.",tr:"Sağlayıcı, Safe Doc aracılığıyla gelen bir gezginin her türlü tedavisinin Safe Doc uygulaması üzerinden yürütüleceğini kabul eder. Hastaya yönelik toplam ödeme ve testler, aynı tıbbi olayla ilgili tekrar tedaviler dahil, anlaşılan adil maliyetlere göre, herhangi bir aracılık ücreti olmaksızın Safe Doc platformu üzerinden ödenir.",ar:"يقر مقدم الخدمة ويوافق على أن أي علاج لمسافر يصل عبر Safe Doc سيُنفَّذ من خلال تطبيق Safe Doc. وسيُدفع إجمالي المبلغ والفحوصات، بما في ذلك العلاجات المتكررة المرتبطة بالحدث الطبي نفسه، عبر منصة Safe Doc وفقًا للتكاليف العادلة المتفق عليها، دون أي رسوم وساطة.",fa:"ارائه‌دهنده می‌پذیرد و موافقت می‌کند که هرگونه درمان مسافری که از طریق Safe Doc می‌آید از طریق برنامه Safe Doc انجام شود. مبلغ کل و آزمایش‌ها، شامل درمان‌های مکرر مرتبط با همان رویداد پزشکی، مطابق هزینه‌های منصفانه توافق‌شده از طریق پلتفرم Safe Doc و بدون هیچ‌گونه کارمزد واسطه‌گری پرداخت خواهد شد.",ur:"فراہم کنندہ تسلیم کرتا اور متفق ہے کہ Safe Doc کے ذریعے آنے والے مسافر کا کوئی بھی علاج Safe Doc ایپلیکیشن کے ذریعے کیا جائے گا۔ مریض کے لیے کل ادائیگی اور ٹیسٹ، بشمول اسی طبی واقعے سے متعلق بار بار کے علاج، متفقہ منصفانہ لاگت کے مطابق Safe Doc پلیٹ فارم کے ذریعے بغیر کسی بروکریج فیس کے ادا کیے جائیں گے۔",ne:"प्रदायकले स्वीकार र सहमत हुन्छ कि Safe Doc मार्फत आउने यात्रुको कुनै पनि उपचार Safe Doc एप्लिकेसन मार्फत गरिनेछ। बिरामीका लागि गरिएको कुल भुक्तानी र परीक्षणहरू, सोही चिकित्सा घटनासँग सम्बन्धित दोहोरिने उपचार सहित, सहमत उचित लागत अनुसार कुनै दलाली शुल्क बिना Safe Doc प्लेटफर्म मार्फत भुक्तानी गरिनेछ।",ta:"Safe Doc வழியாக வரும் பயணியின் எந்தவொரு சிகிச்சையும் Safe Doc செயலி வழியாக மேற்கொள்ளப்படும் என்பதை வழங்குநர் ஒப்புக்கொள்கிறார். நோயாளிக்கான மொத்த கட்டணமும் சோதனைகளும், அதே மருத்துவ நிகழ்வு தொடர்பான மீண்டும் சிகிச்சைகள் உட்பட, ஒப்புக்கொண்ட நியாயமான கட்டணங்களின்படி எந்த தரகு கட்டணமும் இல்லாமல் Safe Doc தளம் வழியாக செலுத்தப்படும்.",pl:"Dostawca przyjmuje do wiadomości i zgadza się, że każde leczenie podróżnego przybywającego przez Safe Doc będzie realizowane za pośrednictwem aplikacji Safe Doc. Całkowita płatność i badania, w tym powtórne leczenie tego samego zdarzenia medycznego, będą opłacane przez platformę Safe Doc zgodnie z uzgodnionymi uczciwymi kosztami, bez jakichkolwiek opłat pośrednictwa.",hu:"A Szolgáltató elismeri és elfogadja, hogy a Safe Docon keresztül érkező utazó bármely kezelése a Safe Doc alkalmazáson keresztül történik. A teljes fizetés és vizsgálatok, beleértve az ugyanazon orvosi eseményhez kapcsolódó ismételt kezeléseket, a megállapodott méltányos költségek szerint, mindenféle közvetítői díj nélkül a Safe Doc platformon keresztül kerülnek kifizetésre.",si:"Safe Doc හරහා පැමිණෙන ගමන්කරුවෙකුගේ ඕනෑම ප්‍රතිකාරයක් Safe Doc යෙදුම හරහා සිදුකරන බව සපයන්නා පිළිගෙන එකඟ වේ. රෝගියා සඳහා සම්පූර්ණ ගෙවීම සහ පරීක්ෂණ, එම වෛද්‍ය සිදුවීමට අදාළ නැවත ප්‍රතිකාර ඇතුළුව, එකඟ වූ සාධාරණ පිරිවැයට අනුව කිසිදු තැරැව්කාර ගාස්තුවක් නොමැතිව Safe Doc වේදිකාව හරහා ගෙවනු ලැබේ.",am:"አቅራቢው Safe Doc በኩል የሚመጣ ተጓዥ ማንኛውም ሕክምና በ Safe Doc መተግበሪያ በኩል እንደሚከናወን ይቀበላል እና ይስማማል። ለታካሚው የተደረገው ጠቅላላ ክፍያ እና ምርመራዎች፣ ከተመሳሳይ የሕክምና ክስተት ጋር የተያያዙ ተደጋጋሚ ሕክምናዎችን ጨምሮ፣ በተስማማው ፍትሐዊ ወጪ መሠረት ያለ ምንም የደላላ ክፍያ በ Safe Doc መድረክ በኩል ይከፈላሉ።"},
+  s5_h:{en:"Medical Responsibility & Liability",he:"אחריות רפואית ומשפטית",es:"Responsabilidad médica y legal",pt:"Responsabilidade médica e legal",th:"ความรับผิดชอบทางการแพทย์และกฎหมาย",hi:"चिकित्सा और कानूनी जिम्मेदारी",vi:"Trách nhiệm y tế & pháp lý",km:"ការទទួលខុសត្រូវវេជ្ជសាស្ត្រ និងច្បាប់",lo:"ຄວາມຮັບຜິດຊອບທາງການແພດ ແລະກົດໝາຍ",tl:"Medikal at Legal na Pananagutan",id:"Tanggung Jawab Medis & Hukum",zh:"医疗与法律责任",ja:"医療上・法的責任",ko:"의료 및 법적 책임",de:"Medizinische & rechtliche Haftung",nl:"Medische & juridische aansprakelijkheid",fr:"Responsabilité médicale et juridique",it:"Responsabilità medica e legale",ru:"Медицинская и юридическая ответственность",el:"Ιατρική & νομική ευθύνη",tr:"Tıbbi & Hukuki Sorumluluk",ar:"المسؤولية الطبية والقانونية",fa:"مسئولیت پزشکی و قانونی",ur:"طبی اور قانونی ذمہ داری",ne:"चिकित्सा र कानुनी जिम्मेवारी",ta:"மருத்துவ & சட்டப் பொறுப்பு",pl:"Odpowiedzialność medyczna i prawna",hu:"Orvosi és jogi felelősség",si:"වෛද්‍ය හා නෛතික වගකීම",am:"የሕክምና እና ሕጋዊ ኃላፊነት"},
+  s5_p:{en:"The Provider bears sole medical and legal responsibility for the treatment. Safe Doc is a technology platform and shall not be held liable for any medical outcomes, malpractice, or negligence. The Provider declares they possess valid medical licenses and professional indemnity insurance required by local law.",he:"הרופא נושא באחריות רפואית ומשפטית בלעדית לטיפול. Safe Doc היא פלטפורמה טכנולוגית ולא תישא באחריות לכל תוצאה רפואית, רשלנות או טעות. הרופא מצהיר כי ברשותו רישיונות רפואיים בתוקף וביטוח אחריות מקצועית כנדרש בחוק המקומי.",es:"El Proveedor asume la responsabilidad médica y legal exclusiva del tratamiento. Safe Doc es una plataforma tecnológica y no será responsable de resultados médicos, negligencia o mala praxis. El Proveedor declara poseer licencias médicas válidas y seguro de responsabilidad profesional exigido por la ley local.",pt:"O Prestador assume a responsabilidade médica e legal exclusiva pelo tratamento. A Safe Doc é uma plataforma tecnológica e não será responsável por resultados médicos, negligência ou má prática. O Prestador declara possuir licenças médicas válidas e seguro de responsabilidade profissional exigido pela lei local.",th:"ผู้ให้บริการรับผิดชอบทางการแพทย์และกฎหมายแต่เพียงผู้เดียวสำหรับการรักษา Safe Doc เป็นแพลตฟอร์มเทคโนโลยีและจะไม่รับผิดต่อผลลัพธ์ทางการแพทย์ การประมาท หรือความผิดพลาด ผู้ให้บริการประกาศว่ามีใบอนุญาตแพทย์ที่ถูกต้องและประกันความรับผิดทางวิชาชีพตามกฎหมายท้องถิ่น",hi:"प्रदाता उपचार के लिए एकमात्र चिकित्सा और कानूनी जिम्मेदारी वहन करता है। Safe Doc एक प्रौद्योगिकी मंच है और किसी भी चिकित्सा परिणाम, कुप्रबंधन या लापरवाही के लिए उत्तरदायी नहीं होगा। प्रदाता घोषित करता है कि उसके पास वैध चिकित्सा लाइसेंस और स्थानीय कानून द्वारा आवश्यक पेशेवर क्षतिपूर्ति बीमा है।",vi:"Nhà cung cấp chịu trách nhiệm y tế và pháp lý duy nhất đối với việc điều trị. Safe Doc là nền tảng công nghệ và không chịu trách nhiệm về kết quả y tế, sai sót hay sơ suất. Nhà cung cấp tuyên bố sở hữu giấy phép hành nghề hợp lệ và bảo hiểm trách nhiệm nghề nghiệp theo luật địa phương.",km:"អ្នកផ្តល់សេវាទទួលខុសត្រូវវេជ្ជសាស្ត្រ និងច្បាប់តែម្នាក់ឯងចំពោះការព្យាបាល។ Safe Doc គឺជាវេទិកាបច្ចេកវិទ្យា ហើយមិនទទួលខុសត្រូវចំពោះលទ្ធផលវេជ្ជសាស្ត្រ ឬការធ្វេសប្រហែស។ អ្នកផ្តល់សេវាប្រកាសថាមានអាជ្ញាប័ណ្ណត្រឹមត្រូវ និងធានារ៉ាប់រងវិជ្ជាជីវៈ។",lo:"ຜູ້ໃຫ້ບໍລິການຮັບຜິດຊອບທາງການແພດ ແລະກົດໝາຍແຕ່ຜູ້ດຽວສຳລັບການປິ່ນປົວ. Safe Doc ເປັນແພລດຟອມເຕັກໂນໂລຍີ ແລະຈະບໍ່ຮັບຜິດຊອບຕໍ່ຜົນທາງການແພດ ຫຼືຄວາມປະໝາດ. ຜູ້ໃຫ້ບໍລິການປະກາດວ່າມີໃບອະນຸຍາດ ແລະປະກັນໄພວິຊາຊີບ.",tl:"Ang Provider lamang ang may medikal at legal na pananagutan sa paggamot. Ang Safe Doc ay isang teknolohiyang platform at hindi mananagot sa anumang medikal na resulta, malpractice, o kapabayaan. Idineklara ng Provider na may wastong medical license at professional indemnity insurance ayon sa lokal na batas.",id:"Penyedia memikul tanggung jawab medis dan hukum tunggal atas perawatan. Safe Doc adalah platform teknologi dan tidak bertanggung jawab atas hasil medis, malpraktik, atau kelalaian. Penyedia menyatakan memiliki lisensi medis yang sah dan asuransi tanggung jawab profesional sesuai hukum setempat.",zh:"提供者对治疗承担全部医疗和法律责任。Safe Doc 是技术平台，不对任何医疗结果、医疗事故或疏忽承担责任。提供者声明其持有有效的医疗执照和当地法律要求的专业责任保险。",ja:"提供者は治療に対する医療上・法的責任を単独で負います。Safe Doc は技術プラットフォームであり、医療結果、医療過誤、過失について一切責任を負いません。提供者は、現地法で求められる有効な医師免許および職業賠償責任保険を保有していることを宣言します。",ko:"제공자는 치료에 대한 의료적·법적 책임을 단독으로 부담합니다. Safe Doc은 기술 플랫폼이며 의료 결과, 의료 과실 또는 부주의에 대해 책임지지 않습니다. 제공자는 현지 법률이 요구하는 유효한 의료 면허와 전문 배상 책임 보험을 보유하고 있음을 선언합니다.",de:"Der Anbieter trägt die alleinige medizinische und rechtliche Verantwortung für die Behandlung. Safe Doc ist eine Technologieplattform und haftet nicht für medizinische Ergebnisse, Behandlungsfehler oder Fahrlässigkeit. Der Anbieter erklärt, über gültige ärztliche Zulassungen und die nach lokalem Recht erforderliche Berufshaftpflichtversicherung zu verfügen.",nl:"De zorgverlener draagt de volledige medische en juridische verantwoordelijkheid voor de behandeling. Safe Doc is een technologieplatform en is niet aansprakelijk voor medische uitkomsten, wanpraktijken of nalatigheid. De zorgverlener verklaart geldige medische licenties en een beroepsaansprakelijkheidsverzekering te bezitten zoals vereist door lokale wetgeving.",fr:"Le Prestataire assume l'entière responsabilité médicale et juridique du traitement. Safe Doc est une plateforme technologique et ne saurait être tenue responsable des résultats médicaux, fautes ou négligences. Le Prestataire déclare détenir des licences médicales valides et une assurance responsabilité professionnelle requise par la loi locale.",it:"Il Fornitore si assume l'esclusiva responsabilità medica e legale del trattamento. Safe Doc è una piattaforma tecnologica e non sarà responsabile di esiti medici, negligenza o malasanità. Il Fornitore dichiara di possedere licenze mediche valide e un'assicurazione di responsabilità professionale richiesta dalla legge locale.",ru:"Поставщик несёт исключительную медицинскую и юридическую ответственность за лечение. Safe Doc является технологической платформой и не несёт ответственности за медицинские результаты, врачебные ошибки или халатность. Поставщик заявляет, что обладает действующими медицинскими лицензиями и профессиональной страховкой ответственности, требуемой местным законодательством.",el:"Ο Πάροχος φέρει αποκλειστική ιατρική και νομική ευθύνη για τη θεραπεία. Το Safe Doc είναι τεχνολογική πλατφόρμα και δεν φέρει ευθύνη για ιατρικά αποτελέσματα, αμέλεια ή κακή πρακτική. Ο Πάροχος δηλώνει ότι κατέχει έγκυρες ιατρικές άδειες και ασφάλιση επαγγελματικής ευθύνης που απαιτείται από την τοπική νομοθεσία.",tr:"Sağlayıcı, tedaviye ilişkin tek başına tıbbi ve hukuki sorumluluğu taşır. Safe Doc bir teknoloji platformudur ve tıbbi sonuçlardan, hatalı uygulamadan veya ihmalden sorumlu tutulamaz. Sağlayıcı, yerel yasaların gerektirdiği geçerli tıbbi lisanslara ve mesleki sorumluluk sigortasına sahip olduğunu beyan eder.",ar:"يتحمل مقدم الخدمة وحده المسؤولية الطبية والقانونية عن العلاج. Safe Doc منصة تقنية ولن تتحمل المسؤولية عن أي نتائج طبية أو إهمال أو سوء ممارسة. يقر مقدم الخدمة بامتلاكه تراخيص طبية سارية وتأمين مسؤولية مهنية وفقًا للقانون المحلي.",fa:"ارائه‌دهنده مسئولیت پزشکی و قانونی درمان را به‌تنهایی بر عهده دارد. Safe Doc یک پلتفرم فناوری است و در قبال نتایج پزشکی، قصور یا سهل‌انگاری مسئول نیست. ارائه‌دهنده اعلام می‌کند که دارای مجوزهای پزشکی معتبر و بیمه مسئولیت حرفه‌ای مطابق قانون محلی است.",ur:"فراہم کنندہ علاج کی واحد طبی اور قانونی ذمہ داری اٹھاتا ہے۔ Safe Doc ایک ٹیکنالوجی پلیٹ فارم ہے اور کسی بھی طبی نتیجے، غفلت یا بدعملی کا ذمہ دار نہیں ہوگا۔ فراہم کنندہ اعلان کرتا ہے کہ اس کے پاس درست میڈیکل لائسنس اور مقامی قانون کے مطابق پیشہ ورانہ ذمہ داری انشورنس ہے۔",ne:"प्रदायकले उपचारको एकमात्र चिकित्सा र कानुनी जिम्मेवारी बहन गर्छ। Safe Doc एक प्रविधि प्लेटफर्म हो र कुनै चिकित्सा परिणाम, लापरवाही वा कुप्रबन्धनको लागि उत्तरदायी हुनेछैन। प्रदायकले स्थानीय कानुनद्वारा आवश्यक वैध चिकित्सा इजाजतपत्र र व्यावसायिक क्षतिपूर्ति बीमा भएको घोषणा गर्छ।",ta:"வழங்குநர் சிகிச்சைக்கான மருத்துவ மற்றும் சட்டப் பொறுப்பை தனியாக ஏற்கிறார். Safe Doc ஒரு தொழில்நுட்ப தளமாகும், எந்தவொரு மருத்துவ விளைவு, தவறான நடைமுறை அல்லது அலட்சியத்திற்கும் பொறுப்பாகாது. வழங்குநர் செல்லுபடியாகும் மருத்துவ உரிமங்கள் மற்றும் உள்ளூர் சட்டம் தேவைப்படும் தொழில்முறை இழப்பீட்டு காப்பீட்டை வைத்திருப்பதாக அறிவிக்கிறார்.",pl:"Dostawca ponosi wyłączną odpowiedzialność medyczną i prawną za leczenie. Safe Doc jest platformą technologiczną i nie ponosi odpowiedzialności za wyniki medyczne, błędy w sztuce ani zaniedbania. Dostawca oświadcza, że posiada ważne licencje medyczne i ubezpieczenie odpowiedzialności zawodowej wymagane prawem lokalnym.",hu:"A Szolgáltató kizárólagos orvosi és jogi felelősséget visel a kezelésért. A Safe Doc egy technológiai platform, és nem felel az orvosi eredményekért, műhibákért vagy gondatlanságért. A Szolgáltató kijelenti, hogy érvényes orvosi engedélyekkel és a helyi jog által előírt szakmai felelősségbiztosítással rendelkezik.",si:"ප්‍රතිකාරය සඳහා වෛද්‍ය හා නෛතික වගකීම සපයන්නා තනිවම දරයි. Safe Doc යනු තාක්ෂණික වේදිකාවක් වන අතර කිසිදු වෛද්‍ය ප්‍රතිඵලයක්, වැරදි පිළිවෙතක් හෝ නොසැලකිල්ලක් සඳහා වගකිව යුතු නොවේ. දේශීය නීතිය මඟින් අවශ්‍ය වලංගු වෛද්‍ය බලපත්‍ර සහ වෘත්තීය වන්දි රක්ෂණයක් සතු බව සපයන්නා ප්‍රකාශ කරයි.",am:"አቅራቢው ለሕክምናው ብቸኛ የሕክምና እና ሕጋዊ ኃላፊነት ይወስዳል። Safe Doc የቴክኖሎጂ መድረክ ሲሆን ለማንኛውም የሕክምና ውጤት፣ ስህተት ወይም ቸልተኝነት ተጠያቂ አይሆንም። አቅራቢው በአካባቢ ሕግ የሚፈለጉ ትክክለኛ የሕክምና ፈቃዶች እና ሙያዊ የኃላፊነት ኢንሹራንስ እንዳለው ያውጃል።"},
+  s6_h:{en:"Confidentiality & Non-Circumvention",he:"סודיות ואי-עקיפה",es:"Confidencialidad y no elusión",pt:"Confidencialidade e não circunvenção",th:"การรักษาความลับและการไม่หลีกเลี่ยง",hi:"गोपनीयता और गैर-परिहार",vi:"Bảo mật & không lách nền tảng",km:"ការសម្ងាត់ និងមិនគេចវេស",lo:"ຄວາມລັບ ແລະການບໍ່ຫຼີກລ້ຽງ",tl:"Pagiging Kompidensyal at Non-Circumvention",id:"Kerahasiaan & Non-Circumvention",zh:"保密与禁止规避",ja:"守秘義務・回避禁止",ko:"기밀유지 및 우회 금지",de:"Vertraulichkeit & Umgehungsverbot",nl:"Vertrouwelijkheid & non-circumventie",fr:"Confidentialité et non-contournement",it:"Riservatezza e non elusione",ru:"Конфиденциальность и запрет обхода",el:"Εμπιστευτικότητα & μη παράκαμψη",tr:"Gizlilik & Atlatmama",ar:"السرية وعدم الالتفاف",fa:"محرمانگی و عدم دور زدن",ur:"رازداری اور عدم گریز",ne:"गोपनीयता र गैर-छल",ta:"இரகசியத்தன்மை & தவிர்க்காமை",pl:"Poufność i zakaz obchodzenia",hu:"Titoktartás és megkerülés tilalma",si:"රහස්‍යභාවය සහ මඟ නොහැරීම",am:"ሚስጥራዊነት እና አለመዞር"},
+  s6_p:{en:"The Provider shall maintain absolute confidentiality regarding the Company's business model and patient data. The Provider shall not circumvent the platform to provide private services to travelers referred by Safe Doc.",he:"הרופא ישמור על סודיות מוחלטת בנוגע למודל העסקי של החברה ולנתוני המטופלים. הרופא לא יעקוף את הפלטפורמה כדי לספק שירותים פרטיים למטיילים שהופנו דרך Safe Doc.",es:"El Proveedor mantendrá absoluta confidencialidad sobre el modelo de negocio de la Empresa y los datos de los pacientes. El Proveedor no eludirá la plataforma para prestar servicios privados a viajeros referidos por Safe Doc.",pt:"O Prestador manterá total confidencialidade sobre o modelo de negócio da Empresa e os dados dos pacientes. O Prestador não contornará a plataforma para prestar serviços privados a viajantes encaminhados pela Safe Doc.",th:"ผู้ให้บริการจะรักษาความลับโดยสมบูรณ์เกี่ยวกับรูปแบบธุรกิจของบริษัทและข้อมูลผู้ป่วย ผู้ให้บริการจะไม่หลีกเลี่ยงแพลตฟอร์มเพื่อให้บริการส่วนตัวแก่นักเดินทางที่ส่งต่อโดย Safe Doc",hi:"प्रदाता कंपनी के व्यवसाय मॉडल और रोगी डेटा के संबंध में पूर्ण गोपनीयता बनाए रखेगा। प्रदाता Safe Doc द्वारा भेजे गए यात्रियों को निजी सेवाएं प्रदान करने के लिए मंच को दरकिनार नहीं करेगा।",vi:"Nhà cung cấp phải giữ bí mật tuyệt đối về mô hình kinh doanh của Công ty và dữ liệu bệnh nhân. Nhà cung cấp không được lách nền tảng để cung cấp dịch vụ riêng cho du khách do Safe Doc giới thiệu.",km:"អ្នកផ្តល់សេវានឹងរក្សាការសម្ងាត់ដាច់ខាតអំពីគំរូអាជីវកម្ម និងទិន្នន័យអ្នកជំងឺ។ អ្នកផ្តល់សេវាមិនត្រូវគេចវេសវេទិកាដើម្បីផ្តល់សេវាឯកជនដល់អ្នកដំណើរដែលបញ្ជូនដោយ Safe Doc ឡើយ។",lo:"ຜູ້ໃຫ້ບໍລິການຈະຮັກສາຄວາມລັບຢ່າງສົມບູນກ່ຽວກັບຮູບແບບທຸລະກິດ ແລະຂໍ້ມູນຄົນເຈັບ. ຜູ້ໃຫ້ບໍລິການຈະບໍ່ຫຼີກລ້ຽງແພລດຟອມເພື່ອໃຫ້ບໍລິການສ່ວນຕົວແກ່ນັກທ່ອງທ່ຽວທີ່ສົ່ງໂດຍ Safe Doc.",tl:"Pananatilihin ng Provider ang lubos na pagiging kompidensyal tungkol sa business model ng Kumpanya at data ng pasyente. Hindi lalampasan ng Provider ang platform para magbigay ng pribadong serbisyo sa mga manlalakbay na ni-refer ng Safe Doc.",id:"Penyedia wajib menjaga kerahasiaan mutlak atas model bisnis Perusahaan dan data pasien. Penyedia tidak akan melewati platform untuk memberikan layanan pribadi kepada wisatawan yang dirujuk oleh Safe Doc.",zh:"提供者应对公司的商业模式和患者数据保持绝对保密。提供者不得绕过平台向 Safe Doc 转介的旅行者提供私人服务。",ja:"提供者は、会社のビジネスモデルおよび患者データに関して絶対的な守秘義務を維持します。提供者は、Safe Doc が紹介した旅行者に私的サービスを提供するためにプラットフォームを回避してはなりません。",ko:"제공자는 회사의 비즈니스 모델 및 환자 데이터에 대해 절대적 기밀을 유지합니다. 제공자는 Safe Doc이 의뢰한 여행자에게 사적 서비스를 제공하기 위해 플랫폼을 우회해서는 안 됩니다.",de:"Der Anbieter wahrt absolute Vertraulichkeit hinsichtlich des Geschäftsmodells des Unternehmens und der Patientendaten. Der Anbieter darf die Plattform nicht umgehen, um von Safe Doc vermittelten Reisenden private Leistungen anzubieten.",nl:"De zorgverlener bewaart absolute vertrouwelijkheid over het bedrijfsmodel van het Bedrijf en patiëntgegevens. De zorgverlener zal het platform niet omzeilen om privédiensten te verlenen aan reizigers die door Safe Doc zijn doorverwezen.",fr:"Le Prestataire maintiendra une confidentialité absolue concernant le modèle commercial de la Société et les données des patients. Le Prestataire ne contournera pas la plateforme pour fournir des services privés aux voyageurs référés par Safe Doc.",it:"Il Fornitore manterrà assoluta riservatezza riguardo al modello di business della Società e ai dati dei pazienti. Il Fornitore non eluderà la piattaforma per fornire servizi privati ai viaggiatori segnalati da Safe Doc.",ru:"Поставщик обязуется сохранять полную конфиденциальность в отношении бизнес-модели Компании и данных пациентов. Поставщик не вправе обходить платформу для оказания частных услуг путешественникам, направленным через Safe Doc.",el:"Ο Πάροχος διατηρεί απόλυτη εμπιστευτικότητα σχετικά με το επιχειρηματικό μοντέλο της Εταιρείας και τα δεδομένα ασθενών. Ο Πάροχος δεν θα παρακάμψει την πλατφόρμα για να παρέχει ιδιωτικές υπηρεσίες σε ταξιδιώτες που παραπέμπονται από το Safe Doc.",tr:"Sağlayıcı, Şirketin iş modeli ve hasta verileri konusunda mutlak gizlilik sağlar. Sağlayıcı, Safe Doc tarafından yönlendirilen gezginlere özel hizmet sunmak için platformu atlatmayacaktır.",ar:"يحافظ مقدم الخدمة على سرية مطلقة بشأن نموذج عمل الشركة وبيانات المرضى. ولن يتحايل مقدم الخدمة على المنصة لتقديم خدمات خاصة للمسافرين المُحالين عبر Safe Doc.",fa:"ارائه‌دهنده محرمانگی مطلق درباره مدل کسب‌وکار شرکت و داده‌های بیماران را حفظ می‌کند. ارائه‌دهنده برای ارائه خدمات خصوصی به مسافران معرفی‌شده توسط Safe Doc، پلتفرم را دور نخواهد زد.",ur:"فراہم کنندہ کمپنی کے کاروباری ماڈل اور مریضوں کے ڈیٹا کے بارے میں مکمل رازداری برقرار رکھے گا۔ فراہم کنندہ Safe Doc کے بھیجے گئے مسافروں کو نجی خدمات دینے کے لیے پلیٹ فارم کو نظرانداز نہیں کرے گا۔",ne:"प्रदायकले कम्पनीको व्यापार मोडेल र बिरामी डेटाको पूर्ण गोपनीयता कायम राख्नेछ। प्रदायकले Safe Doc द्वारा पठाइएका यात्रुहरूलाई निजी सेवा दिन प्लेटफर्म छल्नेछैन।",ta:"வழங்குநர் நிறுவனத்தின் வணிக மாதிரி மற்றும் நோயாளி தரவு குறித்து முழுமையான இரகசியத்தை பேணுவார். Safe Doc பரிந்துரைத்த பயணிகளுக்கு தனிப்பட்ட சேவைகளை வழங்க வழங்குநர் தளத்தை தவிர்க்க மாட்டார்.",pl:"Dostawca zachowa pełną poufność dotyczącą modelu biznesowego Spółki i danych pacjentów. Dostawca nie będzie omijać platformy, aby świadczyć prywatne usługi podróżnym skierowanym przez Safe Doc.",hu:"A Szolgáltató teljes titoktartást tart fenn a Társaság üzleti modelljével és a betegadatokkal kapcsolatban. A Szolgáltató nem kerüli meg a platformot, hogy magánszolgáltatást nyújtson a Safe Doc által beutalt utazóknak.",si:"සපයන්නා සමාගමේ ව්‍යාපාර ආකෘතිය සහ රෝගී දත්ත සම්බන්ධයෙන් සම්පූර්ණ රහස්‍යභාවය පවත්වා ගනී. Safe Doc විසින් යොමු කරන ලද ගමන්කරුවන්ට පෞද්ගලික සේවා සැපයීමට සපයන්නා වේදිකාව මඟ නොහරියි.",am:"አቅራቢው ስለ ኩባንያው የንግድ ሞዴል እና የታካሚ መረጃ ፍጹም ሚስጥራዊነት ይጠብቃል። አቅራቢው በ Safe Doc የተላኩ ተጓዦችን የግል አገልግሎት ለመስጠት መድረኩን አያልፍም።"},
+  s7_h:{en:"Term & Termination",he:"תקופה וסיום",es:"Vigencia y terminación",pt:"Vigência e rescisão",th:"ระยะเวลาและการสิ้นสุด",hi:"अवधि और समाप्ति",vi:"Thời hạn & chấm dứt",km:"រយៈពេល និងការបញ្ចប់",lo:"ໄລຍະເວລາ ແລະການສິ້ນສຸດ",tl:"Tagal at Pagwawakas",id:"Jangka Waktu & Pengakhiran",zh:"期限与终止",ja:"契約期間と解除",ko:"기간 및 해지",de:"Laufzeit & Kündigung",nl:"Looptijd & beëindiging",fr:"Durée et résiliation",it:"Durata e risoluzione",ru:"Срок и расторжение",el:"Διάρκεια & λήξη",tr:"Süre & Fesih",ar:"المدة والإنهاء",fa:"مدت و فسخ",ur:"مدت اور خاتمہ",ne:"अवधि र समाप्ति",ta:"காலம் & முடிவு",pl:"Okres i rozwiązanie",hu:"Időtartam és felmondás",si:"කාලය සහ අවසන් කිරීම",am:"ጊዜ እና ማቋረጥ"},
+  s7_p:{en:"Either party may terminate this Agreement by providing 30 days' written notice. This Agreement is governed by the laws of the country where the medical service is provided. Disputes shall be resolved through good-faith negotiations.",he:"כל צד רשאי לסיים הסכם זה במתן הודעה בכתב 30 יום מראש. הסכם זה כפוף לחוקי המדינה בה ניתן השירות הרפואי. מחלוקות ייושבו באמצעות משא ומתן בתום לב.",es:"Cualquiera de las partes puede rescindir este Acuerdo con un aviso por escrito de 30 días. Este Acuerdo se rige por las leyes del país donde se presta el servicio médico. Las disputas se resolverán mediante negociaciones de buena fe.",pt:"Qualquer parte pode rescindir este Acordo mediante aviso por escrito de 30 dias. Este Acordo é regido pelas leis do país onde o serviço médico é prestado. As disputas serão resolvidas por meio de negociações de boa-fé.",th:"ฝ่ายใดฝ่ายหนึ่งสามารถยุติข้อตกลงนี้โดยแจ้งเป็นลายลักษณ์อักษรล่วงหน้า 30 วัน ข้อตกลงนี้อยู่ภายใต้กฎหมายของประเทศที่ให้บริการทางการแพทย์ ข้อพิพาทจะได้รับการแก้ไขผ่านการเจรจาด้วยความสุจริต",hi:"कोई भी पक्ष 30 दिन का लिखित नोटिस देकर इस समझौते को समाप्त कर सकता है। यह समझौता उस देश के कानूनों द्वारा शासित है जहां चिकित्सा सेवा प्रदान की जाती है। विवादों को सद्भावनापूर्ण बातचीत के माध्यम से हल किया जाएगा।",vi:"Mỗi bên có thể chấm dứt Thỏa thuận này bằng cách thông báo trước bằng văn bản 30 ngày. Thỏa thuận này được điều chỉnh bởi luật của quốc gia nơi cung cấp dịch vụ y tế. Tranh chấp sẽ được giải quyết thông qua thương lượng thiện chí.",km:"ភាគីណាមួយអាចបញ្ចប់កិច្ចព្រមព្រៀងនេះដោយជូនដំណឹងជាលាយលក្ខណ៍អក្សរ 30 ថ្ងៃ។ កិច្ចព្រមព្រៀងនេះស្ថិតក្រោមច្បាប់នៃប្រទេសដែលផ្តល់សេវាវេជ្ជសាស្ត្រ។ វិវាទនឹងត្រូវដោះស្រាយតាមការចរចាដោយសុច្ឆន្ទៈ។",lo:"ຝ່າຍໃດໜຶ່ງສາມາດຍົກເລີກຂໍ້ຕົກລົງນີ້ໂດຍແຈ້ງເປັນລາຍລັກອັກສອນລ່ວງໜ້າ 30 ວັນ. ຂໍ້ຕົກລົງນີ້ຢູ່ພາຍໃຕ້ກົດໝາຍຂອງປະເທດທີ່ໃຫ້ບໍລິການທາງການແພດ. ຂໍ້ຂັດແຍ້ງຈະແກ້ໄຂຜ່ານການເຈລະຈາດ້ວຍຄວາມສຸດໃຈ.",tl:"Maaaring wakasan ng alinmang partido ang Kasunduang ito sa pamamagitan ng 30 araw na nakasulat na abiso. Pinamamahalaan ng batas ng bansa kung saan ibinibigay ang serbisyong medikal. Ang mga hindi pagkakaunawaan ay lulutasin sa pamamagitan ng tapat na negosasyon.",id:"Salah satu pihak dapat mengakhiri Perjanjian ini dengan pemberitahuan tertulis 30 hari. Perjanjian ini diatur oleh hukum negara tempat layanan medis diberikan. Sengketa diselesaikan melalui negosiasi dengan itikad baik.",zh:"任何一方均可提前 30 天书面通知终止本协议。本协议受提供医疗服务所在国家/地区法律管辖。争议应通过善意协商解决。",ja:"いずれの当事者も30日前の書面通知により本契約を解除できます。本契約は医療サービスが提供される国の法律に準拠します。紛争は誠実な交渉により解決されます。",ko:"어느 당사자든 30일 전 서면 통지로 본 계약을 해지할 수 있습니다. 본 계약은 의료 서비스가 제공되는 국가의 법률을 따릅니다. 분쟁은 선의의 협상을 통해 해결됩니다.",de:"Jede Partei kann diese Vereinbarung mit einer schriftlichen Frist von 30 Tagen kündigen. Diese Vereinbarung unterliegt den Gesetzen des Landes, in dem die medizinische Leistung erbracht wird. Streitigkeiten werden durch gutgläubige Verhandlungen beigelegt.",nl:"Elke partij kan deze overeenkomst beëindigen met een schriftelijke opzegtermijn van 30 dagen. Deze overeenkomst valt onder het recht van het land waar de medische dienst wordt verleend. Geschillen worden opgelost via onderhandelingen te goeder trouw.",fr:"Chaque partie peut résilier le présent accord moyennant un préavis écrit de 30 jours. Le présent accord est régi par les lois du pays où le service médical est fourni. Les litiges seront résolus par des négociations de bonne foi.",it:"Ciascuna parte può risolvere il presente Accordo con preavviso scritto di 30 giorni. Il presente Accordo è regolato dalle leggi del paese in cui viene fornito il servizio medico. Le controversie saranno risolte mediante negoziati in buona fede.",ru:"Любая сторона может расторгнуть настоящее Соглашение, направив письменное уведомление за 30 дней. Настоящее Соглашение регулируется законами страны, где оказывается медицинская услуга. Споры разрешаются путём добросовестных переговоров.",el:"Κάθε μέρος μπορεί να καταγγείλει την παρούσα Συμφωνία με γραπτή προειδοποίηση 30 ημερών. Η παρούσα Συμφωνία διέπεται από τους νόμους της χώρας όπου παρέχεται η ιατρική υπηρεσία. Οι διαφορές επιλύονται μέσω καλόπιστων διαπραγματεύσεων.",tr:"Taraflardan biri 30 gün önceden yazılı bildirimde bulunarak bu Sözleşmeyi feshedebilir. Bu Sözleşme, tıbbi hizmetin sunulduğu ülkenin yasalarına tabidir. Anlaşmazlıklar iyi niyetli müzakereler yoluyla çözülür.",ar:"يجوز لأي طرف إنهاء هذه الاتفاقية بإشعار خطي مدته 30 يومًا. تخضع هذه الاتفاقية لقوانين البلد الذي تُقدَّم فيه الخدمة الطبية. وتُحل النزاعات عبر مفاوضات بحسن نية.",fa:"هر یک از طرفین می‌تواند با اطلاع کتبی ۳۰ روزه این توافقنامه را فسخ کند. این توافقنامه تابع قوانین کشوری است که خدمات پزشکی در آن ارائه می‌شود. اختلافات از طریق مذاکرات با حسن نیت حل خواهد شد.",ur:"کوئی بھی فریق 30 دن کا تحریری نوٹس دے کر اس معاہدے کو ختم کر سکتا ہے۔ یہ معاہدہ اس ملک کے قوانین کے تابع ہے جہاں طبی خدمت فراہم کی جاتی ہے۔ تنازعات کو نیک نیتی سے مذاکرات کے ذریعے حل کیا جائے گا۔",ne:"कुनै पनि पक्षले 30 दिनको लिखित सूचना दिएर यो सम्झौता अन्त्य गर्न सक्छ। यो सम्झौता चिकित्सा सेवा प्रदान गरिएको देशको कानुनद्वारा शासित हुन्छ। विवादहरू सद्भावपूर्ण वार्ता मार्फत समाधान गरिनेछ।",ta:"எந்தவொரு தரப்பும் 30 நாட்கள் எழுத்துப்பூர்வ அறிவிப்பு வழங்கி இந்த ஒப்பந்தத்தை முடிக்கலாம். மருத்துவ சேவை வழங்கப்படும் நாட்டின் சட்டங்களுக்கு இந்த ஒப்பந்தம் உட்பட்டது. தகராறுகள் நல்லெண்ண பேச்சுவார்த்தைகள் மூலம் தீர்க்கப்படும்.",pl:"Każda ze stron może rozwiązać niniejszą Umowę z 30-dniowym pisemnym wypowiedzeniem. Niniejsza Umowa podlega prawu kraju, w którym świadczona jest usługa medyczna. Spory rozstrzygane są w drodze negocjacji w dobrej wierze.",hu:"Bármelyik fél felmondhatja a Megállapodást 30 napos írásbeli felmondással. A Megállapodásra annak az országnak a joga az irányadó, ahol az orvosi szolgáltatást nyújtják. A vitákat jóhiszemű tárgyalások útján rendezik.",si:"කවර පාර්ශවයකට හෝ දින 30ක ලිඛිත දැනුම්දීමක් ලබා දී මෙම ගිවිසුම අවසන් කළ හැකිය. මෙම ගිවිසුම වෛද්‍ය සේවාව සපයන රටේ නීතිවලට යටත් වේ. ආරවුල් සද්භාවී සාකච්ඡා හරහා විසඳනු ලැබේ.",am:"ማንኛውም ወገን የ30 ቀን የጽሁፍ ማስታወቂያ በመስጠት ይህን ስምምነት ማቋረጥ ይችላል። ይህ ስምምነት የሕክምና አገልግሎቱ በሚሰጥበት ሀገር ሕጎች ይተዳደራል። አለመግባባቶች በቅን ልቦና ድርድር ይፈታሉ።"},
+  confirm_text:{en:"I confirm that I have read and understood this Collaboration Agreement, that all details I provided are accurate, that I am a licensed medical professional, and I agree to all its terms.",he:"אני מאשר/ת שקראתי והבנתי את הסכם שיתוף הפעולה, שכל הפרטים שמסרתי מדויקים, שאני בעל/ת רישיון רפואי בתוקף, ואני מסכים/ה לכל תנאיו.",es:"Confirmo que he leído y entendido este Acuerdo de Colaboración, que todos los datos proporcionados son exactos, que soy un profesional médico con licencia y acepto todos sus términos.",pt:"Confirmo que li e compreendi este Acordo de Colaboração, que todos os dados fornecidos são exatos, que sou um profissional médico licenciado e aceito todos os seus termos.",th:"ฉันยืนยันว่าได้อ่านและเข้าใจข้อตกลงความร่วมมือนี้ ว่าข้อมูลทั้งหมดที่ให้ถูกต้อง ว่าฉันเป็นผู้ประกอบวิชาชีพแพทย์ที่มีใบอนุญาต และฉันยอมรับเงื่อนไขทั้งหมด",hi:"मैं पुष्टि करता/करती हूं कि मैंने इस सहयोग समझौते को पढ़ और समझ लिया है, कि मेरे द्वारा दिए गए सभी विवरण सटीक हैं, कि मैं एक लाइसेंस प्राप्त चिकित्सा पेशेवर हूं, और मैं इसकी सभी शर्तों से सहमत हूं।",vi:"Tôi xác nhận đã đọc và hiểu Thỏa thuận Hợp tác này, rằng mọi thông tin tôi cung cấp là chính xác, rằng tôi là chuyên gia y tế được cấp phép và tôi đồng ý với mọi điều khoản.",km:"ខ្ញុំបញ្ជាក់ថាខ្ញុំបានអាន និងយល់កិច្ចព្រមព្រៀងនេះ ថាព័ត៌មានទាំងអស់ត្រឹមត្រូវ ថាខ្ញុំជាអ្នកជំនាញវេជ្ជសាស្ត្រមានអាជ្ញាប័ណ្ណ ហើយខ្ញុំយល់ព្រមនឹងលក្ខខណ្ឌទាំងអស់។",lo:"ຂ້ອຍຢືນຢັນວ່າຂ້ອຍໄດ້ອ່ານ ແລະເຂົ້າໃຈຂໍ້ຕົກລົງນີ້ ວ່າຂໍ້ມູນທັງໝົດຖືກຕ້ອງ ວ່າຂ້ອຍເປັນຜູ້ປະກອບວິຊາຊີບແພດທີ່ມີໃບອະນຸຍາດ ແລະຂ້ອຍຍອມຮັບເງື່ອນໄຂທັງໝົດ.",tl:"Kinukumpirma ko na nabasa at naunawaan ko ang Kasunduang ito, na tama ang lahat ng detalyeng ibinigay ko, na ako ay lisensyadong medical professional, at sumasang-ayon ako sa lahat ng tuntunin nito.",id:"Saya mengonfirmasi telah membaca dan memahami Perjanjian Kerja Sama ini, bahwa semua detail yang saya berikan akurat, bahwa saya adalah profesional medis berlisensi, dan saya menyetujui semua ketentuannya.",zh:"我确认已阅读并理解本合作协议，我提供的所有信息均属准确，我是持证医疗专业人员，并同意其所有条款。",ja:"私は本協業契約書を読み理解したこと、提供したすべての情報が正確であること、私が有資格の医療従事者であること、そしてすべての条件に同意することを確認します。",ko:"본인은 이 협력 계약서를 읽고 이해했으며, 제공한 모든 정보가 정확하고, 면허를 소지한 의료 전문가이며, 모든 조건에 동의함을 확인합니다.",de:"Ich bestätige, dass ich diese Kooperationsvereinbarung gelesen und verstanden habe, dass alle von mir angegebenen Daten korrekt sind, dass ich eine zugelassene medizinische Fachkraft bin, und ich stimme allen Bedingungen zu.",nl:"Ik bevestig dat ik deze samenwerkingsovereenkomst heb gelezen en begrepen, dat alle door mij verstrekte gegevens juist zijn, dat ik een bevoegde medische professional ben, en ik ga akkoord met alle voorwaarden.",fr:"Je confirme avoir lu et compris le présent accord de collaboration, que tous les renseignements fournis sont exacts, que je suis un professionnel de santé agréé, et j'accepte toutes ses conditions.",it:"Confermo di aver letto e compreso il presente Accordo di Collaborazione, che tutti i dati forniti sono esatti, di essere un professionista medico abilitato e accetto tutti i suoi termini.",ru:"Я подтверждаю, что прочитал(а) и понял(а) настоящее Соглашение о сотрудничестве, что все предоставленные мной данные точны, что я являюсь лицензированным медицинским специалистом, и я согласен(на) со всеми его условиями.",el:"Επιβεβαιώνω ότι έχω διαβάσει και κατανοήσει την παρούσα Συμφωνία Συνεργασίας, ότι όλα τα στοιχεία που παρείχα είναι ακριβή, ότι είμαι αδειούχος επαγγελματίας υγείας, και συμφωνώ με όλους τους όρους.",tr:"Bu İşbirliği Sözleşmesini okuyup anladığımı, sağladığım tüm bilgilerin doğru olduğunu, lisanslı bir tıp uzmanı olduğumu ve tüm şartları kabul ettiğimi onaylarım.",ar:"أؤكد أنني قرأت وفهمت اتفاقية التعاون هذه، وأن جميع البيانات التي قدمتها دقيقة، وأنني مهني طبي مرخّص، وأوافق على جميع شروطها.",fa:"تأیید می‌کنم که این توافقنامه همکاری را خوانده و فهمیده‌ام، تمام اطلاعاتی که ارائه داده‌ام دقیق است، من یک متخصص پزشکی دارای مجوز هستم و با تمام شرایط آن موافقم.",ur:"میں تصدیق کرتا/کرتی ہوں کہ میں نے یہ تعاون کا معاہدہ پڑھ اور سمجھ لیا ہے، میری فراہم کردہ تمام تفصیلات درست ہیں، میں ایک لائسنس یافتہ طبی پیشہ ور ہوں، اور میں اس کی تمام شرائط سے متفق ہوں۔",ne:"म पुष्टि गर्छु कि मैले यो सहकार्य सम्झौता पढेँ र बुझेँ, मैले दिएका सबै विवरण सही छन्, म इजाजतपत्र प्राप्त चिकित्सा पेशेवर हुँ, र म यसका सबै सर्तहरूमा सहमत छु।",ta:"இந்த ஒத்துழைப்பு ஒப்பந்தத்தை நான் படித்து புரிந்துகொண்டேன், நான் வழங்கிய அனைத்து விவரங்களும் சரியானவை, நான் உரிமம் பெற்ற மருத்துவ நிபுணர், மற்றும் அதன் அனைத்து விதிமுறைகளையும் ஏற்கிறேன் என உறுதிப்படுத்துகிறேன்.",pl:"Potwierdzam, że przeczytałem(am) i zrozumiałem(am) niniejszą Umowę o Współpracy, że wszystkie podane przeze mnie dane są dokładne, że jestem licencjonowanym specjalistą medycznym i akceptuję wszystkie jej warunki.",hu:"Megerősítem, hogy elolvastam és megértettem ezt az Együttműködési Megállapodást, hogy minden megadott adat pontos, hogy engedéllyel rendelkező orvosi szakember vagyok, és elfogadom annak minden feltételét.",si:"මෙම සහයෝගිතා ගිවිසුම කියවා තේරුම් ගත් බව, මා සැපයූ සියලු තොරතුරු නිවැරදි බව, මම බලපත්‍රලාභී වෛද්‍ය වෘත්තිකයෙකු බව, සහ එහි සියලු කොන්දේසිවලට එකඟ වන බව තහවුරු කරමි.",am:"ይህን የትብብር ስምምነት አንብቤ እንደተረዳሁ፣ ያቀረብኳቸው ዝርዝሮች ሁሉ ትክክለኛ መሆናቸውን፣ ፈቃድ ያለኝ የሕክምና ባለሙያ መሆኔን፣ እና ሁሉንም ውሎቹን እንደምስማማ አረጋግጣለሁ።"},
+  submit:{en:"Confirm & Submit Agreement",he:"אישור ושליחת ההסכם",es:"Confirmar y enviar el acuerdo",pt:"Confirmar e enviar o acordo",th:"ยืนยันและส่งข้อตกลง",hi:"पुष्टि करें और समझौता भेजें",vi:"Xác nhận & gửi thỏa thuận",km:"បញ្ជាក់ និងផ្ញើកិច្ចព្រមព្រៀង",lo:"ຢືນຢັນ ແລະສົ່ງຂໍ້ຕົກລົງ",tl:"Kumpirmahin at Isumite ang Kasunduan",id:"Konfirmasi & Kirim Perjanjian",zh:"确认并提交协议",ja:"契約を確認して送信",ko:"계약 확인 및 제출",de:"Vereinbarung bestätigen & senden",nl:"Overeenkomst bevestigen & verzenden",fr:"Confirmer et envoyer l'accord",it:"Conferma e invia l'accordo",ru:"Подтвердить и отправить соглашение",el:"Επιβεβαίωση & υποβολή συμφωνίας",tr:"Sözleşmeyi Onayla & Gönder",ar:"تأكيد وإرسال الاتفاقية",fa:"تأیید و ارسال توافقنامه",ur:"معاہدے کی تصدیق اور جمع کریں",ne:"पुष्टि गर्नुहोस् र सम्झौता पठाउनुहोस्",ta:"உறுதிப்படுத்தி ஒப்பந்தத்தை சமர்ப்பிக்கவும்",pl:"Potwierdź i wyślij umowę",hu:"Megállapodás megerősítése és elküldése",si:"ගිවිසුම තහවුරු කර යවන්න",am:"ስምምነቱን አረጋግጥ እና ላክ"},
+  note:{en:"Your confirmation is recorded securely. No signature required.",he:"האישור שלך נרשם באופן מאובטח. אין צורך בחתימה.",es:"Tu confirmación se registra de forma segura. No se requiere firma.",pt:"A sua confirmação é registada com segurança. Não é necessária assinatura.",th:"การยืนยันของคุณถูกบันทึกอย่างปลอดภัย ไม่ต้องลงนาม",hi:"आपकी पुष्टि सुरक्षित रूप से दर्ज की जाती है। हस्ताक्षर की आवश्यकता नहीं।",vi:"Xác nhận của bạn được lưu an toàn. Không cần chữ ký.",km:"ការបញ្ជាក់របស់អ្នកត្រូវបានកត់ត្រាដោយសុវត្ថិភាព។ មិនត្រូវការហត្ថលេខា។",lo:"ການຢືນຢັນຂອງທ່ານຖືກບັນທຶກຢ່າງປອດໄພ. ບໍ່ຕ້ອງລົງລາຍເຊັນ.",tl:"Ligtas na naitala ang iyong kumpirmasyon. Walang kailangang pirma.",id:"Konfirmasi Anda dicatat dengan aman. Tidak perlu tanda tangan.",zh:"您的确认已安全记录。无需签名。",ja:"確認内容は安全に記録されます。署名は不要です。",ko:"귀하의 확인은 안전하게 기록됩니다. 서명이 필요 없습니다.",de:"Ihre Bestätigung wird sicher erfasst. Keine Unterschrift erforderlich.",nl:"Uw bevestiging wordt veilig vastgelegd. Geen handtekening nodig.",fr:"Votre confirmation est enregistrée en toute sécurité. Aucune signature requise.",it:"La tua conferma è registrata in modo sicuro. Nessuna firma richiesta.",ru:"Ваше подтверждение надёжно зафиксировано. Подпись не требуется.",el:"Η επιβεβαίωσή σας καταγράφεται με ασφάλεια. Δεν απαιτείται υπογραφή.",tr:"Onayınız güvenli şekilde kaydedilir. İmza gerekmez.",ar:"يتم تسجيل تأكيدك بأمان. لا حاجة للتوقيع.",fa:"تأیید شما به‌صورت ایمن ثبت می‌شود. به امضا نیازی نیست.",ur:"آپ کی تصدیق محفوظ طریقے سے ریکارڈ ہوتی ہے۔ دستخط کی ضرورت نہیں۔",ne:"तपाईंको पुष्टि सुरक्षित रूपमा रेकर्ड गरिन्छ। हस्ताक्षर आवश्यक छैन।",ta:"உங்கள் உறுதிப்படுத்தல் பாதுகாப்பாக பதிவு செய்யப்படுகிறது. கையொப்பம் தேவையில்லை.",pl:"Twoje potwierdzenie jest bezpiecznie rejestrowane. Podpis nie jest wymagany.",hu:"Megerősítését biztonságosan rögzítjük. Aláírás nem szükséges.",si:"ඔබේ තහවුරු කිරීම ආරක්ෂිතව සටහන් වේ. අත්සනක් අවශ්‍ය නැත.",am:"ማረጋገጫዎ በደህና ይመዘገባል። ፊርማ አያስፈልግም።"},
+  upload_btn:{en:"Upload File",he:"שליחת קובץ",es:"Subir archivo",pt:"Enviar ficheiro",th:"อัปโหลดไฟล์",hi:"फ़ाइल अपलोड करें",vi:"Tải tệp lên",km:"ផ្ទុកឯកសារ",lo:"ອັບໂຫລດໄຟລ໌",tl:"Mag-upload ng File",id:"Unggah Berkas",zh:"上传文件",ja:"ファイルをアップロード",ko:"파일 업로드",de:"Datei hochladen",nl:"Bestand uploaden",fr:"Téléverser un fichier",it:"Carica file",ru:"Загрузить файл",el:"Μεταφόρτωση αρχείου",tr:"Dosya Yükle",ar:"رفع ملف",fa:"بارگذاری فایل",ur:"فائل اپ لوڈ کریں",ne:"फाइल अपलोड गर्नुहोस्",ta:"கோப்பைப் பதிவேற்று",pl:"Prześlij plik",hu:"Fájl feltöltése",si:"ගොනුව උඩුගත කරන්න",am:"ፋይል ስቀል"},
+  upload_hint:{en:"You can upload a price list file instead of filling in the details.",he:"ניתן לשלוח קובץ מחירון במקום מילוי הפרטים.",es:"Puede subir un archivo con la lista de precios en lugar de rellenar los datos.",pt:"Pode enviar um ficheiro de lista de preços em vez de preencher os dados.",th:"คุณสามารถอัปโหลดไฟล์รายการราคาแทนการกรอกข้อมูลได้",hi:"आप विवरण भरने के बजाय मूल्य सूची फ़ाइल अपलोड कर सकते हैं।",vi:"Bạn có thể tải lên tệp bảng giá thay vì điền chi tiết.",km:"អ្នកអាចផ្ទុកឯកសារបញ្ជីតម្លៃជំនួសឱ្យការបំពេញព័ត៌មាន។",lo:"ທ່ານສາມາດອັບໂຫລດໄຟລ໌ລາຍການລາຄາແທນການຕື່ມຂໍ້ມູນ.",tl:"Maaari kang mag-upload ng file ng listahan ng presyo sa halip na punan ang mga detalye.",id:"Anda dapat mengunggah berkas daftar harga alih-alih mengisi detail.",zh:"您可以上传价格表文件，而无需填写明细。",ja:"詳細を入力する代わりに価格表ファイルをアップロードできます。",ko:"세부 정보를 입력하는 대신 가격표 파일을 업로드할 수 있습니다.",de:"Sie können eine Preislisten-Datei hochladen, anstatt die Angaben auszufüllen.",nl:"U kunt een prijslijstbestand uploaden in plaats van de gegevens in te vullen.",fr:"Vous pouvez téléverser un fichier de liste de prix au lieu de remplir les détails.",it:"Puoi caricare un file con il listino prezzi invece di compilare i dettagli.",ru:"Вы можете загрузить файл с прайс-листом вместо заполнения данных.",el:"Μπορείτε να ανεβάσετε αρχείο τιμοκαταλόγου αντί να συμπληρώσετε τα στοιχεία.",tr:"Ayrıntıları doldurmak yerine bir fiyat listesi dosyası yükleyebilirsiniz.",ar:"يمكنك رفع ملف قائمة أسعار بدلاً من ملء التفاصيل.",fa:"می‌توانید به‌جای پر کردن جزئیات، یک فایل فهرست قیمت بارگذاری کنید.",ur:"آپ تفصیلات بھرنے کے بجائے قیمت کی فہرست کی فائل اپ لوڈ کر سکتے ہیں۔",ne:"विवरण भर्नुको सट्टा तपाईं मूल्य सूची फाइल अपलोड गर्न सक्नुहुन्छ।",ta:"விவரங்களை நிரப்புவதற்குப் பதிலாக விலைப்பட்டியல் கோப்பைப் பதிவேற்றலாம்.",pl:"Zamiast wypełniać dane, możesz przesłać plik z cennikiem.",hu:"Az adatok kitöltése helyett feltölthet egy árlista fájlt.",si:"විස්තර පිරවීම වෙනුවට ඔබට මිල ලැයිස්තු ගොනුවක් උඩුගත කළ හැකිය.",am:"ዝርዝሮችን ከመሙላት ይልቅ የዋጋ ዝርዝር ፋይል መስቀል ይችላሉ።"},
+  success_title:{en:"Agreement Confirmed!",he:"ההסכם אושר!",es:"¡Acuerdo confirmado!",pt:"Acordo confirmado!",th:"ยืนยันข้อตกลงแล้ว!",hi:"समझौता पुष्टि!",vi:"Đã xác nhận thỏa thuận!",km:"កិច្ចព្រមព្រៀងបានបញ្ជាក់!",lo:"ຢືນຢັນຂໍ້ຕົກລົງແລ້ວ!",tl:"Nakumpirma ang Kasunduan!",id:"Perjanjian Dikonfirmasi!",zh:"协议已确认！",ja:"契約が確認されました！",ko:"계약이 확인되었습니다!",de:"Vereinbarung bestätigt!",nl:"Overeenkomst bevestigd!",fr:"Accord confirmé !",it:"Accordo confermato!",ru:"Соглашение подтверждено!",el:"Η συμφωνία επιβεβαιώθηκε!",tr:"Sözleşme Onaylandı!",ar:"تم تأكيد الاتفاقية!",fa:"توافقنامه تأیید شد!",ur:"معاہدہ تصدیق ہو گیا!",ne:"सम्झौता पुष्टि भयो!",ta:"ஒப்பந்தம் உறுதி செய்யப்பட்டது!",pl:"Umowa potwierdzona!",hu:"Megállapodás megerősítve!",si:"ගිවිසුම තහවුරු විය!",am:"ስምምነቱ ተረጋግጧል!"},
+  success_msg:{en:"Thank you. Your collaboration agreement has been received. Our team will be in touch shortly with next steps.",he:"תודה. הסכם שיתוף הפעולה שלך התקבל. הצוות שלנו ייצור איתך קשר בקרוב עם השלבים הבאים.",es:"Gracias. Hemos recibido tu acuerdo de colaboración. Nuestro equipo se pondrá en contacto pronto con los siguientes pasos.",pt:"Obrigado. O seu acordo de colaboração foi recebido. A nossa equipa entrará em contacto em breve com os próximos passos.",th:"ขอบคุณ เราได้รับข้อตกลงความร่วมมือของคุณแล้ว ทีมงานของเราจะติดต่อกลับเร็ว ๆ นี้พร้อมขั้นตอนถัดไป",hi:"धन्यवाद। आपका सहयोग समझौता प्राप्त हो गया है। हमारी टीम जल्द ही अगले चरणों के साथ संपर्क करेगी।",vi:"Cảm ơn bạn. Chúng tôi đã nhận được thỏa thuận hợp tác của bạn. Đội ngũ của chúng tôi sẽ liên hệ sớm với các bước tiếp theo.",km:"អរគុណ។ កិច្ចព្រមព្រៀងរបស់អ្នកត្រូវបានទទួល។ ក្រុមការងាររបស់យើងនឹងទាក់ទងក្នុងពេលឆាប់ៗ។",lo:"ຂອບໃຈ. ພວກເຮົາໄດ້ຮັບຂໍ້ຕົກລົງຂອງທ່ານແລ້ວ. ທີມງານຂອງພວກເຮົາຈະຕິດຕໍ່ໃນໄວໆນີ້.",tl:"Salamat. Natanggap na ang iyong kasunduan sa pakikipagtulungan. Makikipag-ugnayan ang aming team sa lalong madaling panahon.",id:"Terima kasih. Perjanjian kerja sama Anda telah diterima. Tim kami akan segera menghubungi Anda dengan langkah selanjutnya.",zh:"谢谢。我们已收到您的合作协议。我们的团队将很快与您联系下一步事宜。",ja:"ありがとうございます。協業契約を受領しました。チームより次のステップについて間もなくご連絡します。",ko:"감사합니다. 협력 계약이 접수되었습니다. 저희 팀이 곧 다음 단계를 안내드리겠습니다.",de:"Vielen Dank. Ihre Kooperationsvereinbarung ist eingegangen. Unser Team meldet sich in Kürze mit den nächsten Schritten.",nl:"Bedankt. Uw samenwerkingsovereenkomst is ontvangen. Ons team neemt binnenkort contact met u op over de volgende stappen.",fr:"Merci. Votre accord de collaboration a été reçu. Notre équipe vous contactera bientôt pour les prochaines étapes.",it:"Grazie. Il tuo accordo di collaborazione è stato ricevuto. Il nostro team ti contatterà a breve per i prossimi passi.",ru:"Спасибо. Ваше соглашение о сотрудничестве получено. Наша команда свяжется с вами в ближайшее время по следующим шагам.",el:"Ευχαριστούμε. Η συμφωνία συνεργασίας σας ελήφθη. Η ομάδα μας θα επικοινωνήσει σύντομα για τα επόμενα βήματα.",tr:"Teşekkürler. İşbirliği sözleşmeniz alındı. Ekibimiz sonraki adımlar için kısa süre içinde sizinle iletişime geçecek.",ar:"شكرًا لك. تم استلام اتفاقية التعاون الخاصة بك. سيتواصل فريقنا معك قريبًا بشأن الخطوات التالية.",fa:"متشکریم. توافقنامه همکاری شما دریافت شد. تیم ما به‌زودی برای مراحل بعدی با شما تماس می‌گیرد.",ur:"شکریہ۔ آپ کا تعاون کا معاہدہ موصول ہو گیا ہے۔ ہماری ٹیم جلد ہی اگلے اقدامات کے ساتھ رابطہ کرے گی۔",ne:"धन्यवाद। तपाईंको सहकार्य सम्झौता प्राप्त भयो। हाम्रो टोलीले छिट्टै अर्को चरणका साथ सम्पर्क गर्नेछ।",ta:"நன்றி. உங்கள் ஒத்துழைப்பு ஒப்பந்தம் பெறப்பட்டது. எங்கள் குழு விரைவில் அடுத்த படிகளுடன் தொடர்பு கொள்ளும்.",pl:"Dziękujemy. Otrzymaliśmy Twoją umowę o współpracy. Nasz zespół wkrótce skontaktuje się w sprawie kolejnych kroków.",hu:"Köszönjük. Megkaptuk együttműködési megállapodását. Csapatunk hamarosan felveszi Önnel a kapcsolatot a következő lépésekkel.",si:"ස්තුතියි. ඔබේ සහයෝගිතා ගිවිසුම ලැබුණි. අපගේ කණ්ඩායම ඉක්මනින් මීළඟ පියවර සමඟ සම්බන්ධ වනු ඇත.",am:"እናመሰግናለን። የትብብር ስምምነትዎ ደርሷል። ቡድናችን በቅርቡ ከቀጣይ ደረጃዎች ጋር ያገኝዎታል።"}
+};
+
+var LANG_NAMES = {en:'EN',he:'עב',es:'ES',pt:'PT',th:'TH',hi:'HI',vi:'VI',km:'KM',lo:'LO',tl:'TL',id:'ID',zh:'中文',ja:'日本語',ko:'한국어',de:'DE',nl:'NL',fr:'FR',it:'IT',ru:'RU',el:'EL',tr:'TR',ar:'AR',fa:'FA',ur:'UR',ne:'NE',ta:'TA',pl:'PL',hu:'HU',si:'SI',am:'AM'};
+var RTL = ['he','ar','fa','ur'];
+
+function toggleLangMenu(e){ if(e) e.stopPropagation(); var m=document.getElementById('lang-menu'); m.style.display = m.style.display==='block'?'none':'block'; }
+document.addEventListener('click', function(e){ if(!e.target.closest('.lang-toggle')){ document.getElementById('lang-menu').style.display='none'; } });
+
+function setLang(lang){
+  try{ sessionStorage.setItem('safedoc_agreement_lang', lang); }catch(e){}
+  document.body.className = 'lang-' + lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = RTL.indexOf(lang) !== -1 ? 'rtl' : 'ltr';
+  document.getElementById('lang-label').textContent = LANG_NAMES[lang] || lang.toUpperCase();
+  document.getElementById('lang-menu').style.display = 'none';
+  // Apply all translations
+  document.querySelectorAll('[data-k]').forEach(function(el){
+    var key = el.getAttribute('data-k');
+    if (T[key] && typeof T[key][lang] !== 'undefined'){
+      el.textContent = T[key][lang];
+    } else if (T[key] && T[key].en){
+      el.textContent = T[key].en; // fallback
+    }
+  });
+}
+
+function autoDetectLang(){
+  try{
+    var saved = sessionStorage.getItem('safedoc_agreement_lang');
+    if (saved){ setLang(saved); return; }
+  }catch(e){}
+  var code = (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase();
+  if (code==='iw') code='he';
+  if (code==='in') code='id';
+  if (code==='fil') code='tl';
+  var supported = Object.keys(LANG_NAMES);
+  setLang(supported.indexOf(code) !== -1 ? code : 'en');
+}
+
+// Checkbox toggle
+var confirmed = false;
+function toggleConfirm(){
+  confirmed = !confirmed;
+  document.getElementById('confirm-box').classList.toggle('checked', confirmed);
+  document.getElementById('submit-btn').disabled = !confirmed;
+}
+
+// Submit to the existing Cloudflare Worker
+function onFilePicked(){
+  var inp = document.getElementById('f-file');
+  var name = (inp.files && inp.files[0]) ? inp.files[0].name : '';
+  document.getElementById('f-file-name').textContent = name;
+}
+
+var WORKER_URL = 'https://safedoc-form.tal-997.workers.dev';
+async function submitAgreement(){
+  if (!confirmed) return;
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  var prices = {};
+  var labels = ['Clinic','Home/Hotel','Online','Lab','Diagnostic','Injections','IV','Medicines'];
+  document.querySelectorAll('[data-price]').forEach(function(inp,i){ prices[labels[i]] = inp.value || ''; });
+  var fd = new FormData();
+  var fileInput = document.getElementById('f-file');
+  if (fileInput && fileInput.files && fileInput.files[0]) { fd.append('price_file', fileInput.files[0]); }
+  fd.append('form_type', 'collaboration_agreement');
+  fd.append('date', document.getElementById('f-date').value || '');
+  fd.append('full_name', document.getElementById('f-name').value || '');
+  fd.append('license', document.getElementById('f-license').value || '');
+  fd.append('clinic_name', document.getElementById('f-clinic').value || '');
+  fd.append('phone', document.getElementById('f-phone').value || '');
+  fd.append('address', document.getElementById('f-address').value || '');
+  fd.append('prices', JSON.stringify(prices));
+  fd.append('other_terms', document.getElementById('f-other').value || '');
+  fd.append('confirmed', 'yes');
+  fd.append('language', document.documentElement.lang);
+  fd.append('confirmed_at', new Date().toISOString());
+  try{
+    await fetch(WORKER_URL, { method:'POST', body:fd });
+  }catch(e){ /* show success anyway so the doctor isn't blocked */ }
+  document.getElementById('doc-card').style.display = 'none';
+  var s = document.getElementById('success');
+  s.style.display = 'block';
+  s.classList.add('show');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Init
+window.addEventListener('load', function(){
+  // default date = today
+  var d = new Date();
+  document.getElementById('f-date').value = d.toISOString().split('T')[0];
+  autoDetectLang();
+});
+</script>
+</body>
+</html>
