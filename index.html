@@ -1934,10 +1934,6 @@ body.lang-he .qcard p, body.lang-he .docx-name{
             <div class="combo-list" id="city-list" hidden></div>
           </div>
         </div>
-        <div class="fg">
-          <label><span data-he="">כתובת מלאה</span><span data-en="" data-key="form_address">Full address</span></label>
-          <input type="text" id="address"/>
-        </div>
         <div class="nav-btns"><button class="bnxt" onclick="goStep(2)"><span data-he="">הבא — מרפאה ומומחיות ←</span><span data-en="" data-key="next_clinic">Next — clinic &amp; specialty →</span></button></div>
       </div>
 
@@ -2049,7 +2045,7 @@ body.lang-he .qcard p, body.lang-he .docx-name{
         </div>
         <div class="fg">
           <label><span data-he="">עלויות</span><span data-en="" data-key="fees_label">Fees &amp; pricing</span></label>
-          <div class="fdesc">Please describe in detail the fees you charge travelers referred to you — clinic visit, home/hotel visit, medications, tests, online consultation, and more. This helps us understand your fair pricing.</div>
+          <div class="fdesc">Please describe your prices. The discount and fair price give an advantage in referring you and are important to us. We do not charge you a commission!</div>
           <div class="fgrow3">
             <div class="fg" style="margin:0">
               <label style="font-size:.62rem"><span data-he="">מרפאה</span><span data-en="" data-key="form_clinic">Clinic</span></label>
@@ -2108,6 +2104,10 @@ body.lang-he .qcard p, body.lang-he .docx-name{
           <textarea id="about_clinic" style="min-height:90px"></textarea>
         </div>
         <div class="fg">
+          <label><span data-he="">כתובת מלאה</span><span data-en="" data-key="form_address">Full address</span></label>
+          <input type="text" id="address"/>
+        </div>
+        <div class="fg">
           <label><span data-he="">לינק גוגל מפס [אופציונלי]</span><span data-en="" data-key="maps_label">Google Maps Link [option]</span></label>
           <input type="url" id="maps_link"/>
         </div>
@@ -2159,7 +2159,7 @@ body.lang-he .qcard p, body.lang-he .docx-name{
         </div>
         <div class="terms-row">
           <input type="checkbox" id="terms"/>
-          <label for="terms"><span data-he="">אני מאשר/ת שהפרטים שמסרתי נכונים ושאני רופא/ה מוסמך/ת בעל/ת רישיון תקף. קראתי והסכמתי ל<a href='#'>תנאי השימוש</a> של Safe Doc.</span><span data-en="">I confirm all details are accurate and that I am a licensed medical professional. I agree to Safe Doc's <a href='#'>Terms of Service</a>.</span></label>
+          <label for="terms"><span data-he="">אני מאשר/ת שהפרטים שמסרתי נכונים ושאני רופא/ה מוסמך/ת בעל/ת רישיון תקף.</span><span data-en="">I confirm all details are accurate and that I am a licensed medical professional.</span></label>
         </div>
         <div class="nav-btns">
           <button class="bbk" onclick="goStep(3)"><span data-he="">← חזור</span><span data-en="" data-key="back_btn">← Back</span></button>
@@ -3354,7 +3354,7 @@ async function submitForm() {
   var lang = document.body.className.replace('lang-','');
 
   if (!document.getElementById('terms').checked) {
-    alert(lang==='he' ? 'יש לאשר את תנאי השימוש' : 'Please accept the Terms of Service');
+    alert(lang==='he' ? 'יש לאשר את ההצהרה' : 'Please confirm the declaration');
     return;
   }
 
