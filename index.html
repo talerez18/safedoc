@@ -398,6 +398,11 @@ tr:hover td{background:#F8FCFF}
 
 /* ── FOOTER ── */
 footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 4vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.fcontact{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fcontact-link{display:inline-flex;align-items:center;gap:6px;color:#7FD4E8;text-decoration:none;font-size:.85rem;font-weight:600;transition:color .2s;direction:ltr}
+.fcontact-link:hover{color:#22D3EE}
+.fcontact-link svg{opacity:.85}
+.fcontact-sep{color:rgba(127,212,232,.4);font-size:.85rem}
 .flogo{font-size:1.1rem;font-weight:900;color:#FFFFFF}
 .flogo em{color:#06B6D4;font-style:normal}
 .fcopy{font-size:.73rem;color:rgba(255,255,255,.35)}
@@ -1934,6 +1939,10 @@ body.lang-he .qcard p, body.lang-he .docx-name{
             <div class="combo-list" id="city-list" hidden></div>
           </div>
         </div>
+        <div class="fg">
+          <label><span data-he="">כתובת מלאה</span><span data-en="" data-key="form_address">Full address</span></label>
+          <input type="text" id="address"/>
+        </div>
         <div class="nav-btns"><button class="bnxt" onclick="goStep(2)"><span data-he="">הבא — מרפאה ומומחיות ←</span><span data-en="" data-key="next_clinic">Next — clinic &amp; specialty →</span></button></div>
       </div>
 
@@ -2045,7 +2054,7 @@ body.lang-he .qcard p, body.lang-he .docx-name{
         </div>
         <div class="fg">
           <label><span data-he="">עלויות</span><span data-en="" data-key="fees_label">Fees &amp; pricing</span></label>
-          <div class="fdesc">Please describe your prices. The discount and fair price give an advantage in referring you and are important to us. We do not charge you a commission!</div>
+          <div class="fdesc">Please describe in detail the fees you charge travelers referred to you — clinic visit, home/hotel visit, medications, tests, online consultation, and more. This helps us understand your fair pricing.</div>
           <div class="fgrow3">
             <div class="fg" style="margin:0">
               <label style="font-size:.62rem"><span data-he="">מרפאה</span><span data-en="" data-key="form_clinic">Clinic</span></label>
@@ -2104,10 +2113,6 @@ body.lang-he .qcard p, body.lang-he .docx-name{
           <textarea id="about_clinic" style="min-height:90px"></textarea>
         </div>
         <div class="fg">
-          <label><span data-he="">כתובת מלאה</span><span data-en="" data-key="form_address">Full address</span></label>
-          <input type="text" id="address"/>
-        </div>
-        <div class="fg">
           <label><span data-he="">לינק גוגל מפס [אופציונלי]</span><span data-en="" data-key="maps_label">Google Maps Link [option]</span></label>
           <input type="url" id="maps_link"/>
         </div>
@@ -2159,7 +2164,7 @@ body.lang-he .qcard p, body.lang-he .docx-name{
         </div>
         <div class="terms-row">
           <input type="checkbox" id="terms"/>
-          <label for="terms"><span data-he="">אני מאשר/ת שהפרטים שמסרתי נכונים ושאני רופא/ה מוסמך/ת בעל/ת רישיון תקף.</span><span data-en="">I confirm all details are accurate and that I am a licensed medical professional.</span></label>
+          <label for="terms"><span data-he="">אני מאשר/ת שהפרטים שמסרתי נכונים ושאני רופא/ה מוסמך/ת בעל/ת רישיון תקף. קראתי והסכמתי ל<a href='#'>תנאי השימוש</a> של Safe Doc.</span><span data-en="">I confirm all details are accurate and that I am a licensed medical professional. I agree to Safe Doc's <a href='#'>Terms of Service</a>.</span></label>
         </div>
         <div class="nav-btns">
           <button class="bbk" onclick="goStep(3)"><span data-he="">← חזור</span><span data-en="" data-key="back_btn">← Back</span></button>
@@ -2182,6 +2187,17 @@ body.lang-he .qcard p, body.lang-he .docx-name{
 <!-- FOOTER -->
 <footer>
   <div class="flogo">Safe<em> Doc</em></div>
+  <div class="fcontact">
+    <a href="#" id="footer-email" class="fcontact-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 7l9 6 9-6M3 7v10a1 1 0 001 1h16a1 1 0 001-1V7M3 7a1 1 0 011-1h16a1 1 0 011 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span id="footer-email-text"></span>
+    </a>
+    <span class="fcontact-sep">|</span>
+    <a href="https://wa.me/972586934770" target="_blank" rel="noopener" class="fcontact-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 00-8.6 15l-1.4 5 5.1-1.3A10 10 0 1012 2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 7.5c-.3 0-.6.1-.8.4-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.8 4.3 3.8 2.1.8 2.6.7 3 .6.6-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3l-1.6-.8c-.2-.1-.4-.1-.6.1l-.6.8c-.1.2-.3.2-.5.1-.7-.3-1.4-.6-2.1-1.5-.5-.7-.4-.9-.3-1.1l.4-.5c.1-.2.1-.3 0-.5l-.7-1.6c-.2-.4-.3-.4-.5-.4z" fill="currentColor"/></svg>
+      +972-586934770
+    </a>
+  </div>
   <div class="fcopy"><span data-he="">© 2025 Safe Doc. כל הזכויות שמורות.</span><span data-en="" data-key="copyright">© 2025 Safe Doc. All rights reserved.</span></div>
   <div class="flinks">
     <a href="#"><span data-he="">פרטיות</span><span data-en="" data-key="Privacy">Privacy</span></a>
@@ -3354,7 +3370,7 @@ async function submitForm() {
   var lang = document.body.className.replace('lang-','');
 
   if (!document.getElementById('terms').checked) {
-    alert(lang==='he' ? 'יש לאשר את ההצהרה' : 'Please confirm the declaration');
+    alert(lang==='he' ? 'יש לאשר את תנאי השימוש' : 'Please accept the Terms of Service');
     return;
   }
 
@@ -3515,6 +3531,14 @@ window.addEventListener('load', async function() {
   setupCityCombo();
   detectBrowserLanguage();
   setupDoctorScroll();
+  // Assemble footer email (split to avoid email-harvesting / Cloudflare obfuscation)
+  (function(){
+    var u = 'tal', d = 'safe-dr.com';
+    var addr = u + '@' + d;
+    var link = document.getElementById('footer-email');
+    var txt = document.getElementById('footer-email-text');
+    if (link && txt){ link.href = 'mailto:' + addr; txt.textContent = addr; }
+  })();
   await loadDynamicOptions();
   detectLocation();
   restoreFormState();
