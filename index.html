@@ -4,430 +4,502 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Safe Doc – Your Doctor. Anywhere.</title>
-<link rel="icon" type="image/png" href="favicon.png?v=1"
-<link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Poppins:wght@400;500;600;700;800;900&family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
 <style>
-:root{
-  --green:#0891B2;
-  --green2:#06B6D4;
-  --teal:#0EA5E9;
-  --navy:#F0F7FF;
-  --navy2:#E8F4FE;
-  --white:#FFFFFF;
-  --t1:#0F2744;
-  --t2:#3D6A96;
-  --t3:#7AAED6;
-  --border:rgba(14,60,110,.1);
-  --border2:rgba(14,60,110,.18);
-  --card:rgba(255,255,255,.7);
-  --card2:rgba(255,255,255,.85);
-  --accent:#0891B2;
-  --accent2:#06B6D4;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:'Varela Round','Poppins',sans-serif;background:#F0F7FF;color:#0F2744;overflow-x:hidden;overflow-y:auto;-webkit-font-smoothing:antialiased}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:#E8F4FE}
-::-webkit-scrollbar-thumb{background:#BAD7EF;border-radius:2px}
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 4vw;
-  background:rgba(240,247,255,0.92);
-  backdrop-filter:blur(24px);
-  border-bottom:1px solid rgba(8,145,178,0.15);
+:root {
+  --pink:        #0891B2;
+  --orange:      #06B6D4;
+  --grad:        linear-gradient(135deg, #0891B2, #06B6D4);
+  --grad-rev:    linear-gradient(135deg, #06B6D4, #0891B2);
+  --grad-soft:   linear-gradient(135deg, rgba(8,145,178,.07), rgba(6,182,212,.07));
+  --ink:         #16162A;
+  --ink2:        #4A4A66;
+  --ink3:        #9C9CB4;
+  --bg:          #FAFAFD;
+  --white:       #FFFFFF;
+  --border:      #ECECF2;
+  --gold-light:  #FFF6EC;
+  --gold-border: #FFD9AE;
+  --gold-text:   #C05E00;
+  --blue:        #1B3F8B;
+  --blue-light:  #EEF3FF;
+  --blue-mid:    #C9D8F7;
+  --green:       #059669;
+  --green-light: #EDFDF5;
+  --r:           18px;
+  --r-lg:        26px;
+  --shadow:      0 2px 10px rgba(22,22,42,.05), 0 8px 28px rgba(22,22,42,.06);
+  --shadow-md:   0 6px 16px rgba(22,22,42,.06), 0 20px 48px rgba(22,22,42,.09);
 }
-.logo{
-  font-size:1.2rem;font-weight:900;color:#08192E;
-  text-decoration:none;display:flex;align-items:center;gap:10px;letter-spacing:-.3px;
-}
-.logo-cross{
-  width:30px;height:30px;border-radius:8px;
-  background:linear-gradient(135deg,#0891B2,#06B6D4);
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;font-weight:900;color:#fff;
-}
-.nav-links{display:flex;align-items:center;gap:2rem}
-.nav-links a{font-size:.82rem;font-weight:600;color:#08192E;text-decoration:none;transition:color .15s}
-.nav-links a:hover{color:#0891B2}
-.nav-cta{
-  background:#0891B2 !important;color:#fff !important;
-  padding:8px 18px;border-radius:6px;font-weight:700 !important;font-size:.8rem !important;
-}
-.nav-cta:hover{background:#06B6D4 !important}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Heebo',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;line-height:1.6}
+a{text-decoration:none;color:inherit}
 
-/* ── HERO ── */
-.hero{
-  min-height:100vh;
-  position:relative;
-  display:flex;
-  align-items:center;
-  padding:80px 5vw 60px;
-  overflow:hidden;
-  background:#D6EEFF;
-  width:100%;
-  max-width:100vw;
-  box-sizing:border-box;
-}
+/* ═══ NAV ═══ */
+.nav-wrap{background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+nav{max-width:1120px;margin:0 auto;padding:0 28px;height:70px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:16px}
+.oply-logo img{height:42px;width:auto;object-fit:contain}
+.gold-chip{background:var(--grad);color:#fff;font-size:11px;font-weight:900;padding:4px 13px;border-radius:20px;letter-spacing:1px}
+.nav-div{width:1px;height:30px;background:var(--border)}
+.migdal-nav img{height:38px;width:auto;object-fit:contain}
+.nav-tag{font-size:13px;font-weight:700;color:var(--pink);background:var(--grad-soft);border:1px solid rgba(8,145,178,.18);padding:6px 16px;border-radius:40px}
 
+/* ═══ HERO ═══ */
+.hero{background:linear-gradient(165deg,#fff 0%,#EFFAFD 55%,#F5FCFE 100%);padding:84px 28px 76px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(8,145,178,.07) 0%,transparent 60%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-100px;right:-100px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.08) 0%,transparent 70%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:780px;margin:0 auto}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid rgba(8,145,178,.2);border-radius:40px;padding:7px 20px;font-size:12.5px;font-weight:700;color:var(--pink);letter-spacing:.5px;margin-bottom:26px;box-shadow:0 3px 14px rgba(8,145,178,.1);animation:up .5s ease both}
+.hero h1{font-size:clamp(38px,6vw,74px);font-weight:900;letter-spacing:-2.5px;line-height:1.02;color:var(--ink);margin-bottom:18px;animation:up .55s ease .07s both}
+.hero h1 .grad-t{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:17.5px;font-weight:300;color:var(--ink2);max-width:520px;margin:0 auto 42px;line-height:1.7;animation:up .55s ease .13s both}
+.hero-logos{display:flex;align-items:center;justify-content:center;gap:22px;background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:20px 36px;width:fit-content;margin:0 auto;box-shadow:var(--shadow-md);animation:up .55s ease .2s both}
+.hl-oply img{height:46px;width:auto;object-fit:contain}
+.hl-x{font-size:24px;color:var(--ink3);font-weight:200}
+.hl-migdal img{height:44px;width:auto;object-fit:contain}
 
-/* WORLD MAP BACKGROUND */
-.hero-map{
-  position:absolute;inset:0;pointer-events:none;
-}
-.hero-map-svg{
-  position:absolute;inset:0;width:100%;height:100%;
-  opacity:1;
-}
-/* ocean gradient overlay */
-.hero-ocean{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 70% 60% at 25% 55%, rgba(6,182,212,.12) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 70% at 75% 35%, rgba(14,165,233,.1) 0%, transparent 50%),
-    radial-gradient(ellipse 100% 35% at 50% 100%, rgba(214,238,255,.95) 0%, transparent 55%),
-    radial-gradient(ellipse 100% 25% at 50% 0%, rgba(214,238,255,.7) 0%, transparent 45%);
-  pointer-events:none;z-index:2;
-}
-/* subtle dot grid on top */
-.hero-dots{
-  position:absolute;inset:0;z-index:3;
-  background-image:radial-gradient(circle, rgba(8,145,178,.3) 1px, transparent 1px);
-  background-size:44px 44px;
-  mask-image:radial-gradient(ellipse 85% 75% at 50% 50%, black 10%, transparent 80%);
-  opacity:.35;pointer-events:none;
-}
-.hero-lines{display:none;}
+/* ═══ STATS STRIP ═══ */
+.stats-strip{background:#fff;border-bottom:1px solid var(--border);padding:30px 28px}
+.stats-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:22px}
+.stats-hello h2{font-size:21px;font-weight:800;letter-spacing:-.4px}
+.stats-hello p{font-size:14px;color:var(--ink2);margin-top:3px;font-weight:300}
+.stats-nums{display:flex;gap:38px}
+.stat{text-align:center}
+.stat-n{font-size:32px;font-weight:900;letter-spacing:-1.5px;color:var(--ink)}
+.stat-n.grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-l{font-size:12px;color:var(--ink3);margin-top:-3px}
 
-/* pulsing city dots */
-.city-dot{
-  position:absolute;
-  width:8px;height:8px;border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 0 0 rgba(0,201,167,.6);
-  animation:cityPulse 3s infinite;
-}
-.city-dot::before{
-  content:'';position:absolute;inset:-6px;border-radius:50%;
-  border:1px solid rgba(0,201,167,.4);
-  animation:ripple 3s infinite;
-}
-.city-dot.d2{animation-delay:.8s}
-.city-dot.d3{animation-delay:1.6s}
-.city-dot.d4{animation-delay:2.2s}
-.city-dot.d5{animation-delay:.4s}
-.city-dot.d6{animation-delay:1.2s}
-@keyframes cityPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(0,201,167,.6)}
-  50%{box-shadow:0 0 0 8px rgba(0,201,167,0)}
-}
-@keyframes ripple{
-  0%{transform:scale(1);opacity:1}
-  100%{transform:scale(3);opacity:0}
-}
-.city-label{
-  position:absolute;
-  font-size:.65rem;font-weight:600;color:var(--green2);
-  white-space:nowrap;pointer-events:none;
-  opacity:.7;
-}
+/* ═══ SECTION ═══ */
+.section{max-width:1120px;margin:0 auto;padding:76px 28px}
+.s-white{background:#fff}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;display:flex;align-items:center;gap:9px}
+.eyebrow-line{width:18px;height:2.5px;background:var(--grad);border-radius:2px;flex-shrink:0}
+.h2{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-1.3px;color:var(--ink);line-height:1.08;margin-bottom:11px}
+.sub{font-size:15.5px;font-weight:300;color:var(--ink2);max-width:540px;line-height:1.7}
 
-/* flight path animation */
-.path-svg{
-  position:absolute;inset:0;width:100%;height:100%;
-  pointer-events:none;overflow:hidden;
-}
-.flight-path{
-  fill:none;stroke:var(--green);stroke-width:.8;
-  stroke-dasharray:4 6;opacity:.25;
-}
-.flight-dot{
-  fill:var(--green2);r:3;filter:drop-shadow(0 0 4px var(--green2));
-  animation:flyPath 8s linear infinite;
-}
+/* ═══ GOLD PACKAGE ═══ */
+.gold-pkg{background:linear-gradient(145deg,#EFFAFD,#E8F7FB);border-radius:32px;padding:56px 48px;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(8,145,178,.08)}
+.gold-pkg::before{content:'';position:absolute;top:-100px;left:-100px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(8,145,178,.08),transparent 70%)}
+.gold-pkg::after{content:'';position:absolute;bottom:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.09),transparent 70%)}
+.gold-pkg-inner{display:grid;grid-template-columns:1fr 1.15fr;gap:52px;align-items:center;position:relative;z-index:1}
+.gp-tag{display:inline-flex;align-items:center;gap:6px;background:#fff;border:none;border-radius:40px;padding:7px 18px;font-size:12px;font-weight:800;background:var(--grad);color:#fff;margin-bottom:20px;letter-spacing:.5px;box-shadow:0 4px 14px rgba(8,145,178,.25)}
+.gp-title{font-size:clamp(30px,4.2vw,50px);font-weight:900;color:var(--ink);letter-spacing:-2px;line-height:1.03;margin-bottom:14px}
+.gp-title .grad-word{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gp-desc{font-size:15.5px;font-weight:300;color:var(--ink2);line-height:1.7}
+.gp-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gp-item{background:#fff;border:none;border-radius:22px;padding:20px 18px;display:flex;flex-direction:column;align-items:flex-start;gap:12px;box-shadow:0 4px 16px rgba(22,22,42,.06);transition:.26s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden}
+.gp-item:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(22,22,42,.11)}
+.gp-ic{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.3s}
+.gp-item:hover .gp-ic{transform:rotate(-8deg) scale(1.1)}
+.gp-item:nth-child(1) .gp-ic{background:#FFF3A3}
+.gp-item:nth-child(2) .gp-ic{background:#B7F0D8}
+.gp-item:nth-child(3) .gp-ic{background:#CBD9FF}
+.gp-item:nth-child(4) .gp-ic{background:#FFD1DC}
+.gp-item:nth-child(5) .gp-ic{background:#FFE0B8}
+.gp-item:nth-child(6) .gp-ic{background:#E4D4FF}
+.gp-name{font-size:14.5px;font-weight:800;color:var(--ink);letter-spacing:-.2px}
+.gp-val{font-size:12.5px;color:var(--ink2);font-weight:500;margin-top:2px;line-height:1.4}
 
-.hero-content{position:relative;z-index:4;max-width:520px;width:100%;}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(8,145,178,.12);border:1px solid rgba(8,145,178,.35);
-  border-radius:20px;padding:5px 14px;
-  font-size:.72rem;font-weight:700;letter-spacing:.8px;
-  color:#0369A1;margin-bottom:2rem;text-transform:uppercase;
-}
-.pulse-dot{width:6px;height:6px;border-radius:50%;background:#0891B2;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+/* ═══ FEATURE CARDS ═══ */
+.f-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:44px 32px;margin-top:52px}
+.f-card{text-align:center;display:flex;flex-direction:column;align-items:center;transition:.24s}
+.f-card:hover{transform:translateY(-4px)}
+.f-top{display:flex;flex-direction:column;align-items:center;flex:1}
+.f-ic{width:110px;height:110px;display:flex;align-items:center;justify-content:center;font-size:46px;margin-bottom:22px;transition:.3s}
+.f-card:hover .f-ic{transform:rotate(-6deg) scale(1.05)}
+.f-ic.blob-yellow{background:#FFF3A3;border-radius:50%}
+.f-ic.blob-green{background:#B7F0D8;border-radius:26px;transform:rotate(8deg)}
+.f-ic.blob-blue{background:#CBD9FF;clip-path:polygon(50% 0%,100% 90%,0% 90%);padding-top:20px}
+.f-ic.blob-pink{background:#FFD1DC;border-radius:50% 50% 50% 12px}
+.f-ic.blob-orange{background:#FFE0B8;border-radius:20px;transform:rotate(-6deg)}
+.f-ic.blob-purple{background:#E4D4FF;border-radius:50% 12px 50% 50%}
+.f-name{font-size:19px;font-weight:800;color:var(--ink);margin-bottom:9px;letter-spacing:-.4px;line-height:1.25}
+.f-desc{font-size:13.5px;color:var(--ink2);line-height:1.6;font-weight:300;max-width:280px}
+.f-bottom{margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.f-val{font-size:13.5px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.f-tag{font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px}
+.t-grad{background:var(--grad);color:#fff}
+.t-gold{background:var(--gold-light);color:var(--gold-text);border:1px solid var(--gold-border)}
+.t-blue{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-mid)}
+.t-green{background:var(--green-light);color:var(--green);border:1px solid #A9F2D2}
 
-h1{
-  font-size:clamp(2rem,3.8vw,3.2rem);
-  font-weight:900;line-height:1.08;
-  letter-spacing:-1.5px;color:#0A1F3C;
-  margin-bottom:1.5rem;
-}
-h1 .g{
-  background:linear-gradient(100deg, #0A6E9F, #0891B2, #06B6D4);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.hero-sub{
-  font-size:1.05rem;font-weight:400;color:#1E4A72;
-  line-height:1.9;max-width:440px;margin-bottom:2.5rem;
-}
-.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
-.btn-main{
-  display:inline-flex;align-items:center;gap:8px;
-  background:linear-gradient(135deg,#0369A1,#0891B2);
-  color:#fff;padding:13px 26px;border-radius:8px;
-  font-weight:900;font-size:.9rem;text-decoration:none;
-  border:none;cursor:pointer;transition:all .2s;
-  box-shadow:0 8px 30px rgba(8,145,178,.35);
-}
-.btn-main:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(8,145,178,.45)}
-.btn-sec{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,.7);color:#1E4A72;padding:13px 26px;border-radius:8px;
-  font-weight:600;font-size:.9rem;text-decoration:none;
-  border:1px solid rgba(8,145,178,.3);cursor:pointer;transition:all .2s;
-}
-.btn-sec:hover{color:#0891B2;border-color:rgba(8,145,178,.5);background:rgba(255,255,255,.9)}
+/* ═══ TRAVEL WORLD ═══ */
+.tw-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:44px}
+.tw-card{border:none;border-radius:28px;padding:34px 30px;transition:.28s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden}
+.tw-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 24px 56px rgba(22,22,42,.13)}
+.tw-card.c1{background:linear-gradient(165deg,rgba(10,20,30,.25) 0%,rgba(10,20,30,.72) 75%),url('https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=900&q=70&auto=format&fit=crop') center/cover no-repeat}
+.tw-card.c1 .tw-name{color:#fff}
+.tw-card.c1 .tw-desc{color:rgba(255,255,255,.88);font-weight:400}
+.tw-card.c1 .tw-num{color:#fff;opacity:.18}
+.tw-card.c2{background:linear-gradient(165deg,rgba(10,20,30,.25) 0%,rgba(10,20,30,.72) 75%),url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=900&q=70&auto=format&fit=crop') center/cover no-repeat}
+.tw-card.c2 .tw-name{color:#fff}
+.tw-card.c2 .tw-desc{color:rgba(255,255,255,.88);font-weight:400}
+.tw-card.c2 .tw-num{color:#fff;opacity:.18}
+.tw-card.c3{background:linear-gradient(165deg,rgba(10,20,30,.25) 0%,rgba(10,20,30,.72) 75%),url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=70&auto=format&fit=crop') center/cover no-repeat}
+.tw-card.c3 .tw-name{color:#fff}
+.tw-card.c3 .tw-desc{color:rgba(255,255,255,.88);font-weight:400}
+.tw-card.c3 .tw-num{color:#fff;opacity:.18}
+.tw-card.c4{background:linear-gradient(165deg,rgba(10,20,30,.25) 0%,rgba(10,20,30,.72) 75%),url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&q=70&auto=format&fit=crop') center/cover no-repeat}
+.tw-card.c4 .tw-name{color:#fff}
+.tw-card.c4 .tw-desc{color:rgba(255,255,255,.88);font-weight:400}
+.tw-card.c4 .tw-num{color:#fff;opacity:.18}
+.tw-num{position:absolute;top:22px;left:26px;font-size:52px;font-weight:900;letter-spacing:-3px;opacity:.08;color:var(--ink);line-height:1}
+.tw-ic{width:66px;height:66px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 6px 18px rgba(22,22,42,.08);transition:.3s}
+.tw-card:hover .tw-ic{transform:rotate(-8deg) scale(1.08)}
+.tw-name{font-size:20px;font-weight:900;color:var(--ink);margin-bottom:8px;letter-spacing:-.5px}
+.tw-desc{font-size:14px;color:var(--ink2);line-height:1.65;font-weight:300}
+.tw-hl{display:inline-flex;align-items:center;gap:6px;background:#fff;font-size:12.5px;font-weight:700;color:var(--ink);padding:7px 16px;border-radius:40px;margin-top:16px;box-shadow:0 3px 10px rgba(22,22,42,.07)}
 
-.hero-stats{
-  display:flex;gap:2.5rem;flex-wrap:wrap;
-  margin-top:3rem;padding-top:2rem;
-  border-top:1px solid rgba(8,145,178,.2);
-  padding-bottom:1rem;
-}
-.hstat .n{font-size:1.9rem;font-weight:900;color:#0A1F3C;line-height:1}
-.hstat .n em{color:#0891B2;font-style:normal}
-.hstat .l{font-size:.72rem;color:#2563A8;margin-top:4px;letter-spacing:.3px;font-weight:500}
+/* ═══ CASHBACK ═══ */
+.cb-banner{background:#16162A;border-radius:var(--r-lg);padding:48px 44px;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;position:relative;overflow:hidden}
+.cb-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad)}
+.cb-banner::after{content:'';position:absolute;bottom:-100px;left:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(8,145,178,.15) 0%,transparent 70%)}
+.cb-content{position:relative;z-index:1}
+.cb-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(8,145,178,.18);border:1px solid rgba(8,145,178,.35);border-radius:40px;padding:5px 16px;font-size:11.5px;font-weight:800;color:#5FD4E8;margin-bottom:16px;letter-spacing:.8px;text-transform:uppercase}
+.cb-title{font-size:clamp(26px,3.4vw,42px);font-weight:900;color:#fff;letter-spacing:-1.3px;line-height:1.08;margin-bottom:13px}
+.cb-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cb-desc{font-size:15px;color:rgba(255,255,255,.7);line-height:1.7;font-weight:300}
+.cb-note{margin-top:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:13px 17px;font-size:13px;color:rgba(255,255,255,.6)}
+.cb-rows{display:flex;flex-direction:column;gap:11px;position:relative;z-index:1}
+.cb-row{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;transition:.2s}
+.cb-row:hover{background:rgba(255,255,255,.1)}
+.cb-lbl{font-size:14.5px;color:rgba(255,255,255,.9);display:flex;align-items:center;gap:9px}
+.cb-val{font-size:14px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-/* ── DOCTOR SCROLL STRIP ── */
-.docx-scroll{
-  display:flex;gap:1rem;overflow-x:auto;overflow-y:hidden;
-  padding:.5rem 4vw 1rem;scroll-snap-type:x proximity;
-  -webkit-overflow-scrolling:touch;cursor:grab;
-  scrollbar-width:thin;scrollbar-color:#0891B2 transparent;
-}
-.docx-scroll.dragging{cursor:grabbing;scroll-snap-type:none}
-.docx-scroll::-webkit-scrollbar{height:6px}
-.docx-scroll::-webkit-scrollbar-thumb{background:rgba(8,145,178,.4);border-radius:10px}
-.docx-scroll::-webkit-scrollbar-track{background:transparent}
-.docx-card{
-  background:#fff;border:1px solid rgba(8,145,178,.18);border-radius:12px;
-  padding:1rem 1.1rem;box-shadow:0 3px 14px rgba(8,145,178,.08);
-  display:flex;flex-direction:column;gap:8px;
-  min-width:240px;max-width:240px;flex:0 0 auto;scroll-snap-align:start;
-}
-.docx-top{display:flex;align-items:center;gap:10px;direction:ltr}
-.docx-ico{width:36px;height:36px;border-radius:50%;background:rgba(8,145,178,.1);border:1px solid rgba(8,145,178,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.docx-name{font-size:.84rem;font-weight:700;color:#0F2744;white-space:nowrap}
-.docx-city{font-size:.7rem;color:#5A90B8;white-space:nowrap}
-.docx-status{font-size:.7rem;color:#0891B2;background:rgba(8,145,178,.08);padding:4px 10px;border-radius:20px;border:1px solid rgba(8,145,178,.15);direction:ltr;align-self:flex-start;white-space:nowrap}
-@keyframes flyPath{
-  0%{transform:translateX(0);opacity:0}
-  10%,90%{opacity:1}
-  50%{transform:translateX(220px) translateY(-8px)}
-  100%{transform:translateX(440px);opacity:0}
+/* ═══ PRICING ═══ */
+.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:44px;max-width:640px}
+.price-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r-lg);padding:36px 30px;text-align:center;transition:.24s;position:relative;overflow:hidden}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad)}
+.price-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px);border-color:rgba(8,145,178,.25)}
+.price-ic{font-size:34px;margin-bottom:14px}
+.price-amount{font-size:44px;font-weight:900;letter-spacing:-2px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.price-per{font-size:14px;color:var(--ink3);font-weight:500;margin-top:4px}
+.price-desc{font-size:13.5px;color:var(--ink2);line-height:1.6;margin-top:14px;font-weight:300}
+
+/* ═══ CTA ═══ */
+.cta-wrap{padding:76px 28px}
+.cta-box{background:var(--grad);border-radius:var(--r-lg);padding:60px 44px;text-align:center;position:relative;overflow:hidden;max-width:760px;margin:0 auto;box-shadow:0 24px 64px rgba(8,145,178,.3)}
+.cta-box::before{content:'';position:absolute;top:-90px;right:-90px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.1)}
+.cta-box::after{content:'';position:absolute;bottom:-70px;left:-70px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.07)}
+.cta-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:40px;padding:6px 18px;font-size:12px;font-weight:800;color:#fff;margin-bottom:20px;letter-spacing:.5px;position:relative;z-index:1}
+.cta-title{font-size:clamp(27px,4vw,46px);font-weight:900;letter-spacing:-1.5px;color:#fff;line-height:1.06;margin-bottom:14px;position:relative;z-index:1}
+.cta-sub{font-size:16px;color:rgba(255,255,255,.85);line-height:1.7;margin-bottom:32px;position:relative;z-index:1;font-weight:300}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.btn-white{background:#fff;color:var(--pink);border:none;padding:15px 40px;border-radius:40px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;transition:.2s;box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.22)}
+.btn-ghost-w{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);padding:13px 32px;border-radius:40px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+.btn-ghost-w:hover{border-color:#fff;background:rgba(255,255,255,.12)}
+
+/* ═══ FOOTER ═══ */
+footer{background:#fff;border-top:1px solid var(--border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer-brand{display:flex;align-items:center;gap:16px}
+.f-div{width:1px;height:28px;background:var(--border)}
+footer p{font-size:12px;color:var(--ink3)}
+
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ RESPONSIVE ═══ */
+.future-grid{grid-template-columns:repeat(4,1fr);gap:36px 24px}
+@media(max-width:900px){
+  .future-grid{grid-template-columns:repeat(2,1fr)}
+  .gold-pkg-inner,.cb-banner{grid-template-columns:1fr;gap:30px}
+  .f-grid{grid-template-columns:1fr}
+  .tw-grid{grid-template-columns:1fr}
+  .price-grid{grid-template-columns:1fr;max-width:100%}
+  .stats-nums{gap:24px;flex-wrap:wrap}
+  nav{padding:0 16px}
+  .nav-tag{display:none}
+  footer{padding:20px 16px;flex-direction:column;align-items:flex-start}
+  .cta-btns{flex-direction:column;align-items:center}
+  .hero-logos{flex-direction:column;gap:14px;padding:18px 28px}
+  .gold-pkg,.cb-banner{padding:36px 24px}
 }
 
 
-
-
-
-
-/* ── TICKER ── */
-.ticker-bar{overflow:hidden;background:rgba(8,145,178,.07);border-top:1px solid rgba(8,145,178,.15);border-bottom:1px solid rgba(8,145,178,.15);height:38px;display:flex;align-items:center}
-.ticker{display:flex;animation:tick 28s linear infinite;width:max-content}
+/* ── Safe Doc additions on top of OPLY base ── */
+.logo-cross{width:38px;height:38px;border-radius:11px;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:19px;box-shadow:0 6px 16px rgba(8,145,178,.3)}
+.sd-brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:20px;letter-spacing:-.5px;color:var(--ink)}
+.sd-brand .d{color:var(--teal,#06B6D4)}
+.nav-links-sd{display:flex;align-items:center;gap:30px}
+.nav-links-sd a{font-size:14px;font-weight:600;color:var(--ink2);transition:.15s}
+.nav-links-sd a:hover{color:var(--pink)}
+.nav-cta-sd{background:var(--grad);color:#fff;padding:10px 22px;border-radius:40px;font-weight:800;font-size:13px;box-shadow:0 6px 18px rgba(8,145,178,.3);transition:.2s;border:none;cursor:pointer;font-family:inherit}
+.nav-cta-sd:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(8,145,178,.42)}
+.lang-toggle{background:#fff;border:1px solid var(--border);border-radius:40px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer;font-family:inherit}
+.hero-cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px;animation:up .55s ease .2s both}
+.hero-btn-main{background:var(--grad);color:#fff;padding:15px 34px;border-radius:40px;font-size:15px;font-weight:800;box-shadow:0 10px 28px rgba(8,145,178,.32);border:none;cursor:pointer;font-family:inherit;transition:.2s}
+.hero-btn-main:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(8,145,178,.44)}
+.hero-btn-sec{background:#fff;color:var(--ink);padding:15px 30px;border-radius:40px;font-size:15px;font-weight:700;border:1.5px solid var(--border);cursor:pointer;font-family:inherit;transition:.2s}
+.hero-btn-sec:hover{border-color:var(--pink);color:var(--pink);transform:translateY(-2px)}
+/* doctor ticker */
+.doc-ticker{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;height:46px;display:flex;align-items:center}
+.doc-ticker-inner{display:flex;animation:tick 40s linear infinite;width:max-content;gap:38px;white-space:nowrap}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.ti{display:flex;align-items:center;gap:8px;padding:0 24px;border-left:1px solid rgba(8,145,178,.15);white-space:nowrap;font-size:.73rem}
-.ti-dot{width:5px;height:5px;border-radius:50%;background:#0891B2}
-.ti-city{color:#3D6A96;font-weight:500}
-.ti-val{color:#0891B2;font-weight:700}
+.dt-item{display:flex;align-items:center;gap:8px;font-size:13.5px}
+.dt-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);box-shadow:0 0 8px rgba(8,145,178,.5)}
+.dt-city{color:var(--ink2);font-weight:500}
+.dt-val{color:var(--pink);font-weight:700}
+body.lang-he .doc-ticker-inner{animation-direction:reverse}
+/* how = feature cards (3) */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.how-card{background:#fff;border-radius:28px;padding:38px 30px;box-shadow:var(--shadow);transition:.28s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden}
+.how-card:hover{transform:translateY(-7px);box-shadow:var(--shadow-md)}
+.how-num{font-size:54px;font-weight:900;letter-spacing:-3px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:.22;line-height:1;position:absolute;top:26px;right:30px}
+body.lang-he .how-num{right:auto;left:30px}
+.how-ic{width:64px;height:64px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:20px}
+.how-card:nth-child(1) .how-ic{background:#CBE9FF}
+.how-card:nth-child(2) .how-ic{background:#C7F0E9}
+.how-card:nth-child(3) .how-ic{background:#D9E4FF}
+.how-name{font-size:19px;font-weight:800;letter-spacing:-.4px;margin-bottom:9px}
+.how-desc{font-size:14px;color:var(--ink2);line-height:1.7;font-weight:300}
+/* about = split with points + stat cards */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.about-points{margin-top:28px;display:flex;flex-direction:column;gap:20px}
+.apoint{display:flex;gap:15px;align-items:flex-start}
+.apoint-ic{width:46px;height:46px;border-radius:14px;background:var(--grad-soft);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.apoint h4{font-size:15.5px;font-weight:800;margin-bottom:4px}
+.apoint p{font-size:13.5px;color:var(--ink2);line-height:1.65;font-weight:300}
+.about-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.about-quote{grid-column:1/-1;background:var(--grad-soft);border:1px solid rgba(8,145,178,.16);border-radius:24px;padding:26px}
+.about-quote p{font-size:16px;font-weight:600;color:var(--ink);line-height:1.5;font-style:italic}
+.about-quote .sig{font-size:12.5px;color:var(--pink);margin-top:10px;font-weight:700}
+.astat{background:#fff;border:1px solid var(--border);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
+.astat-n{font-size:34px;font-weight:900;letter-spacing:-1.5px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.astat-l{font-size:13px;color:var(--ink3);margin-top:4px}
+/* benefits = feature grid 3x2 */
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.ben-card{background:#fff;border-radius:26px;padding:32px 28px;box-shadow:var(--shadow);transition:.26s;position:relative;overflow:hidden}
+.ben-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad);opacity:0;transition:.25s}
+.ben-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.ben-card:hover::before{opacity:1}
+.ben-ic{width:58px;height:58px;border-radius:18px;background:var(--grad-soft);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px}
+.ben-name{font-size:17px;font-weight:800;letter-spacing:-.3px;margin-bottom:8px}
+.ben-desc{font-size:13.5px;color:var(--ink2);line-height:1.7;font-weight:300}
+.ben-head-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:end}
+.ben-join-btn{background:var(--grad);color:#fff;padding:14px 32px;border-radius:40px;font-size:14.5px;font-weight:800;box-shadow:0 8px 22px rgba(8,145,178,.3);border:none;cursor:pointer;font-family:inherit;transition:.2s;align-self:start}
+.ben-join-btn:hover{transform:translateY(-2px)}
+/* trust band */
+.trust-band{background:linear-gradient(135deg,#EFFAFD,#E8F7FB);padding:70px 28px;text-align:center}
+/* section titles centered variant */
+.sec-center{text-align:center;max-width:620px;margin:0 auto 8px}
+.sec-center .eyebrow{justify-content:center}
+/* form wrapper restyle to match */
+#join .section{max-width:1120px}
+.join-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;align-items:start}
+@media(max-width:900px){
+  .how-grid,.ben-grid{grid-template-columns:1fr}
+  .about-wrap,.join-layout,.ben-head-grid{grid-template-columns:1fr;gap:28px}
+  .about-cards{grid-template-columns:1fr 1fr}
+  .nav-links-sd{display:none}
+}
 
-/* ── SECTIONS ── */
-section{padding:90px 4vw}
-.s-tag{display:block;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0891B2;margin-bottom:.9rem}
-.s-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;letter-spacing:-.8px;color:#08192E;line-height:1.15;margin-bottom:1rem}
-.s-body{font-size:.95rem;color:#1E4A72;line-height:1.9;max-width:520px}
-.sep{height:1px;background:rgba(8,145,178,.12);margin:0 4vw}
-
-/* ── HOW ── */
-#how{background:#E8F4FE}
-.how-wrap{margin-top:4rem}
-.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(8,145,178,.12);border:1px solid rgba(8,145,178,.15);border-radius:12px;overflow:hidden}
-.hstep{background:#FFFFFF;padding:2.5rem 2rem;position:relative;transition:background .2s}
-.hstep:hover{background:#F0FAFF}
-.hstep::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background .2s}
-.hstep:hover::after{background:linear-gradient(90deg,#0891B2,#06B6D4)}
-.hn{font-size:2.2rem;font-weight:900;color:rgba(8,145,178,.12);line-height:1;margin-bottom:1.5rem}
-.hico{width:42px;height:42px;border-radius:10px;background:rgba(8,145,178,.1);border:1px solid rgba(8,145,178,.2);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:1rem}
-.ht{font-size:.9rem;font-weight:700;color:#08192E;margin-bottom:.5rem}
-.hd{font-size:.78rem;color:#1E4A72;line-height:1.75}
-
-/* ── ABOUT ── */
-#about{background:#F0F7FF}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
-.about-points{margin-top:2.5rem;display:flex;flex-direction:column;gap:1.4rem}
-.ap{display:flex;gap:14px;align-items:flex-start}
-.ap-ico{width:36px;height:36px;min-width:36px;border-radius:8px;background:rgba(8,145,178,.1);border:1px solid rgba(8,145,178,.2);display:flex;align-items:center;justify-content:center;font-size:16px}
-.ap-t h4{font-size:.85rem;font-weight:700;color:#0F2744;margin-bottom:3px}
-.ap-t p{font-size:.78rem;color:#1E4A72;line-height:1.65}
-.about-right{display:flex;flex-direction:column;gap:12px}
-.acard{background:#FFFFFF;border:1px solid rgba(8,145,178,.15);border-radius:10px;padding:1.4rem;box-shadow:0 2px 12px rgba(8,145,178,.08)}
-.acard-n{font-size:2rem;font-weight:900;color:#0891B2}
-.acard-l{font-size:.75rem;color:#5A90B8;margin-top:3px}
-.acard-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.qcard{background:linear-gradient(135deg,rgba(8,145,178,.08),rgba(14,165,233,.06));border:1px solid rgba(8,145,178,.2);border-radius:10px;padding:1.5rem}
-.qcard p{font-size:1rem;color:#0A3057;line-height:1.65;font-style:italic;font-weight:500}
-.qcard .sig{font-size:.7rem;color:#0891B2;margin-top:.75rem;letter-spacing:.5px}
-
-/* ── DOCTORS ── */
-#doctors{background:#E8F4FE}
-.doc-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:4rem}
-.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(8,145,178,.12);border:1px solid rgba(8,145,178,.15);border-radius:12px;overflow:hidden}
-.bc{background:#FFFFFF;padding:2rem;transition:background .2s;position:relative;overflow:hidden}
-.bc:hover{background:#F0FAFF}
-.bc::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 100% 0%, rgba(8,145,178,.06), transparent);opacity:0;transition:opacity .3s}
-.bc:hover::before{opacity:1}
-.bico{width:40px;height:40px;border-radius:9px;background:rgba(8,145,178,.1);border:1px solid rgba(8,145,178,.18);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:1.1rem}
-.bt{font-size:.88rem;font-weight:700;color:#08192E;margin-bottom:.4rem}
-.bd{font-size:.77rem;color:#1E4A72;line-height:1.72}
-.compare{margin-top:4rem}
-.compare-h{font-size:1.3rem;font-weight:900;color:#0F2744;margin-bottom:1.5rem}
-table{width:100%;border-collapse:collapse;background:#FFFFFF;border:1px solid rgba(8,145,178,.15);border-radius:10px;overflow:hidden}
-th{padding:.9rem 1.2rem;font-size:.75rem;font-weight:700;letter-spacing:.3px;text-align:right}
-th:first-child{background:#F0F7FF;color:#3D6A96;width:45%}
-th:nth-child(2){background:rgba(8,145,178,.1);color:#0891B2;border-bottom:1px solid rgba(8,145,178,.2)}
-th:last-child{background:#F0F7FF;color:#7AAED6}
-td{padding:.8rem 1.2rem;font-size:.8rem;border-top:1px solid rgba(8,145,178,.1);color:#1E4A72}
-tr:hover td{background:#F8FCFF}
-.ck{color:#0891B2;font-weight:700}
-.cx{color:#BAD7EF}
-
-/* ── JOIN ── */
-#join{background:#F0F7FF}
+/* ===== FORM CSS (from original, restyled context) ===== */
 .join-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:start}
-.jteaser{background:#FFFFFF;border:1px solid rgba(8,145,178,.15);border-radius:10px;padding:1.5rem;margin-top:2.5rem;box-shadow:0 2px 12px rgba(8,145,178,.07)}
-.jteaser h4{font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#0891B2;margin-bottom:1rem}
+.jteaser{background:#FFFFFF;border:1px solid rgba(79,70,229,.15);border-radius:10px;padding:1.5rem;margin-top:2.5rem;box-shadow:0 2px 12px rgba(79,70,229,.07)}
+.jteaser h4{font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#4F46E5;margin-bottom:1rem}
 .jteaser ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
-.jteaser li{font-size:.8rem;color:#0F2744;display:flex;gap:10px;align-items:center}
-.jteaser li::before{content:'→';color:#0891B2;font-size:.7rem;flex-shrink:0}
-.form-box{background:#FFFFFF;border:1.5px solid #C0DAF0;border-radius:14px;padding:2.5rem;box-shadow:0 6px 32px rgba(8,145,178,.12)}
-
-/* stepper */
+.jteaser li{font-size:.8rem;color:#0A1330;display:flex;gap:10px;align-items:center}
+.jteaser li::before{content:'→';color:#4F46E5;font-size:.7rem;flex-shrink:0}
+.jteaser{ box-shadow:0 8px 30px rgba(79,70,229,.14); border-radius:16px; }
+.jteaser{
+  background:var(--rd-grad-soft) !important; border:1px solid rgba(79,70,229,.14) !important;
+  border-radius:var(--rd-r) !important; box-shadow:var(--rd-shadow) !important;
+}
+.jteaser h4{ color:var(--rd-ink) !important; font-weight:800 !important; }
+.form-box{background:#FFFFFF;border:1.5px solid #C0DAF0;border-radius:14px;padding:2.5rem;box-shadow:0 6px 32px rgba(79,70,229,.12)}
+.form-box { margin: 0 auto; width: 100% !important; max-width: 100%; padding: 15px; box-sizing: border-box; }
+.form-box { padding: 10px; }
+.form-box{
+  background:rgba(255,255,255,.78) !important;
+  backdrop-filter:blur(20px) saturate(150%) !important;
+  border:1px solid rgba(79,70,229,.16) !important;
+  border-radius:24px !important;
+  box-shadow:var(--shadow-lift) !important;
+}
+.form-box{
+  background:#fff !important; border:1px solid var(--rd-border) !important;
+  border-radius:var(--rd-r-lg) !important; box-shadow:var(--rd-shadow-md) !important;
+}
 .stepper{display:flex;align-items:center;margin-bottom:2rem}
-.sc{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;border:1px solid rgba(8,145,178,.2);background:#EBF5FB;color:#7AAED6;transition:all .3s;flex-shrink:0}
-.sc.active{background:#0891B2;border-color:#0891B2;color:#fff}
-.sc.done{background:#EBF9F9;border-color:#0891B2;color:#0891B2}
-.sl{font-size:.65rem;color:#7AAED6;line-height:1.3;font-weight:500;transition:color .3s}
-.sl.active{color:#0891B2}
-.sl.done{color:#3D6A96}
-.sln{flex:1;height:1px;background:rgba(8,145,178,.15);margin:0 6px;transition:background .3s}
-.sln.done{background:#0891B2}
+.stepper .prog-fill, .prog-fill{ background:linear-gradient(135deg,#4F46E5,#06B6D4) !important; }
+.stepper .n, .fstep .n, .stepper [class*="circle"]{ }
+/* ★ FIX: stepper circles + labels (were missing → plain numbers) */
 .sw{display:flex;align-items:center;gap:7px;flex:1}
 .sw:last-child{flex:none}
-.prog{height:2px;background:rgba(8,145,178,.15);border-radius:1px;margin-bottom:2rem;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,#0891B2,#06B6D4);border-radius:1px;transition:width .4s ease}
-
-/* form */
-.fstep{display:none}.fstep.active{display:block}
-.fstep-h{font-size:.95rem;font-weight:800;color:#08192E;margin-bottom:.25rem}
-.fstep-en{font-size:.78rem;font-weight:400;color:#5A90B8;margin-right:.5rem}
-.fstep-s{font-size:.75rem;color:#1E4A72;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(8,145,178,.15)}
+.sc{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;border:1px solid rgba(79,70,229,.25);background:#EEF0FE;color:#9B9FD0;transition:all .3s;flex-shrink:0}
+.sc.active{background:#4F46E5;border-color:#4F46E5;color:#fff}
+.sc.done{background:#EEF0FE;border-color:#4F46E5;color:#4F46E5}
+.sl{font-size:.65rem;color:#9B9FD0;line-height:1.3;font-weight:500;transition:color .3s}
+.sl.active{color:#4F46E5}
+.sl.done{color:#4B4F7A}
+/* ★ FIX: active step must be visible (this rule was lost → empty form) */
+.fstep{display:none}
+.fstep.active{display:block}
+.fstep-h{font-size:.95rem;font-weight:800;color:#0A1330;margin-bottom:.25rem}
+.fstep-en{font-size:.78rem;font-weight:400;color:#7B7FB0;margin-right:.5rem}
+.fstep-s{font-size:.75rem;color:#4B4F7A;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(79,70,229,.15)}
+.fstep-h, .qcard p, .docx-name{
+  font-family:'Poppins','Varela Round',sans-serif !important;
+  letter-spacing:-.5px;
+}
+.fstep-h, .qcard p, .docx-name, .logo{
+  font-family:'Poppins','Varela Round',sans-serif !important;
+  letter-spacing:-.5px !important;
+  font-weight:800 !important;
+}
+.fstep-h{ color:var(--rd-ink) !important; font-weight:800 !important; }
+.fstep-s{ color:var(--rd-ink2) !important; }
+.fstep-h{font-size:.95rem;font-weight:800;color:#0A1330;margin-bottom:.25rem}
+.fstep-h, .qcard p, .docx-name{
+  font-family:'Poppins','Varela Round',sans-serif !important;
+  letter-spacing:-.5px;
+}
+.fstep-h, .qcard p, .docx-name, .logo{
+  font-family:'Poppins','Varela Round',sans-serif !important;
+  letter-spacing:-.5px !important;
+  font-weight:800 !important;
+}
+.fstep-h{ color:var(--rd-ink) !important; font-weight:800 !important; }
+.fstep-s{font-size:.75rem;color:#4B4F7A;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(79,70,229,.15)}
+.fstep-s{ color:var(--rd-ink2) !important; }
 .fg{display:flex;flex-direction:column;gap:5px;margin-bottom:1rem}
 .fg label{font-size:.78rem;font-weight:700;letter-spacing:.2px;color:#0A2540;margin-bottom:2px}
-.fg label .req{color:#0891B2}
+.fg label .req{color:#4F46E5}
 .fg input,.fg select,.fg textarea{
   background:#FFFFFF;border:1.5px solid #B0CCE0;border-radius:7px;
   padding:10px 13px;font-family:'Varela Round','Poppins',sans-serif;font-size:.9rem;
-  color:#08192E;outline:none;transition:border-color .2s,box-shadow .2s;direction:ltr;width:100%;
+  color:#0A1330;outline:none;transition:border-color .2s,box-shadow .2s;direction:ltr;width:100%;
 }
 .fg input::placeholder,.fg textarea::placeholder{color:#7099B8}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#0891B2;background:#EAF6FD;box-shadow:0 0 0 3px rgba(8,145,178,.1)}
-.fg select option{background:#fff;color:#08192E;font-weight:500}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#4F46E5;background:#EAF6FD;box-shadow:0 0 0 3px rgba(79,70,229,.1)}
+.fg select option{background:#fff;color:#0A1330;font-weight:500}
 .fg textarea{resize:vertical;min-height:80px}
 .fgrow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
 .fgrow3{display:grid;grid-template-columns:1fr 1fr 95px;gap:.75rem}
-.priv{font-size:.7rem;color:#2563A8;margin-top:4px}
-.fdesc{font-size:.72rem;color:#3D6A96;margin-top:3px;line-height:1.5}
-.appt-row{display:flex;align-items:center;gap:8px;padding:.5rem 0;border-top:1px solid rgba(8,145,178,.1);margin-top:.25rem}
-.appt-row input[type=checkbox]{width:16px;height:16px;flex-shrink:0;accent-color:var(--green);cursor:pointer}
-.appt-row label{font-size:.78rem;font-weight:600;color:#0A2540;cursor:pointer}
-.upload{border:1px dashed rgba(8,145,178,.3);border-radius:8px;padding:1.2rem;text-align:center;background:rgba(8,145,178,.03);cursor:pointer;transition:all .2s;position:relative}
-.upload:hover{border-color:#0891B2;background:rgba(8,145,178,.07)}
-.upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
-.uico{font-size:1.3rem;margin-bottom:5px}
-.utxt{font-size:.73rem;color:#2563A8}
-.utxt strong{color:#0891B2}
-.ufn{font-size:.72rem;color:#0369A1;margin-top:5px;display:none;font-weight:700}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-.chip{padding:6px 14px;border-radius:6px;border:1.5px solid #B0D4E8;background:#EBF5FB;font-size:.78rem;font-weight:600;color:#0F2744;cursor:pointer;transition:all .15s;user-select:none}
-.chip:hover{border-color:#0891B2;color:#0369A1;background:#DCF0FA}
-.chip.sel{background:#DBEFFE;border-color:#0891B2;color:#0369A1;font-weight:700}
-.combo{position:relative;background:#F0F8FF;border:1.5px solid #B0D4E8;border-radius:8px;padding:.55rem .8rem;transition:all .15s}
-.combo:focus-within{border-color:#0891B2;background:#EAF6FD;box-shadow:0 0 0 3px rgba(8,145,178,.1)}
+.fgrow, .fgrow3 { grid-template-columns: 1fr; gap: 15px; }
+.fg input, .fg textarea, .fg select, .combo input{
+  border-radius:11px !important;
+  transition:border-color .2s, box-shadow .2s !important;
+}
+.fg input:focus, .fg textarea:focus, .combo input:focus{
+  border-color:#4F46E5 !important;
+  box-shadow:0 0 0 4px rgba(79,70,229,.12) !important;
+}
+.fg input, .fg textarea, .fg select, .combo input,
+.bbk, .bnxt, .chip, .lm-item, .nav-cta, .btn-main, .btn-sec{
+  font-family:inherit !important;
+}
+.fg label, .fg > span{ color:var(--rd-ink) !important; font-weight:600 !important; }
+.fg input, .fg textarea, .fg select, .combo input{
+  border-radius:13px !important; border:1.5px solid var(--rd-border) !important;
+  background:#fff !important; color:var(--rd-ink) !important;
+}
+.fg input:focus, .fg textarea:focus, .combo input:focus{
+  border-color:var(--rd-p1) !important; box-shadow:0 0 0 4px rgba(79,70,229,.1) !important;
+}
+.combo{position:relative;background:#F0F8FF;border:1.5px solid #C4C8F5;border-radius:8px;padding:.55rem .8rem;transition:all .15s}
+.combo:focus-within{border-color:#4F46E5;background:#EAF6FD;box-shadow:0 0 0 3px rgba(79,70,229,.1)}
 .combo input{background:transparent;border:none;outline:none;width:100%;font-size:.86rem;color:#0A2540;padding:0;font-family:inherit}
 .combo input::placeholder{color:#7099B8}
 .combo.multi{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .combo.multi input{flex:1;min-width:120px}
 .combo-tags{display:flex;flex-wrap:wrap;gap:5px}
-.combo-tag{display:inline-flex;align-items:center;gap:6px;background:#DBEFFE;border:1px solid #0891B2;color:#0369A1;font-size:.74rem;font-weight:600;padding:3px 4px 3px 10px;border-radius:5px;line-height:1}
+.combo-tag{display:inline-flex;align-items:center;gap:6px;background:#DBEFFE;border:1px solid #4F46E5;color:#4338CA;font-size:.74rem;font-weight:600;padding:3px 4px 3px 10px;border-radius:5px;line-height:1}
 .combo-tag.free{background:#FDF2E1;border-color:#D97706;color:#92400E}
 .combo-tag .x{cursor:pointer;font-weight:700;padding:0 6px;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;height:18px;width:18px;font-size:.78rem}
 .combo-tag .x:hover{background:rgba(0,0,0,.08)}
-.combo-list{position:absolute;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid #B0D4E8;border-radius:8px;max-height:220px;overflow-y:auto;z-index:10;box-shadow:0 8px 24px rgba(8,25,46,.12)}
+.combo-list{position:absolute;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid #C4C8F5;border-radius:8px;max-height:220px;overflow-y:auto;z-index:10;box-shadow:0 8px 24px rgba(8,25,46,.12)}
 .combo-list[hidden]{display:none}
 .combo-item{padding:8px 12px;font-size:.82rem;color:#0A2540;cursor:pointer;border-bottom:1px solid #F0F8FF}
 .combo-item:last-child{border-bottom:none}
-.combo-item:hover,.combo-item.active{background:#EAF6FD;color:#0369A1}
+.combo-item:hover,.combo-item.active{background:#EAF6FD;color:#4338CA}
 .combo-item .add-hint{font-size:.7rem;color:#92400E;float:right;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{padding:6px 14px;border-radius:6px;border:1.5px solid #C4C8F5;background:#EEF0FE;font-size:.78rem;font-weight:600;color:#0A1330;cursor:pointer;transition:all .15s;user-select:none}
+.chip:hover{border-color:#4F46E5;color:#4338CA;background:#E4E5FD}
+.chip.sel{background:#DBEFFE;border-color:#4F46E5;color:#4338CA;font-weight:700}
+.chip{ border-radius:100px !important; transition:all .2s !important; }
+.chip.sel, .chip:hover{ box-shadow:0 4px 12px rgba(79,70,229,.18); }
+.chip{ border-radius:100px !important; border:1.5px solid var(--rd-border) !important; background:#fff !important; color:var(--rd-ink2) !important; }
+.chip.sel{ background:var(--rd-grad-soft) !important; border-color:var(--rd-p1) !important; color:var(--rd-p1) !important; }
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.bnxt{flex:2;padding:11px;background:linear-gradient(135deg,#4F46E5,#06B6D4);border:none;border-radius:7px;font-family:'Varela Round','Poppins',sans-serif;font-size:.88rem;font-weight:900;color:#fff;cursor:pointer;transition:all .15s;box-shadow:0 4px 20px rgba(79,70,229,.25)}
+.bnxt:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(79,70,229,.38)}
+.bnxt, .bbk{ border-radius:12px !important; }
+.bnxt{
+  background:linear-gradient(135deg,#4F46E5,#06B6D4) !important; border-radius:100px !important;
+  font-weight:800 !important; box-shadow:0 10px 26px rgba(79,70,229,.3) !important;
+}
+.bbk{flex:1;padding:11px;background:#EEF0FE;border:1.5px solid #C4C8F5;border-radius:7px;font-family:'Varela Round','Poppins',sans-serif;font-size:.88rem;font-weight:700;color:#0A1330;cursor:pointer;transition:all .15s}
+.bbk:hover{border-color:#4F46E5;color:#4338CA;background:#E4E5FD}
+.bbk, .bnxt, .chip, .lm-item, .nav-cta, .btn-main, .btn-sec{
+  font-family:inherit !important;
+}
+.bbk{
+  background:#fff !important; border:1.5px solid var(--rd-border) !important;
+  border-radius:100px !important; color:var(--rd-ink2) !important;
+}
+.bbk:hover{ border-color:var(--rd-p1) !important; color:var(--rd-p1) !important; background:#fff !important; }
 .nav-btns{display:flex;gap:.75rem;margin-top:1.5rem}
-.bbk{flex:1;padding:11px;background:#EBF5FB;border:1.5px solid #B0D4E8;border-radius:7px;font-family:'Varela Round','Poppins',sans-serif;font-size:.88rem;font-weight:700;color:#0F2744;cursor:pointer;transition:all .15s}
-.bbk:hover{border-color:#0891B2;color:#0369A1;background:#DCF0FA}
-.bnxt{flex:2;padding:11px;background:linear-gradient(135deg,#0891B2,#06B6D4);border:none;border-radius:7px;font-family:'Varela Round','Poppins',sans-serif;font-size:.88rem;font-weight:900;color:#fff;cursor:pointer;transition:all .15s;box-shadow:0 4px 20px rgba(8,145,178,.25)}
-.bnxt:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(8,145,178,.38)}
+.prog{height:2px;background:rgba(79,70,229,.15);border-radius:1px;margin-bottom:2rem;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,#4F46E5,#06B6D4);border-radius:1px;transition:width .4s ease}
+.prog-fill{height:100%;background:linear-gradient(90deg,#4F46E5,#06B6D4);border-radius:1px;transition:width .4s ease}
+.success-scr{display:none;text-align:center;padding:3rem 1rem}
+.success-scr h3{font-size:1.5rem;font-weight:900;color:#0A1330;margin-bottom:.5rem;margin-top:1rem}
+.success-scr p{font-size:.85rem;color:#4B4F7A}
+.success-scr h3{ color:var(--rd-ink) !important; }
+.upload{border:1px dashed rgba(79,70,229,.3);border-radius:8px;padding:1.2rem;text-align:center;background:rgba(79,70,229,.03);cursor:pointer;transition:all .2s;position:relative}
+.upload:hover{border-color:#4F46E5;background:rgba(79,70,229,.07)}
+.upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+.combo-list{position:absolute;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid #C4C8F5;border-radius:8px;max-height:220px;overflow-y:auto;z-index:10;box-shadow:0 8px 24px rgba(8,25,46,.12)}
+.combo-list[hidden]{display:none}
+.combo-tags{display:flex;flex-wrap:wrap;gap:5px}
+.yn-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.3rem 0;border-bottom:1px solid rgba(79,70,229,.07)}
+.yn-row:last-child{border-bottom:none}
+.yn-chips{flex:0 0 auto;display:flex;gap:.35rem}
+.yn-chips .chip{padding:.22rem .65rem;font-size:.72rem;margin:0}
+.yn-label{font-size:.78rem;font-weight:600;color:#0A2540;flex:1}
+.yn-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.3rem 0;border-bottom:1px solid rgba(79,70,229,.07)}
+.yn-row:last-child{border-bottom:none}
+.yn-label{font-size:.78rem;font-weight:600;color:#0A2540;flex:1}
+.yn-chips{flex:0 0 auto;display:flex;gap:.35rem}
+.yn-chips .chip{padding:.22rem .65rem;font-size:.72rem;margin:0}
 .terms-row{display:flex;align-items:flex-start;gap:10px;margin-top:1rem}
 .terms-row input[type=checkbox]{width:16px;height:16px;margin-top:3px;flex-shrink:0;accent-color:var(--green)}
-.terms-row label{font-size:.8rem;color:#0F2744;line-height:1.6;cursor:pointer}
-.terms-row a{color:#0891B2}
-.fnote{font-size:.72rem;color:#2563A8;text-align:center;margin-top:.75rem}
-.success-scr{display:none;text-align:center;padding:3rem 1rem}
-.success-scr h3{font-size:1.5rem;font-weight:900;color:#0F2744;margin-bottom:.5rem;margin-top:1rem}
-.success-scr p{font-size:.85rem;color:#1E4A72}
-
-/* ── FOOTER ── */
-footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 4vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.fcontact{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.fcontact-link{display:inline-flex;align-items:center;gap:6px;color:#7FD4E8;text-decoration:none;font-size:.85rem;font-weight:600;transition:color .2s;direction:ltr}
-.fcontact-link:hover{color:#22D3EE}
-.fcontact-link svg{opacity:.85}
-.fcontact-sep{color:rgba(127,212,232,.4);font-size:.85rem}
-.flogo{font-size:1.1rem;font-weight:900;color:#FFFFFF}
-.flogo em{color:#06B6D4;font-style:normal}
-.fcopy{font-size:.73rem;color:rgba(255,255,255,.35)}
-.flinks{display:flex;gap:1.5rem}
-.flinks a{font-size:.73rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s}
-.flinks a:hover{color:#06B6D4}
-
-/* ── REVEAL ── */
+.terms-row label{font-size:.8rem;color:#0A1330;line-height:1.6;cursor:pointer}
+.terms-row a{color:#4F46E5}
+.s-tag{display:block;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#4F46E5;margin-bottom:.9rem}
+.s-tag{
+  display:inline-block !important;
+  background:linear-gradient(135deg,rgba(79,70,229,.1),rgba(139,92,246,.08));
+  border:1px solid rgba(79,70,229,.2);
+  padding:5px 14px;border-radius:100px;
+  color:#4F46E5 !important;
+}
+.s-tag{
+  display:inline-flex !important; align-items:center !important;
+  font-size:11px !important; font-weight:800 !important; letter-spacing:3px !important;
+  text-transform:uppercase !important;
+  background:linear-gradient(135deg,#4F46E5,#06B6D4) !important;
+  -webkit-background-clip:text !important; background-clip:text !important;
+  -webkit-text-fill-color:transparent !important; color:transparent !important;
+  border:none !important; padding:0 !important; margin-bottom:14px !important;
+}
+.s-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;letter-spacing:-.8px;color:#0A1330;line-height:1.15;margin-bottom:1rem}
+.s-title{ letter-spacing:-1.2px !important; }
+.s-title{
+  font-size:clamp(1.9rem,3.4vw,2.9rem) !important; font-weight:900 !important;
+  letter-spacing:-1.4px !important; color:var(--rd-ink) !important; line-height:1.1 !important;
+}
+.s-body{font-size:.95rem;color:#4B4F7A;line-height:1.9;max-width:520px}
+.s-body{ color:var(--rd-ink2) !important; font-size:1.02rem !important; line-height:1.85 !important; }
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
 .reveal.vis{opacity:1;transform:none}
-/* —— FINAL RESPONSIVE FIX —— */
-@media(max-width:960px){
-  html, body { overflow-x: hidden; width: 100%; position: relative; margin: 0; padding: 0; }
-  
-  /* סידור הראש: לוגו, שפה וכפתור */
-  nav { padding: 10px 12px; display: flex; flex-wrap: nowrap; justify-content: space-between; align-items: center; gap: 6px; }
-  /* Hide only the text nav links, keep lang-toggle visible */
-  .nav-links > a:not(.nav-cta) { display: none; }
-  .nav-links { display: flex !important; align-items: center; gap: 6px; }
-  .lang-toggle { display: flex !important; transform: none; margin: 0; }
-  #lang-current { font-size: 0.78rem; padding: 5px 10px; min-height: 34px; }
-  .nav-cta { padding: 6px 10px !important; font-size: 0.7rem !important; white-space: nowrap; }
-  .logo svg { width: 120px !important; }
-  /* Mobile lang menu - fixed centered for easy tapping */
-  #lang-menu {
+#lang-menu {
     position: fixed !important;
     top: 56px !important;
     left: 50% !important;
@@ -436,48 +508,147 @@ footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 
     max-height: 55vh !important;
     z-index: 9999 !important;
   }
-  #lang-menu .lm-item { padding: 11px 14px !important; font-size: 0.9rem !important; min-height: 44px; display: flex; align-items: center; }
+#lang-menu .lm-item { padding: 11px 14px !important; font-size: 0.9rem !important; min-height: 44px; display: flex; align-items: center; }
+#lang-menu{
+  background:rgba(255,255,255,.86) !important;
+  backdrop-filter:blur(24px) saturate(160%) !important;
+  border:1px solid rgba(79,70,229,.18) !important;
+  border-radius:16px !important;
+  box-shadow:var(--shadow-lift) !important;
+}
+#lang-menu{
+  background:#fff !important; border:1px solid var(--rd-border) !important;
+  border-radius:16px !important; box-shadow:var(--rd-shadow-md) !important;
+}
+.lm-item{
+  padding:7px 12px;font-size:.82rem;font-weight:500;color:#0A1330;
+  cursor:pointer;border-radius:6px;transition:background .15s;white-space:nowrap;
+}
+.lm-item:hover{background:#EEF0FE;color:#4F46E5}
+.lm-item{ border-radius:10px !important; transition:background .15s; }
+.lm-item{ border-radius:10px !important; color:var(--rd-ink2) !important; }
+.lm-item:hover{ background:var(--rd-grad-soft) !important; color:var(--rd-p1) !important; }
+.priv{font-size:.7rem;color:#4B4F7A;margin-top:4px}
+.sep{height:1px;background:rgba(79,70,229,.12);margin:0 4vw}
+.sep, .sln{ background:linear-gradient(90deg,transparent,rgba(79,70,229,.25),transparent) !important; }
+.sep, .sln{ background:var(--rd-border) !important; }
+.sln{flex:1;height:1px;background:rgba(79,70,229,.15);margin:0 6px;transition:background .3s}
+.sln.done{background:#4F46E5}
 
-  /* סידור ה-Hero והטופס */
-  section { padding: 40px 15px; width: 100%; box-sizing: border-box; }
-  .hero { padding: 90px 15px 40px; text-align: center; min-height: auto; position: relative; overflow: visible; display: block !important; }
-  .hero-content { width: 100%; padding: 0; position: relative !important; top: auto !important; transform: none !important; margin: 0 auto; }
-  h1 { font-size: 1.6rem !important; line-height: 1.2; width: 100%; }
-  
-  .hero-btns { flex-direction: column; gap: 10px; width: 100%; max-width: 280px; margin: 0 auto; }
-  .btn-main, .btn-sec { width: 100% !important; margin: 0; justify-content: center; }
-  
-  /* תיקון הטופס שלא ייחתך בצדדים */
-  .form-box { margin: 0 auto; width: 100% !important; max-width: 100%; padding: 15px; box-sizing: border-box; }
-  .fgrow, .fgrow3 { grid-template-columns: 1fr; gap: 15px; }
-  .step-content { padding: 10px; }
-  
-  .about-grid, .doc-header, .join-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .how-steps, .benefits-grid { grid-template-columns: 1fr; }
-  /* Doctor scroll: smaller cards, ensure touch scroll works */
-  .docx-card { min-width: 200px; max-width: 200px; }
-  .docx-scroll { padding-left: 15px; padding-right: 15px; }
-}
+/* ===== FORCE HEEBO GLOBALLY (must win over injected form CSS) ===== */
+body, body *, input, textarea, select, button{font-family:'Heebo',sans-serif !important}
 
-@media(max-width:480px) {
-  h1 { font-size: 1.4rem !important; }
-  .hero-stats {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px 10px;
-    flex-direction: unset;
-    margin-top: 2rem;
-  }
-  .hstat { text-align: center; }
-  .form-box { padding: 10px; }
+/* ===== LANGUAGE SWITCHING (hide inactive language) ===== */
+body.lang-he [data-en], body:not(.lang-he) [data-he]{ display:none !important }
+body.lang-he{ direction:rtl; }
+body:not(.lang-he){ direction:ltr; }
+body.lang-he nav, body.lang-he .stats-inner{ direction:rtl; }
+.sd-brand, .logo-cross{ direction:ltr; }
+
+/* ═══════════════════════════════════════════════════════════════
+   ★ FIX: complete form CSS (from live site) + benefits header ★
+   ═══════════════════════════════════════════════════════════════ */
+.form-box{background:#FFFFFF;border:1.5px solid #C0DAF0;border-radius:14px;padding:2.5rem;box-shadow:0 6px 32px rgba(79,70,229,.12)}
+.form-box{
+  background:rgba(255,255,255,.78) !important;
+  backdrop-filter:blur(20px) saturate(150%) !important;
+  border:1px solid rgba(79,70,229,.16) !important;
+  border-radius:24px !important;
+  box-shadow:var(--shadow-lift) !important;
 }
-/* ── LANGUAGE TOGGLE ── */
-.lang-toggle{
-  display:flex;align-items:center;gap:2px;
-  background:#EBF5FB;border:1.5px solid #B0D4E8;
-  border-radius:20px;padding:3px;
-  margin-left:.5rem;
+.stepper{display:flex;align-items:center;margin-bottom:2rem}
+.sc{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;border:1px solid rgba(79,70,229,.2);background:#EEF0FE;color:#9B9FD0;transition:all .3s;flex-shrink:0}
+.sc.active{background:#4F46E5;border-color:#4F46E5;color:#fff}
+.sc.done{background:#EEF0FE;border-color:#4F46E5;color:#4F46E5}
+.sl{font-size:.65rem;color:#9B9FD0;line-height:1.3;font-weight:500;transition:color .3s}
+.sl.active{color:#4F46E5}
+.sl.done{color:#4B4F7A}
+.sln{flex:1;height:1px;background:rgba(79,70,229,.15);margin:0 6px;transition:background .3s}
+.sln.done{background:#4F46E5}
+.sw{display:flex;align-items:center;gap:7px;flex:1}
+.sw:last-child{flex:none}
+.fstep{display:none}
+.fstep-h{font-size:.95rem;font-weight:800;color:#0A1330;margin-bottom:.25rem}
+.fstep-h, .qcard p, .docx-name{
+  font-family:'Poppins','Varela Round',sans-serif !important;
+  letter-spacing:-.5px;
 }
+.fstep-h, .qcard p, .docx-name, .logo{
+  font-family:'Poppins','Varela Round',sans-serif !important;
+  letter-spacing:-.5px !important;
+  font-weight:800 !important;
+}
+.fstep-s{font-size:.75rem;color:#4B4F7A;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(79,70,229,.15)}
+.fstep-en{font-size:.78rem;font-weight:400;color:#5A90B8;margin-right:.5rem}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:1rem}
+.fgrow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.fgrow, .fgrow3 { grid-template-columns: 1fr; gap: 15px; }
+.fgrow3{display:grid;grid-template-columns:1fr 1fr 95px;gap:.75rem}
+.combo{position:relative;background:#F0F8FF;border:1.5px solid #C4C8F5;border-radius:8px;padding:.55rem .8rem;transition:all .15s}
+.combo:focus-within{border-color:#4F46E5;background:#EEF0FE;box-shadow:0 0 0 3px rgba(79,70,229,.1)}
+.combo.multi{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.combo.multi input{flex:1;min-width:120px}
+.combo-list{position:absolute;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid #C4C8F5;border-radius:8px;max-height:220px;overflow-y:auto;z-index:10;box-shadow:0 8px 24px rgba(8,25,46,.12)}
+.combo-list[hidden]{display:none}
+.combo-tags{display:flex;flex-wrap:wrap;gap:5px}
+.chip{padding:6px 14px;border-radius:6px;border:1.5px solid #C4C8F5;background:#EEF0FE;font-size:.78rem;font-weight:600;color:#0A1330;cursor:pointer;transition:all .15s;user-select:none}
+.chip:hover{border-color:#4F46E5;color:#0369A1;background:#DCF0FA}
+.chip.sel{background:#DBEFFE;border-color:#4F46E5;color:#0369A1;font-weight:700}
+.chip{ border-radius:100px !important; transition:all .2s !important; }
+.chip.sel, .chip:hover{ box-shadow:0 4px 12px rgba(79,70,229,.18); }
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.yn-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.3rem 0;border-bottom:1px solid rgba(79,70,229,.07)}
+.yn-row:last-child{border-bottom:none}
+.yn-chips{flex:0 0 auto;display:flex;gap:.35rem}
+.yn-label{font-size:.78rem;font-weight:600;color:#0A1330;flex:1}
+.terms-row{display:flex;align-items:flex-start;gap:10px;margin-top:1rem}
+.upload{border:1px dashed rgba(79,70,229,.3);border-radius:8px;padding:1.2rem;text-align:center;background:rgba(79,70,229,.03);cursor:pointer;transition:all .2s;position:relative}
+.upload:hover{border-color:#4F46E5;background:rgba(79,70,229,.07)}
+.ufn{font-size:.72rem;color:#0369A1;margin-top:5px;display:none;font-weight:700}
+.uico{font-size:1.3rem;margin-bottom:5px}
+.utxt{font-size:.73rem;color:#2563A8}
+.bnxt{flex:2;padding:11px;background:linear-gradient(135deg,#4F46E5,#06B6D4);border:none;border-radius:7px;font-family:'Varela Round','Poppins',sans-serif;font-size:.88rem;font-weight:900;color:#fff;cursor:pointer;transition:all .15s;box-shadow:0 4px 20px rgba(79,70,229,.25)}
+.bnxt:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(79,70,229,.38)}
+.bnxt, .bbk{ border-radius:12px !important; }
+.bbk{flex:1;padding:11px;background:#EEF0FE;border:1.5px solid #C4C8F5;border-radius:7px;font-family:'Varela Round','Poppins',sans-serif;font-size:.88rem;font-weight:700;color:#0A1330;cursor:pointer;transition:all .15s}
+.bbk:hover{border-color:#4F46E5;color:#0369A1;background:#DCF0FA}
+.bbk, .bnxt, .chip, .lm-item, .nav-cta, .btn-main, .btn-sec{
+  font-family:inherit !important;
+}
+.nav-btns{display:flex;gap:.75rem;margin-top:1.5rem}
+.prog{height:2px;background:rgba(79,70,229,.15);border-radius:1px;margin-bottom:2rem;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,#4F46E5,#06B6D4);border-radius:1px;transition:width .4s ease}
+.success-scr{display:none;text-align:center;padding:3rem 1rem}
+.priv{font-size:.7rem;color:#2563A8;margin-top:4px}
+.sep{height:1px;background:rgba(79,70,229,.12);margin:0 4vw}
+.sep, .sln{ background:linear-gradient(90deg,transparent,rgba(79,70,229,.25),transparent) !important; }
+.jteaser{background:#FFFFFF;border:1px solid rgba(79,70,229,.15);border-radius:10px;padding:1.5rem;margin-top:2.5rem;box-shadow:0 2px 12px rgba(79,70,229,.07)}
+.jteaser{ box-shadow:0 8px 30px rgba(79,70,229,.14); border-radius:16px; }
+.join-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:start}
+.s-tag{display:block;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#4F46E5;margin-bottom:.9rem}
+.s-tag{
+  display:inline-block !important;
+  background:linear-gradient(135deg,rgba(79,70,229,.1),rgba(34,211,238,.08));
+  border:1px solid rgba(79,70,229,.2);
+  padding:5px 14px;border-radius:100px;
+  color:#0782a0 !important;
+}
+.s-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;letter-spacing:-.8px;color:#0A1330;line-height:1.15;margin-bottom:1rem}
+.s-title{ letter-spacing:-1.2px !important; }
+.s-body{font-size:.95rem;color:#4B4F7A;line-height:1.9;max-width:520px}
+#lang-menu{
+  background:rgba(255,255,255,.86) !important;
+  backdrop-filter:blur(24px) saturate(160%) !important;
+  border:1px solid rgba(79,70,229,.18) !important;
+  border-radius:16px !important;
+  box-shadow:var(--shadow-lift) !important;
+}
+.lm-item{
+  padding:7px 12px;font-size:.82rem;font-weight:500;color:#0A1330;
+  cursor:pointer;border-radius:6px;transition:background .15s;white-space:nowrap;
+}
+.lm-item:hover{background:#EEF0FE;color:#4F46E5}
+.lm-item{ border-radius:10px !important; transition:background .15s; }
 .lang-btn{
   padding:4px 12px;border-radius:16px;
   font-size:.72rem;font-weight:700;letter-spacing:.3px;
@@ -485,475 +656,143 @@ footer{background:#0F2744;border-top:1px solid rgba(8,145,178,.15);padding:2rem 
   color:#5A90B8;transition:all .2s;
 }
 .lang-btn.active{
-  background:#0891B2;color:#fff;
-  box-shadow:0 2px 8px rgba(8,145,178,.3);
+  background:#4F46E5;color:#fff;
+  box-shadow:0 2px 8px rgba(79,70,229,.3);
 }
-/* hide/show by language */
-body.lang-he [data-en],
-body:not(.lang-he) [data-he]{ display:none !important }
-
-
-
-
-
-
-
-
-
-
-
-/* Language alignment */
-body.lang-he .hero-content{margin-left:auto;margin-right:0;text-align:right;}
-body.lang-en .hero-content,
-body.lang-es .hero-content,
-body.lang-pt .hero-content,
-body.lang-th .hero-content,
-body.lang-vi .hero-content,
-body.lang-km .hero-content,
-body.lang-lo .hero-content,
-body.lang-tl .hero-content,
-body.lang-de .hero-content,
-body.lang-nl .hero-content,
-body.lang-el .hero-content{margin-left:0;margin-right:auto;text-align:left;}
-
-
-/* English uses Inter for better readability */
-body.lang-en, body.lang-en * {
-  font-family: 'Poppins','Varela Round', sans-serif;
-}
-body.lang-en h1 {
-  font-family: 'Poppins','Varela Round', sans-serif;
-  font-weight: 800;
-  letter-spacing: -1px;
-  line-height: 1.1;
-}
-body.lang-en .hero-sub {
-  font-size: 1.1rem;
-  font-weight: 400;
-  line-height: 1.85;
-  color: #1E4A72;
-}
-body.lang-en .s-title {
-  font-family: 'Poppins','Varela Round', sans-serif;
-  font-weight: 800;
-}
-body.lang-en .nav-links a {
-  font-family: 'Poppins','Varela Round', sans-serif;
-  font-weight: 500;
-}
-
-.lm-item{
-  padding:7px 12px;font-size:.82rem;font-weight:500;color:#0F2744;
-  cursor:pointer;border-radius:6px;transition:background .15s;white-space:nowrap;
-}
-.lm-item:hover{background:#EBF5FB;color:#0891B2}
 .lang-btn{
   display:flex;align-items:center;gap:4px;
   white-space:nowrap;
 }
-
-
-/* RTL languages */
-body.lang-ar .hero-content,
-body.lang-fa .hero-content,
-body.lang-ur .hero-content {
-  margin-left: auto;
-  margin-right: 0;
-  text-align: right;
+.lang-toggle{
+  display:flex;align-items:center;gap:2px;
+  background:#EEF0FE;border:1.5px solid #C4C8F5;
+  border-radius:20px;padding:3px;
+  margin-left:.5rem;
 }
-
-/* ── YES/NO SERVICE ROWS ── */
-.yn-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.3rem 0;border-bottom:1px solid rgba(8,145,178,.07)}
-.yn-row:last-child{border-bottom:none}
-.yn-label{font-size:.78rem;font-weight:600;color:#0A2540;flex:1}
-.yn-chips{flex:0 0 auto;display:flex;gap:.35rem}
-.yn-chips .chip{padding:.22rem .65rem;font-size:.72rem;margin:0}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   FINTECH MODERN UPGRADE — teal/blue medical palette, dark-light depth
-   Overrides the base styles for a sleek fintech look (Alta-inspired)
-   ═══════════════════════════════════════════════════════════════ */
-:root{
-  --ink:#06192E;
-  --ink2:#0B2540;
-  --teal-glow:#0891B2;
-  --cyan:#06B6D4;
-  --sky:#22D3EE;
-  --mist:#EAF6FD;
-  --glass:rgba(255,255,255,.72);
-  --glass-brd:rgba(8,145,178,.16);
-  --shadow-soft:0 4px 24px rgba(11,37,64,.06);
-  --shadow-card:0 10px 40px rgba(8,80,120,.10);
-  --shadow-lift:0 24px 70px rgba(8,80,120,.18);
-}
-
-/* Display font for all headings */
-h1, .s-title, .bt, .ht, .hn, .acard-n, .hstat .n,
-.fstep-h, .qcard p, .docx-name{
-  font-family:'Poppins','Varela Round',sans-serif !important;
-  letter-spacing:-.5px;
-}
-body:not(.lang-he){ font-family:'Poppins','Varela Round',sans-serif; }
-
-/* ── Layered gradient-mesh atmosphere on the whole page ── */
-body{
-  background:
-    radial-gradient(1100px 700px at 88% -8%, rgba(34,211,238,.16), transparent 60%),
-    radial-gradient(900px 600px at -6% 12%, rgba(8,145,178,.14), transparent 55%),
-    radial-gradient(800px 800px at 50% 108%, rgba(6,182,212,.10), transparent 60%),
-    linear-gradient(180deg,#F4FAFF 0%, #EAF4FC 100%) !important;
-  background-attachment:fixed !important;
-}
-
-/* ── NAV: frosted glass, floating ── */
-nav{
-  background:rgba(244,250,255,.7) !important;
-  backdrop-filter:blur(28px) saturate(160%) !important;
-  -webkit-backdrop-filter:blur(28px) saturate(160%) !important;
-  border-bottom:1px solid rgba(8,145,178,.10) !important;
-  box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 6px 30px rgba(8,80,120,.05) !important;
-}
-.nav-links a{ letter-spacing:-.1px; position:relative; }
-.nav-cta{
-  background:linear-gradient(135deg,#0891B2,#06B6D4) !important;
-  border-radius:11px !important;
-  box-shadow:0 6px 20px rgba(8,145,178,.30), 0 1px 0 rgba(255,255,255,.4) inset !important;
-  transition:transform .2s, box-shadow .2s !important;
-}
-.nav-cta:hover{ transform:translateY(-1px); box-shadow:0 10px 28px rgba(8,145,178,.42) !important; }
-
-/* ── HERO ── */
-.hero-badge{
-  background:rgba(255,255,255,.7) !important;
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(8,145,178,.2) !important;
-  border-radius:100px !important;
-  box-shadow:0 4px 16px rgba(8,80,120,.08);
-  font-weight:600;
-}
-h1{
-  letter-spacing:-1.5px !important;
-  background:linear-gradient(180deg,#06192E 0%, #0B2D4E 100%);
-  -webkit-background-clip:text; background-clip:text;
-}
-h1 .g{
-  background:linear-gradient(120deg,#0891B2 0%,#06B6D4 45%,#22D3EE 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-}
-.hero-sub{ color:#3a6388 !important; }
-
-/* Primary buttons → gradient + glow */
-.btn-main{
-  background:linear-gradient(135deg,#0891B2 0%,#06B6D4 100%) !important;
-  border-radius:13px !important;
-  box-shadow:0 10px 30px rgba(8,145,178,.32), 0 1px 0 rgba(255,255,255,.35) inset !important;
-  font-weight:700 !important;
-  letter-spacing:-.2px;
-  position:relative;overflow:hidden;
-}
-.btn-main::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.25) 50%,transparent 70%);
-  transform:translateX(-120%);transition:transform .6s;
-}
-.btn-main:hover::after{ transform:translateX(120%); }
-.btn-main:hover{ transform:translateY(-2px); box-shadow:0 16px 44px rgba(8,145,178,.45) !important; }
-.btn-sec{
-  background:rgba(255,255,255,.6) !important;
-  backdrop-filter:blur(10px);
-  border:1.5px solid rgba(8,145,178,.25) !important;
-  border-radius:13px !important;
-  font-weight:600 !important;
-}
-
-/* Hero stats → glass tiles */
-.hero-stats{ border-top:1px solid rgba(8,145,178,.14) !important; }
-.hstat .n{ font-size:2.1rem !important; }
-.hstat .n em{
-  background:linear-gradient(120deg,#0891B2,#22D3EE);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
-
-/* ── TICKER ── */
-.ticker-bar{
-  background:rgba(8,145,178,.05) !important;
-  border-color:rgba(8,145,178,.10) !important;
-  backdrop-filter:blur(8px);
-}
-.ti-dot{ box-shadow:0 0 8px rgba(8,145,178,.6); }
-
-/* ── SECTION TITLES ── */
-.s-tag{
-  display:inline-block !important;
-  background:linear-gradient(135deg,rgba(8,145,178,.1),rgba(34,211,238,.08));
-  border:1px solid rgba(8,145,178,.2);
-  padding:5px 14px;border-radius:100px;
-  color:#0782a0 !important;
-}
-.s-title{ letter-spacing:-1.2px !important; }
-
-/* ── HOW STEPS → glass cards with glow ── */
-.how-steps{ gap:1.2rem !important; background:transparent !important; }
-.hstep{
-  background:var(--glass) !important;
-  backdrop-filter:blur(16px) saturate(140%);
-  border:1px solid var(--glass-brd) !important;
-  border-radius:20px !important;
-  box-shadow:var(--shadow-card);
-  transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s !important;
-  overflow:hidden;
-}
-.hstep:hover{ transform:translateY(-6px); box-shadow:var(--shadow-lift) !important; background:rgba(255,255,255,.86) !important; }
-.hstep::after{ height:3px !important; }
-.hico{
-  width:50px !important;height:50px !important;border-radius:14px !important;
-  background:linear-gradient(135deg,rgba(8,145,178,.14),rgba(34,211,238,.10)) !important;
-  border:1px solid rgba(8,145,178,.18) !important;
-  box-shadow:0 6px 18px rgba(8,145,178,.12);
-  font-size:22px !important;
-}
-.hn{ color:rgba(8,145,178,.18) !important; font-weight:800 !important; }
-
-/* ── ABOUT cards ── */
-.acard{
-  background:var(--glass) !important;
-  backdrop-filter:blur(14px);
-  border:1px solid var(--glass-brd) !important;
-  border-radius:18px !important;
-  box-shadow:var(--shadow-card) !important;
-  transition:transform .3s, box-shadow .3s;
-}
-.acard:hover{ transform:translateY(-4px); box-shadow:var(--shadow-lift) !important; }
-.acard-n{
-  background:linear-gradient(120deg,#0891B2,#22D3EE);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  font-weight:800 !important;
-}
-.qcard{
-  background:linear-gradient(135deg,rgba(8,145,178,.10),rgba(34,211,238,.06)) !important;
-  border:1px solid rgba(8,145,178,.2) !important;
-  border-radius:20px !important;
-  backdrop-filter:blur(12px);
-  box-shadow:var(--shadow-card);
-}
-
-/* ── BENEFIT cards (Why Join) → premium glass ── */
-.benefits-grid{ gap:1.2rem !important; background:transparent !important; }
-.bc{
-  background:var(--glass) !important;
-  backdrop-filter:blur(16px) saturate(140%);
-  border:1px solid var(--glass-brd) !important;
-  border-radius:20px !important;
-  box-shadow:var(--shadow-card);
-  transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s !important;
-}
-.bc:hover{ transform:translateY(-6px); box-shadow:var(--shadow-lift) !important; background:rgba(255,255,255,.88) !important; }
-.bc::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,#0891B2,#22D3EE);
-  opacity:0;transition:opacity .3s;
-}
-.bc:hover::before{ opacity:1; }
-.bico{
-  width:50px !important;height:50px !important;border-radius:14px !important;
-  background:linear-gradient(135deg,rgba(8,145,178,.14),rgba(34,211,238,.10)) !important;
-  border:1px solid rgba(8,145,178,.18) !important;
-  box-shadow:0 6px 18px rgba(8,145,178,.12);
-  font-size:22px !important;
-}
-.bt{ font-size:1rem !important; letter-spacing:-.3px; }
-
-/* ── DOCTOR SCROLL cards → glass ── */
-.docx-card{
-  background:var(--glass) !important;
-  backdrop-filter:blur(14px);
-  border:1px solid var(--glass-brd) !important;
-  border-radius:18px !important;
-  box-shadow:var(--shadow-card) !important;
-  transition:transform .25s, box-shadow .25s;
-}
-.docx-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow-lift) !important; }
-.docx-ico{
-  background:linear-gradient(135deg,rgba(8,145,178,.14),rgba(34,211,238,.10)) !important;
-  box-shadow:0 4px 12px rgba(8,145,178,.14);
-}
-.docx-status{
-  background:linear-gradient(135deg,rgba(8,145,178,.1),rgba(34,211,238,.06)) !important;
-}
-
-/* ── FORM → premium glass panel ── */
-.form-box{
-  background:rgba(255,255,255,.78) !important;
-  backdrop-filter:blur(20px) saturate(150%) !important;
-  border:1px solid rgba(8,145,178,.16) !important;
-  border-radius:24px !important;
-  box-shadow:var(--shadow-lift) !important;
-}
-.fg input, .fg textarea, .fg select, .combo input{
-  border-radius:11px !important;
-  transition:border-color .2s, box-shadow .2s !important;
-}
-.fg input:focus, .fg textarea:focus, .combo input:focus{
-  border-color:#0891B2 !important;
-  box-shadow:0 0 0 4px rgba(8,145,178,.12) !important;
-}
-.chip{ border-radius:100px !important; transition:all .2s !important; }
-.chip.sel, .chip:hover{ box-shadow:0 4px 12px rgba(8,145,178,.18); }
-.bnxt, .bbk{ border-radius:12px !important; }
-
-/* ── LANGUAGE menu → glass ── */
-#lang-menu{
-  background:rgba(255,255,255,.86) !important;
-  backdrop-filter:blur(24px) saturate(160%) !important;
-  border:1px solid rgba(8,145,178,.18) !important;
-  border-radius:16px !important;
-  box-shadow:var(--shadow-lift) !important;
-}
-.lm-item{ border-radius:10px !important; transition:background .15s; }
 .lang-toggle{
   background:rgba(255,255,255,.6) !important;
   backdrop-filter:blur(10px);
-  border:1px solid rgba(8,145,178,.2) !important;
+  border:1px solid rgba(79,70,229,.2) !important;
   border-radius:100px !important;
 }
 
-/* ── Section reveal animation on load ── */
-@keyframes fadeUp{ from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-.hstep, .bc, .acard{ animation:fadeUp .6s cubic-bezier(.2,.8,.2,1) both; }
-.benefits-grid .bc:nth-child(2){ animation-delay:.06s }
-.benefits-grid .bc:nth-child(3){ animation-delay:.12s }
-.benefits-grid .bc:nth-child(4){ animation-delay:.18s }
-.benefits-grid .bc:nth-child(5){ animation-delay:.24s }
-.benefits-grid .bc:nth-child(6){ animation-delay:.30s }
-.how-steps .hstep:nth-child(2){ animation-delay:.1s }
-.how-steps .hstep:nth-child(3){ animation-delay:.2s }
-
-/* Soft separators */
-.sep, .sln{ background:linear-gradient(90deg,transparent,rgba(8,145,178,.25),transparent) !important; }
-
-/* Launch banner glow */
-.jteaser{ box-shadow:0 8px 30px rgba(8,145,178,.14); border-radius:16px; }
-
+/* benefits header — stop intro text overlapping the button */
+.ben-head-grid{ align-items:center !important; }
+.ben-head-grid > div:last-child{ display:flex !important; flex-direction:column !important; align-items:flex-start !important; gap:18px !important; }
+.ben-head-grid .sub{ margin:0 !important; }
+.ben-join-btn{ margin-top:0 !important; }
 
 
 /* ═══════════════════════════════════════════════════════════════
-   CLEAN FINTECH HERO — remove green world map, add sleek gradient
+   ★ FORM POLISH — nicer & consistent with the indigo site ★
    ═══════════════════════════════════════════════════════════════ */
-/* Hide the green continents SVG map entirely */
-.hero-map-svg{ display:none !important; }
+.form-box{
+  background:#fff !important; border:1px solid #ECECF2 !important;
+  border-radius:26px !important; padding:2.6rem !important;
+  box-shadow:0 6px 16px rgba(22,22,42,.06), 0 24px 56px rgba(22,22,42,.09) !important;
+}
+/* inputs — clean, rounded, indigo focus */
+.fg input,.fg select,.fg textarea,.combo input{
+  border:1.5px solid #E4E7F2 !important; border-radius:13px !important;
+  background:#FBFBFE !important; padding:12px 15px !important;
+  font-family:'Assistant','Heebo',sans-serif !important; font-size:.95rem !important;
+  color:#16162A !important; transition:border-color .2s, box-shadow .2s, background .2s !important;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus,.combo input:focus{
+  border-color:#4F46E5 !important; background:#fff !important;
+  box-shadow:0 0 0 4px rgba(79,70,229,.1) !important;
+}
+.fg label, .fg > span{ color:#16162A !important; font-weight:700 !important; font-size:.82rem !important; }
+.fstep-h{ color:#16162A !important; font-weight:800 !important; font-size:1.05rem !important; }
+.fstep-s{ color:#6E7391 !important; }
+/* next/back buttons — site gradient pill */
+.bnxt{
+  background:linear-gradient(135deg,#4F46E5,#06B6D4) !important; color:#fff !important;
+  border-radius:100px !important; padding:15px 20px !important;
+  font-weight:800 !important; font-family:'Assistant','Heebo',sans-serif !important;
+  box-shadow:0 10px 26px rgba(79,70,229,.3) !important; border:none !important;
+}
+.bnxt:hover{ transform:translateY(-2px) !important; box-shadow:0 16px 38px rgba(79,70,229,.42) !important; }
+.bbk{
+  background:#fff !important; border:1.5px solid #E4E7F2 !important;
+  border-radius:100px !important; color:#6E7391 !important; font-weight:700 !important;
+}
+.bbk:hover{ border-color:#4F46E5 !important; color:#4F46E5 !important; }
+/* chips — clean pills */
+.chip{ border-radius:100px !important; border:1.5px solid #E4E7F2 !important; background:#fff !important; color:#4B4F7A !important; font-weight:600 !important; }
+.chip.sel{ background:linear-gradient(135deg,rgba(79,70,229,.1),rgba(6,182,212,.08)) !important; border-color:#4F46E5 !important; color:#4F46E5 !important; }
+/* stepper circles — refined */
+.sc{ border-radius:50% !important; }
+.sc.active{ background:#4F46E5 !important; border-color:#4F46E5 !important; box-shadow:0 4px 12px rgba(79,70,229,.3) !important; }
+/* teaser box — clean */
+.jteaser{ background:linear-gradient(135deg,rgba(79,70,229,.06),rgba(6,182,212,.05)) !important; border:1px solid rgba(79,70,229,.14) !important; border-radius:20px !important; }
+.jteaser h4{ color:#16162A !important; font-weight:800 !important; }
 
-/* Clean fintech hero background: soft teal gradient mesh */
-.hero{
-  background:
-    radial-gradient(900px 600px at 80% -10%, rgba(34,211,238,.20), transparent 55%),
-    radial-gradient(800px 500px at 10% 10%, rgba(8,145,178,.16), transparent 50%),
-    radial-gradient(700px 700px at 50% 110%, rgba(6,182,212,.12), transparent 60%),
-    linear-gradient(165deg,#EAF6FF 0%, #DCEEFB 45%, #E8F5FC 100%) !important;
-}
-/* Keep a refined dot grid, fade it softly */
-.hero-dots{
-  background-image:radial-gradient(circle, rgba(8,145,178,.18) 1px, transparent 1px) !important;
-  background-size:40px 40px !important;
-  opacity:.6;
-}
-/* Soften ocean overlay to neutral light wash */
-.hero-ocean{
-  background:
-    radial-gradient(ellipse 60% 50% at 78% 30%, rgba(34,211,238,.10) 0%, transparent 55%),
-    radial-gradient(ellipse 100% 30% at 50% 100%, rgba(244,250,255,.85) 0%, transparent 55%) !important;
-}
 
-/* Floating glow orbs for depth (fintech vibe) */
-.hero::before{
-  content:'';position:absolute;top:8%;right:-6%;
-  width:340px;height:340px;border-radius:50%;
-  background:radial-gradient(circle,rgba(34,211,238,.22),transparent 70%);
-  filter:blur(20px);z-index:1;pointer-events:none;
-}
-.hero::after{
-  content:'';position:absolute;bottom:6%;left:-8%;
-  width:300px;height:300px;border-radius:50%;
-  background:radial-gradient(circle,rgba(8,145,178,.18),transparent 70%);
-  filter:blur(24px);z-index:1;pointer-events:none;
-}
+/* ═══ FOOTER (from live site) + JOIN width/centering ═══ */
+footer{background:#0F2744;border-top:1px solid rgba(79,70,229,.15);padding:2rem 4vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.flogo{font-size:1.1rem;font-weight:900;color:#FFFFFF}
+.flogo em{color:#06B6D4;font-style:normal}
+.fcontact{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fcontact-link{display:inline-flex;align-items:center;gap:6px;color:#7FD4E8;text-decoration:none;font-size:.85rem;font-weight:600;transition:color .2s;direction:ltr}
+.fcontact-link:hover{color:#22D3EE}
+.fcontact-link svg{opacity:.85}
+.fcontact-sep{color:rgba(127,212,232,.4);font-size:.85rem}
+.fdesc{font-size:.72rem;color:#3D6A96;margin-top:3px;line-height:1.5}
+.fcopy{font-size:.73rem;color:rgba(255,255,255,.35)}
+.flinks{display:flex;gap:1.5rem}
+.flinks a{font-size:.73rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s}
+.flinks a:hover{color:#06B6D4}
+.fnote{font-size:.72rem;color:#2563A8;text-align:center;margin-top:.75rem}
+/* constrain + center the join section (was full-width) */
+#join{ max-width:1060px !important; margin:0 auto !important; padding:72px 28px !important; }
+#join .join-grid{ gap:3.5rem !important; }
 
-/* ── MOBILE: fix the huge top gap ── */
-@media(max-width:768px){
-  .hero{
-    min-height:auto !important;
-    padding:84px 18px 48px !important;
+/* ═══════════════════════════════════════════════════════════════
+   ★ MOBILE FIX — no horizontal overflow, stack columns ★
+   ═══════════════════════════════════════════════════════════════ */
+html, body{ overflow-x:hidden !important; max-width:100% !important; }
+*{ max-width:100%; }
+.doc-ticker{ overflow:hidden !important; }
+@media(max-width:860px){
+  /* collapse every multi-column grid to one column */
+  .join-grid, .ben-head-grid, .about-wrap, .how-grid, .ben-grid,
+  .f-grid, .gold-pkg-inner, .tw-grid, .price-grid, .future-grid{
+    grid-template-columns:1fr !important; gap:24px !important;
   }
-  .hero::before{ width:200px;height:200px;top:4%; }
-  .hero::after{ width:180px;height:180px; }
-  /* The floating doctor cards inside hero shouldn't push content down */
-  .hero-content{ margin-top:0 !important; }
+  #join{ max-width:100% !important; padding:48px 18px !important; }
+  #join .join-grid{ gap:28px !important; }
+  .section{ padding:48px 18px !important; }
+  .form-box{ padding:1.4rem !important; border-radius:20px !important; }
+  /* stepper fits small screens */
+  .stepper{ gap:2px !important; }
+  .sw{ gap:3px !important; }
+  .sc{ width:26px !important; height:26px !important; font-size:.66rem !important; }
+  .sl{ font-size:.56rem !important; }
+  .sln{ margin:0 2px !important; }
+  /* stats row wraps */
+  .stats-nums{ flex-wrap:wrap !important; justify-content:center !important; gap:18px 26px !important; }
+  /* hero text sizes down */
+  .hero h1{ font-size:clamp(30px,8.5vw,44px) !important; }
+  .hero{ padding:92px 18px 52px !important; }
+  /* footer stacks */
+  footer{ flex-direction:column !important; gap:14px !important; text-align:center !important; padding:24px 18px !important; }
+  .fcontact{ flex-wrap:wrap !important; justify-content:center !important; }
+  /* nav tightens */
+  nav{ padding:0 14px !important; }
+  .nav-links-sd{ display:none !important; }
 }
 @media(max-width:480px){
-  .hero{ padding:78px 16px 40px !important; }
+  .hero h1{ font-size:clamp(26px,9vw,38px) !important; }
+  .s-title, .h2{ font-size:clamp(1.5rem,7vw,2rem) !important; }
 }
-
-
-
-/* ── HERO content centering (desktop via flex, no absolute) ── */
-.hero{ align-items:center; }
-.hero-content{ position:relative !important; top:auto !important; transform:none !important; }
-
-/* Hide the 3 leftover floating doctor cards in hero (real strip is below) */
-.hero .fcard{ display:none !important; }
-
-/* Make sure on mobile hero starts right under nav, no giant gap */
-@media(max-width:768px){
-  .hero{ min-height:auto !important; padding:96px 18px 44px !important; display:flex !important; align-items:flex-start !important; }
-  .hero-content{ margin:0 auto !important; }
-  .hero .fcard{ display:none !important; }
-}
-
-
-
-/* ═══════════════════════════════════════════════════════════════
-   MODERN ROUNDED TYPOGRAPHY
-   Hebrew: Varela Round | Foreign: Poppins (rounded) + Varela Round
-   ═══════════════════════════════════════════════════════════════ */
-/* Body default */
-body{
-  font-family:'Varela Round','Poppins',sans-serif !important;
-}
-/* Hebrew gets Varela Round (it has Hebrew glyphs) */
-body.lang-he, body.lang-he *{
-  font-family:'Varela Round','Heebo',sans-serif !important;
-}
-/* Latin / foreign languages: Poppins for body, Varela Round accents */
-body:not(.lang-he){
-  font-family:'Poppins','Varela Round',sans-serif !important;
-}
-/* Headings — rounded, bold, modern */
-h1, .s-title, .bt, .ht, .hn, .acard-n, .hstat .n,
-.fstep-h, .qcard p, .docx-name, .logo{
-  font-family:'Poppins','Varela Round',sans-serif !important;
-  letter-spacing:-.5px !important;
-  font-weight:800 !important;
-}
-body.lang-he h1, body.lang-he .s-title, body.lang-he .bt,
-body.lang-he .ht, body.lang-he .hn, body.lang-he .acard-n,
-body.lang-he .hstat .n, body.lang-he .fstep-h,
-body.lang-he .qcard p, body.lang-he .docx-name{
-  font-family:'Varela Round','Heebo',sans-serif !important;
-}
-/* Form controls inherit the rounded font */
-.fg input, .fg textarea, .fg select, .combo input,
-.bbk, .bnxt, .chip, .lm-item, .nav-cta, .btn-main, .btn-sec{
-  font-family:inherit !important;
-}
-
 </style>
 </head>
 <body class="lang-en">
 
 <!-- NAV -->
-<nav>
-  <a href="#" class="logo" style="direction:ltr;text-decoration:none;display:flex;align-items:center">
+<div class="nav-wrap"><nav>
+<a href="#" class="logo" style="direction:ltr;text-decoration:none;display:flex;align-items:center">
     <svg width="180" height="48" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
@@ -999,13 +838,14 @@ body.lang-he .qcard p, body.lang-he .docx-name{
       <text x="46" y="34" font-family="Arial,Helvetica,sans-serif" font-weight="400" font-size="6.5" fill="#5A90B8" letter-spacing="1.2">YOUR HEALTH.  OUR PRIORITY.</text>
     </svg>
   </a>
-  <div class="nav-links">
-    <a href="#how"><span data-he="">איך זה עובד</span><span data-en="" data-key="How It Works">How It Works</span></a>
-    <a href="#about"><span data-he="">אודות</span><span data-en="" data-key="About">About</span></a>
-    <a href="#doctors"><span data-he="">לרופאים</span><span data-en="" data-key="For Doctors">For Doctors</span></a>
-    <div class="lang-toggle" style="position:relative">
-      <button class="lang-btn active" id="lang-current" onclick="toggleLangMenu()">🌐 <span id="lang-label">EN</span> ▾</button>
-      <div id="lang-menu" style="display:none;position:absolute;top:38px;left:0;background:white;border:1.5px solid #B0D4E8;border-radius:10px;padding:6px;width:200px;max-height:340px;overflow-y:auto;box-shadow:0 8px 24px rgba(8,145,178,.15);z-index:999">
+<div class="nav-links-sd">
+<a href="#how"><span data-he="">איך זה עובד</span><span data-en="" data-key="How It Works">How It Works</span></a>
+<a href="#about"><span data-he="">אודות</span><span data-en="" data-key="About">About</span></a>
+<a href="#doctors"><span data-he="">לרופאים</span><span data-en="" data-key="For Doctors">For Doctors</span></a>
+</div>
+<div style="display:flex;align-items:center;gap:12px">
+<div style="position:relative"><button class="lang-toggle" id="lang-current" onclick="toggleLangMenu()">🌐 <span id="lang-label">EN</span></button>
+<div id="lang-menu" style="display:none;position:absolute;top:38px;left:0;background:white;border:1.5px solid #B0D4E8;border-radius:10px;padding:6px;width:200px;max-height:340px;overflow-y:auto;box-shadow:0 8px 24px rgba(8,145,178,.15);z-index:999">
         <div class="lm-item" onclick="setLang('en');toggleLangMenu()">🇬🇧 English</div>
         <div class="lm-item" onclick="setLang('he');toggleLangMenu()">🇮🇱 עברית</div>
         <div class="lm-item" onclick="setLang('es');toggleLangMenu()">🇪🇸 Español</div>
@@ -1037,859 +877,94 @@ body.lang-he .qcard p, body.lang-he .docx-name{
         <div class="lm-item" onclick="setLang('si');toggleLangMenu()">🇱🇰 සිංහල</div>
         <div class="lm-item" onclick="setLang('am');toggleLangMenu()">🇪🇹 አማርኛ</div>
       </div>
-    </div>
-    </div>
-    <a href="#join" class="nav-cta"><span data-he="">הצטרפות רופאים ←</span><span data-en="" data-key="Join as Doctor →">Join as Doctor →</span></a>
-  </div>
-</nav>
-
+</div>
+<a href="#join" class="nav-cta-sd"><span data-he="">הצטרפות רופאים ←</span><span data-en="" data-key="Join as Doctor →">Join as Doctor →</span></a>
+</div></nav></div>
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-map">
-    <!-- WORLD MAP SVG - detailed continents -->
-    <svg class="hero-map-svg" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#A8D8F0"/>
-          <stop offset="50%" stop-color="#7EC8E3"/>
-          <stop offset="100%" stop-color="#5BB8D4"/>
-        </linearGradient>
-        <filter id="landGlow">
-          <feGaussianBlur stdDeviation="1.5" result="blur"/>
-          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-        </filter>
-        <radialGradient id="atmGrad" cx="50%" cy="45%" r="55%">
-          <stop offset="0%" stop-color="rgba(0,180,150,0.06)"/>
-          <stop offset="100%" stop-color="rgba(0,180,150,0)"/>
-        </radialGradient>
-      </defs>
-
-      <!-- Ocean base -->
-      <rect width="1440" height="800" fill="url(#oceanGrad)"/>
-      <!-- Atmosphere glow -->
-      <ellipse cx="720" cy="400" rx="750" ry="450" fill="url(#atmGrad)" opacity="0.7"/>
-
-      <!-- NORTH AMERICA -->
-      <g filter="url(#landGlow)">
-        <path d="M95,80 L145,72 L195,65 L240,70 L275,82 L295,95 L310,115 L320,140 L315,165 L300,185 L285,210 L270,235 L255,255 L240,270 L228,285 L218,295 L205,302 L195,308 L182,318 L170,325 L158,330 L148,338 L140,348 L130,355 L118,358 L108,352 L98,342 L88,328 L80,312 L75,295 L72,275 L70,255 L68,232 L72,210 L78,188 L85,165 L90,140 L92,115 L93,95 Z" fill="#4AAF82" opacity="0.7"/>
-        <!-- Alaska -->
-        <path d="M50,90 L75,82 L95,80 L93,95 L85,108 L72,115 L58,118 L45,112 L38,100 Z" fill="#4AAF82" opacity="0.65"/>
-        <!-- Mexico/Central -->
-        <path d="M148,338 L158,330 L170,325 L178,335 L182,348 L178,362 L170,372 L160,378 L150,380 L140,376 L132,368 L130,355 Z" fill="#4AAF82" opacity="0.6"/>
-        <!-- Greenland -->
-        <path d="M245,30 L278,25 L305,32 L322,48 L328,65 L318,78 L300,85 L278,82 L258,72 L242,58 L238,42 Z" fill="#52C08A" opacity="0.55"/>
-      </g>
-
-      <!-- SOUTH AMERICA -->
-      <g filter="url(#landGlow)">
-        <path d="M185,400 L200,388 L218,382 L238,380 L255,385 L268,395 L278,410 L282,428 L280,448 L272,468 L260,488 L245,505 L228,518 L210,528 L194,532 L180,530 L168,522 L160,510 L155,495 L153,478 L155,460 L160,442 L168,425 L178,412 Z" fill="#4AAF82" opacity="0.68"/>
-      </g>
-
-      <!-- EUROPE -->
-      <g filter="url(#landGlow)">
-        <path d="M610,80 L635,72 L658,68 L680,72 L698,82 L710,96 L715,112 L708,128 L695,138 L680,142 L665,138 L652,128 L642,115 L630,105 L618,98 Z" fill="#52C08A" opacity="0.72"/>
-        <!-- Scandinavia -->
-        <path d="M658,42 L678,35 L698,32 L715,38 L720,52 L715,68 L698,82 L680,72 L658,68 L648,55 Z" fill="#52C08A" opacity="0.65"/>
-        <!-- UK -->
-        <path d="M598,80 L610,72 L618,78 L615,90 L605,98 L595,92 L592,82 Z" fill="#52C08A" opacity="0.65"/>
-        <!-- Spain/France/Italy -->
-        <path d="M618,98 L630,105 L642,115 L650,128 L648,142 L638,152 L622,158 L605,155 L592,145 L585,132 L588,118 L598,108 Z" fill="#52C08A" opacity="0.68"/>
-        <!-- Eastern Europe -->
-        <path d="M680,142 L710,135 L738,128 L758,135 L768,148 L762,162 L748,172 L728,175 L708,170 L693,158 L685,148 Z" fill="#52C08A" opacity="0.65"/>
-      </g>
-
-      <!-- AFRICA -->
-      <g filter="url(#landGlow)">
-        <path d="M618,200 L640,190 L665,185 L692,188 L718,198 L738,215 L748,238 L752,265 L750,295 L742,325 L728,355 L710,382 L690,405 L668,422 L645,432 L622,435 L600,430 L580,418 L565,400 L555,378 L550,352 L552,325 L558,298 L568,272 L580,248 L592,228 L605,212 Z" fill="#47A87A" opacity="0.72"/>
-        <!-- Madagascar -->
-        <path d="M758,348 L768,340 L776,348 L778,368 L774,385 L762,390 L752,382 L750,365 L753,350 Z" fill="#47A87A" opacity="0.6"/>
-      </g>
-
-      <!-- MIDDLE EAST -->
-      <g filter="url(#landGlow)">
-        <path d="M758,165 L780,158 L805,155 L828,162 L842,175 L848,192 L840,208 L820,218 L798,220 L775,215 L758,202 L750,188 Z" fill="#52C08A" opacity="0.65"/>
-        <!-- Arabian Peninsula -->
-        <path d="M798,220 L820,218 L845,225 L858,242 L860,262 L852,278 L835,285 L815,282 L798,270 L788,252 L788,235 Z" fill="#52C08A" opacity="0.6"/>
-      </g>
-
-      <!-- ASIA -->
-      <g filter="url(#landGlow)">
-        <!-- Russia/Central Asia - large mass -->
-        <path d="M768,48 L820,38 L880,32 L945,28 L1010,30 L1068,38 L1115,52 L1148,68 L1162,88 L1155,108 L1135,122 L1108,130 L1075,132 L1042,128 L1008,120 L975,118 L942,122 L908,128 L875,132 L842,130 L812,122 L788,110 L772,95 L762,78 Z" fill="#4AAF82" opacity="0.68"/>
-        <!-- India -->
-        <path d="M885,200 L912,192 L938,195 L958,208 L968,228 L965,250 L952,268 L935,278 L915,278 L898,265 L888,245 L882,222 Z" fill="#4AAF82" opacity="0.65"/>
-        <!-- Southeast Asia -->
-        <path d="M1008,188 L1035,182 L1060,185 L1080,198 L1088,215 L1082,232 L1062,242 L1038,242 L1018,232 L1005,215 L1002,198 Z" fill="#4AAF82" opacity="0.65"/>
-        <!-- China/East Asia mass -->
-        <path d="M958,118 L1005,112 L1048,115 L1082,125 L1108,140 L1118,158 L1110,175 L1090,185 L1062,188 L1032,185 L1005,175 L980,162 L962,148 L955,132 Z" fill="#4AAF82" opacity="0.68"/>
-        <!-- Japan -->
-        <path d="M1132,118 L1145,112 L1155,118 L1155,130 L1145,138 L1132,135 L1125,125 Z" fill="#4AAF82" opacity="0.6"/>
-      </g>
-
-      <!-- AUSTRALIA -->
-      <g filter="url(#landGlow)">
-        <path d="M1058,462 L1095,450 L1135,448 L1172,455 L1202,470 L1218,492 L1220,518 L1210,542 L1190,558 L1162,565 L1130,562 L1098,550 L1072,530 L1055,505 L1048,480 Z" fill="#4AAF82" opacity="0.65"/>
-        <!-- New Zealand -->
-        <path d="M1235,545 L1245,535 L1255,540 L1258,555 L1250,565 L1238,562 Z" fill="#4AAF82" opacity="0.55"/>
-      </g>
-
-      <!-- FLIGHT PATHS (animated) -->
-      <path id="fp1" d="M720,390 Q900,180 1120,260" fill="none" stroke="rgba(8,145,178,0.45)" stroke-width="1" stroke-dasharray="5 8"/>
-      <path id="fp2" d="M720,390 Q520,180 260,310" fill="none" stroke="rgba(8,145,178,0.4)" stroke-width="1" stroke-dasharray="5 8"/>
-      <path id="fp3" d="M720,390 Q820,480 1030,455" fill="none" stroke="rgba(8,145,178,0.35)" stroke-width="1" stroke-dasharray="5 8"/>
-      <path id="fp4" d="M720,390 Q680,200 750,120" fill="none" stroke="rgba(8,145,178,0.28)" stroke-width="1" stroke-dasharray="5 8"/>
-      <path id="fp5" d="M720,390 Q600,450 340,430" fill="none" stroke="rgba(8,145,178,0.28)" stroke-width="1" stroke-dasharray="5 8"/>
-
-      <!-- Animated travel dots -->
-      <circle r="3.5" fill="rgba(8,145,178,0.9)" filter="url(#landGlow)">
-        <animateMotion dur="9s" repeatCount="indefinite"><mpath href="#fp1"/></animateMotion>
-      </circle>
-      <circle r="3" fill="rgba(8,145,178,0.85)">
-        <animateMotion dur="11s" repeatCount="indefinite" begin="3s"><mpath href="#fp2"/></animateMotion>
-      </circle>
-      <circle r="2.5" fill="rgba(8,145,178,0.75)">
-        <animateMotion dur="8s" repeatCount="indefinite" begin="5s"><mpath href="#fp3"/></animateMotion>
-      </circle>
-      <circle r="2" fill="rgba(8,145,178,0.7)">
-        <animateMotion dur="7s" repeatCount="indefinite" begin="1s"><mpath href="#fp4"/></animateMotion>
-      </circle>
-
-      <!-- CITY GLOW DOTS (major cities) -->
-      <!-- Tel Aviv -->
-      <circle cx="762" cy="198" r="4" fill="#0891B2" opacity="0.9">
-        <animate attributeName="r" values="3;6;3" dur="2.5s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2.5s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="762" cy="198" r="12" fill="rgba(0,229,204,0)" stroke="rgba(8,145,178,0.5)" stroke-width="1">
-        <animate attributeName="r" values="6;18;6" dur="2.5s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0.6;0;0.6" dur="2.5s" repeatCount="indefinite"/>
-      </circle>
-      <!-- Bangkok -->
-      <circle cx="1032" cy="235" r="3.5" fill="#0891B2" opacity="0.85">
-        <animate attributeName="r" values="2.5;5;2.5" dur="3s" repeatCount="indefinite" begin="0.8s"/>
-        <animate attributeName="opacity" values="0.85;0.3;0.85" dur="3s" repeatCount="indefinite" begin="0.8s"/>
-      </circle>
-      <!-- Barcelona -->
-      <circle cx="622" cy="138" r="3" fill="#0891B2" opacity="0.8">
-        <animate attributeName="r" values="2;4.5;2" dur="3.2s" repeatCount="indefinite" begin="1.5s"/>
-        <animate attributeName="opacity" values="0.8;0.3;0.8" dur="3.2s" repeatCount="indefinite" begin="1.5s"/>
-      </circle>
-      <!-- New York -->
-      <circle cx="178" cy="295" r="3" fill="#0891B2" opacity="0.8">
-        <animate attributeName="r" values="2;4.5;2" dur="2.8s" repeatCount="indefinite" begin="2.2s"/>
-        <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2.8s" repeatCount="indefinite" begin="2.2s"/>
-      </circle>
-      <!-- Tokyo -->
-      <circle cx="1138" cy="155" r="3" fill="#0891B2" opacity="0.75">
-        <animate attributeName="r" values="2;4;2" dur="3.5s" repeatCount="indefinite" begin="1s"/>
-        <animate attributeName="opacity" values="0.75;0.25;0.75" dur="3.5s" repeatCount="indefinite" begin="1s"/>
-      </circle>
-      <!-- London -->
-      <circle cx="600" cy="100" r="3" fill="#0891B2" opacity="0.75">
-        <animate attributeName="r" values="2;4;2" dur="3s" repeatCount="indefinite" begin="0.4s"/>
-      </circle>
-      <!-- Sydney -->
-      <circle cx="1155" cy="512" r="3" fill="#0891B2" opacity="0.75">
-        <animate attributeName="r" values="2;4;2" dur="3.8s" repeatCount="indefinite" begin="2.5s"/>
-      </circle>
-      <!-- Dubai -->
-      <circle cx="832" cy="252" r="3" fill="#0891B2" opacity="0.75">
-        <animate attributeName="r" values="2;4.5;2" dur="2.9s" repeatCount="indefinite" begin="3.2s"/>
-      </circle>
-    </svg>
-  </div>
-  <div class="hero-ocean"></div>
-  <div class="hero-dots"></div>
-<div class="hero-content" id="hero-content" style="max-width:520px;z-index:4;">
-    <div class="hero-badge"><span class="pulse-dot"></span><span data-he="">פלטפורמת רפואה לכל מטייל בעולם</span><span data-en="" data-key="Global Medical Platform for Travelers">Global Medical Platform for Travelers</span></div>
-    <h1>
-      <span data-he="">רפואה מקצועית,<br><span class="g">בכל מקום בעולם.</span></span><span data-en="">Professional care,<br><span class="g">anywhere in the world.</span></span>
-    </h1>
-    <p class="hero-sub"><span data-he="">מערכת Safe Doc מחברת בין מטיילים לרופאים מקצועיים ברחבי הגלובוס. ללא ביורוקרטיה.</span><span data-en="" data-key="hero_sub">Safe Doc connects travelers from around the world with professional local doctors. Instant payment, 24/7 availability, zero bureaucracy.</span></p>
-    <div class="hero-btns">
-      <a href="#join" class="btn-main"><span data-he="">הצטרף כרופא שותף ✚</span><span data-en="" data-key="Join as Partner Doctor ✚">Join as Partner Doctor ✚</span></a>
-      <a href="#how" class="btn-sec"><span data-he="">איך זה עובד ←</span><span data-en="" data-key="How It Works →">How It Works →</span></a>
-    </div>
-    <div class="hero-stats">
-      <div class="hstat"><div class="n"><em>40</em>+</div><div class="l"><span data-he="">מדינות שותפות</span><span data-en="" data-key="Partner Countries">Partner Countries</span></div></div>
-      <div class="hstat"><div class="n"><em>24</em>/7</div><div class="l"><span data-he="">זמינות</span><span data-en="" data-key="Availability">Availability</span></div></div>
-      <div class="hstat"><div class="n"><em>0</em></div><div class="l"><span data-he="">ללא עמלה</span><span data-en="" data-key="No Commission">No Commission</span></div></div>
-      <div class="hstat"><div class="n"><span data-he="">מיידי</span><span data-en="" data-key="Instant">Instant</span></div><div class="l"><span data-he="">תשלום לרופא</span><span data-en="" data-key="Doctor Payout">Doctor Payout</span></div></div>
-    </div>
-  </div>
-</section>
-
+<section class="hero"><div class="hero-inner">
+<div class="hero-kicker"><span style="width:6px;height:6px;border-radius:50%;background:var(--pink);display:inline-block"></span> <span data-he="">פלטפורמת רפואה לכל מטייל בעולם</span><span data-en="" data-key="Global Medical Platform for Travelers">Global Medical Platform for Travelers</span></div>
+<h1><span data-he="">טיפול רפואי מקצועי,</span><span data-en="" data-key="hero_h1a">Professional care,</span><br><span class="grad-t"><span data-he="">בכל מקום בעולם.</span><span data-en="" data-key="hero_h1b">anywhere in the world.</span></span></h1>
+<p class="hero-sub"><span data-he="">מערכת Safe Doc מחברת בין מטיילים לרופאים מקומיים מקצועיים. תשלום מיידי, זמינות 24/7, אפס בירוקרטיה.</span><span data-en="" data-key="hero_sub">Safe Doc connects travelers from around the world with professional local doctors. Instant payment, 24/7 availability, zero bureaucracy.</span></p>
+<div class="hero-cta-row">
+<a href="#join" class="hero-btn-main"><span data-he="">הצטרף כרופא שותף ✚</span><span data-en="" data-key="Join as Partner Doctor ✚">Join as Partner Doctor ✚</span></a>
+<a href="#how" class="hero-btn-sec"><span data-he="">איך זה עובד ←</span><span data-en="" data-key="How It Works →">How It Works →</span></a>
+</div></div></section>
+<!-- STATS -->
+<div class="stats-strip"><div class="stats-inner" style="justify-content:center"><div class="stats-nums">
+<div class="stat"><div class="stat-n grad">40+</div><div class="stat-l"><span data-he="">מדינות שותפות</span><span data-en="" data-key="Partner Countries">Partner Countries</span></div></div>
+<div class="stat"><div class="stat-n grad">24/7</div><div class="stat-l"><span data-he="">זמינות</span><span data-en="" data-key="Availability">Availability</span></div></div>
+<div class="stat"><div class="stat-n grad">0</div><div class="stat-l"><span data-he="">ללא עמלה</span><span data-en="" data-key="No Commission">No Commission</span></div></div>
+<div class="stat"><div class="stat-n grad"><span data-he="">מיידי</span><span data-en="" data-key="Instant">Instant</span></div><div class="stat-l"><span data-he="">תשלום לרופא</span><span data-en="" data-key="Doctor Payout">Doctor Payout</span></div></div>
+</div></div></div>
 <!-- TICKER -->
-<div class="ticker-bar">
-  <div class="ticker">
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Bangkok</span><span class="ti-val"><span data-he="">3 רופאים מחוברים</span><span data-en="" data-key="3_doctors">3 doctors online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Barcelona</span><span class="ti-val"><span data-he="">2 רופאים מחוברים</span><span data-en="" data-key="2_doctors">2 doctors online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">New York</span><span class="ti-val"><span data-he="">5 רופאים מחוברים</span><span data-en="" data-key="5_doctors">5 doctors online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Tokyo</span><span class="ti-val"><span data-he="">1 רופא מחובר</span><span data-en="" data-key="1_doctor">1 doctor online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Berlin</span><span class="ti-val"><span data-he="">2 רופאים מחוברים</span><span data-en="" data-key="2_doctors">2 doctors online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Dubai</span><span class="ti-val"><span data-he="">4 רופאים מחוברים</span><span data-en="" data-key="4_doctors">4 doctors online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">London</span><span class="ti-val"><span data-he="">3 רופאים מחוברים</span><span data-en="" data-key="3_doctors">3 doctors online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Sydney</span><span class="ti-val"><span data-he="">2 רופאים מחוברים</span><span data-en="" data-key="2_doctors">2 doctors online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Bangkok</span><span class="ti-val"><span data-he="">3 רופאים מחוברים</span><span data-en="" data-key="3_doctors">3 doctors online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Barcelona</span><span class="ti-val"><span data-he="">2 רופאים מחוברים</span><span data-en="" data-key="2_doctors">2 doctors online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">New York</span><span class="ti-val"><span data-he="">5 רופאים מחוברים</span><span data-en="" data-key="5_doctors">5 doctors online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Tokyo</span><span class="ti-val"><span data-he="">1 רופא מחובר</span><span data-en="" data-key="1_doctor">1 doctor online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">Dubai</span><span class="ti-val"><span data-he="">4 רופאים מחוברים</span><span data-en="" data-key="4_doctors">4 doctors online</span></span></div>
-    <div class="ti"><span class="ti-dot"></span><span class="ti-city">London</span><span class="ti-val"><span data-he="">3 רופאים מחוברים</span><span data-en="" data-key="3_doctors">3 doctors online</span></span></div>
-  </div>
-</div>
-<!-- LAUNCH BANNER -->
-<div style="background:linear-gradient(135deg,#0891B2,#06B6D4);padding:1.5rem 4vw;text-align:center;position:relative;z-index:1;margin-top:0;clear:both;">
-  <div style="font-size:1.1rem;font-weight:900;color:#fff;letter-spacing:-.3px">
-    <span data-he="">🚀 ההשקה עם חברות הביטוח יוצאת לדרך ב-01 לספטמבר 2026!</span>
-    <span data-en="" data-key="launch_banner">🚀 Insurance partnership launch: September 1, 2026!</span>
-  </div>
-  <div style="font-size:.82rem;color:rgba(255,255,255,.8);margin-top:.4rem">
-    <span data-he="">אנחנו מזכירים — המודל שלנו הוא לצרף רופאים ומרפאות איכותיות ולא הכמות.</span>
-    <span data-en="" data-key="quality_focus">Our model focuses on quality doctors and clinics — not quantity.</span>
-  </div>
-</div>
-
-<!-- DOCTOR CARDS STRIP -->
-<div style="background:#EAF5FD;padding:2.5rem 0;border-bottom:1px solid rgba(8,145,178,.12);overflow:hidden">
-  <div style="max-width:1100px;margin:0 auto;padding:0 4vw">
-    <div style="font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#0891B2;margin-bottom:1.2rem;text-align:center">
-      <span data-he="">רופאים זמינים עכשיו</span><span data-en="" data-key="Doctors Available Now">Doctors Available Now</span>
-    </div>
-  </div>
-  <div class="docx-scroll" id="docx-scroll">
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Maria Gonzalez</div>
-            <div class="docx-city"><span data-he="">🇪🇸 ברצלונה, ספרד</span><span data-en="">🇪🇸 Barcelona, Spain</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — קליניקה + ביקור בית</span><span data-en="">✓ Available — Clinic & Home</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💊</div>
-          <div>
-            <div class="docx-name">Dr. James Nakamura</div>
-            <div class="docx-city"><span data-he="">🇯🇵 טוקיו, יפן</span><span data-en="">🇯🇵 Tokyo, Japan</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ייעוץ וידאו זמין</span><span data-en="">✓ Video Consult Available</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🏥</div>
-          <div>
-            <div class="docx-name">Dr. Aisha Patel</div>
-            <div class="docx-city"><span data-he="">🇹🇭 בנגקוק, תאילנד</span><span data-en="">🇹🇭 Bangkok, Thailand</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום + מרפאה</span><span data-en="">✓ Emergency & Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Liam O'Brien</div>
-            <div class="docx-city"><span data-he="">🇮🇪 דבלין, אירלנד</span><span data-en="">🇮🇪 Dublin, Ireland</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — קליניקה</span><span data-en="">✓ Available — Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💉</div>
-          <div>
-            <div class="docx-name">Dr. Sofia Rossi</div>
-            <div class="docx-city"><span data-he="">🇮🇹 רומא, איטליה</span><span data-en="">🇮🇹 Rome, Italy</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור בית זמין</span><span data-en="">✓ Home Visit Available</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Chen Wei</div>
-            <div class="docx-city"><span data-he="">🇨🇳 שנגחאי, סין</span><span data-en="">🇨🇳 Shanghai, China</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ייעוץ וידאו</span><span data-en="">✓ Video Consult</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🏥</div>
-          <div>
-            <div class="docx-name">Dr. Anna Müller</div>
-            <div class="docx-city"><span data-he="">🇩🇪 ברלין, גרמניה</span><span data-en="">🇩🇪 Berlin, Germany</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום 24/7</span><span data-en="">✓ 24/7 Emergency</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💊</div>
-          <div>
-            <div class="docx-name">Dr. Carlos Silva</div>
-            <div class="docx-city"><span data-he="">🇧🇷 סאו פאולו, ברזיל</span><span data-en="">🇧🇷 São Paulo, Brazil</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — קליניקה</span><span data-en="">✓ Available — Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Priya Sharma</div>
-            <div class="docx-city"><span data-he="">🇮🇳 מומבאי, הודו</span><span data-en="">🇮🇳 Mumbai, India</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור מלון</span><span data-en="">✓ Hotel Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💉</div>
-          <div>
-            <div class="docx-name">Dr. Mohammed Al-Rashid</div>
-            <div class="docx-city"><span data-he="">🇦🇪 דובאי, איחוד האמירויות</span><span data-en="">🇦🇪 Dubai, UAE</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום + מרפאה</span><span data-en="">✓ Emergency & Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🏥</div>
-          <div>
-            <div class="docx-name">Dr. Emma Johnson</div>
-            <div class="docx-city"><span data-he="">🇬🇧 לונדון, אנגליה</span><span data-en="">🇬🇧 London, UK</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ייעוץ וידאו זמין</span><span data-en="">✓ Video Consult Available</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Pierre Dubois</div>
-            <div class="docx-city"><span data-he="">🇫🇷 פריז, צרפת</span><span data-en="">🇫🇷 Paris, France</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — קליניקה + בית</span><span data-en="">✓ Available — Clinic & Home</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💊</div>
-          <div>
-            <div class="docx-name">Dr. Yuki Tanaka</div>
-            <div class="docx-city"><span data-he="">🇯🇵 אוסקה, יפן</span><span data-en="">🇯🇵 Osaka, Japan</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור בית</span><span data-en="">✓ Home Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Olga Petrova</div>
-            <div class="docx-city"><span data-he="">🇷🇺 מוסקבה, רוסיה</span><span data-en="">🇷🇺 Moscow, Russia</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום 24/7</span><span data-en="">✓ 24/7 Emergency</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💉</div>
-          <div>
-            <div class="docx-name">Dr. Min-jun Kim</div>
-            <div class="docx-city"><span data-he="">🇰🇷 סיאול, קוריאה</span><span data-en="">🇰🇷 Seoul, South Korea</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ייעוץ וידאו</span><span data-en="">✓ Video Consult</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🏥</div>
-          <div>
-            <div class="docx-name">Dr. Fatima Hassan</div>
-            <div class="docx-city"><span data-he="">🇪🇬 קהיר, מצרים</span><span data-en="">🇪🇬 Cairo, Egypt</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — מרפאה</span><span data-en="">✓ Available — Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Lucas Martin</div>
-            <div class="docx-city"><span data-he="">🇨🇦 טורונטו, קנדה</span><span data-en="">🇨🇦 Toronto, Canada</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור מלון</span><span data-en="">✓ Hotel Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💊</div>
-          <div>
-            <div class="docx-name">Dr. Isabella Costa</div>
-            <div class="docx-city"><span data-he="">🇵🇹 ליסבון, פורטוגל</span><span data-en="">🇵🇹 Lisbon, Portugal</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום + מרפאה</span><span data-en="">✓ Emergency & Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Niran Suksai</div>
-            <div class="docx-city"><span data-he="">🇹🇭 פוקט, תאילנד</span><span data-en="">🇹🇭 Phuket, Thailand</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור בית + מלון</span><span data-en="">✓ Home & Hotel Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💉</div>
-          <div>
-            <div class="docx-name">Dr. Hans Schmidt</div>
-            <div class="docx-city"><span data-he="">🇨🇭 ציריך, שווייץ</span><span data-en="">🇨🇭 Zurich, Switzerland</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ייעוץ וידאו זמין</span><span data-en="">✓ Video Consult Available</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🏥</div>
-          <div>
-            <div class="docx-name">Dr. Mei Lin</div>
-            <div class="docx-city"><span data-he="">🇸🇬 סינגפור</span><span data-en="">🇸🇬 Singapore</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום 24/7</span><span data-en="">✓ 24/7 Emergency</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Andreas Nikolaou</div>
-            <div class="docx-city"><span data-he="">🇬🇷 אתונה, יוון</span><span data-en="">🇬🇷 Athens, Greece</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — קליניקה</span><span data-en="">✓ Available — Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💊</div>
-          <div>
-            <div class="docx-name">Dr. Ngọc Tran</div>
-            <div class="docx-city"><span data-he="">🇻🇳 הו צ'י מין, וייטנאם</span><span data-en="">🇻🇳 Ho Chi Minh, Vietnam</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור בית</span><span data-en="">✓ Home Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Sarah Cohen</div>
-            <div class="docx-city"><span data-he="">🇮🇱 תל אביב, ישראל</span><span data-en="">🇮🇱 Tel Aviv, Israel</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום + מרפאה</span><span data-en="">✓ Emergency & Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💉</div>
-          <div>
-            <div class="docx-name">Dr. Diego Fernandez</div>
-            <div class="docx-city"><span data-he="">🇲🇽 מקסיקו סיטי, מקסיקו</span><span data-en="">🇲🇽 Mexico City, Mexico</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ייעוץ וידאו</span><span data-en="">✓ Video Consult</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🏥</div>
-          <div>
-            <div class="docx-name">Dr. Ingrid Larsen</div>
-            <div class="docx-city"><span data-he="">🇳🇴 אוסלו, נורווגיה</span><span data-en="">🇳🇴 Oslo, Norway</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — קליניקה + בית</span><span data-en="">✓ Available — Clinic & Home</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Ahmet Yilmaz</div>
-            <div class="docx-city"><span data-he="">🇹🇷 איסטנבול, טורקיה</span><span data-en="">🇹🇷 Istanbul, Turkey</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור מלון</span><span data-en="">✓ Hotel Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💊</div>
-          <div>
-            <div class="docx-name">Dr. Laura Bianchi</div>
-            <div class="docx-city"><span data-he="">🇮🇹 מילאנו, איטליה</span><span data-en="">🇮🇹 Milan, Italy</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום 24/7</span><span data-en="">✓ 24/7 Emergency</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Budi Santoso</div>
-            <div class="docx-city"><span data-he="">🇮🇩 באלי, אינדונזיה</span><span data-en="">🇮🇩 Bali, Indonesia</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור בית + מלון</span><span data-en="">✓ Home & Hotel Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💉</div>
-          <div>
-            <div class="docx-name">Dr. Klara Novak</div>
-            <div class="docx-city"><span data-he="">🇨🇿 פראג, צ'כיה</span><span data-en="">🇨🇿 Prague, Czech Republic</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ייעוץ וידאו זמין</span><span data-en="">✓ Video Consult Available</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🏥</div>
-          <div>
-            <div class="docx-name">Dr. Rafael Santos</div>
-            <div class="docx-city"><span data-he="">🇧🇷 ריו דה ז'ניירו, ברזיל</span><span data-en="">🇧🇷 Rio de Janeiro, Brazil</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — מרפאה</span><span data-en="">✓ Available — Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Anaïs Laurent</div>
-            <div class="docx-city"><span data-he="">🇫🇷 ניס, צרפת</span><span data-en="">🇫🇷 Nice, France</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור בית</span><span data-en="">✓ Home Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💊</div>
-          <div>
-            <div class="docx-name">Dr. Viktor Kovács</div>
-            <div class="docx-city"><span data-he="">🇭🇺 בודפשט, הונגריה</span><span data-en="">🇭🇺 Budapest, Hungary</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום + מרפאה</span><span data-en="">✓ Emergency & Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Amara Okafor</div>
-            <div class="docx-city"><span data-he="">🇳🇬 לאגוס, ניגריה</span><span data-en="">🇳🇬 Lagos, Nigeria</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ייעוץ וידאו</span><span data-en="">✓ Video Consult</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💉</div>
-          <div>
-            <div class="docx-name">Dr. Elena Popescu</div>
-            <div class="docx-city"><span data-he="">🇷🇴 בוקרשט, רומניה</span><span data-en="">🇷🇴 Bucharest, Romania</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — קליניקה</span><span data-en="">✓ Available — Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🏥</div>
-          <div>
-            <div class="docx-name">Dr. Thomas Anderson</div>
-            <div class="docx-city"><span data-he="">🇦🇺 סידני, אוסטרליה</span><span data-en="">🇦🇺 Sydney, Australia</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור מלון</span><span data-en="">✓ Hotel Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Siti Rahman</div>
-            <div class="docx-city"><span data-he="">🇲🇾 קואלה לומפור, מלזיה</span><span data-en="">🇲🇾 Kuala Lumpur, Malaysia</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום 24/7</span><span data-en="">✓ 24/7 Emergency</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💊</div>
-          <div>
-            <div class="docx-name">Dr. Johan de Vries</div>
-            <div class="docx-city"><span data-he="">🇳🇱 אמסטרדם, הולנד</span><span data-en="">🇳🇱 Amsterdam, Netherlands</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — קליניקה + בית</span><span data-en="">✓ Available — Clinic & Home</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Camila Morales</div>
-            <div class="docx-city"><span data-he="">🇦🇷 בואנוס איירס, ארגנטינה</span><span data-en="">🇦🇷 Buenos Aires, Argentina</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור בית</span><span data-en="">✓ Home Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💉</div>
-          <div>
-            <div class="docx-name">Dr. Kwame Mensah</div>
-            <div class="docx-city"><span data-he="">🇬🇭 אקרה, גאנה</span><span data-en="">🇬🇭 Accra, Ghana</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ייעוץ וידאו זמין</span><span data-en="">✓ Video Consult Available</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🏥</div>
-          <div>
-            <div class="docx-name">Dr. Linnea Berg</div>
-            <div class="docx-city"><span data-he="">🇸🇪 שטוקהולם, שוודיה</span><span data-en="">🇸🇪 Stockholm, Sweden</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום + מרפאה</span><span data-en="">✓ Emergency & Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Rajesh Kumar</div>
-            <div class="docx-city"><span data-he="">🇮🇳 דלהי, הודו</span><span data-en="">🇮🇳 Delhi, India</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — מרפאה</span><span data-en="">✓ Available — Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💊</div>
-          <div>
-            <div class="docx-name">Dr. Marta Sánchez</div>
-            <div class="docx-city"><span data-he="">🇪🇸 מדריד, ספרד</span><span data-en="">🇪🇸 Madrid, Spain</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור מלון</span><span data-en="">✓ Hotel Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Daniel Weber</div>
-            <div class="docx-city"><span data-he="">🇦🇹 וינה, אוסטריה</span><span data-en="">🇦🇹 Vienna, Austria</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ייעוץ וידאו</span><span data-en="">✓ Video Consult</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💉</div>
-          <div>
-            <div class="docx-name">Dr. Linh Nguyen</div>
-            <div class="docx-city"><span data-he="">🇻🇳 האנוי, וייטנאם</span><span data-en="">🇻🇳 Hanoi, Vietnam</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום 24/7</span><span data-en="">✓ 24/7 Emergency</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🏥</div>
-          <div>
-            <div class="docx-name">Dr. Grace Williams</div>
-            <div class="docx-city"><span data-he="">🇺🇸 ניו יורק, ארה"ב</span><span data-en="">🇺🇸 New York, USA</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — קליניקה + בית</span><span data-en="">✓ Available — Clinic & Home</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Felipe Vargas</div>
-            <div class="docx-city"><span data-he="">🇨🇱 סנטיאגו, צ'ילה</span><span data-en="">🇨🇱 Santiago, Chile</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ביקור בית</span><span data-en="">✓ Home Visit</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💊</div>
-          <div>
-            <div class="docx-name">Dr. Aleksandra Nowak</div>
-            <div class="docx-city"><span data-he="">🇵🇱 ורשה, פולין</span><span data-en="">🇵🇱 Warsaw, Poland</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ ייעוץ וידאו זמין</span><span data-en="">✓ Video Consult Available</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">🩺</div>
-          <div>
-            <div class="docx-name">Dr. Tariq Aziz</div>
-            <div class="docx-city"><span data-he="">🇵🇰 קראצ'י, פקיסטן</span><span data-en="">🇵🇰 Karachi, Pakistan</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ חירום + מרפאה</span><span data-en="">✓ Emergency & Clinic</span></div>
-      </div>
-      <div class="docx-card">
-        <div class="docx-top">
-          <div class="docx-ico">💉</div>
-          <div>
-            <div class="docx-name">Dr. Hana Suzuki</div>
-            <div class="docx-city"><span data-he="">🇯🇵 קיוטו, יפן</span><span data-en="">🇯🇵 Kyoto, Japan</span></div>
-          </div>
-        </div>
-        <div class="docx-status"><span data-he="">✓ זמין — קליניקה</span><span data-en="">✓ Available — Clinic</span></div>
-      </div>
-  </div>
-  <div style="text-align:center;margin-top:.8rem;font-size:.68rem;color:#7BA8C9">
-    <span data-he="">← החלק לצדדים לעוד רופאים →</span><span data-en="" data-key="swipe_hint">← Swipe for more doctors →</span>
-  </div>
-</div>
-
-
+<div class="doc-ticker"><div class="doc-ticker-inner"><div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇪🇸 ברצלונה</span><span data-en="">🇪🇸 Barcelona</span></span> <span class="dt-val"><span data-he="">2 רופאים</span><span data-en="">2 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇯🇵 טוקיו</span><span data-en="">🇯🇵 Tokyo</span></span> <span class="dt-val"><span data-he="">1 רופא</span><span data-en="">1 doctor</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇹🇭 בנגקוק</span><span data-en="">🇹🇭 Bangkok</span></span> <span class="dt-val"><span data-he="">3 רופאים</span><span data-en="">3 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇮🇪 דבלין</span><span data-en="">🇮🇪 Dublin</span></span> <span class="dt-val"><span data-he="">2 רופאים</span><span data-en="">2 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇮🇹 רומא</span><span data-en="">🇮🇹 Rome</span></span> <span class="dt-val"><span data-he="">4 רופאים</span><span data-en="">4 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇩🇪 ברלין</span><span data-en="">🇩🇪 Berlin</span></span> <span class="dt-val"><span data-he="">2 רופאים</span><span data-en="">2 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇬🇧 לונדון</span><span data-en="">🇬🇧 London</span></span> <span class="dt-val"><span data-he="">3 רופאים</span><span data-en="">3 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇫🇷 פריז</span><span data-en="">🇫🇷 Paris</span></span> <span class="dt-val"><span data-he="">5 רופאים</span><span data-en="">5 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇦🇪 דובאי</span><span data-en="">🇦🇪 Dubai</span></span> <span class="dt-val"><span data-he="">2 רופאים</span><span data-en="">2 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇸🇬 סינגפור</span><span data-en="">🇸🇬 Singapore</span></span> <span class="dt-val"><span data-he="">3 רופאים</span><span data-en="">3 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇪🇸 ברצלונה</span><span data-en="">🇪🇸 Barcelona</span></span> <span class="dt-val"><span data-he="">2 רופאים</span><span data-en="">2 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇯🇵 טוקיו</span><span data-en="">🇯🇵 Tokyo</span></span> <span class="dt-val"><span data-he="">1 רופא</span><span data-en="">1 doctor</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇹🇭 בנגקוק</span><span data-en="">🇹🇭 Bangkok</span></span> <span class="dt-val"><span data-he="">3 רופאים</span><span data-en="">3 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇮🇪 דבלין</span><span data-en="">🇮🇪 Dublin</span></span> <span class="dt-val"><span data-he="">2 רופאים</span><span data-en="">2 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇮🇹 רומא</span><span data-en="">🇮🇹 Rome</span></span> <span class="dt-val"><span data-he="">4 רופאים</span><span data-en="">4 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇩🇪 ברלין</span><span data-en="">🇩🇪 Berlin</span></span> <span class="dt-val"><span data-he="">2 רופאים</span><span data-en="">2 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇬🇧 לונדון</span><span data-en="">🇬🇧 London</span></span> <span class="dt-val"><span data-he="">3 רופאים</span><span data-en="">3 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇫🇷 פריז</span><span data-en="">🇫🇷 Paris</span></span> <span class="dt-val"><span data-he="">5 רופאים</span><span data-en="">5 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇦🇪 דובאי</span><span data-en="">🇦🇪 Dubai</span></span> <span class="dt-val"><span data-he="">2 רופאים</span><span data-en="">2 doctors</span></span></div>
+<div class="dt-item"><span class="dt-dot"></span><span class="dt-city"><span data-he="">🇸🇬 סינגפור</span><span data-en="">🇸🇬 Singapore</span></span> <span class="dt-val"><span data-he="">3 רופאים</span><span data-en="">3 doctors</span></span></div>
+</div></div>
 <!-- HOW -->
-<section id="how">
-  <div class="reveal">
-    <span class="s-tag"><span data-he="">התהליך</span><span data-en="" data-key="The Process">The Process</span></span>
-    <div class="s-title"><span data-he="">איך Safe Doc עובדת?</span><span data-en="" data-key="How Safe Doc Works">How Safe Doc Works</span></div>
-<span data-he="שלושה שלבים פשוטים – מהרגע שמטייל צריך עזרה ועד שהכל מוסדר."></span><span data-en="" data-key="3_simple_steps">3 simple steps – from the moment a traveler needs help to the moment payment is secured.</span>  </div>
-  <div class="how-steps reveal" style="margin-top:3rem">
-    <div class="hstep">
-      <div class="hn">01</div>
-      <div class="hico">📱</div>
-      <div class="ht"><span data-he="">מציאת שירות רפואי</span><span data-en="" data-key="Finding Medical Care">Finding Medical Care</span></div>
-      <div class="hd"><span data-he="">המטייל פותח את האפליקציה ורואה רופאים זמינים בקרבתו — בזמן אמת.</span><span data-en="" data-key="traveler_opens_app">The traveler opens the app and sees available doctors nearby — in real time.</span></div>
-    </div>
-    <div class="hstep">
-      <div class="hn">02</div>
-      <div class="hico">🔗</div>
-      <div class="ht"><span data-he="">הפניה לרופא</span><span data-en="" data-key="Referred to You">Referred to You</span></div>
-      <div class="hd"><span data-he="">האפליקציה מתאמת את התור וההתקשרות עם רופא זמין.</span><span data-en="" data-key="app_coordinates">The app coordinates the appointment and connection with an available doctor.</span></div>
-    </div>
-    <div class="hstep">
-      <div class="hn">03</div>
-      <div class="hico">💳</div>
-      <div class="ht"><span data-he="">תשלום מיידי</span><span data-en="" data-key="Instant Payment">Instant Payment</span></div>
-      <div class="hd"><span data-he="">אנחנו מעבירים לך תשלום מיידי ואוטומטי בדרך שנוחה לך — כרטיס אשראי, העברה לחשבון או מטבע דיגיטלי.</span><span data-en="" data-key="we_transfer_payment">We transfer instant, automatic payment in the way most convenient for you — credit card, bank transfer or digital currency.</span></div>
-    </div>
-  </div>
-</section>
-
-<div class="sep"></div>
-
+<section class="section" id="how"><div class="sec-center">
+<div class="eyebrow"><span class="eyebrow-line"></span> <span data-he="">התהליך</span><span data-en="" data-key="The Process">The Process</span></div>
+<div class="h2"><span data-he="">איך Safe Doc עובדת?</span><span data-en="" data-key="How Safe Doc Works">How Safe Doc Works</span></div>
+<p class="sub" style="margin:0 auto"><span data-he="">3 שלבים פשוטים — מהרגע שמטייל זקוק לעזרה ועד שהתשלום מאובטח.</span><span data-en="" data-key="3_simple_steps">3 simple steps – from the moment a traveler needs help to the moment payment is secured.</span></p></div>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">01</div><div class="how-ic">📱</div><div class="how-name"><span data-he="">מציאת שירות רפואי</span><span data-en="" data-key="Finding Medical Care">Finding Medical Care</span></div><div class="how-desc"><span data-he="">המטייל פותח את האפליקציה ורואה רופאים זמינים בקרבתו — בזמן אמת.</span><span data-en="" data-key="traveler_opens_app">The traveler opens the app and sees available doctors nearby — in real time.</span></div></div>
+<div class="how-card"><div class="how-num">02</div><div class="how-ic">🔗</div><div class="how-name"><span data-he="">הפניה לרופא</span><span data-en="" data-key="Referred to You">Referred to You</span></div><div class="how-desc"><span data-he="">האפליקציה מתאמת את התור וההתקשרות עם רופא זמין.</span><span data-en="" data-key="app_coordinates">The app coordinates the appointment and connection with an available doctor.</span></div></div>
+<div class="how-card"><div class="how-num">03</div><div class="how-ic">💳</div><div class="how-name"><span data-he="">תשלום מיידי</span><span data-en="" data-key="Instant Payment">Instant Payment</span></div><div class="how-desc"><span data-he="">אנחנו מעבירים לך תשלום מיידי ואוטומטי בדרך שנוחה לך — כרטיס אשראי, העברה בנקאית או מטבע דיגיטלי.</span><span data-en="" data-key="we_transfer_payment">We transfer instant, automatic payment in the way most convenient for you — credit card, bank transfer or digital currency.</span></div></div>
+</div></section>
 <!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
-    <div class="reveal">
-      <span class="s-tag"><span data-he="">אודות Safe Doc</span><span data-en="" data-key="About Safe Doc">About Safe Doc</span></span>
-      <div class="s-title"><span data-he="">נולדנו מתוך צורך אמיתי</span><span data-en="" data-key="Born From a Real Need">Born From a Real Need</span></div>
-      <p class="s-body"><span data-he="">כל שנה מאות מיליוני מטיילים ברחבי העולם נפצעים, חולים, זקוקים לייעוץ — ולא יודעים למי לפנות. Safe Doc נוצרה כדי לשנות את זה.</span><span data-en="" data-key="every_year">Every year, hundreds of millions of travelers get injured, fall ill, or need advice abroad — and don't know who to call. Safe Doc was created to change that.</span></p>
-      <div class="about-points">
-        <div class="ap"><div class="ap-ico">🌍</div><div class="ap-t">
-          <h4><span data-he="">נוכחות גלובלית</span><span data-en="" data-key="Global Presence">Global Presence</span></h4>
-          <p><span data-he="">רשת רופאים שותפים ביותר מ-40 מדינות, מאירופה ועד דרום-מזרח אסיה ואמריקה.</span><span data-en="" data-key="network_40">A network of partner doctors in 40+ countries, from Europe to Southeast Asia and the Americas.</span></p>
-        </div></div>
-        <div class="ap"><div class="ap-ico">🤝</div><div class="ap-t">
-          <h4><span data-he="">שותפות אמיתית</span><span data-en="" data-key="Real Partnership">Real Partnership</span></h4>
-          <p><span data-he="">מודל תשלום מיידי ומתגמל ביותר — אנחנו משלמים לך ישירות לפי הסיכום עלויות בהסכם שלנו.</span><span data-en="" data-key="most_rewarding">The most rewarding instant payment model — we pay you directly according to the agreed rates in our contract.</span></p>
-          <p style="margin-top:.75rem;font-size:.82rem;color:#1E4A72;line-height:1.7"><span data-he="">אנחנו בוחרים רופאים איכותיים ומומלצים ולא מחפשים עשרות רופאים בכל יעד. ככה תקבל נפח פעילות גדול מאיתנו.</span><span data-en="" data-key="we_select_quality">We select quality, recommended doctors — not dozens per destination. That means more volume and referrals for you.</span></p>
-        </div></div>
-        <div class="ap"><div class="ap-ico">🔐</div><div class="ap-t">
-          <h4><span data-he="">אמינות ובטיחות</span><span data-en="" data-key="Trust &amp; Safety">Trust & Safety</span></h4>
-          <p><span data-he="">כל רופא עובר תהליך אימות. המטיילים יודעים שהם בידיים טובות.</span><span data-en="" data-key="every_doctor_verified">Every doctor is verified. Travelers know they're in good hands.</span></p>
-        </div></div>
-      </div>
-    </div>
-    <div class="about-right reveal">
-      <div class="qcard">
-        <p><span data-he="">"המטרה שלנו היא פשוטה — שאף מטייל לא יהיה לבד ברגע שהוא זקוק לרופא."</span><span data-en="" data-key="our_goal">"Our goal is simple — no traveler should face a health crisis alone, anywhere in the world."</span></p>
-        <div class="sig"><span data-he="">— צוות Safe Doc</span><span data-en="" data-key="— The Safe Doc Team">— The Safe Doc Team</span></div>
-      </div>
-      <div class="acard-row">
-        <div class="acard"><div class="acard-n">40+</div><div class="acard-l"><span data-he="">מדינות</span><span data-en="" data-key="Countries">Countries</span></div></div>
-        <div class="acard"><div class="acard-n">24/7</div><div class="acard-l"><span data-he="">זמינות</span><span data-en="" data-key="Availability">Availability</span></div></div>
-        <div class="acard"><div class="acard-n">0</div><div class="acard-l"><span data-he="">ביורוקרטיה</span><span data-en="" data-key="Bureaucracy">Bureaucracy</span></div></div>
-        <div class="acard"><div class="acard-n"><span data-he="">מיידי</span><span data-en="" data-key="Instant">Instant</span></div><div class="acard-l"><span data-he="">תשלום לרופא</span><span data-en="" data-key="Doctor Payout">Doctor Payout</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="sep"></div>
-
-<!-- TRUST / INSURANCE -->
-<section id="trust" style="background:#E8F4FE;padding:80px 4vw">
-  <div class="reveal" style="text-align:center;margin-bottom:1rem">
-    <span class="s-tag"><span data-he="">אמון ושותפויות</span><span data-en="" data-key="trust_partnerships">Trust & Partnerships</span></span>
-    <div class="s-title" style="max-width:600px;margin:0 auto 1rem"><span data-he="">חברות ביטוח ענקיות בוחרות בנו</span><span data-en="" data-key="Leading Insurance Giants Back Us">Leading Insurance Giants Back Us</span></div>
-    <p class="s-body" style="margin:0 auto;text-align:center;max-width:560px"><span data-he="">שתי חברות ביטוח גדולות חתמו עמנו על הסכם שותפות. זו הוכחה שהמודל העסקי שלנו מהימן, בטוח ומוכח.</span><span data-en="" data-key="two_insurance">Two of the world's largest insurance companies have signed partnership agreements with us — proof that our model is trusted, secure and proven.</span></p>
-  </div>
-</section>
-
-<div class="sep"></div>
-
-<!-- DOCTORS -->
-<section id="doctors">
-  <div class="doc-header reveal">
-    <div>
-      <span class="s-tag"><span data-he="">לרופאים</span><span data-en="" data-key="For Doctors">For Doctors</span></span>
-      <div class="s-title"><span data-he="">למה להצטרף ל-Safe Doc?</span><span data-en="" data-key="Why Join Safe Doc?">Why Join Safe Doc?</span></div>
-    </div>
-    <div>
-      <p class="s-body"><span data-he="">הצטרף לרשת הרופאים הגלובלית של Safe Doc. קבל לקוחות מטיילים מכל העולם וקבל תשלום מיידי.</span><span data-en="" data-key="join_network">Join the Safe Doc global doctor network. Get clients from travelers worldwide, instant payout and terms that simply don't exist anywhere else.</span></p>
-      <br><a href="#join" class="btn-main" style="text-decoration:none;display:inline-flex;margin-top:.5rem"><span data-he="">הצטרף עכשיו ←</span><span data-en="" data-key="Join Now →">Join Now →</span></a>
-    </div>
-  </div>
-  <div class="benefits-grid reveal">
-    
-    <div class="bc"><div class="bico">📈</div>
-      <div class="bt"><span data-he="">הכנסה נוספת ללא מאמץ</span><span data-en="" data-key="Extra Income, Zero Effort">Extra Income, Zero Effort</span></div>
-      <div class="bd"><span data-he="">אנחנו מביאים אליך לקוחות מטיילים שכבר מחפשים רופא. אתה רק מטפל.</span><span data-en="" data-key="we_bring_clients">We bring you traveler clients who are already looking for a doctor. You just treat.</span></div>
-    </div>
-    <div class="bc"><div class="bico">🕐</div>
-      <div class="bt"><span data-he="">שליטה מלאה בזמינות</span><span data-en="" data-key="Full Availability Control">Full Availability Control</span></div>
-      <div class="bd"><span data-he="">פועל רק כשאתה רוצה. הגדר זמינות, סוגי ביקורים ומחירים — הכל דרך הפלטפורמה.</span><span data-en="" data-key="work_when_want">Work only when you want. Set your availability, visit types and pricing — all through the platform.</span></div>
-    </div>
-    <div class="bc"><div class="bico">🎁</div>
-  <div class="bt"><span data-he="">איך זה הגיוני?</span><span data-en="" data-key="How is this possible?">How is this possible?</span></div>
-  <div class="bd"><span data-he="">אנחנו מרוויחים כסף מחברת הביטוח ולא מכם. כך שאתם רק מרווחים!</span><span data-en="" data-key="we_earn_insurance">We earn from the insurance company — not from you. You only gain!</span></div>
-</div>
-    <div class="bc"><div class="bico">🌍</div>
-      <div class="bt"><span data-he="">מטיילים מכל העולם</span><span data-en="" data-key="Travelers Worldwide">Travelers Worldwide</span></div>
-      <div class="bd"><span data-he="">אנחנו בוחרים רופאים ומרפאות מקצועיות ומחפשים איכות ולא כמות. כך נפנה אליך והרבה!</span><span data-en="" data-key="quality_not_quantity">We select quality clinics and doctors — not quantity. That means more referrals coming your way!</span></div>
-    </div>
-    <div class="bc"><div class="bico">⚖️</div>
-  <div class="bt"><span data-he="">ללא עמלות וללא עלויות בכלל!</span><span data-en="" data-key="Zero Commission, Zero Cost!">Zero Commission, Zero Cost!</span></div>
-  <div class="bd"><span data-he="">אנחנו לא גובים מכם תשלום. בכלל!</span><span data-en="" data-key="we_dont_charge">We don't charge you anything. At all!</span></div>
-</div>
-    <div class="bc"><div class="bico">🛡️</div>
-  <div class="bt"><span data-he="">מה זה מחייב מכם?</span><span data-en="" data-key="Whats_required">What's required of you?</span></div>
-  <div class="bd"><span data-he="">אנחנו עובדים רק עם רופאים הוגנים שמעניקים מחירים מוזלים בתמורה לקבל נפח תנועה גדול של מטיילים [בחינם!]</span><span data-en="" data-key="fair_doctors">We work only with fair doctors who offer discounted rates in exchange for a high volume of traveler referrals — for free!</span></div>
-</div>
-  </div>
-</section>
-
-<div class="sep"></div>
-
-<!-- JOIN -->
+<div class="s-white"><section class="section" id="about"><div class="about-wrap"><div>
+<div class="eyebrow"><span class="eyebrow-line"></span> <span data-he="">אודות Safe Doc</span><span data-en="" data-key="About Safe Doc">About Safe Doc</span></div>
+<div class="h2"><span data-he="">נולדנו מתוך צורך אמיתי</span><span data-en="" data-key="Born From a Real Need">Born From a Real Need</span></div>
+<p class="sub"><span data-he="">כל שנה מאות מיליוני מטיילים ברחבי העולם נפצעים, חולים או זקוקים לייעוץ בחו&quot;ל — ולא יודעים למי לפנות. Safe Doc נוצרה כדי לשנות את זה.</span><span data-en="" data-key="every_year">Every year, hundreds of millions of travelers get injured, fall ill, or need advice abroad — and don&#39;t know who to call. Safe Doc was created to change that.</span></p>
+<div class="about-points">
+<div class="apoint"><div class="apoint-ic">🌍</div><div><h4><span data-he="">נוכחות גלובלית</span><span data-en="" data-key="Global Presence">Global Presence</span></h4><p><span data-he="">רשת רופאים שותפים ביותר מ-40 מדינות, מאירופה ועד דרום-מזרח אסיה ואמריקה.</span><span data-en="" data-key="network_40">A network of partner doctors in 40+ countries, from Europe to Southeast Asia and the Americas.</span></p></div></div>
+<div class="apoint"><div class="apoint-ic">🤝</div><div><h4><span data-he="">שותפות אמיתית</span><span data-en="" data-key="Real Partnership">Real Partnership</span></h4><p><span data-he="">מודל תשלום מיידי ומתגמל ביותר — אנחנו משלמים לך ישירות לפי התעריפים המוסכמים בחוזה.</span><span data-en="" data-key="most_rewarding">The most rewarding instant payment model — we pay you directly according to the agreed rates in our contract.</span></p></div></div>
+<div class="apoint"><div class="apoint-ic">🔐</div><div><h4><span data-he="">אמינות ובטיחות</span><span data-en="" data-key="Trust &amp; Safety">Trust &amp; Safety</span></h4><p><span data-he="">כל רופא עובר תהליך אימות. המטיילים יודעים שהם בידיים טובות.</span><span data-en="" data-key="every_doctor_verified">Every doctor is verified. Travelers know they&#39;re in good hands.</span></p></div></div>
+</div></div>
+<div class="about-cards">
+<div class="about-quote"><p><span data-he="">&quot;המטרה שלנו היא פשוטה — שאף מטייל לא יתמודד עם משבר בריאותי לבד, בשום מקום בעולם.&quot;</span><span data-en="" data-key="our_goal">&quot;Our goal is simple — no traveler should face a health crisis alone, anywhere in the world.&quot;</span></p><div class="sig"><span data-he="">— צוות Safe Doc</span><span data-en="" data-key="— The Safe Doc Team">— The Safe Doc Team</span></div></div>
+<div class="astat"><div class="astat-n">40+</div><div class="astat-l"><span data-he="">מדינות</span><span data-en="" data-key="Countries">Countries</span></div></div>
+<div class="astat"><div class="astat-n">24/7</div><div class="astat-l"><span data-he="">זמינות</span><span data-en="" data-key="Availability">Availability</span></div></div>
+<div class="astat"><div class="astat-n">0</div><div class="astat-l"><span data-he="">ביורוקרטיה</span><span data-en="" data-key="Bureaucracy">Bureaucracy</span></div></div>
+<div class="astat"><div class="astat-n"><span data-he="">מיידי</span><span data-en="" data-key="Instant">Instant</span></div><div class="astat-l"><span data-he="">תשלום לרופא</span><span data-en="" data-key="Doctor Payout">Doctor Payout</span></div></div>
+</div></div></section></div>
+<!-- TRUST -->
+<div class="trust-band"><div class="sec-center">
+<div class="eyebrow"><span class="eyebrow-line"></span> <span data-he="">אמון ושותפויות</span><span data-en="" data-key="trust_partnerships">Trust &amp; Partnerships</span></div>
+<div class="h2"><span data-he="">חברות ביטוח ענקיות בוחרות בנו</span><span data-en="" data-key="Leading Insurance Giants Back Us">Leading Insurance Giants Back Us</span></div>
+<p class="sub" style="margin:0 auto"><span data-he="">שתי חברות ביטוח גדולות חתמו עמנו על הסכם שותפות — הוכחה שהמודל שלנו אמין, בטוח ומוכח.</span><span data-en="" data-key="two_insurance">Two of the world&#39;s largest insurance companies have signed partnership agreements with us — proof that our model is trusted, secure and proven.</span></p></div></div>
+<!-- BENEFITS -->
+<section class="section" id="doctors"><div class="ben-head-grid"><div>
+<div class="eyebrow"><span class="eyebrow-line"></span> <span data-he="">לרופאים</span><span data-en="" data-key="For Doctors">For Doctors</span></div>
+<div class="h2"><span data-he="">למה להצטרף ל-Safe Doc?</span><span data-en="" data-key="Why Join Safe Doc?">Why Join Safe Doc?</span></div></div><div>
+<p class="sub"><span data-he="">הצטרף לרשת הרופאים הגלובלית של Safe Doc. קבל לקוחות ממטיילים מכל העולם, תשלום מיידי ותנאים שפשוט לא קיימים בשום מקום אחר.</span><span data-en="" data-key="join_network">Join the Safe Doc global doctor network. Get clients from travelers worldwide, instant payout and terms that simply don&#39;t exist anywhere else.</span></p>
+<a href="#join" class="ben-join-btn" style="margin-top:16px"><span data-he="">הצטרף עכשיו ←</span><span data-en="" data-key="Join Now →">Join Now →</span></a></div></div>
+<div class="ben-grid">
+<div class="ben-card"><div class="ben-ic">📈</div><div class="ben-name"><span data-he="">הכנסה נוספת ללא מאמץ</span><span data-en="" data-key="Extra Income, Zero Effort">Extra Income, Zero Effort</span></div><div class="ben-desc"><span data-he="">אנחנו מביאים אליך לקוחות מטיילים שכבר מחפשים רופא. אתה רק מטפל.</span><span data-en="" data-key="we_bring_clients">We bring you traveler clients who are already looking for a doctor. You just treat.</span></div></div>
+<div class="ben-card"><div class="ben-ic">🕐</div><div class="ben-name"><span data-he="">שליטה מלאה בזמינות</span><span data-en="" data-key="Full Availability Control">Full Availability Control</span></div><div class="ben-desc"><span data-he="">פועל רק כשאתה רוצה. הגדר זמינות, סוגי ביקור ותמחור — הכל דרך הפלטפורמה.</span><span data-en="" data-key="work_when_want">Work only when you want. Set your availability, visit types and pricing — all through the platform.</span></div></div>
+<div class="ben-card"><div class="ben-ic">🎁</div><div class="ben-name"><span data-he="">איך זה הגיוני?</span><span data-en="" data-key="How is this possible?">How is this possible?</span></div><div class="ben-desc"><span data-he="">אנחנו מרוויחים כסף מחברת הביטוח ולא מכם. אתם רק מרוויחים!</span><span data-en="" data-key="we_earn_insurance">We earn from the insurance company — not from you. You only gain!</span></div></div>
+<div class="ben-card"><div class="ben-ic">🌍</div><div class="ben-name"><span data-he="">מטיילים מכל העולם</span><span data-en="" data-key="Travelers Worldwide">Travelers Worldwide</span></div><div class="ben-desc"><span data-he="">אנחנו בוחרים רופאים ומרפאות מקצועיות ואיכותיות — לא כמות. כך יש יותר הפניות עבורך.</span><span data-en="" data-key="quality_not_quantity">We select quality clinics and doctors — not quantity. That means more referrals coming your way!</span></div></div>
+<div class="ben-card"><div class="ben-ic">⚖️</div><div class="ben-name"><span data-he="">ללא עמלות וללא עלויות בכלל!</span><span data-en="" data-key="Zero Commission, Zero Cost!">Zero Commission, Zero Cost!</span></div><div class="ben-desc"><span data-he="">אנחנו לא גובים מכם תשלום. בכלל!</span><span data-en="" data-key="we_dont_charge">We don&#39;t charge you anything. At all!</span></div></div>
+<div class="ben-card"><div class="ben-ic">🛡️</div><div class="ben-name"><span data-he="">מה זה מחייב מכם?</span><span data-en="" data-key="Whats_required">What&#39;s required of you?</span></div><div class="ben-desc"><span data-he="">אנחנו עובדים רק עם רופאים הוגנים שמעניקים תעריפים מוזלים בתמורה לכמות גבוהה של הפניות מטיילים — בחינם.</span><span data-en="" data-key="fair_doctors">We work only with fair doctors who offer discounted rates in exchange for a high volume of traveler referrals — for free.</span></div></div>
+</div></section>
+<div class="s-white">
 <section id="join">
   <div class="join-grid">
     <div class="join-left reveal">
@@ -2183,6 +1258,7 @@ body.lang-he .qcard p, body.lang-he .docx-name{
     </div>
   </div>
 </section>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -2926,6 +2002,8 @@ const COUNTRY_META = {
   'South Africa':{'dial':'+27','cur':'Other'},
   'Kenya':{'dial':'+254','cur':'Other'},
 };
+/* ★ static fallback so country search works instantly even before the worker /options loads */
+try{ if(!COUNTRY_LIST.length){ COUNTRY_LIST = Object.keys(COUNTRY_META); } }catch(e){}
 
 // ── Combobox helpers (DOM-only, no innerHTML with user content) ──────────────
 function makeItem(text, onClick, hint) {
@@ -3261,7 +2339,7 @@ function restoreFormState() {
     var state = JSON.parse(saved);
     var lang = document.body.className.replace('lang-','') || 'he';
     var banner = document.createElement('div');
-    banner.style.cssText = 'background:#f0f9ff;border:1px solid #0891B2;border-left:4px solid #0891B2;padding:10px 14px;margin-bottom:12px;font-size:.8rem;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;';
+    banner.style.cssText = 'background:#f0f9ff;border:1px solid #4F46E5;border-left:4px solid #4F46E5;padding:10px 14px;margin-bottom:12px;font-size:.8rem;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;';
     var msg = document.createElement('span');
     msg.style.color = '#0A2540';
     msg.textContent = lang==='he' ? 'יש לנו טיוטה שמורה. להמשיך ממנה?' : 'You have a saved draft. Continue from where you left off?';
@@ -3269,7 +2347,7 @@ function restoreFormState() {
     btns.style.cssText = 'display:flex;gap:6px;flex-shrink:0;';
     var btnY = document.createElement('button');
     btnY.textContent = lang==='he' ? 'כן, המשך' : 'Yes, continue';
-    btnY.style.cssText = 'padding:4px 12px;background:#0891B2;color:#fff;border:none;cursor:pointer;font-size:.75rem;font-weight:600;';
+    btnY.style.cssText = 'padding:4px 12px;background:#4F46E5;color:#fff;border:none;cursor:pointer;font-size:.75rem;font-weight:600;';
     var btnN = document.createElement('button');
     btnN.textContent = lang==='he' ? 'התחל מחדש' : 'Start over';
     btnN.style.cssText = 'padding:4px 12px;background:#fff;border:1px solid #cbd5e1;cursor:pointer;font-size:.75rem;color:#475569;';
