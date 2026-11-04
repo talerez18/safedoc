@@ -1052,36 +1052,36 @@ body.lang-he .pt-fold::after{clip-path:polygon(0 0,0 100%,100% 100%)}
 <div style="display:flex;align-items:center;gap:12px">
 <div style="position:relative"><button class="lang-toggle" id="lang-current" onclick="toggleLangMenu()">🌐 <span id="lang-label">EN</span></button>
 <div id="lang-menu" style="display:none;position:absolute;top:38px;left:0;background:white;border:1.5px solid #B0D4E8;border-radius:10px;padding:6px;width:200px;max-height:340px;overflow-y:auto;box-shadow:0 8px 24px rgba(8,145,178,.15);z-index:999">
-        <div class="lm-item" onclick="setLang('en');toggleLangMenu()">🇬🇧 English</div>
-        <div class="lm-item" onclick="setLang('he');toggleLangMenu()">🇮🇱 עברית</div>
-        <div class="lm-item" onclick="setLang('es');toggleLangMenu()">🇪🇸 Español</div>
-        <div class="lm-item" onclick="setLang('pt');toggleLangMenu()">🇧🇷 Português</div>
-        <div class="lm-item" onclick="setLang('th');toggleLangMenu()">🇹🇭 ภาษาไทย</div>
-        <div class="lm-item" onclick="setLang('hi');toggleLangMenu()">🇮🇳 हिन्दी</div>
-        <div class="lm-item" onclick="setLang('vi');toggleLangMenu()">🇻🇳 Tiếng Việt</div>
-        <div class="lm-item" onclick="setLang('km');toggleLangMenu()">🇰🇭 ខ្មែរ</div>
-        <div class="lm-item" onclick="setLang('lo');toggleLangMenu()">🇱🇦 ລາວ</div>
-        <div class="lm-item" onclick="setLang('tl');toggleLangMenu()">🇵🇭 Tagalog</div>
-        <div class="lm-item" onclick="setLang('id');toggleLangMenu()">🇮🇩 Bahasa Indonesia</div>
-        <div class="lm-item" onclick="setLang('zh');toggleLangMenu()">🇨🇳 中文</div>
-        <div class="lm-item" onclick="setLang('ja');toggleLangMenu()">🇯🇵 日本語</div>
-        <div class="lm-item" onclick="setLang('ko');toggleLangMenu()">🇰🇷 한국어</div>
-        <div class="lm-item" onclick="setLang('de');toggleLangMenu()">🇩🇪 Deutsch</div>
-        <div class="lm-item" onclick="setLang('nl');toggleLangMenu()">🇳🇱 Nederlands</div>
-        <div class="lm-item" onclick="setLang('fr');toggleLangMenu()">🇫🇷 Français</div>
-        <div class="lm-item" onclick="setLang('it');toggleLangMenu()">🇮🇹 Italiano</div>
-        <div class="lm-item" onclick="setLang('ru');toggleLangMenu()">🇷🇺 Русский</div>
-        <div class="lm-item" onclick="setLang('el');toggleLangMenu()">🇬🇷 Ελληνικά</div>
-        <div class="lm-item" onclick="setLang('tr');toggleLangMenu()">🇹🇷 Türkçe</div>
-        <div class="lm-item" onclick="setLang('ar');toggleLangMenu()">🇸🇦 العربية</div>
-        <div class="lm-item" onclick="setLang('fa');toggleLangMenu()">🇮🇷 فارسی</div>
-        <div class="lm-item" onclick="setLang('ur');toggleLangMenu()">🇵🇰 اردو</div>
-        <div class="lm-item" onclick="setLang('ne');toggleLangMenu()">🇳🇵 नेपाली</div>
-        <div class="lm-item" onclick="setLang('ta');toggleLangMenu()">🇮🇳 தமிழ்</div>
-        <div class="lm-item" onclick="setLang('pl');toggleLangMenu()">🇵🇱 Polski</div>
-        <div class="lm-item" onclick="setLang('hu');toggleLangMenu()">🇭🇺 Magyar</div>
-        <div class="lm-item" onclick="setLang('si');toggleLangMenu()">🇱🇰 සිංහල</div>
-        <div class="lm-item" onclick="setLang('am');toggleLangMenu()">🇪🇹 አማርኛ</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('en');toggleLangMenu()">🇬🇧 English</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('he');toggleLangMenu()">🇮🇱 עברית</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('es');toggleLangMenu()">🇪🇸 Español</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('pt');toggleLangMenu()">🇧🇷 Português</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('th');toggleLangMenu()">🇹🇭 ภาษาไทย</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('hi');toggleLangMenu()">🇮🇳 हिन्दी</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('vi');toggleLangMenu()">🇻🇳 Tiếng Việt</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('km');toggleLangMenu()">🇰🇭 ខ្មែរ</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('lo');toggleLangMenu()">🇱🇦 ລາວ</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('tl');toggleLangMenu()">🇵🇭 Tagalog</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('id');toggleLangMenu()">🇮🇩 Bahasa Indonesia</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('zh');toggleLangMenu()">🇨🇳 中文</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('ja');toggleLangMenu()">🇯🇵 日本語</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('ko');toggleLangMenu()">🇰🇷 한국어</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('de');toggleLangMenu()">🇩🇪 Deutsch</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('nl');toggleLangMenu()">🇳🇱 Nederlands</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('fr');toggleLangMenu()">🇫🇷 Français</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('it');toggleLangMenu()">🇮🇹 Italiano</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('ru');toggleLangMenu()">🇷🇺 Русский</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('el');toggleLangMenu()">🇬🇷 Ελληνικά</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('tr');toggleLangMenu()">🇹🇷 Türkçe</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('ar');toggleLangMenu()">🇸🇦 العربية</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('fa');toggleLangMenu()">🇮🇷 فارسی</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('ur');toggleLangMenu()">🇵🇰 اردو</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('ne');toggleLangMenu()">🇳🇵 नेपाली</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('ta');toggleLangMenu()">🇮🇳 தமிழ்</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('pl');toggleLangMenu()">🇵🇱 Polski</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('hu');toggleLangMenu()">🇭🇺 Magyar</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('si');toggleLangMenu()">🇱🇰 සිංහල</div>
+        <div class="lm-item" onclick="try{sessionStorage.setItem('safedoc_lang_manual','1')}catch(e){};setLang('am');toggleLangMenu()">🇪🇹 አማርኛ</div>
       </div>
 </div>
 <a href="#join" class="nav-cta-sd"><span data-he="">הצטרפות רופאים ←</span><span data-en="" data-key="Join as Doctor →">Join as Doctor →</span></a>
@@ -2693,14 +2693,24 @@ function autoApplyDeviceLanguage() {
 
   var code = (navigator.language || navigator.userLanguage || '').split('-')[0].toLowerCase();
   // Supported site languages (codes used by setLang)
-  var supported = ['en','he','es','pt','th','hi','vi','km','lo','tl','id','zh','ja','ko','de','nl','fr','it','ru','el','tr','ar','fa','ur','ne','ta','pl','hu','si','am'];
+  var supported = ['en','he','es','pt','th','hi','vi','km','lo','tl','id','zh','ja','ko','de','nl','fr','it','ru','el','tr','ar','fa','ur','ne','ta','pl','hu','si','am','hr','lt','bs','ay','qu','gn'];
   // Normalize some codes
   if (code === 'iw') code = 'he';
   if (code === 'in') code = 'id';
   if (code === 'fil') code = 'tl';
   // Apply if supported, else fall back to English
-  var lang = supported.indexOf(code) !== -1 ? code : 'en';
-  setLang(lang);
+  if (supported.indexOf(code) !== -1) { setLang(code); return; }
+  // Device language not supported -> try the visitor's country, else English
+  setLang('en');
+  var CL={IL:'he',ES:'es',MX:'es',AR:'es',CO:'es',CL:'es',PE:'es',VE:'es',EC:'es',GT:'es',CU:'es',BO:'es',DO:'es',HN:'es',PY:'es',SV:'es',NI:'es',CR:'es',PA:'es',UY:'es',BR:'pt',PT:'pt',TH:'th',VN:'vi',KH:'km',LA:'lo',PH:'tl',ID:'id',CN:'zh',TW:'zh',HK:'zh',JP:'ja',KR:'ko',DE:'de',AT:'de',CH:'de',NL:'nl',FR:'fr',IT:'it',RU:'ru',BY:'ru',GR:'el',TR:'tr',SA:'ar',AE:'ar',EG:'ar',MA:'ar',JO:'ar',IQ:'ar',IR:'fa',PK:'ur',NP:'ne',LK:'si',IN:'hi',PL:'pl',HU:'hu',HR:'hr',LT:'lt',BA:'bs',ET:'am'};
+  try {
+    var ctl = new AbortController(); setTimeout(function(){ctl.abort()}, 2500);
+    fetch('https://ipapi.co/json/', {signal: ctl.signal}).then(function(r){return r.json()}).then(function(d){
+      var l = d && CL[d.country_code];
+      var saved2=null; try{saved2=sessionStorage.getItem('safedoc_lang_manual')}catch(e){}
+      if (l && !saved2) setLang(l);
+    }).catch(function(){});
+  } catch(e){}
 }
 
 // ── IP geolocation ────────────────────────────────────────────────────────────
