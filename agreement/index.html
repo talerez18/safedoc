@@ -235,6 +235,14 @@ body.lang-he .doc-head .ttl{font-family:'Varela Round','Heebo',sans-serif}
   .ptable th, .ptable td{padding:9px 10px;font-size:.8rem}
   .doc-meta{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:nowrap}
 }
+
+/* prominent language switch next to date */
+.doc-meta .date-field{flex-wrap:wrap;justify-content:flex-end}
+.lang2{position:relative}
+.lang-btn2{background:linear-gradient(135deg,#0891B2,#22D3EE)!important;color:#fff!important;border:none!important;box-shadow:0 8px 20px -8px rgba(6,182,212,.8);font-size:.85rem;padding:9px 16px;animation:l2pulse 2.2s ease-in-out 3}
+@keyframes l2pulse{0%,100%{box-shadow:0 8px 20px -8px rgba(6,182,212,.8),0 0 0 0 rgba(6,182,212,.45)}50%{box-shadow:0 8px 20px -8px rgba(6,182,212,.8),0 0 0 9px rgba(6,182,212,0)}}
+#lang-menu2{display:none;position:absolute;top:46px;inset-inline-end:0;background:rgba(255,255,255,.96);backdrop-filter:blur(24px) saturate(160%);border:1px solid rgba(8,145,178,.18);border-radius:16px;padding:6px;width:230px;max-height:60vh;overflow-y:auto;box-shadow:var(--shadow-lift);z-index:999;direction:ltr}
+@media(max-width:560px){.doc-meta{flex-wrap:wrap!important;row-gap:10px}.doc-meta .date-field{width:100%;justify-content:space-between}#lang-menu2{inset-inline-end:auto;left:auto;right:0}}
 </style>
 </head>
 <body class="lang-en">
@@ -309,6 +317,10 @@ body.lang-he .doc-head .ttl{font-family:'Varela Round','Heebo',sans-serif}
       <div class="date-field">
         <span data-k="date">Date:</span>
         <input type="date" id="f-date">
+        <div class="lang-toggle lang2">
+          <button type="button" class="lang-btn lang-btn2" id="lang-current2" onclick="toggleLangMenu2(event)">🌐 <span id="lang-label2">EN</span> ▾</button>
+          <div id="lang-menu2"></div>
+        </div>
       </div>
     </div>
 
@@ -494,7 +506,8 @@ var LANG_NAMES = {en:'EN',he:'עב',es:'ES',pt:'PT',th:'TH',hi:'HI',vi:'VI',km:'
 var RTL = ['he','ar','fa','ur'];
 
 function toggleLangMenu(e){ if(e) e.stopPropagation(); var m=document.getElementById('lang-menu'); m.style.display = m.style.display==='block'?'none':'block'; }
-document.addEventListener('click', function(e){ if(!e.target.closest('.lang-toggle')){ document.getElementById('lang-menu').style.display='none'; } });
+function toggleLangMenu2(e){ if(e) e.stopPropagation(); var m=document.getElementById('lang-menu2'); if(!m.innerHTML.trim()) m.innerHTML=document.getElementById('lang-menu').innerHTML; m.style.display = m.style.display==='block'?'none':'block'; }
+document.addEventListener('click', function(e){ if(!e.target.closest('.lang-toggle')){ document.getElementById('lang-menu').style.display='none'; var m2=document.getElementById('lang-menu2'); if(m2) m2.style.display='none'; } });
 
 function setLang(lang){
   try{ sessionStorage.setItem('safedoc_agreement_lang', lang); }catch(e){}
@@ -503,6 +516,8 @@ function setLang(lang){
   document.documentElement.dir = RTL.indexOf(lang) !== -1 ? 'rtl' : 'ltr';
   document.getElementById('lang-label').textContent = LANG_NAMES[lang] || lang.toUpperCase();
   document.getElementById('lang-menu').style.display = 'none';
+  var l2=document.getElementById('lang-label2'); if(l2) l2.textContent = LANG_NAMES[lang] || lang.toUpperCase();
+  var m2=document.getElementById('lang-menu2'); if(m2) m2.style.display='none';
   // Apply all translations
   document.querySelectorAll('[data-k]').forEach(function(el){
     var key = el.getAttribute('data-k');
