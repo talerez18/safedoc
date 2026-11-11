@@ -1357,9 +1357,6 @@ body.lang-he .pt-fold::after{clip-path:polygon(0 0,0 100%,100% 100%)}
           <div style="margin-top:.5rem">
             <div class="yn-row"><span class="yn-label"><span data-he="">ביקורי בית / מלון</span><span data-en="" data-key="hotel_visits_label">Home / hotel visits</span></span><div class="chips yn-chips" data-field="hotel_visits"><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">חירום 24/7</span><span data-en="" data-key="emergency_label">24/7 emergency</span></span><div class="chips yn-chips" data-field="emergency"><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="No">No</div></div></div>
-            <div class="yn-row"><span class="yn-label"><span data-he="">בדיקות אבחנתיות</span><span data-en="" data-key="diagnostic_label">Diagnostic tests</span></span><div class="chips yn-chips" data-field="diagnostic"><div class="chip yn" onclick="toggleYN(this,'diagnostic')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'diagnostic')" data-val="No">No</div></div></div>
-            <div class="yn-row"><span class="yn-label"><span data-he="">בדיקות מעבדה</span><span data-en="" data-key="lab_label">Lab tests</span></span><div class="chips yn-chips" data-field="lab"><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'lab')" data-val="No">No</div></div></div>
-            <div class="yn-row"><span class="yn-label"><span data-he="">פינויים</span><span data-en="" data-key="evacuations_label">Evacuations</span></span><div class="chips yn-chips" data-field="evacuations"><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">ייעוץ אונליין</span><span data-en="" data-key="online_consult_label">Online consult</span></span><div class="chips yn-chips" data-field="online_consult"><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes + Digital Prescriptions">Yes + Rx</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">תיאום תור מראש?</span><span data-en="" data-key="appointment_label">Appointment required?</span></span><div class="chips yn-chips" data-field="appointment_required"><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="No">No</div></div></div>
           </div>
@@ -2782,6 +2779,11 @@ async function submitForm() {
       if (s) fd.append(f, s.getAttribute('data-val'));
     });
     document.querySelectorAll('#chips-spec .chip.sel').forEach(function(c){ fd.append('specialization', c.getAttribute('data-val')); });
+    // Diagnostic / lab / evacuations are no longer asked in Services; derive "Yes" from the Specialization tags so the Airtable fields stay filled
+    var specSel = Array.from(document.querySelectorAll('#chips-spec .chip.sel')).map(function(c){ return c.getAttribute('data-val'); });
+    if (specSel.indexOf('Diagnostic Tests') !== -1) fd.append('diagnostic', 'Yes');
+    if (specSel.indexOf('Laboratory Tests') !== -1) fd.append('lab', 'Yes');
+    if (specSel.indexOf('Medical evacuations') !== -1) fd.append('evacuations', 'Yes');
     document.querySelectorAll('#chips-days .chip.sel').forEach(function(c){ fd.append('days', c.getAttribute('data-val')); });
     document.querySelectorAll('#chips-lang .chip.sel').forEach(function(c){ fd.append('languages', c.getAttribute('data-val')); });
 
