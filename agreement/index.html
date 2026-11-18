@@ -7,6 +7,7 @@
 <title>Safe Doc – Collaboration Agreement</title>
 <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Poppins:wght@400;500;600;700;800;900&family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root{
   --teal:#0891B2; --cyan:#06B6D4; --sky:#22D3EE;
@@ -630,7 +631,8 @@ var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwyHPmq3egTLxnXEkoMYdyk
 var WORKER_URL = '';
 // Email the signed PDF to the owner + a copy to the doctor via FormSubmit (no server code needed).
 // One-time setup: after the first real submission FormSubmit emails OWNER_EMAIL an activation link – click it once.
-var EMAIL_VIA_FORMSUBMIT = true;
+var EMAIL_VIA_FORMSUBMIT = false;   // replaced by AGREEMENT_URL (PDF stored in Airtable "הסכמי רופאים")
+var AGREEMENT_URL = 'https://safedoc-form.tal-997.workers.dev/agreement';
 var OWNER_EMAIL = 'tal@safe-dr.com';
 
 function collectData(){
@@ -661,88 +663,81 @@ function collectData(){
   };
 }
 
-// Build a clean PDF of the agreement for the doctor
-function generatePDF(d){
-  try{
-    var jsPDF = window.jspdf.jsPDF;
-    var doc = new jsPDF({unit:'pt', format:'a4'});
-    var W = doc.internal.pageSize.getWidth();
-    var y = 56;
+// Build the signed PDF from the agreement as the doctor saw it (works in every language/script)
+async function buildAgreementPDF(d){
+  var src = document.getElementById('doc-card');
+  var W = 794;                                   // A4 width @96dpi
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;left:-10000px;top:0;width:'+W+'px;background:#fff;padding:0;z-index:-1';
+  var c = src.cloneNode(true);
+  c.removeAttribute('id'); c.style.margin='0'; c.style.maxWidth='none'; c.style.width=W+'px'; c.style.boxShadow='none';
+  // inputs → plain text with the values the doctor entered
+  var srcIn = src.querySelectorAll('input,textarea,select'), cIn = c.querySelectorAll('input,textarea,select');
+  cIn.forEach(function(el,i){
+    var o = srcIn[i]; if(!o) return;
+    if (o.type==='checkbox'||o.type==='radio'||o.type==='file'){ if(o.type==='file'){ el.replaceWith(document.createTextNode(d.file_name||'')); } return; }
+    var sp = document.createElement('span');
+    sp.textContent = o.value || '—';
+    sp.style.cssText = 'display:inline-block;min-width:60px;padding:2px 6px;border-bottom:1px solid #9bb;font-weight:600;white-space:pre-wrap;unicode-bidi:plaintext';
+    el.replaceWith(sp);
+  });
+  // signature canvas → image
+  var sc = c.querySelector('canvas'); if (sc && d.signature){ var im=document.createElement('img'); im.src=d.signature; im.style.cssText='width:100%;height:100%;object-fit:contain'; sc.replaceWith(im); }
+  c.querySelectorAll('button,.lang-toggle,.sig-ph,.sig-err,.note,#submit-btn').forEach(function(x){ x.remove(); });
+  c.querySelectorAll('.ttl').forEach(function(t){ t.style.background='none'; t.style.webkitBackgroundClip='border-box'; t.style.backgroundClip='border-box'; t.style.color='#0B2D4E'; });
+  // footer: who, when, id, hash
+  var f = document.createElement('div');
+  f.style.cssText = 'margin:18px 32px 28px;padding-top:12px;border-top:1px solid #d5e3ea;font:12px/1.6 Arial,sans-serif;color:#456;direction:ltr;text-align:left';
+  f.textContent = 'Signed by: ' + d.full_name + (d.clinic_name?(' · '+d.clinic_name):'') + ' · ' + d.email + '\nConfirmed at: ' + d.confirmed_at + ' (' + d.timezone + ')\nAgreement ID: ' + (d.agreement_id||'-') + '\nSHA-256: ' + (d.agreement_hash||'-');
+  f.style.whiteSpace = 'pre-line';
+  c.appendChild(f);
+  box.appendChild(c); document.body.appendChild(box);
+  await new Promise(function(r){ setTimeout(r, 150); });
+  function computeBreaks(root){
+    var top = root.getBoundingClientRect().top, breaks = [];
+  root.querySelectorAll('p,li,h1,h2,h3,h4,tr,.sec-h,.fld,.disc-box,.sigbox,.sigsec,.confirm,.sec,div').forEach(function(el){ if(el.classList.contains('sec')||el.classList.contains('sigsec')){ breaks.push(Math.round(el.getBoundingClientRect().top - top)); }
+    if (el.children.length && el.tagName==='DIV' && !el.classList.contains('sigbox') && !el.classList.contains('confirm') && !el.classList.contains('fld')) return;
+    breaks.push(Math.round(el.getBoundingClientRect().bottom - top));
+  });
+  var keep = [];
+  root.querySelectorAll('.sigsec,.sigbox,.confirm,tr,.disc-box,.fld,.sec-h,p,li').forEach(function(el){ var r=el.getBoundingClientRect(); keep.push([Math.round(r.top-top), Math.round(r.bottom-top)]); });
+  breaks = breaks.filter(function(b){ return !keep.some(function(k){ return b > k[0] + 1 && b < k[1] - 1; }); });
+  breaks.sort(function(a,b){return a-b});
+    return breaks;
+  }
+  var breaks = [];
+  var scale = 2;
+  var canvas = await html2canvas(c, {scale:scale, backgroundColor:'#ffffff', useCORS:true, windowWidth:W, onclone:function(doc, el){ breaks = computeBreaks(el); }});
+  box.remove();
+  var jsPDF = window.jspdf.jsPDF;
+  var pdf = new jsPDF({unit:'px', format:[W, 1123], hotfixes:['px_scaling']});
+  var pageH = 1123, total = canvas.height/scale, y = 0, first = true;
+  while (y < total - 1){
+    var limit = y + pageH, cut = limit;
+    if (limit < total){ for (var i=breaks.length-1;i>=0;i--){ if (breaks[i] <= limit && breaks[i] > y + pageH*0.5){ cut = breaks[i]; break; } } }
+    else cut = total;
+    var h = cut - y;
+    var part = document.createElement('canvas'); part.width = canvas.width; part.height = Math.ceil(h*scale);
+    var ctx = part.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,part.width,part.height);
+    ctx.drawImage(canvas, 0, Math.floor(y*scale), canvas.width, Math.ceil(h*scale), 0, 0, canvas.width, Math.ceil(h*scale));
+    if (!first) pdf.addPage([W, pageH]);
+    pdf.addImage(part.toDataURL('image/jpeg', 0.88), 'JPEG', 0, 0, W, h);
+    first = false; y = cut;
+  }
+  var fname = 'SafeDoc-Agreement-' + ((d.clinic_name||d.full_name||'clinic').replace(/[^a-z0-9֐-׿]+/gi,'_')) + '.pdf';
+  return { blob: pdf.output('blob'), name: fname };
+}
 
-    // Header band
-    doc.setFillColor(8,145,178);
-    doc.rect(0,0,W,90,'F');
-    doc.setTextColor(255,255,255);
-    doc.setFont('helvetica','bold'); doc.setFontSize(22);
-    doc.text('SAFE DOC', 40, 46);
-    doc.setFont('helvetica','normal'); doc.setFontSize(12);
-    doc.text('Collaboration Agreement', 40, 68);
-
-    y = 130;
-    doc.setTextColor(20,40,68);
-    doc.setFont('helvetica','bold'); doc.setFontSize(14);
-    doc.text('Provider Details', 40, y); y += 8;
-    doc.setDrawColor(8,145,178); doc.setLineWidth(1); doc.line(40,y,W-40,y); y += 22;
-
-    doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.setTextColor(40,60,90);
-    function line(label, val){
-      doc.setFont('helvetica','bold'); doc.text(label+':', 40, y);
-      doc.setFont('helvetica','normal'); doc.text(String(val||'-'), 200, y);
-      y += 22;
-    }
-    line('Date', d.date);
-    line('Company', 'SAFE DOC LTD (517368403)');
-    line('Doctor', d.full_name);
-    line('Clinic / Practice', d.clinic_name);
-    line('Phone / WhatsApp', d.phone);
-    line('Email', d.email);
-    line('Country', d.address);
-
-    y += 12;
-    doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.setTextColor(20,40,68);
-    doc.text('Agreed Price List', 40, y); y += 8;
-    doc.line(40,y,W-40,y); y += 22;
-
-    doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(8,145,178);
-    doc.text('Discount for Safe Doc members: ' + d.discount_pct, 40, y); y += 22;
-    var pnames = {Clinic:'Clinic Consultation','Home/Hotel':'Home / Hotel Visit',Online:'Online Consultation'};
-    doc.setFontSize(11);
-    Object.keys(pnames).forEach(function(k){
-      var v = d.pricesObj[k] || '-';
-      doc.setFont('helvetica','normal'); doc.setTextColor(40,60,90);
-      doc.text(pnames[k], 40, y);
-      doc.setFont('helvetica','bold'); doc.text(String(v), 360, y);
-      y += 20;
-    });
-
-    if (d.other_terms){
-      y += 8;
-      doc.setFont('helvetica','bold'); doc.text('Other terms:', 40, y); y += 18;
-      doc.setFont('helvetica','normal');
-      var split = doc.splitTextToSize(d.other_terms, W-80);
-      doc.text(split, 40, y); y += split.length*15;
-    }
-    if (d.file_name){
-      y += 6;
-      doc.setFont('helvetica','italic'); doc.setTextColor(100,120,140);
-      doc.text('Attached price file: ' + d.file_name, 40, y); y += 20;
-    }
-
-    y += 16;
-    doc.setDrawColor(220,230,238); doc.line(40,y,W-40,y); y += 24;
-    if (d.signature){ if (y>640){ doc.addPage(); y=60; } doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(20,40,68); doc.text('Digital signature:', 40, y); y+=8; try{ doc.addImage(d.signature,'PNG',40,y,200,75); }catch(e3){} y+=95; doc.setDrawColor(220,230,238); doc.line(40,y-8,240,y-8); doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(120,130,145); doc.text(d.full_name||'', 40, y+4); y+=24; }
-    doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(8,145,178);
-    doc.text('\u2713 Confirmed & agreed by the provider', 40, y); y += 18;
-    doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(120,130,145);
-    doc.text('Confirmed at: ' + d.confirmed_at + '  (' + d.timezone + ')', 40, y); y += 13;
-    doc.text('Agreement ID: ' + (d.agreement_id||'-'), 40, y); y += 13;
-    doc.setFontSize(7); doc.text('SHA-256: ' + (d.agreement_hash||'-'), 40, y); doc.setFontSize(9); y += 13;
-    doc.text('No costs, no monthly fees, no commission. Full terms apply as presented online.', 40, y);
-
-    var fname = 'SafeDoc-Agreement-' + (d.clinic_name||'clinic').replace(/[^a-z0-9]/gi,'_') + '.pdf';
-    doc.save(fname);
-    try{ d.pdf_name = fname; d.pdf_base64 = doc.output('datauristring').split(',')[1]; }catch(e2){}
-  }catch(err){ /* if PDF fails, don't block submission */ }
+function offerDownload(file){
+  var url = URL.createObjectURL(file.blob);
+  var a = document.createElement('a'); a.href = url; a.download = file.name; document.body.appendChild(a); a.click(); a.remove();
+  var s = document.getElementById('success');
+  if (s && !document.getElementById('dl-again')){
+    var b = document.createElement('a'); b.id='dl-again'; b.href=url; b.download=file.name; b.className='submit-btn';
+    b.style.cssText='display:inline-block;margin-top:16px;text-decoration:none;width:auto;padding:12px 22px';
+    b.textContent = (document.documentElement.lang==='he') ? 'הורדת ההסכם החתום (PDF)' : 'Download the signed agreement (PDF)';
+    s.appendChild(b);
+  }
 }
 
 async function submitAgreement(){
@@ -761,8 +756,29 @@ async function submitAgreement(){
     d.agreement_id = 'SD-' + d.agreement_hash.slice(0,10).toUpperCase();
   }catch(e){ d.agreement_id = 'SD-' + Date.now().toString(36).toUpperCase(); d.agreement_hash=''; }
 
-  // 1) Generate the PDF for the doctor
-  generatePDF(d);
+  // 1) Build the signed PDF (full agreement as shown, any language) and store it with Safe Doc
+  var btn = document.getElementById('submit-btn'); var btnTxt = btn.textContent;
+  btn.textContent = (document.documentElement.lang==='he') ? 'שומר את ההסכם...' : 'Saving your agreement...';
+  var file = null;
+  try { file = await buildAgreementPDF(d); } catch(e) { file = null; }
+  if (file){
+    var sent = false;
+    for (var attempt=0; attempt<2 && !sent; attempt++){
+      try{
+        var af = new FormData();
+        ['full_name','clinic_name','phone','email','address','prices','other_terms','language','timezone','agreement_id','agreement_hash','confirmed_at'].forEach(function(k){ af.append(k, d[k]||''); });
+        af.append('discount_pct', String(d.discount_pct||'').replace('%',''));
+        af.append('pdf', file.blob, file.name);
+        var r = await fetch(AGREEMENT_URL, { method:'POST', body: af });
+        sent = r.ok;
+      }catch(e){}
+    }
+    if (!sent){
+      btn.disabled = false; btn.textContent = btnTxt;
+      alert((document.documentElement.lang==='he') ? 'השמירה נכשלה. בדקו את החיבור לאינטרנט ונסו שוב.' : 'Saving failed. Please check your connection and try again.');
+      return;
+    }
+  }
 
   // 2) Send the data to your Google Sheet (no-cors so it always goes through)
   if (SHEET_URL && SHEET_URL.indexOf('http') === 0){
@@ -810,6 +826,7 @@ async function submitAgreement(){
   }
 
   document.getElementById('doc-card').style.display = 'none';
+  if (file) offerDownload(file);
   var s = document.getElementById('success');
   s.style.display = 'block';
   s.classList.add('show');
