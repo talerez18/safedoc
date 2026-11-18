@@ -459,7 +459,11 @@ body.lang-he .how-num{right:auto;left:30px}
 .combo-list[hidden]{display:none}
 .combo-tags{display:flex;flex-wrap:wrap;gap:5px}
 .yn-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.3rem 0;border-bottom:1px solid rgba(14,165,233,.07)}
-.yn-row:last-child{border-bottom:none}
+ .yn-row:last-child{border-bottom:none}
+.disc-box{display:flex;align-items:center;gap:1rem;background:rgba(14,165,233,.06);border:1px solid rgba(14,165,233,.22);border-radius:12px;padding:.9rem 1rem;margin:0 0 1rem}
+.disc-txt{flex:1}.disc-h{font-weight:700;color:#0b7fa8;margin-bottom:.25rem}.disc-s{font-size:.8rem;line-height:1.5;opacity:.85}
+.disc-in{display:flex;align-items:center;gap:.4rem;background:#fff;border:1px solid rgba(14,165,233,.3);border-radius:10px;padding:.35rem .7rem;flex-shrink:0}
+.disc-in span{font-weight:700;color:#0b7fa8}.disc-in input{width:3.6rem;border:0;outline:0;font-size:1.25rem;font-weight:700;text-align:center;background:none;padding:0;margin:0;box-shadow:none}
 .yn-row:has(.yn-long){flex-wrap:wrap}.yn-long{flex-direction:column;align-items:stretch;width:100%}.yn-long .chip{text-align:start}
 .yn-chips{flex:0 0 auto;display:flex;gap:.35rem}
 .yn-chips .chip{padding:.22rem .65rem;font-size:.72rem;margin:0}
@@ -1357,6 +1361,7 @@ body.lang-he .pt-fold::after{clip-path:polygon(0 0,0 100%,100% 100%)}
           <label><span data-he="">שירותים</span><span data-en="" data-key="services_label">Services</span></label>
           <div style="margin-top:.5rem">
             <div class="yn-row"><span class="yn-label"><span data-he="">ביקורי בית / מלון</span><span data-en="" data-key="hotel_visits_label">Home / hotel visits</span></span><div class="chips yn-chips" data-field="hotel_visits"><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="No">No</div></div></div>
+            <div class="yn-row"><span class="yn-label"><span data-he="">רופא עד הבית 24/7</span><span data-en="" data-key="home_doctor_24_label">24/7 home doctor</span></span><div class="chips yn-chips" data-field="home_doctor_24"><div class="chip yn" onclick="toggleYN(this,'home_doctor_24')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'home_doctor_24')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">חירום 24/7</span><span data-en="" data-key="emergency_label">24/7 emergency</span></span><div class="chips yn-chips" data-field="emergency"><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">פינויים</span><span data-en="" data-key="evacuations_label">Evacuations</span></span><div class="chips yn-chips" data-field="evacuations"><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">ייעוץ אונליין</span><span data-en="" data-key="online_consult_label">Online consult</span></span><div class="chips yn-chips" data-field="online_consult"><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes + Digital Prescriptions">Yes + Rx</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="No">No</div></div></div>
@@ -1411,6 +1416,13 @@ body.lang-he .pt-fold::after{clip-path:polygon(0 0,0 100%,100% 100%)}
               <input type="number" id="fee_online" min="0"/>
             </div>
           </div>
+        </div>
+        <div class="disc-box">
+          <div class="disc-txt">
+            <div class="disc-h"><span data-he="">אחוז הנחה לחברי <bdi>SAFE DOC</bdi> (%)</span><span data-en="" data-key="disc_label">Discount for SAFE DOC members (%)</span></div>
+            <div class="disc-s"><span data-he="">הזינו את אחוז ההנחה שאתם מעניקים למגיעים דרך <bdi>SAFE DOC</bdi> על המחירון שלכם. מרפאה שנותנת הנחה מקבלת עדיפות בתצוגה למטיילים שלנו באפליקציה.</span><span data-en="" data-key="disc_sub">Enter the discount you give patients who come through SAFE DOC, off your regular prices. Clinics that offer a discount get priority in our app for travelers.</span></div>
+          </div>
+          <div class="disc-in"><span>%</span><input type="number" id="discount_pct" min="0" max="100" step="1" inputmode="numeric"/></div>
         </div>
         <div class="fgrow">
           <div class="fg" style="margin:0">
@@ -2019,6 +2031,9 @@ var T_extra = {
   'days_label': {es:'Días activos',pt:'Dias ativos',th:'วันทำการ',hi:'सक्रिय दिन',vi:'Ngày hoạt động',de:'Arbeitstage',fr:'Jours actifs',it:'Giorni attivi',ru:'Рабочие дни',ar:'الأيام النشطة',ko:'활동 요일',ja:'営業日',zh:'营业日',pl:'Aktywne dni',el:'Ενεργές ημέρες'},
   'services_label': {es:'Servicios',pt:'Serviços',th:'บริการ',hi:'सेवाएं',vi:'Dịch vụ',de:'Dienste',fr:'Services',it:'Servizi',ru:'Услуги',ar:'الخدمات',ko:'서비스',ja:'サービス',zh:'服务',pl:'Usługi',el:'Υπηρεσίες'},
   'hotel_visits_label': {es:'Visitas a domicilio/hotel',pt:'Visitas domiciliares/hotel',th:'เยี่ยมบ้าน/โรงแรม',hi:'घर/होटल विजिट',vi:'Thăm nhà/khách sạn',de:'Haus/Hotelbesuche',fr:'Visites domicile/hôtel',it:'Visite a domicilio/hotel',ru:'Визиты на дом/в отель',ar:'زيارات منزلية/فندقية',ko:'가정/호텔 방문',ja:'自宅/ホテル訪問',zh:'家庭/酒店访问',pl:'Wizyty domowe/hotelowe',el:'Επισκέψεις στο σπίτι/ξενοδοχείο'},
+  'home_doctor_24_label': {es:'Médico a domicilio 24/7',pt:'Médico em domicílio 24/7',th:'แพทย์เยี่ยมบ้าน 24/7',hi:'घर पर डॉक्टर 24/7',vi:'Bác sĩ tại nhà 24/7',de:'Hausarzt-Besuch 24/7',fr:'Médecin à domicile 24/7',it:'Medico a domicilio 24/7',ru:'Врач на дом 24/7',ar:'طبيب منزلي 24/7',ko:'24시간 방문 진료',ja:'24時間往診',zh:'24/7上门医生',pl:'Lekarz domowy 24/7',el:'Γιατρός κατ’ οίκον 24/7'},
+  'disc_label': {es:'Descuento para miembros de SAFE DOC (%)',pt:'Desconto para membros SAFE DOC (%)',th:'ส่วนลดสำหรับสมาชิก SAFE DOC (%)',hi:'SAFE DOC सदस्यों के लिए छूट (%)',vi:'Giảm giá cho thành viên SAFE DOC (%)',de:'Rabatt für SAFE DOC-Mitglieder (%)',fr:'Remise pour les membres SAFE DOC (%)',it:'Sconto per i membri SAFE DOC (%)',ru:'Скидка для участников SAFE DOC (%)',ar:'خصم لأعضاء SAFE DOC (%)',ko:'SAFE DOC 회원 할인 (%)',ja:'SAFE DOC会員割引（%）',zh:'SAFE DOC会员折扣（%）',pl:'Rabat dla członków SAFE DOC (%)',el:'Έκπτωση για μέλη SAFE DOC (%)'},
+  'disc_sub': {es:'Indique el descuento que ofrece a los pacientes que llegan a través de SAFE DOC sobre sus precios habituales. Las clínicas con descuento tienen prioridad en nuestra app para viajeros.',pt:'Informe o desconto que oferece aos pacientes que chegam pelo SAFE DOC sobre os seus preços habituais. Clínicas com desconto têm prioridade no nosso app para viajantes.',th:'ระบุเปอร์เซ็นต์ส่วนลดที่คุณให้กับผู้ป่วยที่มาผ่าน SAFE DOC จากราคาปกติ คลินิกที่ให้ส่วนลดจะได้รับการแสดงเป็นลำดับต้นในแอปสำหรับนักเดินทางของเรา',hi:'SAFE DOC के माध्यम से आने वाले मरीजों को आप अपनी सामान्य कीमतों पर जो छूट देते हैं, वह दर्ज करें। छूट देने वाले क्लिनिक हमारे यात्रियों के ऐप में प्राथमिकता पाते हैं।',vi:'Nhập mức giảm giá bạn dành cho bệnh nhân đến qua SAFE DOC trên bảng giá thông thường. Phòng khám có giảm giá được ưu tiên hiển thị trong ứng dụng dành cho du khách.',de:'Geben Sie den Rabatt an, den Patienten über SAFE DOC auf Ihre regulären Preise erhalten. Kliniken mit Rabatt werden in unserer App für Reisende bevorzugt angezeigt.',fr:'Indiquez la remise accordée aux patients venant via SAFE DOC sur vos tarifs habituels. Les cliniques qui offrent une remise sont mises en avant dans notre application pour les voyageurs.',it:'Inserisci lo sconto che offri ai pazienti che arrivano tramite SAFE DOC sui tuoi prezzi abituali. Le cliniche che offrono uno sconto hanno priorità nella nostra app per viaggiatori.',ru:'Укажите скидку от ваших обычных цен для пациентов, пришедших через SAFE DOC. Клиники со скидкой показываются в нашем приложении для путешественников в первую очередь.',ar:'أدخل نسبة الخصم التي تمنحها للمرضى القادمين عبر SAFE DOC من أسعارك المعتادة. العيادات التي تقدم خصماً تحظى بأولوية العرض في تطبيقنا للمسافرين.',ko:'SAFE DOC를 통해 오는 환자에게 정상 가격에서 제공하는 할인율을 입력하세요. 할인을 제공하는 병원은 여행자용 앱에서 우선 노출됩니다.',ja:'SAFE DOC経由の患者様に通常料金から提供する割引率を入力してください。割引を提供するクリニックは、旅行者向けアプリで優先表示されます。',zh:'请填写您为通过 SAFE DOC 前来的患者在常规价格基础上提供的折扣。提供折扣的诊所会在我们的旅行者应用中优先展示。',pl:'Podaj rabat od zwykłych cen dla pacjentów przychodzących przez SAFE DOC. Kliniki oferujące rabat są wyświetlane priorytetowo w naszej aplikacji dla podróżnych.',el:'Συμπληρώστε την έκπτωση που δίνετε στους ασθενείς που έρχονται μέσω SAFE DOC επί των κανονικών τιμών σας. Οι κλινικές με έκπτωση εμφανίζονται κατά προτεραιότητα στην εφαρμογή μας για ταξιδιώτες.'},
   'emergency_label': {es:'Emergencias 24/7',pt:'Emergências 24/7',th:'ฉุกเฉิน 24/7',hi:'आपातकाल 24/7',vi:'Khẩn cấp 24/7',de:'24/7 Notfall',fr:'Urgences 24/7',it:'Emergenza 24/7',ru:'Скорая 24/7',ar:'طوارئ 24/7',ko:'24/7 응급',ja:'24時間緊急対応',zh:'24/7紧急',pl:'Nagłe 24/7',el:'Επείγον 24/7'},
   'diagnostic_label': {es:'Pruebas diagnósticas',pt:'Testes diagnósticos',th:'การทดสอบวินิจฉัย',hi:'निदान परीक्षण',vi:'Xét nghiệm chẩn đoán',de:'Diagnosetests',fr:'Tests diagnostiques',it:'Test diagnostici',ru:'Диагностические тесты',ar:'اختبارات تشخيصية',ko:'진단 검사',ja:'診断テスト',zh:'诊断测试',pl:'Testy diagnostyczne',el:'Διαγνωστικές εξετάσεις'},
   'lab_label': {es:'Análisis de laboratorio',pt:'Exames laboratoriais',th:'การทดสอบในห้องปฏิบัติการ',hi:'लैब टेस्ट',vi:'Xét nghiệm phòng thí nghiệm',de:'Labortests',fr:'Tests de laboratoire',it:'Esami di laboratorio',ru:'Лабораторные анализы',ar:'اختبارات مخبرية',ko:'검사실 검사',ja:'検査室検査',zh:'实验室检查',pl:'Badania laboratoryjne',el:'Εργαστηριακές εξετάσεις'},
@@ -2578,7 +2593,7 @@ function saveFormState() {
   try {
     var state = { step: cur };
     ['clinic_name','address','maps_link','phone','office_phone',
-     'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online',
+     'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online','discount_pct',
      'fee_description','notes','country','medical_type','currency'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) state[id] = el.value;
@@ -2588,7 +2603,7 @@ function saveFormState() {
     state.spec = Array.from(document.querySelectorAll('#chips-spec .chip.sel')).map(function(c){return c.getAttribute('data-val');});
     state.days = Array.from(document.querySelectorAll('#chips-days .chip.sel')).map(function(c){return c.getAttribute('data-val');});
     state.lang = Array.from(document.querySelectorAll('#chips-lang .chip.sel')).map(function(c){return c.getAttribute('data-val');});
-    ['hotel_visits','emergency','evacuations','online_consult','appointment_required'].forEach(function(f) {
+    ['hotel_visits','home_doctor_24','emergency','evacuations','online_consult','appointment_required'].forEach(function(f) {
       var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
       if (s) state['yn_'+f] = s.getAttribute('data-val');
     });
@@ -2598,7 +2613,7 @@ function saveFormState() {
 
 function applyDraft(state) {
   ['clinic_name','address','maps_link','phone','office_phone',
-   'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online',
+   'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online','discount_pct',
    'fee_description','notes','medical_type','currency'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el && state[id]) el.value = state[id];
@@ -2616,7 +2631,7 @@ function applyDraft(state) {
   if (state.spec) state.spec.forEach(function(v){ var c=document.querySelector('#chips-spec .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
   if (state.days) state.days.forEach(function(v){ var c=document.querySelector('#chips-days .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
   if (state.lang) state.lang.forEach(function(v){ var c=document.querySelector('#chips-lang .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
-  ['hotel_visits','emergency','evacuations','online_consult','appointment_required'].forEach(function(f) {
+  ['hotel_visits','home_doctor_24','emergency','evacuations','online_consult','appointment_required'].forEach(function(f) {
     var v = state['yn_'+f];
     if (v) { var c=document.querySelector('.yn-chips[data-field="'+f+'"] .chip[data-val="'+v+'"]'); if(c) toggleYN(c,f); }
   });
@@ -2763,7 +2778,7 @@ async function submitForm() {
     var fd = new FormData();
 
     ['clinic_name','address','maps_link','phone','office_phone',
-     'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online',
+     'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online','discount_pct',
      'fee_description','notes'].forEach(function(k) {
       var el = document.getElementById(k);
       if (el && el.value.trim()) fd.append(k, el.value.trim());
@@ -2776,7 +2791,7 @@ async function submitForm() {
     if (country) fd.append('country_en', country);
     CITY_STATE.list.forEach(function(c){ fd.append('city_en', c); });
     if (CITY_STATE.free.length) fd.append('city_freetext', CITY_STATE.free.join(', '));
-    ['hotel_visits','emergency','evacuations','online_consult','appointment_required'].forEach(function(f) {
+    ['hotel_visits','home_doctor_24','emergency','evacuations','online_consult','appointment_required'].forEach(function(f) {
       var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
       if (s) fd.append(f, s.getAttribute('data-val'));
     });
