@@ -2797,6 +2797,10 @@ async function submitForm() {
       if (el && el.value) fd.append(k, el.value);
     });
     var country = document.getElementById('country').value;
+    if (!country) {   // typed/autofilled without picking from the list → accept an exact name match
+      var typed = (document.getElementById('country-input').value || '').trim().toLowerCase();
+      if (typed) country = COUNTRY_LIST.find(function(c){ return c.toLowerCase() === typed; }) || '';
+    }
     if (country) fd.append('country_en', country);
     CITY_STATE.list.forEach(function(c){ fd.append('city_en', c); });
     if (CITY_STATE.free.length) fd.append('city_freetext', CITY_STATE.free.join(', '));
