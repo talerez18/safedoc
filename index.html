@@ -1278,6 +1278,7 @@ body.lang-he .pt-fold::after{clip-path:polygon(0 0,0 100%,100% 100%)}
             <input type="hidden" id="country"/>
             <div class="combo-list" id="country-list" hidden></div>
           </div>
+          <div id="country-error" style="display:none;color:#ef4444;font-size:.8rem;margin-top:.35rem"></div>
         </div>
         <div class="fg">
           <label><span data-he="">ערים</span><span data-en="" data-key="form_cities">Cities</span></label>
@@ -2327,6 +2328,113 @@ function makeItem(text, onClick, hint) {
 }
 function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
 
+// ── Country matching: local names, aliases, accent/case-insensitive ─────────
+var SD_LANGS = ['en','pt','es','he','fr','de','it','ru','ar','th','vi','ko','ja','zh','pl','el','hi'];
+var SD_ALIAS_CODE = {'usa':'US','united states':'US','uae':'AE','england':'GB'};
+var SD_EXTRA = {
+  BR:['brasil'],
+  US:['usa','u s a','eua','e u a','ee uu','estados unidos de america','estados unidos da america','america','ארהב','ארה ב','אמריקה'],
+  GB:['uk','u k','reino unido','inglaterra','england','אנגליה','בריטניה'],
+  AE:['uae','emiratos','emirados','emiratos arabes','emirados arabes','איחוד האמירויות','איחוד האמירויות הערביות','דובאי','dubai'],
+  NL:['holanda','holland','הולנד','paises bajos','paises baixos'],
+  DE:['alemania','alemanha','גרמניה'],
+  MX:['mejico','מקסיקו'], KR:['korea','coreia do sul','corea del sur','קוריאה'], VN:['viet nam','ויטנאם']
+};
+var SD_cache = {nameToCode:null, names:{}};
+function normName(s){
+  try { return String(s||'').normalize('NFD').replace(/[̀-֑ͯ-ׇ]/g,'').toLowerCase().replace(/[^\p{L}\p{M}\p{N}]+/gu,' ').trim(); }
+  catch(e){ return String(s||'').toLowerCase().trim(); }
+}
+function sdNameToCode(){
+  if (SD_cache.nameToCode) return SD_cache.nameToCode;
+  var m = {};
+  try {
+    var dn = new Intl.DisplayNames(['en'], {type:'region'});
+    for (var a=65;a<=90;a++) for (var b=65;b<=90;b++) {
+      var code = String.fromCharCode(a,b), n = null;
+      try { n = dn.of(code); } catch(e){}
+      if (n && n !== code) m[normName(n)] = code;
+    }
+  } catch(e){}
+  SD_cache.nameToCode = m;
+  return m;
+}
+function sdCode(c){ var key = normName(c); return SD_ALIAS_CODE[key] || sdNameToCode()[key] || ''; }
+function countryNames(c){
+  if (SD_cache.names[c]) return SD_cache.names[c];
+  var out = [normName(c)];
+  var code = sdCode(c);
+  if (code) {
+    var langs = SD_LANGS.slice();
+    var cur = (document.documentElement.lang || '').toLowerCase();
+    if (cur && langs.indexOf(cur) === -1) langs.push(cur);
+    langs.forEach(function(l){
+      try { var n = new Intl.DisplayNames([l], {type:'region'}).of(code); if (n && n !== code) out.push(normName(n)); } catch(e){}
+    });
+    (SD_EXTRA[code] || []).forEach(function(x){ out.push(normName(x)); });
+  }
+  SD_cache.names[c] = out;
+  return out;
+}
+function localCountryName(c){
+  var l = (document.documentElement.lang || 'en').toLowerCase();
+  if (l === 'en') return '';
+  var code = sdCode(c);
+  if (!code) return '';
+  try { var n = new Intl.DisplayNames([l], {type:'region'}).of(code); return (n && n !== code && normName(n) !== normName(c)) ? n : ''; } catch(e){ return ''; }
+}
+function rankCountry(c, q){
+  var names = countryNames(c), best = 9;
+  for (var i=0;i<names.length;i++){
+    var n = names[i];
+    if (n === q) return 0;
+    if (n.indexOf(q) === 0) best = Math.min(best, 1);
+    else if (n.indexOf(' '+q) > -1) best = Math.min(best, 2);
+    else if (n.indexOf(q) > -1) best = Math.min(best, 3);
+  }
+  return best;
+}
+// typed text -> canonical list name, or '' when there is no exact / single prefix match
+function resolveTypedCountry(text){
+  var q = normName(text);
+  if (!q) return '';
+  var exact = COUNTRY_LIST.filter(function(c){ return rankCountry(c, q) === 0; });
+  if (exact.length) return exact[0];
+  var pre = COUNTRY_LIST.filter(function(c){ return rankCountry(c, q) === 1; });
+  var uniq = pre.filter(function(c,i){ return pre.indexOf(c) === i; });
+  return uniq.length === 1 ? uniq[0] : '';
+}
+window.resolveTypedCountry = resolveTypedCountry;
+
+var SD_MSG = {
+  en:{sending:'Sending...',retry:'Try again',err:'Submission error: ',
+      timeout:"The connection is slow and we couldn't confirm that your application was sent. Please check your connection and try again.",
+      network:"We couldn't reach the server. Please check your connection and try again.",
+      country:"We couldn't find this country. Please choose one from the list."},
+  pt:{sending:'Enviando...',retry:'Tentar novamente',err:'Erro no envio: ',
+      timeout:'A conexão está lenta e não conseguimos confirmar o envio da sua solicitação. Verifique a conexão e tente novamente.',
+      network:'Não foi possível acessar o servidor. Verifique a conexão e tente novamente.',
+      country:'Não encontramos este país. Escolha um da lista.'},
+  es:{sending:'Enviando...',retry:'Intentar de nuevo',err:'Error al enviar: ',
+      timeout:'La conexión es lenta y no pudimos confirmar el envío de su solicitud. Revise su conexión e inténtelo de nuevo.',
+      network:'No pudimos conectar con el servidor. Revise su conexión e inténtelo de nuevo.',
+      country:'No encontramos este país. Elija uno de la lista.'},
+  he:{sending:'שולח...',retry:'נסו שוב',err:'שגיאה בשליחה: ',
+      timeout:'החיבור איטי ולא הצלחנו לאשר שהבקשה נשלחה. בדקו את החיבור ונסו שוב.',
+      network:'לא הצלחנו להתחבר לשרת. בדקו את החיבור ונסו שוב.',
+      country:'לא מצאנו את המדינה הזו. נא לבחור מדינה מהרשימה.'}
+};
+function sdMsg(k){
+  var l = document.body.className.replace('lang-','');
+  return (SD_MSG[l] || SD_MSG.en)[k];
+}
+function showCountryError(on){
+  var e = document.getElementById('country-error');
+  if (e) { if (on) { e.textContent = sdMsg('country'); e.style.display = 'block'; } else { e.style.display = 'none'; } }
+  var inp = document.getElementById('country-input');
+  if (inp) inp.style.outline = on ? '2px solid #f87171' : '';
+}
+
 // ── Country combobox (single-select with autocomplete) ───────────────────────
 function setupCountryCombo() {
   var input = document.getElementById('country-input');
@@ -2335,17 +2443,18 @@ function setupCountryCombo() {
   if (!input || !hidden || !list) return;
 
   function renderList(filter) {
-    var q = (filter || '').trim().toLowerCase();
-    var items = COUNTRY_LIST;
+    var q = normName(filter);
+    var items = COUNTRY_LIST.filter(function(c,i){ return COUNTRY_LIST.indexOf(c) === i; });
     if (q) {
-      var starts = items.filter(function(c){ return c.toLowerCase().indexOf(q) === 0; });
-      var includes = items.filter(function(c){ return c.toLowerCase().indexOf(q) > 0; });
-      items = starts.concat(includes);
+      items = items.map(function(c){ return {c:c, r:rankCountry(c, q)}; })
+        .filter(function(x){ return x.r < 9; })
+        .sort(function(a,b){ return a.r - b.r; })
+        .map(function(x){ return x.c; });
     }
     clear(list);
     if (!items.length) { list.hidden = true; return; }
     items.slice(0, 50).forEach(function(c) {
-      list.appendChild(makeItem(c, function(){ selectCountry(c); }));
+      list.appendChild(makeItem(c, function(){ selectCountry(c); }, localCountryName(c) || undefined));
     });
     list.hidden = false;
   }
@@ -2354,13 +2463,22 @@ function setupCountryCombo() {
     input.value = val;
     hidden.value = val;
     list.hidden = true;
+    showCountryError(false);
     applyCountryMeta(val);
   }
 
   input.addEventListener('focus', function(){ renderList(input.value); });
   input.addEventListener('input', function() {
     hidden.value = '';
+    showCountryError(false);
     renderList(input.value);
+  });
+  input.addEventListener('blur', function() {
+    setTimeout(function(){
+      if (hidden.value || !input.value.trim()) return;
+      var m = resolveTypedCountry(input.value);
+      if (m) selectCountry(m);
+    }, 200);
   });
   input.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') { list.hidden = true; }
@@ -2523,6 +2641,14 @@ function validateStep(stepNum) {
 }
 
 function goStep(n){
+  if(n>cur && cur===1){
+    var ci=document.getElementById('country-input'), ch=document.getElementById('country');
+    if(ci && ch && !ch.value && ci.value.trim()){
+      var rc=resolveTypedCountry(ci.value);
+      if(rc){ ci.value=rc; ch.value=rc; applyCountryMeta(rc); showCountryError(false); }
+      else { showCountryError(true); ci.focus(); return; }
+    }
+  }
   if(n>cur && !validateStep(cur)){
     var lang=document.body.className.replace('lang-','');
     alert(lang==='he'?'אנא מלא את כל שדות החובה':'Please fill in all required fields');
@@ -2769,7 +2895,9 @@ async function detectLocation() {
 }
 
 // ── Submit ────────────────────────────────────────────────────────────────────
+var SD_SUBMITTING = false;
 async function submitForm() {
+  if (SD_SUBMITTING) return;   // no double submit while a request is in flight
   var lang = document.body.className.replace('lang-','');
 
   if (!document.getElementById('terms').checked) {
@@ -2777,11 +2905,34 @@ async function submitForm() {
     return;
   }
 
+  // Country: hidden value, else resolve typed text (local names/accents ok), else tell the user
+  var country = document.getElementById('country').value;
+  if (!country) {
+    var typedRaw = (document.getElementById('country-input').value || '').trim();
+    if (typedRaw) {
+      country = resolveTypedCountry(typedRaw);
+      if (!country) {
+        goStep(1);
+        showCountryError(true);
+        return;
+      }
+      document.getElementById('country').value = country;
+      document.getElementById('country-input').value = country;
+    }
+  }
+
   var btn = document.getElementById('submit-btn');
   var errEl = document.getElementById('submit-error');
+  var btnNodes = Array.prototype.slice.call(btn.childNodes);
+  SD_SUBMITTING = true;
   btn.disabled = true;
-  btn.textContent = lang==='he' ? 'שולח...' : 'Sending...';
+  while (btn.firstChild) btn.removeChild(btn.firstChild);
+  btn.appendChild(document.createTextNode(sdMsg('sending')));
   errEl.style.display = 'none';
+  var ctrl = new AbortController();
+  var timedOut = false;
+  var timer = null;
+  var success = false;
 
   try {
     var fd = new FormData();
@@ -2796,11 +2947,6 @@ async function submitForm() {
       var el = document.getElementById(k);
       if (el && el.value) fd.append(k, el.value);
     });
-    var country = document.getElementById('country').value;
-    if (!country) {   // typed/autofilled without picking from the list → accept an exact name match
-      var typed = (document.getElementById('country-input').value || '').trim().toLowerCase();
-      if (typed) country = COUNTRY_LIST.find(function(c){ return c.toLowerCase() === typed; }) || '';
-    }
     if (country) fd.append('country_en', country);
     CITY_STATE.list.forEach(function(c){ fd.append('city_en', c); });
     if (CITY_STATE.free.length) fd.append('city_freetext', CITY_STATE.free.join(', '));
@@ -2813,18 +2959,24 @@ async function submitForm() {
     document.querySelectorAll('#chips-lang .chip.sel').forEach(function(c){ fd.append('languages', c.getAttribute('data-val')); });
 
     var filesInp = document.getElementById('files-inp');
+    var totalBytes = 0;
     if (filesInp && filesInp.files) {
       var maxF = Math.min(filesInp.files.length, 3);
-      for (var i=0; i<maxF; i++) fd.append('files', filesInp.files[i]);
+      for (var i=0; i<maxF; i++) { fd.append('files', filesInp.files[i]); totalBytes += filesInp.files[i].size; }
     }
 
-    var res = await fetch(WORKER_URL, {method:'POST', body:fd});
+    // timeout: 45s base + time for the files at a pessimistic ~150 KB/s, capped at 5 minutes
+    var timeoutMs = Math.min(300000, 45000 + Math.ceil(totalBytes / 150000) * 1000);
+    timer = setTimeout(function(){ timedOut = true; ctrl.abort(); }, timeoutMs);
+
+    var res = await fetch(WORKER_URL, {method:'POST', body:fd, signal:ctrl.signal});
     var data = await res.json();
     if (res.status === 409) {
       throw new Error('This email has reached the maximum of 5 registrations. Contact us at info@safe-dr.com');
     }
     if (!res.ok || data.error) throw new Error(data.error || 'Server error');
 
+    success = true;
     localStorage.removeItem('safedoc_draft');
     document.getElementById('step4').classList.remove('active');
     document.getElementById('stepper').style.display = 'none';
@@ -2832,10 +2984,24 @@ async function submitForm() {
     document.getElementById('success-scr').style.display = 'block';
 
   } catch (err) {
-    errEl.textContent = (lang==='he' ? 'שגיאה בשליחה: ' : 'Submission error: ') + err.message;
+    var isNet = (err && (err.name === 'AbortError' || err instanceof TypeError));
+    var text = timedOut ? sdMsg('timeout') : (isNet ? sdMsg('network') : sdMsg('err') + (err && err.message || ''));
+    errEl.textContent = text + ' ';
+    var rb = document.createElement('button');
+    rb.type = 'button';
+    rb.textContent = sdMsg('retry');
+    rb.style.cssText = 'background:none;border:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit;font-weight:700';
+    rb.addEventListener('click', function(){ submitForm(); });
+    errEl.appendChild(rb);
     errEl.style.display = 'block';
-    btn.disabled = false;
-    btn.textContent = lang==='he' ? 'שלח' : 'Submit';
+  } finally {
+    if (timer) clearTimeout(timer);
+    if (!success) {
+      SD_SUBMITTING = false;
+      btn.disabled = false;
+      while (btn.firstChild) btn.removeChild(btn.firstChild);
+      btnNodes.forEach(function(n){ btn.appendChild(n); });
+    }
   }
 }
 
