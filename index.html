@@ -1318,7 +1318,6 @@ body.lang-he .pt-fold::after{clip-path:polygon(0 0,0 100%,100% 100%)}
           <label><span data-he="">התמחות</span><span data-en="" data-key="spec_label">Specialization</span></label>
           <div class="fdesc">Select all medical services you provide</div>
           <div class="chips" id="chips-spec">
-            <div class="chip" onclick="toggleChip(this)" data-val="General Clinic">General Clinic</div>
             <div class="chip" onclick="toggleChip(this)" data-val="Family Doctor">Family Doctor</div>
             <div class="chip" onclick="toggleChip(this)" data-val="רפואת ילדים">Pediatrics</div>
             <div class="chip" onclick="toggleChip(this)" data-val="ENT">ENT</div>
@@ -3061,12 +3060,15 @@ function makeChip(val, onclickAttr) {
   return c;
 }
 
+// Specializations kept in Airtable but not offered in the form (Tal, 25/11)
+var SPEC_HIDDEN = ['General Clinic'];
+
 function applyDynamicOptions(data) {
   if (data.specialization && data.specialization.length) {
     var specBox = document.getElementById('chips-spec');
     if (specBox) {
       clear(specBox);
-      data.specialization.forEach(function(v){ specBox.appendChild(makeChip(v, 'toggleChip(this)')); });
+      data.specialization.filter(function(v){ return SPEC_HIDDEN.indexOf(v) < 0; }).forEach(function(v){ specBox.appendChild(makeChip(v, 'toggleChip(this)')); });
     }
   }
   if (data.medical_type && data.medical_type.length) {
