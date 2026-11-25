@@ -1364,7 +1364,6 @@ body.lang-he .pt-fold::after{clip-path:polygon(0 0,0 100%,100% 100%)}
             <div class="yn-row"><span class="yn-label"><span data-he="">ביקורי בית / מלון</span><span data-en="" data-key="hotel_visits_label">Home / hotel visits</span></span><div class="chips yn-chips" data-field="hotel_visits"><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'hotel_visits')" data-val="No">No</div></div></div>
             <div class="yn-row yn-sub" id="home24-row" style="display:none"><span class="yn-label"><span data-he="">שעות ביקורי בית</span><span data-en="" data-key="home_doctor_24_label">Home visit hours</span></span><div class="chips yn-chips" data-field="home_doctor_24"><div class="chip yn" onclick="toggleYN(this,'home_doctor_24')" data-val="No">During working hours</div><div class="chip yn" onclick="toggleYN(this,'home_doctor_24')" data-val="Yes">24/7</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">חירום 24/7</span><span data-en="" data-key="emergency_label">24/7 emergency</span></span><div class="chips yn-chips" data-field="emergency"><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="No">No</div></div></div>
-            <div class="yn-row"><span class="yn-label"><span data-he="">פינויים</span><span data-en="" data-key="evacuations_label">Evacuations</span></span><div class="chips yn-chips" data-field="evacuations"><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'evacuations')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">ייעוץ אונליין</span><span data-en="" data-key="online_consult_label">Online consult</span></span><div class="chips yn-chips" data-field="online_consult"><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes + Digital Prescriptions">Yes + Rx</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">תיאום תור מראש?</span><span data-en="" data-key="appointment_label">Appointment required?</span></span><div class="chips yn-chips yn-long" data-field="appointment_required"><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="Yes">Yes, an appointment must be booked in advance</div><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="No">No, patients can come without an appointment</div></div></div>
           </div>
@@ -2738,7 +2737,7 @@ function saveFormState() {
     state.spec = Array.from(document.querySelectorAll('#chips-spec .chip.sel')).map(function(c){return c.getAttribute('data-val');});
     state.days = Array.from(document.querySelectorAll('#chips-days .chip.sel')).map(function(c){return c.getAttribute('data-val');});
     state.lang = Array.from(document.querySelectorAll('#chips-lang .chip.sel')).map(function(c){return c.getAttribute('data-val');});
-    ['hotel_visits','home_doctor_24','emergency','evacuations','online_consult','appointment_required'].forEach(function(f) {
+    ['hotel_visits','home_doctor_24','emergency','online_consult','appointment_required'].forEach(function(f) {
       var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
       if (s) state['yn_'+f] = s.getAttribute('data-val');
     });
@@ -2766,7 +2765,7 @@ function applyDraft(state) {
   if (state.spec) state.spec.forEach(function(v){ var c=document.querySelector('#chips-spec .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
   if (state.days) state.days.forEach(function(v){ var c=document.querySelector('#chips-days .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
   if (state.lang) state.lang.forEach(function(v){ var c=document.querySelector('#chips-lang .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
-  ['hotel_visits','home_doctor_24','emergency','evacuations','online_consult','appointment_required'].forEach(function(f) {
+  ['hotel_visits','home_doctor_24','emergency','online_consult','appointment_required'].forEach(function(f) {
     var v = state['yn_'+f];
     if (v) { var c=document.querySelector('.yn-chips[data-field="'+f+'"] .chip[data-val="'+v+'"]'); if(c) toggleYN(c,f); }
   });
@@ -2950,7 +2949,7 @@ async function submitForm() {
     if (country) fd.append('country_en', country);
     CITY_STATE.list.forEach(function(c){ fd.append('city_en', c); });
     if (CITY_STATE.free.length) fd.append('city_freetext', CITY_STATE.free.join(', '));
-    ['hotel_visits','home_doctor_24','emergency','evacuations','online_consult','appointment_required'].forEach(function(f) {
+    ['hotel_visits','home_doctor_24','emergency','online_consult','appointment_required'].forEach(function(f) {
       var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
       if (s) fd.append(f, s.getAttribute('data-val'));
     });
