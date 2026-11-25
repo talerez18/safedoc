@@ -1364,6 +1364,7 @@ body.lang-he .pt-fold::after{clip-path:polygon(0 0,0 100%,100% 100%)}
             <div class="yn-row yn-sub" id="home24-row" style="display:none"><span class="yn-label"><span data-he="">שעות ביקורי בית</span><span data-en="" data-key="home_doctor_24_label">Home visit hours</span></span><div class="chips yn-chips" data-field="home_doctor_24"><div class="chip yn" onclick="toggleYN(this,'home_doctor_24')" data-val="No">During working hours</div><div class="chip yn" onclick="toggleYN(this,'home_doctor_24')" data-val="Yes">24/7</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">חירום 24/7</span><span data-en="" data-key="emergency_label">24/7 emergency</span></span><div class="chips yn-chips" data-field="emergency"><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'emergency')" data-val="No">No</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">ייעוץ אונליין</span><span data-en="" data-key="online_consult_label">Online consult</span></span><div class="chips yn-chips" data-field="online_consult"><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes">Yes</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="Yes + Digital Prescriptions">Yes + Rx</div><div class="chip yn" onclick="toggleYN(this,'online_consult')" data-val="No">No</div></div></div>
+            <div class="yn-row yn-sub" id="online24-row" style="display:none"><span class="yn-label"><span data-he="">שעות ייעוץ אונליין</span><span data-en="" data-key="online_24_label">Online consult hours</span></span><div class="chips yn-chips" data-field="online_24"><div class="chip yn" onclick="toggleYN(this,'online_24')" data-val="No">During working hours</div><div class="chip yn" onclick="toggleYN(this,'online_24')" data-val="Yes">24/7</div></div></div>
             <div class="yn-row"><span class="yn-label"><span data-he="">תיאום תור מראש?</span><span data-en="" data-key="appointment_label">Appointment required?</span></span><div class="chips yn-chips yn-long" data-field="appointment_required"><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="Yes">Yes, an appointment must be booked in advance</div><div class="chip yn" onclick="toggleYN(this,'appointment_required')" data-val="No">No, patients can come without an appointment</div></div></div>
           </div>
         </div>
@@ -2038,6 +2039,7 @@ var T_extra = {
   'lab_label': {es:'Análisis de laboratorio',pt:'Exames laboratoriais',th:'การทดสอบในห้องปฏิบัติการ',hi:'लैब टेस्ट',vi:'Xét nghiệm phòng thí nghiệm',de:'Labortests',fr:'Tests de laboratoire',it:'Esami di laboratorio',ru:'Лабораторные анализы',ar:'اختبارات مخبرية',ko:'검사실 검사',ja:'検査室検査',zh:'实验室检查',pl:'Badania laboratoryjne',el:'Εργαστηριακές εξετάσεις'},
   'evacuations_label': {es:'Evacuaciones',pt:'Evacuações',th:'การอพยพ',hi:'निकासी',vi:'Di tản',de:'Evakuierungen',fr:'Évacuations',it:'Evacuazioni',ru:'Эвакуации',ar:'إجلاء',ko:'후송',ja:'避難',zh:'疏散',pl:'Ewakuacje',el:'Εκκενώσεις'},
   'online_consult_label': {es:'Consulta online',pt:'Consulta online',th:'ปรึกษาออนไลน์',hi:'ऑनलाइन परामर्श',vi:'Tư vấn trực tuyến',de:'Online-Beratung',fr:'Consultation en ligne',it:'Consulto online',ru:'Онлайн-консультация',ar:'استشارة عبر الإنترنت',ko:'온라인 상담',ja:'オンライン相談',zh:'在线咨询',pl:'Konsultacja online',el:'Διαδικτυακή συμβουλευτική'},
+  'online_24_label': {es:"Horario de consulta online",pt:"Horário de consulta online",th:"เวลาปรึกษาออนไลน์",hi:"ऑनलाइन परामर्श का समय",vi:"Giờ tư vấn trực tuyến",de:"Zeiten für Online-Beratung",fr:"Horaires de consultation en ligne",it:"Orari consulenza online",ru:"Часы онлайн-консультаций",ar:"مواعيد الاستشارة عبر الإنترنت",ko:"온라인 상담 시간",ja:"オンライン相談の時間",zh:"在线咨询时间",pl:"Godziny konsultacji online",el:"Ώρες διαδικτυακής συμβουλευτικής",am:"የመስመር ላይ ምክክር ሰዓታት",ay:"Horario de consulta online",qu:"Horario de consulta online",gn:"Horario de consulta online",bs:"Termini online konsultacija",hr:"Termini online konzultacija",fa:"ساعات مشاوره آنلاین",hu:"Online konzultáció időpontja",id:"Jam konsultasi online",km:"ម៉ោងពិគ្រោះតាមអនឡាញ",lo:"ເວລາປຶກສາອອນໄລນ໌",lt:"Konsultacijų internetu laikas",ne:"अनलाइन परामर्शको समय",nl:"Tijden online consult",si:"මාර්ගගත උපදේශන වේලාවන්",ta:"ஆன்லைன் ஆலோசனை நேரம்",tl:"Oras ng online konsultasyon",tr:"Online danışma saatleri",ur:"آن لائن مشاورت کے اوقات"},
   'appointment_label': {es:'¿Cita requerida?',pt:'Agendamento necessário?',th:'ต้องนัดล่วงหน้า?',hi:'अपॉइंटमेंट जरूरी?',vi:'Cần đặt lịch hẹn?',de:'Termin erforderlich?',fr:'Rendez-vous requis?',it:'Appuntamento richiesto?',ru:'Нужна запись?',ar:'هل يلزم موعد؟',ko:'예약 필요?',ja:'予約必要？',zh:'需要预约？',pl:'Wymagana wizyta?',el:'Απαιτείται ραντεβού;'},
   'back_btn': {es:'← Atrás',pt:'← Voltar',th:'← กลับ',hi:'← वापस',vi:'← Quay lại',de:'← Zurück',fr:'← Retour',it:'← Indietro',ru:'← Назад',ar:'← رجوع',ko:'← 뒤로',ja:'← 戻る',zh:'← 返回',pl:'← Wstecz',el:'← Πίσω'},
   'next_contact': {es:'Siguiente — contacto y precios →',pt:'Próximo — contato e preços →',th:'ถัดไป — ติดต่อและราคา →',hi:'अगला — संपर्क और मूल्य →',vi:'Tiếp theo — liên hệ & giá →',de:'Weiter — Kontakt & Preise →',fr:'Suivant — contact et tarifs →',it:'Avanti — contatto e prezzi →',ru:'Далее — контакт и цены →',ar:'التالي — التواصل والأسعار →',ko:'다음 — 연락처 및 가격 →',ja:'次へ — 連絡先＆料金 →',zh:'下一步 — 联系和价格 →',pl:'Dalej — kontakt i cennik →',el:'Επόμενο — επικοινωνία & τιμές →'},
@@ -2683,6 +2685,15 @@ function toggleYN(el, field) {
   el.classList.add('sel');
   row.closest('.yn-row').style.background='';
   if (field === 'hotel_visits') syncHome24();
+  if (field === 'online_consult') syncOnline24();
+}
+
+function syncOnline24() {
+  var on = !!document.querySelector('.yn-chips[data-field="online_consult"] .chip.sel:not([data-val="No"])');
+  var r = document.getElementById('online24-row');
+  if (!r) return;
+  r.style.display = on ? '' : 'none';
+  if (!on) r.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('sel'); });
 }
 
 function syncHome24() {
@@ -2736,7 +2747,7 @@ function saveFormState() {
     state.spec = Array.from(document.querySelectorAll('#chips-spec .chip.sel')).map(function(c){return c.getAttribute('data-val');});
     state.days = Array.from(document.querySelectorAll('#chips-days .chip.sel')).map(function(c){return c.getAttribute('data-val');});
     state.lang = Array.from(document.querySelectorAll('#chips-lang .chip.sel')).map(function(c){return c.getAttribute('data-val');});
-    ['hotel_visits','home_doctor_24','emergency','online_consult','appointment_required'].forEach(function(f) {
+    ['hotel_visits','home_doctor_24','emergency','online_consult','online_24','appointment_required'].forEach(function(f) {
       var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
       if (s) state['yn_'+f] = s.getAttribute('data-val');
     });
@@ -2764,7 +2775,7 @@ function applyDraft(state) {
   if (state.spec) state.spec.forEach(function(v){ var c=document.querySelector('#chips-spec .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
   if (state.days) state.days.forEach(function(v){ var c=document.querySelector('#chips-days .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
   if (state.lang) state.lang.forEach(function(v){ var c=document.querySelector('#chips-lang .chip[data-val="'+v+'"]'); if(c) c.classList.add('sel'); });
-  ['hotel_visits','home_doctor_24','emergency','online_consult','appointment_required'].forEach(function(f) {
+  ['hotel_visits','home_doctor_24','emergency','online_consult','online_24','appointment_required'].forEach(function(f) {
     var v = state['yn_'+f];
     if (v) { var c=document.querySelector('.yn-chips[data-field="'+f+'"] .chip[data-val="'+v+'"]'); if(c) toggleYN(c,f); }
   });
@@ -2948,7 +2959,7 @@ async function submitForm() {
     if (country) fd.append('country_en', country);
     CITY_STATE.list.forEach(function(c){ fd.append('city_en', c); });
     if (CITY_STATE.free.length) fd.append('city_freetext', CITY_STATE.free.join(', '));
-    ['hotel_visits','home_doctor_24','emergency','online_consult','appointment_required'].forEach(function(f) {
+    ['hotel_visits','home_doctor_24','emergency','online_consult','online_24','appointment_required'].forEach(function(f) {
       var s = document.querySelector('.yn-chips[data-field="'+f+'"] .chip.sel');
       if (s) fd.append(f, s.getAttribute('data-val'));
     });
