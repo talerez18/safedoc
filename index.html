@@ -460,8 +460,8 @@ body.lang-he .how-num{right:auto;left:30px}
 .combo-tags{display:flex;flex-wrap:wrap;gap:5px}
 .yn-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.3rem 0;border-bottom:1px solid rgba(14,165,233,.07)}
  .yn-row:last-child{border-bottom:none}
-.disc-box{display:flex;align-items:center;gap:1rem;background:rgba(14,165,233,.06);border:1px solid rgba(14,165,233,.22);border-radius:12px;padding:.9rem 1rem;margin:0 0 1rem}
-.disc-txt{flex:1}.disc-h{font-weight:700;color:#0b7fa8;margin-bottom:.25rem}.disc-s{font-size:.8rem;line-height:1.5;opacity:.85}
+.disc-box{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:rgba(14,165,233,.06);border:1px solid rgba(14,165,233,.22);border-radius:12px;padding:.9rem 1rem;margin:0 0 1rem}
+.disc-txt{flex:1}.disc-more{flex-basis:100%}.disc-more label{display:block;font-size:.8rem;font-weight:600;color:#0b7fa8;margin-bottom:.3rem}.disc-more textarea{width:100%;box-sizing:border-box}.disc-h{font-weight:700;color:#0b7fa8;margin-bottom:.25rem}.disc-s{font-size:.8rem;line-height:1.5;opacity:.85}
 .disc-in{display:flex;align-items:center;gap:.4rem;background:#fff;border:1px solid rgba(14,165,233,.3);border-radius:10px;padding:.35rem .7rem;flex-shrink:0}
 .disc-in span{font-weight:700;color:#0b7fa8}.disc-in input{width:3.6rem;border:0;outline:0;font-size:1.25rem;font-weight:700;text-align:center;background:none;padding:0;margin:0;box-shadow:none}
 .yn-sub{padding-inline-start:1.1rem}.yn-sub .yn-label{font-weight:500;color:#4A5B72}.yn-row:has(.yn-long){flex-wrap:wrap}.yn-long{flex-direction:column;align-items:stretch;width:100%}.yn-long .chip{text-align:start}
@@ -1423,6 +1423,10 @@ body.lang-he .pt-fold::after{clip-path:polygon(0 0,0 100%,100% 100%)}
             <div class="disc-s"><span data-he="">הזינו את אחוז ההנחה שאתם מעניקים למגיעים דרך <bdi>SAFE DOC</bdi> על המחירון שלכם. מרפאה שנותנת הנחה מקבלת עדיפות בתצוגה למטיילים שלנו באפליקציה.</span><span data-en="" data-key="disc_sub">Enter the discount you give patients who come through SAFE DOC, off your regular prices. Clinics that offer a discount get priority in our app for travelers.</span></div>
           </div>
           <div class="disc-in"><span>%</span><input type="number" id="discount_pct" min="0" max="100" step="1" inputmode="numeric"/></div>
+          <div class="disc-more">
+            <label for="discount_details"><span data-he="">פרטי ההנחה (לא חובה)</span><span data-en="" data-key="disc_details_label">Discount details (optional)</span></label>
+            <textarea id="discount_details" style="min-height:62px"></textarea>
+          </div>
         </div>
         <div class="fgrow">
           <div class="fg" style="margin:0">
@@ -2034,6 +2038,7 @@ var T_extra = {
   'home_doctor_24_label': {es:"Horario de visitas a domicilio",pt:"Horário de visitas domiciliares",th:"เวลาเยี่ยมบ้าน",hi:"घर विज़िट का समय",vi:"Giờ thăm khám tại nhà",de:"Zeiten für Hausbesuche",fr:"Horaires des visites à domicile",it:"Orari visite a domicilio",ru:"Часы визитов на дом",ar:"مواعيد الزيارات المنزلية",ko:"방문 진료 시간",ja:"往診の時間",zh:"上门出诊时间",pl:"Godziny wizyt domowych",el:"Ώρες επισκέψεων κατ’ οίκον",am:"የቤት ጉብኝት ሰዓታት",ay:"Horario de visitas a domicilio",qu:"Horario de visitas a domicilio",gn:"Horario de visitas a domicilio",bs:"Termini kućnih posjeta",hr:"Termini kućnih posjeta",fa:"ساعات ویزیت در منزل",hu:"Házi vizitek időpontja",id:"Jam kunjungan ke rumah",km:"ម៉ោងពិនិត្យនៅផ្ទះ",lo:"ເວລາກວດຢູ່ເຮືອນ",lt:"Vizitų į namus laikas",ne:"घर भ्रमणको समय",nl:"Tijden huisbezoeken",si:"නිවසට පැමිණීමේ වේලාවන්",ta:"வீட்டு வருகை நேரம்",tl:"Oras ng home visit",tr:"Ev ziyareti saatleri",ur:"گھر پر معائنے کے اوقات"},
   'disc_label': {es:'Descuento para miembros de SAFE DOC (%)',pt:'Desconto para membros SAFE DOC (%)',th:'ส่วนลดสำหรับสมาชิก SAFE DOC (%)',hi:'SAFE DOC सदस्यों के लिए छूट (%)',vi:'Giảm giá cho thành viên SAFE DOC (%)',de:'Rabatt für SAFE DOC-Mitglieder (%)',fr:'Remise pour les membres SAFE DOC (%)',it:'Sconto per i membri SAFE DOC (%)',ru:'Скидка для участников SAFE DOC (%)',ar:'خصم لأعضاء SAFE DOC (%)',ko:'SAFE DOC 회원 할인 (%)',ja:'SAFE DOC会員割引（%）',zh:'SAFE DOC会员折扣（%）',pl:'Rabat dla członków SAFE DOC (%)',el:'Έκπτωση για μέλη SAFE DOC (%)'},
   'disc_sub': {es:'Indique el descuento que ofrece a los pacientes que llegan a través de SAFE DOC sobre sus precios habituales. Las clínicas con descuento tienen prioridad en nuestra app para viajeros.',pt:'Informe o desconto que oferece aos pacientes que chegam pelo SAFE DOC sobre os seus preços habituais. Clínicas com desconto têm prioridade no nosso app para viajantes.',th:'ระบุเปอร์เซ็นต์ส่วนลดที่คุณให้กับผู้ป่วยที่มาผ่าน SAFE DOC จากราคาปกติ คลินิกที่ให้ส่วนลดจะได้รับการแสดงเป็นลำดับต้นในแอปสำหรับนักเดินทางของเรา',hi:'SAFE DOC के माध्यम से आने वाले मरीजों को आप अपनी सामान्य कीमतों पर जो छूट देते हैं, वह दर्ज करें। छूट देने वाले क्लिनिक हमारे यात्रियों के ऐप में प्राथमिकता पाते हैं।',vi:'Nhập mức giảm giá bạn dành cho bệnh nhân đến qua SAFE DOC trên bảng giá thông thường. Phòng khám có giảm giá được ưu tiên hiển thị trong ứng dụng dành cho du khách.',de:'Geben Sie den Rabatt an, den Patienten über SAFE DOC auf Ihre regulären Preise erhalten. Kliniken mit Rabatt werden in unserer App für Reisende bevorzugt angezeigt.',fr:'Indiquez la remise accordée aux patients venant via SAFE DOC sur vos tarifs habituels. Les cliniques qui offrent une remise sont mises en avant dans notre application pour les voyageurs.',it:'Inserisci lo sconto che offri ai pazienti che arrivano tramite SAFE DOC sui tuoi prezzi abituali. Le cliniche che offrono uno sconto hanno priorità nella nostra app per viaggiatori.',ru:'Укажите скидку от ваших обычных цен для пациентов, пришедших через SAFE DOC. Клиники со скидкой показываются в нашем приложении для путешественников в первую очередь.',ar:'أدخل نسبة الخصم التي تمنحها للمرضى القادمين عبر SAFE DOC من أسعارك المعتادة. العيادات التي تقدم خصماً تحظى بأولوية العرض في تطبيقنا للمسافرين.',ko:'SAFE DOC를 통해 오는 환자에게 정상 가격에서 제공하는 할인율을 입력하세요. 할인을 제공하는 병원은 여행자용 앱에서 우선 노출됩니다.',ja:'SAFE DOC経由の患者様に通常料金から提供する割引率を入力してください。割引を提供するクリニックは、旅行者向けアプリで優先表示されます。',zh:'请填写您为通过 SAFE DOC 前来的患者在常规价格基础上提供的折扣。提供折扣的诊所会在我们的旅行者应用中优先展示。',pl:'Podaj rabat od zwykłych cen dla pacjentów przychodzących przez SAFE DOC. Kliniki oferujące rabat są wyświetlane priorytetowo w naszej aplikacji dla podróżnych.',el:'Συμπληρώστε την έκπτωση που δίνετε στους ασθενείς που έρχονται μέσω SAFE DOC επί των κανονικών τιμών σας. Οι κλινικές με έκπτωση εμφανίζονται κατά προτεραιότητα στην εφαρμογή μας για ταξιδιώτες.'},
+  'disc_details_label': {es:"Detalles del descuento (opcional)",pt:"Detalhes do desconto (opcional)",th:"รายละเอียดส่วนลด (ไม่บังคับ)",hi:"छूट का विवरण (वैकल्पिक)",vi:"Chi tiết giảm giá (không bắt buộc)",de:"Details zum Rabatt (optional)",fr:"Détails de la remise (facultatif)",it:"Dettagli dello sconto (facoltativo)",ru:"Подробности скидки (необязательно)",ar:"تفاصيل الخصم (اختياري)",ko:"할인 세부 정보 (선택)",ja:"割引の詳細（任意）",zh:"折扣详情（选填）",pl:"Szczegóły zniżki (opcjonalnie)",el:"Λεπτομέρειες έκπτωσης (προαιρετικό)",am:"የቅናሽ ዝርዝሮች (አማራጭ)",ay:"Detalles del descuento (opcional)",qu:"Detalles del descuento (opcional)",gn:"Detalles del descuento (opcional)",bs:"Detalji popusta (neobavezno)",hr:"Pojedinosti o popustu (neobavezno)",fa:"جزئیات تخفیف (اختیاری)",hu:"A kedvezmény részletei (nem kötelező)",id:"Detail diskon (opsional)",km:"ព័ត៌មានលម្អិតអំពីការបញ្ចុះតម្លៃ (ស្រេចចិត្ត)",lo:"ລາຍລະອຽດສ່ວນຫຼຸດ (ບໍ່ບັງຄັບ)",lt:"Nuolaidos informacija (neprivaloma)",ne:"छुटको विवरण (ऐच्छिक)",nl:"Details van de korting (optioneel)",si:"වට්ටම් විස්තර (අත්‍යවශ්‍ය නොවේ)",ta:"தள்ளுபடி விவரங்கள் (விருப்பத்தேர்வு)",tl:"Detalye ng diskwento (opsyonal)",tr:"İndirim ayrıntıları (isteğe bağlı)",ur:"رعایت کی تفصیلات (اختیاری)"},
   'emergency_label': {es:'Emergencias 24/7',pt:'Emergências 24/7',th:'ฉุกเฉิน 24/7',hi:'आपातकाल 24/7',vi:'Khẩn cấp 24/7',de:'24/7 Notfall',fr:'Urgences 24/7',it:'Emergenza 24/7',ru:'Скорая 24/7',ar:'طوارئ 24/7',ko:'24/7 응급',ja:'24時間緊急対応',zh:'24/7紧急',pl:'Nagłe 24/7',el:'Επείγον 24/7'},
   'diagnostic_label': {es:'Pruebas diagnósticas',pt:'Testes diagnósticos',th:'การทดสอบวินิจฉัย',hi:'निदान परीक्षण',vi:'Xét nghiệm chẩn đoán',de:'Diagnosetests',fr:'Tests diagnostiques',it:'Test diagnostici',ru:'Диагностические тесты',ar:'اختبارات تشخيصية',ko:'진단 검사',ja:'診断テスト',zh:'诊断测试',pl:'Testy diagnostyczne',el:'Διαγνωστικές εξετάσεις'},
   'lab_label': {es:'Análisis de laboratorio',pt:'Exames laboratoriais',th:'การทดสอบในห้องปฏิบัติการ',hi:'लैब टेस्ट',vi:'Xét nghiệm phòng thí nghiệm',de:'Labortests',fr:'Tests de laboratoire',it:'Esami di laboratorio',ru:'Лабораторные анализы',ar:'اختبارات مخبرية',ko:'검사실 검사',ja:'検査室検査',zh:'实验室检查',pl:'Badania laboratoryjne',el:'Εργαστηριακές εξετάσεις'},
@@ -2737,7 +2742,7 @@ function saveFormState() {
   try {
     var state = { step: cur };
     ['clinic_name','address','maps_link','phone','office_phone',
-     'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online','discount_pct',
+     'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online','discount_pct','discount_details',
      'fee_description','notes','country','medical_type','currency'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) state[id] = el.value;
@@ -2757,7 +2762,7 @@ function saveFormState() {
 
 function applyDraft(state) {
   ['clinic_name','address','maps_link','phone','office_phone',
-   'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online','discount_pct',
+   'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online','discount_pct','discount_details',
    'fee_description','notes','medical_type','currency'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el && state[id]) el.value = state[id];
@@ -2947,7 +2952,7 @@ async function submitForm() {
     var fd = new FormData();
 
     ['clinic_name','address','maps_link','phone','office_phone',
-     'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online','discount_pct',
+     'email','website','hours','about_clinic','fee_clinic','fee_hotel','fee_online','discount_pct','discount_details',
      'fee_description','notes'].forEach(function(k) {
       var el = document.getElementById(k);
       if (el && el.value.trim()) fd.append(k, el.value.trim());
