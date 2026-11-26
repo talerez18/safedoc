@@ -1334,7 +1334,6 @@ body.lang-he .pt-fold::after{clip-path:polygon(0 0,0 100%,100% 100%)}
             <div class="chip" onclick="toggleChip(this)" data-val="General Surgery">General Surgery</div>
             <div class="chip" onclick="toggleChip(this)" data-val="Neurology">Neurology</div>
             <div class="chip" onclick="toggleChip(this)" data-val="Laboratory Tests">Lab Tests</div>
-            <div class="chip" onclick="toggleChip(this)" data-val="Diagnostic Tests">Diagnostic Tests</div>
             <div class="chip" onclick="toggleChip(this)" data-val="Online Consultation / Telehealth">Telehealth</div>
             <div class="chip" onclick="toggleChip(this)" data-val="Other">Other</div>
           </div>
@@ -3077,7 +3076,7 @@ function makeChip(val, onclickAttr) {
 }
 
 // Specializations kept in Airtable but not offered in the form (Tal, 25/11)
-var SPEC_HIDDEN = ['General Clinic'];
+var SPEC_HIDDEN = ['General Clinic', 'Diagnostic Tests'];
 
 function applyDynamicOptions(data) {
   if (data.specialization && data.specialization.length) {
